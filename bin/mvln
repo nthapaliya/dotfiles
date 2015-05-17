@@ -1,0 +1,10 @@
+#! /bin/bash
+
+DOTFILES_DIR=~/.dotfiles/
+
+FILE=$1
+DEST=$DOTFILES_DIR/$FILE
+
+mv $FILE $DEST 
+ln -s $DEST $FILE
+
