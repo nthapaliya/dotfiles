@@ -1,12 +1,9 @@
-export DOTFILES_PATH=~/.dotfiles
+export DOTFILES_PATH=$HOME/.dotfiles
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.dotfiles/.oh-my-zsh
+export ZSH=$DOTFILES_PATH/.oh-my-zsh
 
 # Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -28,7 +25,7 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -45,12 +42,7 @@ ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-
-# User configuration
-
 plugins=(git ruby tmux)
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -69,15 +61,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
+# User configuration
 export GOPATH=$HOME/go
 export CDPATH=$CDPATH:/$GOPATH/src/github.com/:$GOPATH/src/github.com/nthapaliya
 
