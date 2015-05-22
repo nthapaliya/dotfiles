@@ -13,6 +13,8 @@ iterm2
 keepassx
 keepingyouawake
 lightpaper
+macvim
+minecraft
 mosh
 music-manager
 musicbrainz-picard
