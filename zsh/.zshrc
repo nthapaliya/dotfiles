@@ -1,7 +1,7 @@
 export DOTFILES_PATH=$HOME/.dotfiles
 
 # Path to your oh-my-zsh installation.
-export ZSH=$DOTFILES_PATH/.oh-my-zsh
+export ZSH=$DOTFILES_PATH/zsh/oh-my-zsh
 
 # Set name of the theme to load.
 ZSH_THEME="robbyrussell"
