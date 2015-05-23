@@ -1,5 +1,14 @@
-" Pathogen and a few simple commands
+" Pathogen 
+
+let g:pathogen_disabled = []
+
+if !has('nvim')
+    call add(g:pathogen_disabled, 'vim-airline')
+endif
+
 execute pathogen#infect()
+
+" Simple tweaks
 syntax on
 filetype plugin indent on
 set number
@@ -8,7 +17,12 @@ set nocompatible
 " vim-go 
 let g:go_fmt_command = "goimports"
 
-" Powerline tidbits
+" Neovim doesn't have python so we use vim-airline
+if has('nvim')
+  let g:airline_powerline_fonts = 1
+endif
+
+" Powerline if not neovim (nvim doesn't support powerline) 
 if !has('nvim')
   python from powerline.vim import setup as powerline_setup
   python powerline_setup()
