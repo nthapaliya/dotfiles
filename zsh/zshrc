@@ -72,6 +72,6 @@ export PATH="/usr/local/anaconda/bin:$PATH"
 export EDITOR='vim'
 export SHELL='/usr/local/bin/zsh'
 
-source $DOTFILES_PATH/zsh/.alias
-source $DOTFILES_PATH/zsh/.powerline
-source $DOTFILES_PATH/zsh/.ruby
+source $DOTFILES_PATH/zsh/alias
+source $DOTFILES_PATH/zsh/powerline
+source $DOTFILES_PATH/zsh/ruby

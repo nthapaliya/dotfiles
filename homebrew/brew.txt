@@ -31,6 +31,7 @@ makedepend
 mercurial
 mobile-shell
 mysql
+neovim
 nimrod
 node
 openssl
