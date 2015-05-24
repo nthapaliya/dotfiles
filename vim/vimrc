@@ -1,12 +1,25 @@
-" Pathogen 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
 
-let g:pathogen_disabled = ['unite',]
+call plug#begin('~/.vim/plugged')
 
-" if !has('nvim')
-"     call add(g:pathogen_disabled, 'vim-airline')
-" endif
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sensible'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'vim-ruby/vim-ruby'
 
-execute pathogen#infect()
+call plug#end()
 
 " Simple tweaks
 syntax enable
