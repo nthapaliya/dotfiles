@@ -2,3 +2,4 @@ alias rubo='rubocop -R -D .'
 alias rubox='rubocop -a -R -D .'
 alias al="ag --files-with-matches --smart-case  "
 alias vt="xargs -o vim -p"
+alias vi="nvim "
