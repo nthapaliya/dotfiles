@@ -5,8 +5,6 @@
     ~/.tmate.conf: "tmux/tmate.conf"
 
     ~/.vim: "vim/"
-    ~/.vimrc: "vim/vimrc"
-    ~/.nvimrc: "vim/vimrc"
     ~/.nvim: "vim/"
 
     ~/.zshrc: "zsh/zshrc"

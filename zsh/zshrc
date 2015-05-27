@@ -1,3 +1,5 @@
+# .zshrc
+
 export DOTFILES_PATH=$HOME/.dotfiles
 
 # Path to your oh-my-zsh installation.
@@ -46,7 +48,7 @@ plugins=(git ruby tmux)
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -62,16 +64,12 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # User configuration
-export GOPATH=$HOME/go
-export CDPATH=$CDPATH:/$GOPATH/src/github.com/:$GOPATH/src/github.com/nthapaliya
-
-PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin":$PATH
-PATH=$HOME/go/bin:/usr/local/go/bin:$HOME/.dotfiles/bin:$PATH
-export PATH="/usr/local/anaconda/bin:$PATH"
 
 export EDITOR='vim'
 export SHELL='/usr/local/bin/zsh'
 
+source $DOTFILES_PATH/zsh/path
 source $DOTFILES_PATH/zsh/alias
 source $DOTFILES_PATH/zsh/powerline
 source $DOTFILES_PATH/zsh/ruby
+

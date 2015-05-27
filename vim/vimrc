@@ -1,3 +1,6 @@
+" .vimrc
+" vim-plug auto-install and plugin list
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -6,36 +9,52 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
-Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-bufferline'
+
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+
+"Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/syntastic'
+
+"Plug 'junegunn/vim-easy-align'
+"Plug 'junegunn/seoul256.vim'
+
+Plug 'mattn/emmet-vim'
+Plug 'lokaltog/vim-easymotion'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'fatih/vim-go'
 Plug 'vim-ruby/vim-ruby'
+Plug 'altercation/vim-colors-solarized'
+Plug 'kien/ctrlp.vim'
+Plug 'tomasr/molokai'
 
 call plug#end()
 
 " Simple tweaks
+syntax on
 syntax enable
-"syntax on
-set background=dark
-
 filetype plugin indent on
+set background=dark
 set number
 set nocompatible
+"let mapleader = ","
+
+" set list
+" set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
 " vim-go
 let g:go_fmt_command = "goimports"
 
-" Neovim doesn't have python so we use vim-airline
 " vim-airline glyphs
 let g:airline_powerline_fonts = 1
+" vim-bufferline
+let g:bufferline_echo = 0
 
 " syntastic 'sane defaults'
 set statusline+=%#warningmsg#
@@ -47,7 +66,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" Powerline if not neovim (nvim doesn't support powerline) 
+" Powerline if not neovim (nvim doesn't support powerline)
 " if !has('nvim')
 "   python from powerline.vim import setup as powerline_setup
 "   python powerline_setup()
@@ -62,7 +81,10 @@ colorscheme solarized
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
+:nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " tab-settings
 set ts=2 sts=2 sw=2 expandtab
 
+" gui specific
+set guifont=Inconsolata\ For\ Powerline
