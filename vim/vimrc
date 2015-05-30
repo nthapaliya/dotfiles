@@ -1,4 +1,5 @@
 " .vimrc
+
 " vim-plug auto-install and plugin list
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -18,23 +19,20 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-
-"Plug 'scrooloose/nerdtree'
-"Plug 'scrooloose/syntastic'
-
-"Plug 'junegunn/vim-easy-align'
-"Plug 'junegunn/seoul256.vim'
+Plug 'tpope/vim-repeat'
 
 Plug 'mattn/emmet-vim'
 Plug 'lokaltog/vim-easymotion'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'fatih/vim-go'
 Plug 'vim-ruby/vim-ruby'
 Plug 'altercation/vim-colors-solarized'
 Plug 'kien/ctrlp.vim'
-Plug 'tomasr/molokai'
+Plug 'skalnik/vim-vroom'
+Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
+source ~/.vim/bundle.vim
 
 " Simple tweaks
 syntax on
@@ -43,13 +41,24 @@ filetype plugin indent on
 set background=dark
 set number
 set nocompatible
-"let mapleader = ","
-
+set autoread
 " set list
 " set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+" my custom mappings
+let mapleader = ","
+inoremap jk <esc>
+inoremap <esc> <nop>
+nnoremap <leader>- ddp
+nnoremap <leader>_ dd2kp
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+if has('nvim')
+  tnoremap <Leader>e <C-\><C-n>
+endif
 
 " vim-go
-let g:go_fmt_command = "goimports"
+" let g:go_fmt_command = "goimports"
 
 " vim-airline glyphs
 let g:airline_powerline_fonts = 1
@@ -57,14 +66,14 @@ let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 
 " syntastic 'sane defaults'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " Powerline if not neovim (nvim doesn't support powerline)
 " if !has('nvim')
@@ -73,15 +82,18 @@ let g:syntastic_check_on_wq = 0
 "   python del powerline_setup
 " endif
 
-" For solarized
-"let g:solarized_termcolors=256
-colorscheme solarized
+" Colorscheme etc
+if has('gui')
+  colorscheme base16-monokai
+else
+  colorscheme solarized
+endif
+
 
 " Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-:nnoremap <leader>sv :source $MYVIMRC<cr>
+" if has("autocmd")
+"   autocmd bufwritepost .vimrc source $MYVIMRC
+" endif
 
 " tab-settings
 set ts=2 sts=2 sw=2 expandtab
