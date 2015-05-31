@@ -3,10 +3,8 @@
 - link:
     ~/.tmux.conf: "tmux/tmux.conf"
     ~/.tmate.conf: "tmux/tmate.conf"
-
     ~/.vim: "vim/"
     ~/.nvim: "vim/"
-
     ~/.zshrc: "zsh/zshrc"
 
 - shell:

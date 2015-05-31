@@ -1,4 +1,4 @@
-" .vimrc
+ " .vimrc
 
 " vim-plug auto-install and plugin list
 
@@ -19,20 +19,20 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
 
-Plug 'mattn/emmet-vim'
-Plug 'lokaltog/vim-easymotion'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'vim-ruby/vim-ruby'
 Plug 'altercation/vim-colors-solarized'
-Plug 'kien/ctrlp.vim'
-Plug 'skalnik/vim-vroom'
-Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'kien/ctrlp.vim'
+Plug 'lokaltog/vim-easymotion'
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-startify'
+Plug 'morhetz/gruvbox'
+Plug 'skalnik/vim-vroom'
+Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
-source ~/.vim/bundle.vim
 
 " Simple tweaks
 syntax on
@@ -42,16 +42,27 @@ set background=dark
 set number
 set nocompatible
 set autoread
-" set list
-" set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set hidden
+
+set list
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+
 " my custom mappings
 let mapleader = ","
 inoremap jk <esc>
 inoremap <esc> <nop>
-nnoremap <leader>- ddp
-nnoremap <leader>_ dd2kp
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+nnoremap <left> <C-w>h
+nnoremap <down> <C-w>j
+nnoremap <up> <C-w>k
+nnoremap <right> <C-w>l
+
+nnoremap <S-right> :bn<CR>
+nnoremap <S-left> :bp<CR>
+nnoremap <S-down> ddp
+nnoremap <S-up> dd2kp
 
 if has('nvim')
   tnoremap <Leader>e <C-\><C-n>
@@ -89,14 +100,10 @@ else
   colorscheme solarized
 endif
 
-
-" Source the vimrc file after saving it
-" if has("autocmd")
-"   autocmd bufwritepost .vimrc source $MYVIMRC
-" endif
-
 " tab-settings
 set ts=2 sts=2 sw=2 expandtab
 
 " gui specific
-set guifont=Inconsolata\ For\ Powerline
+if has('gui')
+  set guifont=Inconsolata\ For\ Powerline
+endif
