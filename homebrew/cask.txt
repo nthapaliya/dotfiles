@@ -1,7 +1,6 @@
 android-studio
 appcleaner
 atom
-audacity
 chromecast
 flux
 github

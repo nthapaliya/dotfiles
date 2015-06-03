@@ -6,8 +6,11 @@ brew-cask
 clisp
 cmake
 cscope
+ctags
 docker
+emacs
 exercism
+fish
 flac
 gdbm
 gettext
@@ -41,6 +44,7 @@ pkg-config
 plt-racket
 postgresql
 protobuf
+rbenv
 readline
 ruby-build
 rust

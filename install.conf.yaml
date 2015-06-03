@@ -6,6 +6,8 @@
     ~/.vim: "vim/"
     ~/.nvim: "vim/"
     ~/.zshrc: "zsh/zshrc"
+    ~/.railsrc: "ruby/railsrc"
+    ~/.irbrc: "ruby/irbrc"
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

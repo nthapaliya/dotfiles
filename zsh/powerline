@@ -1,5 +1,8 @@
+#!/bin/sh
 #powerline related things
-powerline-daemon -q
 
-REPO_ROOT=/usr/local/anaconda/lib/python2.7/site-packages/
-source $REPO_ROOT/powerline/bindings/zsh/powerline.zsh
+export POWERLINE_ROOT=/usr/local/anaconda/lib/python2.7/site-packages/
+if [ -z "$COMPATIBILITY" ]; then
+  powerline-daemon -q
+  source $POWERLINE_ROOT/powerline/bindings/zsh/powerline.zsh
+fi
