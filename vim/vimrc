@@ -15,7 +15,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'bling/vim-airline'
+if compat_mode || has('gui')
+  Plug 'bling/vim-airline'
+endif
 Plug 'bling/vim-bufferline'
 
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
@@ -29,7 +31,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
 
-" Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'kien/ctrlp.vim'
@@ -41,6 +43,7 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-ruby/vim-ruby'
 " Plug 'airblade/vim-gitgutter'
 " Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -60,14 +63,14 @@ set hidden
 " my custom mappings
 let mapleader = ","
 inoremap jk <esc>
-inoremap <esc> <nop>
+"inoremap <esc> <nop>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-nnoremap <left>  <C-w>h
-nnoremap <down>  <C-w>j
-nnoremap <up>    <C-w>k
-nnoremap <right> <C-w>l
+" nnoremap <left>  <C-w>h
+" nnoremap <down>  <C-w>j
+" nnoremap <up>    <C-w>k
+" nnoremap <right> <C-w>l
 
 nnoremap <S-right> :bn<CR>
 nnoremap <S-left>  :bp<CR>
@@ -113,6 +116,7 @@ if !has('nvim') && !has('gui')
   python from powerline.vim import setup as powerline_setup
   python powerline_setup()
   python del powerline_setup
+  autocmd User AirlineAfterInit :AirlineToggle 
 endif
 
 " syntastic 'sane defaults'

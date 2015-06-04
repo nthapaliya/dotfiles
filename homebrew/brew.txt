@@ -5,6 +5,7 @@ boot2docker
 brew-cask
 clisp
 cmake
+cowsay
 cscope
 ctags
 docker
@@ -46,6 +47,7 @@ postgresql
 protobuf
 rbenv
 readline
+reattach-to-user-namespace
 ruby-build
 rust
 sqlite

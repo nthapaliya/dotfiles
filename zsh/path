@@ -5,5 +5,5 @@ export GOPATH=$HOME/go
 #export CDPATH=$CDPATH:/$GOPATH/src/github.com/:$GOPATH/src/github.com/nthapaliya
 
 #PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin":$PATH
-PATH=$HOME/go/bin:/usr/local/go/bin:$HOME/$DOTFILES_PATH/bin:$PATH
+PATH=$HOME/go/bin:/usr/local/go/bin:$DOTFILES_PATH/bin:$PATH
 export PATH="/usr/local/anaconda/bin:$PATH"

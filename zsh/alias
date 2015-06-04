@@ -4,3 +4,5 @@ alias rubox='rubocop -a -R -D '
 alias al="ag --files-with-matches --smart-case  "
 alias vt="xargs -o vim -p"
 alias vi="nvim "
+alias nyan="telnet nyancat.dakko.us"
+alias nw='tmux new-window'
