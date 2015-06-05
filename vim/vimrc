@@ -1,10 +1,5 @@
 " .vimrc
 "
-let compat_mode = 0
-if $COMPATIBILITY
-  let compat_mode = 1
-end
-
 " vim-plug auto-install and plugin list
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -15,9 +10,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-if compat_mode || has('gui')
-  Plug 'bling/vim-airline'
-endif
+Plug 'bling/vim-airline'
 Plug 'bling/vim-bufferline'
 
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
@@ -30,6 +23,11 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
+
+Plug 'jgdavey/tslime.vim'
+Plug 'jgdavey/vim-turbux'
+
+"Plug 'davidpdrsn/vim-spectacular'
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
@@ -64,7 +62,7 @@ set hidden
 let mapleader = ","
 inoremap jk <esc>
 "inoremap <esc> <nop>
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " nnoremap <left>  <C-w>h
@@ -85,39 +83,30 @@ endif
 let g:go_fmt_command = "goimports"
 
 let g:bufferline_echo = 0
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'badwolf'
 
-if compat_mode
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
+" environmental flag to determine whether or not to use unicode
+" glyphs instead of poweline-patched fonts. useful when pairing through
+" tmate; even if the other party doesn't have the fonts, the rendering
+  " will not be borked
+if $COMPATIBILITY
+  let g:airline_symbols = {}
 
-  let g:airline_left_sep = '»'
-  let g:airline_right_sep = '«'
-  let g:airline_symbols.linenr = '␊'
+  let g:airline_left_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_symbols.linenr = '␤'
   let g:airline_symbols.branch = '⎇'
   let g:airline_symbols.paste = '∥'
   let g:airline_symbols.whitespace = 'Ξ'
-
-  " " unicode symbols
-  " let g:airline_left_sep = '▶'
-  " let g:airline_right_sep = '◀'
-  " let g:airline_symbols.linenr = '␤'
-  " let g:airline_symbols.linenr = '¶'
-  " let g:airline_symbols.paste = 'ρ'
-  " let g:airline_symbols.paste = 'Þ'
-  " let g:airline_left_sep = "⡇"
-  " let g:airline_right_sep = "⡇"
-else
-  let g:airline_powerline_fonts = 1
 endif
 
-if !has('nvim') && !has('gui')
-  " powerline
-  python from powerline.vim import setup as powerline_setup
-  python powerline_setup()
-  python del powerline_setup
-  autocmd User AirlineAfterInit :AirlineToggle 
-endif
+" if !has('nvim') && !has('gui')
+"   " powerline
+"   python from powerline.vim import setup as powerline_setup
+"   python powerline_setup()
+"   python del powerline_setup
+" endif
 
 " syntastic 'sane defaults'
 "
@@ -131,7 +120,7 @@ endif
 " let g:syntastic_check_on_wq = 0
 
 " Colorscheme etc
-colorscheme gruvbox
+colorscheme solarized
 
 " tab-settings
 set ts=2 sts=2 sw=2 expandtab
@@ -141,3 +130,34 @@ if has('gui')
   set guifont=Inconsolata\ For\ Powerline
   colorscheme gruvbox
 endif
+
+" call spectacular#add_test_runner('ruby', 'rspec {spec}', '_spec')
+" call spectacular#add_test_runner('ruby', 'rspec {spec}:{line-number}', '_spec')
+" nnoremap <leader>t :write\|:call spectacular#run_tests()<cr>
+" nnoremap <leader>rt :write\|:call spectacular#run_tests_with_current_line()<cr>
+
+" Run tests in another tmux pane/session. Requires tslime
+" (https://github.com/jgdavey/tslime.vim)
+" " Default is 0
+let g:spectacular_integrate_with_tmux = 1
+"
+" " Run tests with dispatch. Requires vim-dispatch
+" (http://github.com/tpope/vim-dispatch)
+" " Default is 0
+" let g:spectacular_integrate_with_dispatch = 0
+"
+" " Put the command run onto `:messages`. Useful for debugging
+" " Default is 0
+" let g:spectacular_debugging_mode = 0
+"
+" " If a tmux session with this name is open, and
+" g:spectacular_integrate_with_tmux is set,
+" " then the output will be sent to that session
+" " Default is "test"
+" let g:spectacular_name_of_tmux_test_session = "test_output"
+"
+" " Set this to 1 if you want the screen to be cleared every time you run the
+" tests
+" " If its set to 0 it will just output a bunch of newlines
+" " Default is 1
+" let g:spectacular_clear_screen = 1
