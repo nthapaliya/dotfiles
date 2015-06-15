@@ -13,6 +13,7 @@ emacs
 exercism
 fish
 flac
+freetype
 gdbm
 gettext
 git
@@ -20,6 +21,8 @@ gnu-time
 gnupg
 graphviz
 htop-osx
+imagemagick
+jpeg
 lame
 leiningen
 libevent
@@ -27,6 +30,7 @@ libgpg-error
 libksba
 libpng
 libsigsegv
+libtiff
 libtool
 libyaml
 lua

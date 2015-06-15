@@ -29,6 +29,7 @@ Plug 'jgdavey/vim-turbux'
 
 "Plug 'davidpdrsn/vim-spectacular'
 
+Plug 'sjl/badwolf'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -42,6 +43,7 @@ Plug 'vim-ruby/vim-ruby'
 " Plug 'airblade/vim-gitgutter'
 " Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'fatih/vim-go'
 
 call plug#end()
 
@@ -55,25 +57,31 @@ set nocompatible
 set autoread
 set hidden
 
+" let g:ctrlp_cmd = 'CtrlPMixed'
+" let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_by_filename = 1
+
 " set list
 " set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬
 
 " my custom mappings
-let mapleader = ","
+let mapleader = "\<Space>"
 inoremap jk <esc>
 "inoremap <esc> <nop>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>wq :wq<cr>
+nnoremap <leader>w :w<cr>
 
 " nnoremap <left>  <C-w>h
 " nnoremap <down>  <C-w>j
 " nnoremap <up>    <C-w>k
 " nnoremap <right> <C-w>l
 
-nnoremap <S-right> :bn<CR>
-nnoremap <S-left>  :bp<CR>
-nnoremap <S-down>  ddp
-nnoremap <S-up>    dd2kp
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p  :bp<CR>
+nnoremap <leader>j  ddp
+nnoremap <leader>k dd2kp
 
 if has('nvim')
   tnoremap <Leader>e <C-\><C-n>
@@ -81,6 +89,11 @@ endif
 
 " vim-go
 let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 let g:bufferline_echo = 0
 let g:airline_powerline_fonts = 1
@@ -116,8 +129,9 @@ endif
 
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_open = 0
 " let g:syntastic_check_on_wq = 0
+" let g:syntastic_ruby_checkers = ['rubocop']
 
 " Colorscheme etc
 colorscheme solarized

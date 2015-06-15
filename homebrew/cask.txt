@@ -1,8 +1,11 @@
 android-studio
 appcleaner
 atom
+charles
 chromecast
+emacs
 flux
+gas-mask
 github
 google-chrome
 handbrake
