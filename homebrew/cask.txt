@@ -1,7 +1,4 @@
-android-studio
 appcleaner
-atom
-charles
 chromecast
 emacs
 flux

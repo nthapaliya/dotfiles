@@ -17,6 +17,7 @@ freetype
 gdbm
 gettext
 git
+gnu-getopt
 gnu-time
 gnupg
 graphviz
@@ -43,12 +44,14 @@ neovim
 nimrod
 node
 openssl
+pass
 pcre
 phantomjs
 pkg-config
 plt-racket
 postgresql
 protobuf
+pwgen
 rbenv
 readline
 reattach-to-user-namespace
@@ -61,4 +64,5 @@ tmux
 tree
 vim
 xz
+youtube-dl
 zsh

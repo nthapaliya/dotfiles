@@ -2,14 +2,14 @@
 
 - link:
     ~/.tmux.conf: "tmux/tmux.conf"
-    ~/.tmate.conf: "tmux/tmate.conf"
+    # ~/.tmate.conf: "tmux/tmate.conf"
     ~/.vim: "vim/"
     ~/.nvim: "vim/"
     ~/.zshrc: "zsh/zshrc"
     ~/.railsrc: "ruby/railsrc"
     ~/.irbrc: "ruby/irbrc"
-    ~/.emacs: "emacs/"
-    ~/.emacs.d: "emacs/emacs.d/"
+    # ~/.emacs: "emacs/"
+    # ~/.emacs.d: "emacs/emacs.d/"
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

@@ -26,8 +26,9 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'jgdavey/tslime.vim'
 Plug 'jgdavey/vim-turbux'
-
+Plug 'ludovicchabant/vim-gutentags'
 "Plug 'davidpdrsn/vim-spectacular'
+Plug 'wikitopian/hardmode'
 
 Plug 'sjl/badwolf'
 Plug 'altercation/vim-colors-solarized'
@@ -41,7 +42,6 @@ Plug 'morhetz/gruvbox'
 " Plug 'skalnik/vim-vroom'
 Plug 'vim-ruby/vim-ruby'
 " Plug 'airblade/vim-gitgutter'
-" Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatih/vim-go'
 
@@ -73,10 +73,10 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>wq :wq<cr>
 nnoremap <leader>w :w<cr>
 
-" nnoremap <left>  <C-w>h
+nnoremap <left> :bn<cr>
 " nnoremap <down>  <C-w>j
 " nnoremap <up>    <C-w>k
-" nnoremap <right> <C-w>l
+nnoremap <right> :bp<cr>
 
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p  :bp<CR>
@@ -175,3 +175,5 @@ let g:spectacular_integrate_with_tmux = 1
 " " If its set to 0 it will just output a bunch of newlines
 " " Default is 1
 " let g:spectacular_clear_screen = 1
+set tags=./tags;
+set clipboard^=unnamed "adds unnamed to existing values

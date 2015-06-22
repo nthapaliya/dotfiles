@@ -6,8 +6,7 @@ brew update
 echo "brew upgrade"
 brew upgrade --all
 
-echo "brew cleanup"
-brew cleanup
+echo "conda update anaconda"
+conda update anaconda
 
-echo "brew cask cleanup"
-brew cask cleanup
+
