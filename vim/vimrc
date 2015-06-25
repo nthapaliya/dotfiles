@@ -13,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'bling/vim-bufferline'
 
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'scrooloose/syntastic'
 
 Plug 'tpope/vim-sensible'
@@ -22,31 +22,22 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-dispatch'
 
-Plug 'jgdavey/tslime.vim'
-Plug 'jgdavey/vim-turbux'
+Plug 'thoughtbot/vim-rspec'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
-"Plug 'davidpdrsn/vim-spectacular'
 Plug 'wikitopian/hardmode'
 
-Plug 'sjl/badwolf'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'kien/ctrlp.vim'
-" Plug 'lokaltog/vim-easymotion'
-" Plug 'mattn/emmet-vim'
-" Plug 'mhinz/vim-startify'
-Plug 'morhetz/gruvbox'
-" Plug 'skalnik/vim-vroom'
 Plug 'vim-ruby/vim-ruby'
-" Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatih/vim-go'
 
 call plug#end()
-
+set shell=/usr/local/bin/zsh
 " Simple tweaks
 syntax on
 syntax enable
@@ -54,12 +45,13 @@ filetype plugin indent on
 set background=dark
 set number
 set nocompatible
-set autoread
+set smartcase
+set title
+set visualbell           " don't beep
+set noerrorbells         " don't beep
 set hidden
 
-" let g:ctrlp_cmd = 'CtrlPMixed'
-" let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_by_filename = 1
+" let g:ctrlp_by_filename = 1
 
 " set list
 " set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬
@@ -74,8 +66,6 @@ nnoremap <leader>wq :wq<cr>
 nnoremap <leader>w :w<cr>
 
 nnoremap <left> :bn<cr>
-" nnoremap <down>  <C-w>j
-" nnoremap <up>    <C-w>k
 nnoremap <right> :bp<cr>
 
 nnoremap <leader>n :bn<CR>
@@ -88,50 +78,22 @@ if has('nvim')
 endif
 
 " vim-go
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+" let g:go_fmt_command = "goimports"
+" let g:go_highlight_functions = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_structs = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_build_constraints = 1
 
 let g:bufferline_echo = 0
-let g:airline_powerline_fonts = 1
 let g:airline_theme = 'badwolf'
-
-" environmental flag to determine whether or not to use unicode
-" glyphs instead of poweline-patched fonts. useful when pairing through
-" tmate; even if the other party doesn't have the fonts, the rendering
-  " will not be borked
-if $COMPATIBILITY
-  let g:airline_symbols = {}
-
-  let g:airline_left_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
-endif
-
-" if !has('nvim') && !has('gui')
-"   " powerline
-"   python from powerline.vim import setup as powerline_setup
-"   python powerline_setup()
-"   python del powerline_setup
-" endif
-
-" syntastic 'sane defaults'
-"
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_ruby_checkers = ['rubocop']
+let g:airline_symbols = {}
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 
 " Colorscheme etc
 colorscheme solarized
@@ -139,41 +101,11 @@ colorscheme solarized
 " tab-settings
 set ts=2 sts=2 sw=2 expandtab
 
-" gui specific
-if has('gui')
-  set guifont=Inconsolata\ For\ Powerline
-  colorscheme gruvbox
-endif
-
-" call spectacular#add_test_runner('ruby', 'rspec {spec}', '_spec')
-" call spectacular#add_test_runner('ruby', 'rspec {spec}:{line-number}', '_spec')
-" nnoremap <leader>t :write\|:call spectacular#run_tests()<cr>
-" nnoremap <leader>rt :write\|:call spectacular#run_tests_with_current_line()<cr>
-
-" Run tests in another tmux pane/session. Requires tslime
-" (https://github.com/jgdavey/tslime.vim)
-" " Default is 0
-let g:spectacular_integrate_with_tmux = 1
-"
-" " Run tests with dispatch. Requires vim-dispatch
-" (http://github.com/tpope/vim-dispatch)
-" " Default is 0
-" let g:spectacular_integrate_with_dispatch = 0
-"
-" " Put the command run onto `:messages`. Useful for debugging
-" " Default is 0
-" let g:spectacular_debugging_mode = 0
-"
-" " If a tmux session with this name is open, and
-" g:spectacular_integrate_with_tmux is set,
-" " then the output will be sent to that session
-" " Default is "test"
-" let g:spectacular_name_of_tmux_test_session = "test_output"
-"
-" " Set this to 1 if you want the screen to be cleared every time you run the
-" tests
-" " If its set to 0 it will just output a bunch of newlines
-" " Default is 1
-" let g:spectacular_clear_screen = 1
-set tags=./tags;
 set clipboard^=unnamed "adds unnamed to existing values
+
+" vim rspec
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = "Dispatch bin/rspec {spec}"

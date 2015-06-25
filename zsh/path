@@ -7,3 +7,5 @@ export GOPATH=$HOME/go
 #PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin":$PATH
 PATH=$HOME/go/bin:/usr/local/go/bin:$DOTFILES_PATH/bin:$PATH
 export PATH="/usr/local/anaconda/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

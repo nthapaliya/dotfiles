@@ -5,6 +5,7 @@
     # ~/.tmate.conf: "tmux/tmate.conf"
     ~/.vim: "vim/"
     ~/.nvim: "vim/"
+    ~/.zshenv: "zsh/zshenv"
     ~/.zshrc: "zsh/zshrc"
     ~/.railsrc: "ruby/railsrc"
     ~/.irbrc: "ruby/irbrc"

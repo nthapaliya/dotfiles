@@ -1,6 +1,5 @@
 # .zshrc
 
-export DOTFILES_PATH=$HOME/.dotfiles
 
 # Path to your oh-my-zsh installation.
 export ZSH=$DOTFILES_PATH/zsh/oh-my-zsh
@@ -70,11 +69,8 @@ if [ -n "$TMUX" ] && [[ "$TMUX" == *"tmate"* ]]; then
   export COMPATIBILITY=1
 fi
 
-USE_RVM=true
-export EDITOR='vim'
-export SHELL='/usr/local/bin/zsh'
 
 source $DOTFILES_PATH/zsh/path
 source $DOTFILES_PATH/zsh/alias
 source $DOTFILES_PATH/zsh/powerline
-source $DOTFILES_PATH/zsh/ruby
+source $DOTFILES_PATH/zsh/fzf
