@@ -1,4 +1,5 @@
 appcleaner
+atom
 chromecast
 emacs
 flux

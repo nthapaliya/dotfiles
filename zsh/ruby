@@ -8,5 +8,6 @@ if [ $USE_RVM ]; then
     PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
   fi
 else
+  export PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
 fi

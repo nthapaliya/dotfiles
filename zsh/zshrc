@@ -1,6 +1,5 @@
 # .zshrc
 
-
 # Path to your oh-my-zsh installation.
 export ZSH=$DOTFILES_PATH/zsh/oh-my-zsh
 
@@ -74,3 +73,4 @@ source $DOTFILES_PATH/zsh/path
 source $DOTFILES_PATH/zsh/alias
 source $DOTFILES_PATH/zsh/powerline
 source $DOTFILES_PATH/zsh/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
