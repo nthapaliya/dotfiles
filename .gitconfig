@@ -19,3 +19,4 @@
 	helper = osxkeychain
 [core]
 	ignorecase = false
+	excludesfile = /Users/nirajthapaliya/.gitignore_global

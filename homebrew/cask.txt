@@ -24,6 +24,7 @@ selfcontrol
 sequel-pro
 skype
 spectacle
+spotify
 steam
 the-unarchiver
 transmission
