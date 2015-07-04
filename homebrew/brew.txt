@@ -58,6 +58,7 @@ reattach-to-user-namespace
 ruby-build
 rust
 sqlite
+ssh-copy-id
 the_silver_searcher
 tmate
 tmux

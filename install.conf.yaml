@@ -12,6 +12,7 @@
     # ~/.emacs: "emacs/"
     # ~/.emacs.d: "emacs/emacs.d/"
     ~/.gitignore_global: "git/gitignore_global"
+    ~/.gitconfig: "git/gitconfig"
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
