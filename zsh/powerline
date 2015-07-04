@@ -1,8 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 #powerline related things
 
-export POWERLINE_ROOT=/usr/local/anaconda/lib/python2.7/site-packages/
-if [ -z "$COMPATIBILITY" ]; then
-  powerline-daemon -q
-  source $POWERLINE_ROOT/powerline/bindings/zsh/powerline.zsh
+unamestr=$(uname)
+if [[ "$unamestr" == 'Darwin' ]] ; then
+  # Only do this if we're on OSX
+  export POWERLINE_ROOT=/usr/local/anaconda/lib/python2.7/site-packages/
+  if [ -z "$COMPATIBILITY" ]; then
+    powerline-daemon -q
+    source $POWERLINE_ROOT/powerline/bindings/zsh/powerline.zsh
+  fi
 fi
