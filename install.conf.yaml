@@ -16,4 +16,4 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    - [./save-current-packages]
+    - [./helpers/save-current-packages]
