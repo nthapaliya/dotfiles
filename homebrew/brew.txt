@@ -11,7 +11,6 @@ ctags
 docker
 emacs
 exercism
-flac
 freetype
 gdbm
 gettext
@@ -23,7 +22,6 @@ graphviz
 htop-osx
 imagemagick
 jpeg
-lame
 leiningen
 libevent
 libgpg-error
@@ -37,20 +35,15 @@ lua
 luajit
 makedepend
 mercurial
-mobile-shell
 mysql
-neovim
 nimrod
 node
 openssl
-pass
 pcre
 phantomjs
 pkg-config
 plt-racket
 postgresql
-protobuf
-pwgen
 rbenv
 readline
 reattach-to-user-namespace
@@ -64,5 +57,4 @@ tmux
 tree
 vim
 xz
-youtube-dl
 zsh
