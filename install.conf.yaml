@@ -16,5 +16,4 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    - [brew list > homebrew/brew.txt]
-    - [brew cask list > homebrew/cask.txt]
+    - [./save-current-packages]
