@@ -1,5 +1,13 @@
 export DOTFILES_PATH=$HOME/.dotfiles
-USE_RVM=true
+
+unamestr=$(uname)
+
+if [[ "$unamestr" == 'Linux' ]]; then
+  # other stuff here
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  export SHELL='/usr/local/bin/zsh'
+fi
+
+USE_RVM=
 export EDITOR='vim'
-export SHELL='/usr/local/bin/zsh'
 source $DOTFILES_PATH/zsh/ruby
