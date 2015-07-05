@@ -62,6 +62,7 @@ export LANG=en_US.UTF-8
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # User configuration
+setopt HIST_IGNORE_ALL_DUPS
 
 if [ -n "$TMUX" ] && [[ "$TMUX" == *"tmate"* ]]; then
   # echo 'tmate mode'
