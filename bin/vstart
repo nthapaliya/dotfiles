@@ -1,3 +1,0 @@
-#! /bin/sh
-VBoxManage startvm "Ubuntu Server" --type headless 2>/dev/null
-ssh -p 2222 niraj@localhost
