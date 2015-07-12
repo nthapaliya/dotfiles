@@ -30,7 +30,6 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'wikitopian/hardmode'
 
 Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
 " Plug 'fatih/vim-go'
@@ -87,6 +86,8 @@ endif
 " let g:go_highlight_structs = 1
 " let g:go_highlight_operators = 1
 " let g:go_highlight_build_constraints = 1
+" " let vim-go play nice with dispatch
+" let g:go_dispatch_enabled = 1
 
 let g:bufferline_echo = 0
 let g:airline_theme = 'badwolf'
