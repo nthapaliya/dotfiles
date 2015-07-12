@@ -5,6 +5,7 @@ brew-cask
 cmake
 ctags
 curl
+fish
 freetype
 gdbm
 git
