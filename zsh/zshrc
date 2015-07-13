@@ -27,8 +27,9 @@ autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
 # anaconda is installed here
- PATH=$HOME/.local/bin:$HOME/anaconda3/bin:$PATH
-
+if [ -d "$HOME/anaconda3" ]; then
+  PATH=$PATH:$HOME/.local/bin:$HOME/anaconda3/bin
+fi
 source $DOTFILES_PATH/zsh/alias
 
 unamestr=$(uname)
@@ -46,7 +47,6 @@ fi
 USE_RVM=1
 if [ $USE_RVM ]; then
   # export PATH=$HOME/.rvm/bin:$PATH
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 else
   export PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
