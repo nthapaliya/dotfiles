@@ -27,7 +27,7 @@ autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
 # anaconda is installed here
-export PATH=$HOME/.local/bin:$HOME/anaconda3/bin:$PATH
+ PATH=$HOME/.local/bin:$HOME/anaconda3/bin:$PATH
 
 source $DOTFILES_PATH/zsh/alias
 
@@ -35,9 +35,11 @@ unamestr=$(uname)
 if [[ "$unamestr" == 'Darwin' ]] ; then
   # Only do this if we're on OSX
   POWERLINE_ROOT=$HOME/.local/lib/python3.4/site-packages
+  POWERLINE_ZSH=$POWERLINE_ROOT/powerline/bindings/zsh/powerline.zsh
+  export POWERLINE_TMUX=$POWERLINE_ROOT/powerline/bindings/tmux/powerline.conf
   if [ -z "$COMPATIBILITY" ]; then
     powerline-daemon -q
-    source $POWERLINE_ROOT/powerline/bindings/zsh/powerline.zsh
+    source $POWERLINE_ZSH
   fi
 fi
 

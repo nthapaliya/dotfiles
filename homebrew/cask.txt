@@ -15,8 +15,6 @@ skype
 spectacle
 the-unarchiver
 transmission
-vagrant
-vagrant-manager
 virtualbox
 vlc
 vox
