@@ -1,2 +1,2 @@
-export SHELL='/usr/local/bin/zsh'
+export SHELL=$(which zsh)
 export EDITOR='vim'
