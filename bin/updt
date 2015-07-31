@@ -5,8 +5,3 @@ brew update
 
 echo "brew upgrade"
 brew upgrade --all
-
-echo "conda update anaconda"
-conda update anaconda
-
-

@@ -130,3 +130,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " make test commands execute using dispatch.vim
 let test#strategy = "dispatch"
+
+if has("gui")
+  set guifont=Sauce\ Code\ Powerline\ Light:h11
+endif

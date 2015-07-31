@@ -5,7 +5,3 @@ brew cleanup
 
 echo "brew cask cleanup"
 brew cask cleanup
-
-echo "conda clean -ltips"
-conda clean -ltips
-
