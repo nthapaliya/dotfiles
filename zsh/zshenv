@@ -1,10 +1,9 @@
 export SHELL=$(which zsh)
 export EDITOR='vim'
 
-export USE_RVM=1
+# export USE_RVM=1
 if [ $USE_RVM ]; then
   [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 else
-  export PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
 fi

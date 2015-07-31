@@ -16,40 +16,28 @@ export LANG=en_US.UTF-8
 # User configuration
 setopt HIST_IGNORE_ALL_DUPS
 
-if [ -n "$TMUX" ] && [[ "$TMUX" == *"tmate"* ]]; then
-  # echo 'tmate mode'
-  export COMPATIBILITY=1
-fi
+# if [ -n "$TMUX" ] && [[ "$TMUX" == *"tmate"* ]]; then
+#   export COMPATIBILITY=1
+# fi
 
 # as per zsh-install notes
 unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
-# anaconda is installed here
-if [ -d "$HOME/anaconda3" ]; then
-  PATH=$PATH:$HOME/.local/bin:$HOME/anaconda3/bin
-fi
+PATH=$PATH:$HOME/.dotfiles/bin
 source $DOTFILES_PATH/zsh/alias
 
-unamestr=$(uname)
-if [[ "$unamestr" == 'Darwin' ]] ; then
-  # Only do this if we're on OSX
-  POWERLINE_ROOT=$HOME/.local/lib/python3.4/site-packages
-  POWERLINE_ZSH=$POWERLINE_ROOT/powerline/bindings/zsh/powerline.zsh
-  export POWERLINE_TMUX=$POWERLINE_ROOT/powerline/bindings/tmux/powerline.conf
-  if [ -z "$COMPATIBILITY" ]; then
-    powerline-daemon -q
-    source $POWERLINE_ZSH
-  fi
+# anaconda is installed here
+ANACONDA_PATH=$HOME/.anaconda
+if [ -d "$ANACONDA_PATH" ]; then
+  PATH=$PATH:$HOME/.local/bin:$ANACONDA_PATH/bin
 fi
 
-USE_RVM=1
-if [ $USE_RVM ]; then
-  # export PATH=$HOME/.rvm/bin:$PATH
-else
-  export PATH=$HOME/.rbenv/bin:$PATH
-  eval "$(rbenv init -)"
+if [ -z "$COMPATIBILITY" ]; then
+  source $DOTFILES_PATH/zsh/promptline.sh
+# else
+#   source $DOTFILES_PATH/zsh/promptline_compat.sh
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

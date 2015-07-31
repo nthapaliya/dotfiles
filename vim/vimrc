@@ -12,6 +12,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'bling/vim-airline'
 Plug 'bling/vim-bufferline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/promptline.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'scrooloose/syntastic'
@@ -62,8 +64,6 @@ inoremap jk <esc>
 "inoremap <esc> <nop>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>wq :wq<cr>
-nnoremap <leader>w :w<cr>
 
 nnoremap <left> :bn<cr>
 nnoremap <right> :bp<cr>
@@ -79,6 +79,9 @@ if has('nvim')
   tnoremap <Leader>e <C-\><C-n>
 endif
 
+" Colorscheme etc
+colorscheme solarized
+
 " vim-go
 " let g:go_fmt_command = "goimports"
 " let g:go_highlight_functions = 1
@@ -90,19 +93,28 @@ endif
 " let g:go_dispatch_enabled = 1
 
 let g:bufferline_echo = 0
-let g:airline_theme = 'badwolf'
+let g:airline#extensions#tmuxline#enabled = 0
+" let g:tmuxline_powerline_separators = 0
 
-let g:airline_left_sep = ' '
-let g:airline_right_sep = ' '
+if $COMPATIBILITY
+  let g:airline_powerline_fonts = 0
 
-let g:airline_symbols = {}
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
 
-" Colorscheme etc
-colorscheme solarized
+  " unicode symbols
+  let g:airline_left_sep = ' '
+  let g:airline_right_sep = ' '
+  let g:airline_symbols.crypt = '🔒'
+  let g:airline_symbols.linenr = '␤'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'Þ'
+  let g:airline_symbols.whitespace = 'Ξ'
+  let g:tmuxline_powerline_symbols = 0
+else
+  let g:airline_powerline_fonts = 1
+endif
 
 " tab-settings
 set ts=2 sts=2 sw=2 expandtab
@@ -115,5 +127,6 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
 " make test commands execute using dispatch.vim
 let test#strategy = "dispatch"
