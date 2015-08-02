@@ -34,9 +34,11 @@ Plug 'wikitopian/hardmode'
 Plug 'altercation/vim-colors-solarized'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
-" Plug 'fatih/vim-go'
+Plug 'isRuslan/vim-es6'
+Plug 'fatih/vim-go'
 
 call plug#end()
+
 " Simple tweaks
 syntax on
 syntax enable
@@ -68,12 +70,19 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <left> :bn<cr>
 nnoremap <right> :bp<cr>
 
-nnoremap <leader>n :bn<CR>
-nnoremap <leader>p  :bp<CR>
-nnoremap <leader>j  ddp
 nnoremap <leader>k dd2kp
 
 nnoremap <enter> o<esc>
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <leader>n :call NumberToggle()<cr>
 
 if has('nvim')
   tnoremap <Leader>e <C-\><C-n>
@@ -83,12 +92,12 @@ endif
 colorscheme solarized
 
 " vim-go
-" let g:go_fmt_command = "goimports"
-" let g:go_highlight_functions = 1
-" let g:go_highlight_methods = 1
-" let g:go_highlight_structs = 1
-" let g:go_highlight_operators = 1
-" let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 " " let vim-go play nice with dispatch
 " let g:go_dispatch_enabled = 1
 
