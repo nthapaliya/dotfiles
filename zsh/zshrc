@@ -7,7 +7,7 @@ ZSH_THEME='lambda'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git ruby tmux osx)
+plugins=(git ruby tmux osx bundler)
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -19,13 +19,14 @@ setopt HIST_IGNORE_ALL_DUPS
 # if [ -n "$TMUX" ] && [[ "$TMUX" == *"tmate"* ]]; then
 #   export COMPATIBILITY=1
 # fi
+export rvm_ignore_dotfiles=yes
 
 # as per zsh-install notes
 unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
-export GOPATH=$HOME/Projects/go
+export GOPATH=$HOME/Lang/go
 
 PATH=$PATH:$HOME/.dotfiles/bin
 PATH=$PATH:$GOPATH/bin
@@ -34,7 +35,7 @@ PATH=$PATH:/usr/local/opt/go/libexec/bin
 source $DOTFILES_PATH/zsh/alias
 
 # anaconda is installed here
-ANACONDA_PATH=$HOME/.anaconda
+ANACONDA_PATH=$HOME/Lang/anaconda
 if [ -d "$ANACONDA_PATH" ]; then
   PATH=$PATH:$HOME/.local/bin:$ANACONDA_PATH/bin
 fi

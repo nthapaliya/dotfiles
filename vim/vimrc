@@ -26,13 +26,13 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 
+Plug 'airblade/vim-gitgutter'
 Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'wikitopian/hardmode'
 
 Plug 'altercation/vim-colors-solarized'
-Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'isRuslan/vim-es6'
 Plug 'fatih/vim-go'
@@ -71,8 +71,12 @@ nnoremap <left> :bn<cr>
 nnoremap <right> :bp<cr>
 
 nnoremap <leader>k dd2kp
+nnoremap <leader>w :update<cr>
 
 nnoremap <enter> o<esc>
+
+" to clean up trailing whitespace
+nnoremap <leader>W  :%s/\s\+$<cr>
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -83,6 +87,7 @@ function! NumberToggle()
 endfunc
 
 nnoremap <leader>n :call NumberToggle()<cr>
+nnoremap <C-p> :FZF<cr>
 
 if has('nvim')
   tnoremap <Leader>e <C-\><C-n>
