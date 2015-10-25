@@ -22,20 +22,23 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-rbenv'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'wikitopian/hardmode'
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-ruby/vim-ruby'
 Plug 'isRuslan/vim-es6'
 Plug 'fatih/vim-go'
+Plug 'rodjek/vim-puppet'
 
 call plug#end()
 
@@ -144,6 +147,8 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " make test commands execute using dispatch.vim
 let test#strategy = "dispatch"
+
+" let g:gutentags_exclude = ["node_modules",]
 
 if has("gui")
   set guifont=Sauce\ Code\ Powerline\ Light:h11

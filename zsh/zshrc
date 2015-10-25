@@ -5,6 +5,9 @@ export ZSH=$DOTFILES_PATH/zsh/oh-my-zsh
 
 ZSH_THEME='lambda'
 
+# Set case sensitivity
+# CASE_SENSITIVE="true"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(git ruby tmux osx bundler)
@@ -15,6 +18,7 @@ export LANG=en_US.UTF-8
 
 # User configuration
 setopt HIST_IGNORE_ALL_DUPS
+
 
 # if [ -n "$TMUX" ] && [[ "$TMUX" == *"tmate"* ]]; then
 #   export COMPATIBILITY=1
