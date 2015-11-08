@@ -153,3 +153,5 @@ let test#strategy = "dispatch"
 if has("gui")
   set guifont=Sauce\ Code\ Powerline\ Light:h11
 endif
+
+let g:syntastic_scss_checkers = ['scss_lint']

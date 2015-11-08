@@ -2,7 +2,7 @@ export SHELL=$(which zsh)
 export EDITOR='vim'
 PATH=/usr/local/bin:$PATH
 
-# export USE_RVM=1
+export USE_RVM=1
 if [ $USE_RVM ]; then
   [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 else

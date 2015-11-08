@@ -41,7 +41,7 @@ source $DOTFILES_PATH/zsh/alias
 # anaconda is installed here
 ANACONDA_PATH=$HOME/Lang/anaconda
 if [ -d "$ANACONDA_PATH" ]; then
-  PATH=$PATH:$HOME/.local/bin:$ANACONDA_PATH/bin
+  PATH=$HOME/.local/bin:$ANACONDA_PATH/bin:$PATH
 fi
 
 if [ -z "$COMPATIBILITY" ]; then
