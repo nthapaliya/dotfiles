@@ -12,10 +12,10 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'bling/vim-airline'
 Plug 'bling/vim-bufferline'
-Plug 'edkolev/tmuxline.vim'
-Plug 'edkolev/promptline.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
+
 Plug 'scrooloose/syntastic'
 
 Plug 'tpope/vim-sensible'
@@ -25,14 +25,10 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rbenv'
 
 Plug 'airblade/vim-gitgutter'
-Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'ludovicchabant/vim-gutentags'
-Plug 'wikitopian/hardmode'
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-ruby/vim-ruby'
@@ -57,26 +53,20 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 set hidden
 set cursorline
-
-" let g:ctrlp_by_filename = 1
-
-" set list
-" set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬
+" tab-settings
+set ts=2 sts=2 sw=2 expandtab
 
 " my custom mappings
 let mapleader = "\<Space>"
 inoremap jk <esc>
-"inoremap <esc> <nop>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 nnoremap <left> :bn<cr>
 nnoremap <right> :bp<cr>
 
-nnoremap <leader>k dd2kp
-nnoremap <leader>w :update<cr>
-
 nnoremap <enter> o<esc>
+
 
 " to clean up trailing whitespace
 nnoremap <leader>W  :%s/\s\+$<cr>
@@ -90,10 +80,14 @@ function! NumberToggle()
 endfunc
 
 nnoremap <leader>n :call NumberToggle()<cr>
-nnoremap <C-p> :FZF<cr>
+nnoremap <C-p> :Files<cr>
 
 if has('nvim')
-  tnoremap <Leader>e <C-\><C-n>
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
 endif
 
 " Colorscheme etc
@@ -106,12 +100,8 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" " let vim-go play nice with dispatch
-" let g:go_dispatch_enabled = 1
 
 let g:bufferline_echo = 0
-let g:airline#extensions#tmuxline#enabled = 0
-" let g:tmuxline_powerline_separators = 0
 
 if $COMPATIBILITY
   let g:airline_powerline_fonts = 0
@@ -133,22 +123,7 @@ else
   let g:airline_powerline_fonts = 1
 endif
 
-" tab-settings
-set ts=2 sts=2 sw=2 expandtab
-
 set clipboard^=unnamed "adds unnamed to existing values
-
-" vim-test
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
-
-" make test commands execute using dispatch.vim
-let test#strategy = "dispatch"
-
-" let g:gutentags_exclude = ["node_modules",]
 
 if has("gui")
   set guifont=Sauce\ Code\ Powerline\ Light:h11
