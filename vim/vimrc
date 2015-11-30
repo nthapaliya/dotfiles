@@ -10,13 +10,12 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'bling/vim-airline'
-Plug 'bling/vim-bufferline'
+Plug 'itchyny/lightline.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic' ", { 'on': 'SyntasticCheck' }
 
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
@@ -26,22 +25,24 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rbenv'
+Plug 'tpope/vim-dispatch'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
-
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-ruby/vim-ruby'
 Plug 'isRuslan/vim-es6'
 Plug 'fatih/vim-go'
 Plug 'rodjek/vim-puppet'
+Plug 'thoughtbot/vim-rspec'
+
+Plug 'rizzatti/dash.vim'
+" Plug 'radenling/vim-dispatch-neovim'
 
 call plug#end()
 
 " Simple tweaks
-syntax on
-syntax enable
-filetype plugin indent on
 
 set shell=$SHELL
 set background=dark
@@ -53,12 +54,13 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 set hidden
 set cursorline
+set noshowmode
+
 " tab-settings
 set ts=2 sts=2 sw=2 expandtab
 
 " my custom mappings
 let mapleader = "\<Space>"
-inoremap jk <esc>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
@@ -67,6 +69,8 @@ nnoremap <right> :bp<cr>
 
 nnoremap <enter> o<esc>
 
+" paste tweaks, set paste mode etc
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 
 " to clean up trailing whitespace
 nnoremap <leader>W  :%s/\s\+$<cr>
@@ -101,28 +105,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-let g:bufferline_echo = 0
-
-if $COMPATIBILITY
-  let g:airline_powerline_fonts = 0
-
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-
-  " unicode symbols
-  let g:airline_left_sep = ' '
-  let g:airline_right_sep = ' '
-  let g:airline_symbols.crypt = '🔒'
-  let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'Þ'
-  let g:airline_symbols.whitespace = 'Ξ'
-  let g:tmuxline_powerline_symbols = 0
-else
-  let g:airline_powerline_fonts = 1
-endif
-
 set clipboard^=unnamed "adds unnamed to existing values
 
 if has("gui")
@@ -130,3 +112,21 @@ if has("gui")
 endif
 
 let g:syntastic_scss_checkers = ['scss_lint']
+" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+
+let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+
+" set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
+
+let g:rspec_command = "Dispatch bin/rspec {spec}"
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>

@@ -10,7 +10,10 @@ ZSH_THEME='lambda'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git ruby tmux osx bundler)
+# plugins=(git ruby tmux osx bundler)
+plugins=(git ruby tmux osx)
+
+# export ZSH_TMUX_AUTOSTART=true
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -20,9 +23,6 @@ export LANG=en_US.UTF-8
 setopt HIST_IGNORE_ALL_DUPS
 
 
-# if [ -n "$TMUX" ] && [[ "$TMUX" == *"tmate"* ]]; then
-#   export COMPATIBILITY=1
-# fi
 export rvm_ignore_dotfiles=yes
 
 # as per zsh-install notes
