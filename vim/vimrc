@@ -14,9 +14,9 @@ call plug#begin('~/.vim/plugged')
 
 " Colors and themes
 Plug 'altercation/vim-colors-solarized'
-Plug 'itchyny/lightline.vim'
-" Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
+Plug 'sjl/badwolf'
 
 " Ruby
 Plug 'thoughtbot/vim-rspec'
@@ -40,7 +40,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
-Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
@@ -50,30 +49,32 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
-
-Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
 " }}}
 
-" Simple tweaks {{{
+" basic settings {{{
 
-set shell=$SHELL                               " default shell set by environment
 set background=dark                            " dark theme
-set number                                     " show numbers in side gutter
+set clipboard^=unnamed                         " adds unnamed to existing values
+set cursorline                                 " highlight the cursorline
+set hidden                                     " can change buffers even if current is not written
+set list                                       " enable list characters
+set listchars=trail:·,extends:#,tab:▸·,nbsp:· " specify list characters
 set nocompatible                               " enable vim specific behaviour
+set noerrorbells                               " don't beep
+set number                                     " show numbers in side gutter
+set shell=$SHELL                               " default shell set by environment
 set smartcase                                  " search case setting
 set title                                      " titlebar will be buffer filename
-set visualbell                                 " don't beep
-set noerrorbells                               " don't beep
-set hidden                                     " can change buffers even if current is not written
-set cursorline                                 " highlight the cursorline
-set clipboard^=unnamed                         " adds unnamed to existing values
-set list                                       " enable list characters
-set listchars=trail:.,extends:#,tab:▸\ ,nbsp:. " specify list characters
 set ts=2 sts=2 sw=2 expandtab                  " tab-settings
+set visualbell                                 " don't beep
+colorscheme solarized                          " colorscheme
+
+" set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 
 " }}}
 
@@ -81,16 +82,12 @@ set ts=2 sts=2 sw=2 expandtab                  " tab-settings
 let mapleader = "\<Space>"
 
 cmap w!! w !sudo tee % >/dev/null               " if you forget sudo
-nnoremap <c-enter> o<esc>                       " insert a newline
 nnoremap <leader>W  :%s/\s\+$<cr>               " to clean up trailing whitespace
 nnoremap <leader>ev :e $MYVIMRC<cr>             " quickly edit vimrc
 nnoremap <leader>h  :nohlsearch<cr>             " toggle highlight
 nnoremap <leader>n  :call NumberToggle()<cr>    " toggle relative number
-nnoremap <leader>nt :NERDTreeToggle<cr>         " shortcut for NERDTree
 nnoremap <leader>q  :Bdelete<CR>                " close buffers sanely
 nnoremap <leader>sv :source $MYVIMRC<cr>        " quickly source vimrc
-nnoremap <left>     :bnext<cr>                  " jump to next buffer
-nnoremap <right>    :bprevious<cr>              " jump to prev buffer
 nnoremap Q <nop>                                " don't enter ex mode accidentally
 
 " fzf.vim
@@ -118,7 +115,8 @@ endfunc
 " gui config {{{
 
 if has("gui")
-  set guifont=Sauce\ Code\ Powerline\ Light:h11
+  set guifont=Sauce\ Code\ Powerline:h11
+  colorscheme base16-monokai " gui colorscheme
 endif
 
 " }}}
@@ -135,9 +133,6 @@ endif
 
 " }}}
 
-" colorscheme
-colorscheme base16-monokai
-
 " vim-go {{{
 
 let g:go_fmt_command = "goimports"
@@ -151,8 +146,8 @@ let g:go_highlight_build_constraints = 1
 
 " syntastic {{{
 
-" let g:syntastic_scss_checkers = ['scss_lint']
-" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
@@ -160,8 +155,6 @@ let g:go_highlight_build_constraints = 1
 " let g:syntastic_check_on_wq = 0
 
 " }}}
-
-set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 
 " vim-rspec {{{
 
@@ -173,8 +166,11 @@ map <Leader>a :call RunAllSpecs()<CR>
 
 " }}}
 
-" quick-scope
+" quick-scope {{{
+
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" }}}
 
 " vimscript file settings {{{
 
