@@ -19,7 +19,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'sjl/badwolf'
 
 " Ruby
-Plug 'thoughtbot/vim-rspec'
+Plug 'janko-m/vim-test'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rbenv'
@@ -37,6 +37,7 @@ Plug 'junegunn/fzf.vim'
 " Vim enhancements
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
@@ -63,16 +64,18 @@ set clipboard^=unnamed                         " adds unnamed to existing values
 set cursorline                                 " highlight the cursorline
 set hidden                                     " can change buffers even if current is not written
 set list                                       " enable list characters
-set listchars=trail:·,extends:#,tab:▸·,nbsp:· " specify list characters
+set listchars=trail:·,extends:#,tab:▸·,nbsp:·  " specify list characters
 set nocompatible                               " enable vim specific behaviour
 set noerrorbells                               " don't beep
+set noshowmode                                 " don't need to echo mode
 set number                                     " show numbers in side gutter
+set scrolloff=8                                " leave 8 lines on top and bottom while scrolling
 set shell=$SHELL                               " default shell set by environment
 set smartcase                                  " search case setting
 set title                                      " titlebar will be buffer filename
 set ts=2 sts=2 sw=2 expandtab                  " tab-settings
 set visualbell                                 " don't beep
-colorscheme solarized                          " colorscheme
+colorscheme base16-solarized
 
 " set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 
@@ -81,14 +84,15 @@ colorscheme solarized                          " colorscheme
 " keymappings {{{
 let mapleader = "\<Space>"
 
-cmap w!! w !sudo tee % >/dev/null               " if you forget sudo
-nnoremap <leader>W  :%s/\s\+$<cr>               " to clean up trailing whitespace
-nnoremap <leader>ev :e $MYVIMRC<cr>             " quickly edit vimrc
-nnoremap <leader>h  :nohlsearch<cr>             " toggle highlight
-nnoremap <leader>n  :call NumberToggle()<cr>    " toggle relative number
-nnoremap <leader>q  :Bdelete<CR>                " close buffers sanely
-nnoremap <leader>sv :source $MYVIMRC<cr>        " quickly source vimrc
-nnoremap Q <nop>                                " don't enter ex mode accidentally
+cmap w!! w !sudo tee % >/dev/null                " if you forget sudo
+nnoremap <leader>W  :%s/\s\+$<cr>                " to clean up trailing whitespace
+nnoremap <leader>ev :e $MYVIMRC<cr>              " quickly edit vimrc
+nnoremap <leader>h  :nohlsearch<cr>              " toggle highlight
+nnoremap <leader>n  :call NumberToggle()<cr>     " toggle relative number
+nnoremap <leader>q  :Bdelete<CR>                 " close buffers sanely
+nnoremap <leader>sv :source $MYVIMRC<cr>         " quickly source vimrc
+nnoremap <leader>D  :Dispatch<cr>                " map vim-dispatch
+nnoremap Q <nop>                                 " don't enter ex mode accidentally
 
 " fzf.vim
 if $COMPATIBILITY
@@ -109,39 +113,36 @@ function! NumberToggle()
     set relativenumber
   endif
 endfunc
-
 " }}}
 
 " gui config {{{
-
-if has("gui")
-  set guifont=Sauce\ Code\ Powerline:h11
-  colorscheme base16-monokai " gui colorscheme
+if has("gui_running")
+  set guioptions=
+  set guifont=Sauce\ Code\ Powerline\ Light:h11
+  colorscheme gruvbox
 endif
-
 " }}}
 
 " nvim config {{{
-
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-h> <C-\><C-n><C-w>h
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
   tnoremap <C-l> <C-\><C-n><C-w>l
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  colorscheme gruvbox
 endif
-
 " }}}
 
 " vim-go {{{
-
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-
 " }}}
 
 " syntastic {{{
@@ -152,17 +153,28 @@ let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_mode_map = {
+      \ "mode": "active",
+      \ "active_filetypes": ["ruby"],
+      \ "passive_filetypes": ["puppet"] }
 
 " }}}
 
-" vim-rspec {{{
+" vim-test {{{
 
-let g:rspec_command = "Dispatch! bin/rspec {spec}"
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
+
+if has('nvim')
+  let test#strategy = 'neovim'
+else
+  let test#strategy = 'dispatch'
+endif
 
 " }}}
 
@@ -175,8 +187,8 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " vimscript file settings {{{
 
 augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
 " }}}

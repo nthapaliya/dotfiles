@@ -40,3 +40,7 @@ Thumbs.db
 ######################
 .overcommit.yml
 .git-hooks
+
+# Bundler folder
+######################
+.bundle

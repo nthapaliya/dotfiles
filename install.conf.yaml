@@ -10,6 +10,7 @@
     ~/.irbrc: "ruby/irbrc"
     ~/.gitignore_global: "git/gitignore_global"
     ~/.gitconfig: "git/gitconfig"
+    ~/.bash_profile: "bash/bash_profile"
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
