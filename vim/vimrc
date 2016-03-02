@@ -13,10 +13,10 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Colors and themes
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
-Plug 'itchyny/lightline.vim'
-Plug 'sjl/badwolf'
+Plug 'vim-airline/vim-airline'
+Plug 'bling/vim-bufferline'
+Plug 'morhetz/gruvbox'
+" Plug 'mkarmona/colorsbox'
 
 " Ruby
 Plug 'janko-m/vim-test'
@@ -39,9 +39,9 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -52,6 +52,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
+
+" Generating tmuxline and promptline
+" Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/promptline.vim'
 
 call plug#end()
 
@@ -75,7 +79,8 @@ set smartcase                                  " search case setting
 set title                                      " titlebar will be buffer filename
 set ts=2 sts=2 sw=2 expandtab                  " tab-settings
 set visualbell                                 " don't beep
-colorscheme base16-solarized
+
+colorscheme gruvbox
 
 " set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 
@@ -84,42 +89,29 @@ colorscheme base16-solarized
 " keymappings {{{
 let mapleader = "\<Space>"
 
-cmap w!! w !sudo tee % >/dev/null                " if you forget sudo
+cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>W  :%s/\s\+$<cr>                " to clean up trailing whitespace
 nnoremap <leader>ev :e $MYVIMRC<cr>              " quickly edit vimrc
-nnoremap <leader>h  :nohlsearch<cr>              " toggle highlight
-nnoremap <leader>n  :call NumberToggle()<cr>     " toggle relative number
-nnoremap <leader>q  :Bdelete<CR>                 " close buffers sanely
 nnoremap <leader>sv :source $MYVIMRC<cr>         " quickly source vimrc
+nnoremap <leader>q  :Bdelete<CR>                 " close buffers sanely
 nnoremap <leader>D  :Dispatch<cr>                " map vim-dispatch
+
+" inoremap jk <esc>
 nnoremap Q <nop>                                 " don't enter ex mode accidentally
 
 " fzf.vim
-if $COMPATIBILITY
-  nnoremap <C-p> :Files!<cr>
-else
+" if $COMPATIBILITY
+"   nnoremap <C-p> :Files!<cr>
+" else
   nnoremap <C-p> :Files<cr>
-endif
+" endif
 
-" }}}
-
-" custom functions {{{
-
-" Toggle relativenumber
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
 " }}}
 
 " gui config {{{
 if has("gui_running")
   set guioptions=
   set guifont=Sauce\ Code\ Powerline\ Light:h11
-  colorscheme gruvbox
 endif
 " }}}
 
@@ -132,7 +124,6 @@ if has('nvim')
   tnoremap <C-l> <C-\><C-n><C-w>l
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-  colorscheme gruvbox
 endif
 " }}}
 
@@ -164,17 +155,12 @@ let g:syntastic_mode_map = {
 
 " vim-test {{{
 
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ta :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
-
-if has('nvim')
-  let test#strategy = 'neovim'
-else
-  let test#strategy = 'dispatch'
-endif
+" nmap <silent> <leader>tn :TestNearest<CR>
+" nmap <silent> <leader>tf :TestFile<CR>
+" nmap <silent> <leader>ta :TestSuite<CR>
+" nmap <silent> <leader>tl :TestLast<CR>
+" nmap <silent> <leader>tv :TestVisit<CR>
+let test#strategy = 'neovim'
 
 " }}}
 
@@ -185,10 +171,62 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
 
 " vimscript file settings {{{
-
 augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
 augroup END
+" }}}
+
+" vim-airline fine tuning {{{
+if $COMPATIBILITY
+  let g:airline_left_sep=' '
+  let g:airline_right_sep=' '
+else
+  let g:airline_powerline_fonts = 1
+endif
+
+" let g:airline#extensions#tmuxline#enabled = 0
+" let g:airline#extensions#promptline#enabled = 0
+
+let g:airline#extensions#branch#displayed_head_limit = 8
+let g:airline#extensions#bufferline#enabled = 0
+
+" Short forms, lets see if worth it
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
 
 " }}}
+
+
+let g:promptline_theme =  {
+        \'a'    : [235, 208],
+        \'b'    : [232, 6],
+        \'c'    : [15, 243],
+        \'x'    : [188, 234],
+        \'y'    : [15, 239],
+        \'z'    : [233, 183],
+        \'warn' : [235, 208]}
+
+let g:airline#extensions#tmuxline#enabled = 0
+" let g:tmuxline_theme = {
+"         \'a'    : [235, 208],
+"         \'b'    : [232, 6],
+"         \'c'    : [15, 243],
+"         \'x'    : [188, 234],
+"         \'y'    : [15, 239],
+"         \'z'    : [233, 183],
+"     \   'win'  : [ 103, 236 ],
+"     \   'cwin' : [ 236, 103 ],
+"     \   'bg'   : [ 244, 236 ],
+"     \ }

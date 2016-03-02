@@ -17,4 +17,4 @@
 	required = true
 [core]
 	ignorecase = false
-	excludesfile = /Users/nirajthapaliya/.gitignore_global
+	excludesfile = /Users/niraj/.gitignore_global

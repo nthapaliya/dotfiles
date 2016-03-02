@@ -44,3 +44,9 @@ Thumbs.db
 # Bundler folder
 ######################
 .bundle
+
+tags
+tags.temp
+tags.lock
+
+.rake_tasks
