@@ -32,7 +32,7 @@ unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
-# export GOPATH=$HOME/Lang/go
+export GOPATH=$HOME/Lang/go
 
 PATH=$PATH:$HOME/.dotfiles/bin
 # PATH=$PATH:$GOPATH/bin
@@ -41,10 +41,10 @@ PATH=$PATH:$HOME/.dotfiles/bin
 source $DOTFILES_PATH/zsh/alias
 
 # anaconda is installed here
-# ANACONDA_PATH=$HOME/Lang/anaconda
-# if [ -d "$ANACONDA_PATH" ]; then
-#   PATH=$HOME/.local/bin:$ANACONDA_PATH/bin:$PATH
-# fi
+ANACONDA_PATH=$HOME/Lang/anaconda
+if [ -d "$ANACONDA_PATH" ]; then
+  PATH=$PATH:$HOME/.local/bin:$ANACONDA_PATH/bin
+fi
 
 if [ -z "$COMPATIBILITY" ]; then
   source $DOTFILES_PATH/zsh/promptline.sh

@@ -4,7 +4,7 @@
 alias rubo="git status --porcelain | egrep '((rb)|(rake))' | awk '{print \$2}' | grep -v schema.rb | xargs rubocop -a -R -D"
 alias rubox='rubocop -a -R -D '
 alias al="ag --files-with-matches --smart-case"
-alias vt="xargs -o vim -p"
+alias vt="xargs -o nvim -p"
 alias vi="nvim"
 alias nyan="telnet nyancat.dakko.us"
 alias nw='tmux new-window'
