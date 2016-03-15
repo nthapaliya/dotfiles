@@ -18,3 +18,5 @@
 [core]
 	ignorecase = false
 	excludesfile = /Users/niraj/.gitignore_global
+[alias]
+	up = "!git remote update -p; git merge --ff-only @{u}"

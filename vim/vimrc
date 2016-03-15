@@ -56,6 +56,7 @@ Plug 'unblevable/quick-scope'
 " Generating tmuxline and promptline
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
+Plug 'tmux-plugins/vim-tmux'
 
 call plug#end()
 
