@@ -1,6 +1,6 @@
 [user]
 	name = Niraj Thapaliya
-	email = niraj.thapaliya@gmail.com
+	email = nthapaliya@users.noreply.github.com
 [filter "media"]
 	required = true
 	clean = git media clean %f
