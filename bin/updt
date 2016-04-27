@@ -3,5 +3,5 @@
 echo "brew update"
 brew update
 
-echo "brew upgrade"
+echo "brew upgrade --all"
 brew upgrade --all

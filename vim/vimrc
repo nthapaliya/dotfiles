@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'bling/vim-bufferline'
 Plug 'morhetz/gruvbox'
-" Plug 'mkarmona/colorsbox'
+Plug 'justinmk/molokai'
 
 " Ruby
 Plug 'janko-m/vim-test'
@@ -28,6 +28,8 @@ Plug 'vim-ruby/vim-ruby'
 " Other languages
 Plug 'fatih/vim-go'
 Plug 'isRuslan/vim-es6'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'rodjek/vim-puppet'
 
 " FZF
@@ -41,8 +43,10 @@ Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
+Plug 'rizzatti/dash.vim'
 " Plug 'scrooloose/syntastic'
-Plug 'tommcdo/vim-lion'
+" Plug 'tommcdo/vim-lion'
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -57,6 +61,12 @@ Plug 'unblevable/quick-scope'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
 Plug 'tmux-plugins/vim-tmux'
+
+" Pertinent ones from before the great git catastrophe of 2016
+"  /Users/niraj/.vim/plugged/tern_for_vim/
+"  /Users/niraj/.vim/plugged/vim-airline-themes/
+"  /Users/niraj/.vim/plugged/vim-kalisi/
+
 
 call plug#end()
 
@@ -231,3 +241,5 @@ let g:airline#extensions#tmuxline#enabled = 0
 "     \   'cwin' : [ 236, 103 ],
 "     \   'bg'   : [ 244, 236 ],
 "     \ }
+
+autocmd FileType gitcommit setlocal commentstring=#\ %s

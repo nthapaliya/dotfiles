@@ -39,6 +39,7 @@ PATH=$PATH:$HOME/.dotfiles/bin
 # PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 source $DOTFILES_PATH/zsh/alias
+source $DOTFILES_PATH/zsh/play-youtube.bash
 
 # anaconda is installed here
 ANACONDA_PATH=$HOME/Lang/anaconda
