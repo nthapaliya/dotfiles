@@ -1,9 +1,0 @@
-#! /bin/bash
-
-base=~/OSS
-repos=(huddle kit puppet_modules tasks)
-
-for repo in "${repos[@]}"; do
-  echo updating "$base/$repo"
-  cd "$base/$repo"; git up
-done

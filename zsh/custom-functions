@@ -1,3 +1,5 @@
+#!/bin/bash
+set -eu
 play-yt() {
   youtube-dl \
     --default-search 'ytsearch' \
@@ -8,3 +10,14 @@ play-yt() {
     --exec 'mpv {}' \
     "$1"
 }
+
+git_up_oss() {
+  base=~/OSS
+  repos=(huddle kit puppet_modules tasks)
+
+  for repo in "${repos[@]}"; do
+    echo updating "$base/$repo"
+    cd "$base/$repo"; git up
+  done
+}
+set +eu
