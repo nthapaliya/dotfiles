@@ -2,7 +2,7 @@
 
 # needs some work
 alias rubo="git diff --diff-filter=ACMR --name-only -z origin/master -- \*.{rb,rake} | xargs -0 bundle exec rubocop -R -D"
-alias rubox='rubocop -a -R -D '
+alias rubox='rubocop -a -R -D **/*.{rb,rake}'
 alias al="ag --files-with-matches --smart-case"
 alias vt="xargs -o nvim -p"
 alias vi="nvim"
