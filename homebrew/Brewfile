@@ -77,7 +77,7 @@ brew 'the_silver_searcher'
 brew 'tig'
 brew 'tmate', args: ['HEAD']
 brew 'tmux', args: ['HEAD']
-brew 'vim', args: ['HEAD']
+brew 'vim', args: ['override-system-vi']
 brew 'wget'
 brew 'zsh'
 brew 'neovim/neovim/neovim', args: ['HEAD']

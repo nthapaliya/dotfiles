@@ -1,8 +1,9 @@
 #!/bin/sh
 
 # needs some work
-alias rubo="git diff --diff-filter=ACMR --name-only -z origin/master -- \*.{rb,rake} | xargs -0 bundle exec rubocop -R -D"
-alias rubox='rubocop -a -R -D **/*.{rb,rake}'
+# alias rubo="git diff --diff-filter=ACMR --name-only -z origin/master -- \*.{rb,rake} | xargs -0 bundle exec rubocop -R -D"
+alias rubo="git diff --name-only -z -- \*.{rb,rake} | xargs -0 bundle exec rubocop -a -R -D"
+alias rubox='bundle exec rubocop -a -R -D **/*.{rb,rake}'
 alias al="ag --files-with-matches --smart-case"
 alias vt="xargs -o nvim -p"
 alias vi="nvim"
@@ -20,3 +21,7 @@ alias vssh='vagrant ssh'
 alias guposs='git_up_oss'
 alias zshrc='nvim ~/.zshrc'
 alias vd='cd ~/OSS/huddle/app/assets/javascripts/visual_directory'
+alias v='f -e nvim'
+alias mclient='bundle exec mina full_deploy HOST=client1 BRANCH=`git rev-parse --abbrev-ref HEAD`'
+alias mqa='bundle exec mina full_deploy HOST=qa.ossd.co BRANCH=`git rev-parse --abbrev-ref HEAD`'
+alias weather='curl wttr.in'

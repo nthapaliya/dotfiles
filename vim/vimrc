@@ -14,7 +14,7 @@ call plug#begin('~/.vim/plugged')
 
 " Colors and themes
 Plug 'vim-airline/vim-airline'
-Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 Plug 'morhetz/gruvbox'
 Plug 'justinmk/molokai'
 
@@ -107,6 +107,8 @@ nnoremap <leader>ev :e $MYVIMRC<cr>              " quickly edit vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>         " quickly source vimrc
 nnoremap <leader>q  :Bdelete<CR>                 " close buffers sanely
 nnoremap <leader>D  :Dispatch<cr>                " map vim-dispatch
+nnoremap <Left> :bprev<cr>
+nnoremap <Right> :bnext<cr>
 
 " inoremap jk <esc>
 nnoremap Q <nop>                                 " don't enter ex mode accidentally
@@ -134,6 +136,7 @@ if has('nvim')
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
   tnoremap <C-l> <C-\><C-n><C-w>l
+  " set termguicolors
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
@@ -182,11 +185,14 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " }}}
 
-" vimscript file settings {{{
+" auto-commands {{{
 augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
 augroup END
+
+autocmd FileType gitcommit setlocal commentstring=#\ %s
+autocmd FileType diff setlocal commentstring=#\ %s
 " }}}
 
 " vim-airline fine tuning {{{
@@ -201,7 +207,6 @@ endif
 " let g:airline#extensions#promptline#enabled = 0
 
 let g:airline#extensions#branch#displayed_head_limit = 8
-let g:airline#extensions#bufferline#enabled = 0
 
 " Short forms, lets see if worth it
 let g:airline_mode_map = {
@@ -218,9 +223,16 @@ let g:airline_mode_map = {
     \ '' : 'S',
     \ }
 
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#bufferline#enabled = 0
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 " }}}
 
-
+" TODO: vim-promptline and tmuxline {{{
 let g:promptline_theme =  {
         \'a'    : [235, 208],
         \'b'    : [232, 6],
@@ -243,4 +255,4 @@ let g:airline#extensions#tmuxline#enabled = 0
 "     \   'bg'   : [ 244, 236 ],
 "     \ }
 
-autocmd FileType gitcommit setlocal commentstring=#\ %s
+" }}}
