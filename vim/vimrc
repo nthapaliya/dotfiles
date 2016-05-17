@@ -43,6 +43,7 @@ Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
+Plug 'justinmk/vim-sneak'
 Plug 'rizzatti/dash.vim'
 " Plug 'scrooloose/syntastic'
 Plug 'tommcdo/vim-lion'
@@ -193,6 +194,9 @@ augroup END
 
 autocmd FileType gitcommit setlocal commentstring=#\ %s
 autocmd FileType diff setlocal commentstring=#\ %s
+
+command Today r!date "+\%F (\%a \%b \%d)"
+command Now   r!date "+\%R"
 " }}}
 
 " vim-airline fine tuning {{{

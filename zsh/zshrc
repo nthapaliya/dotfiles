@@ -24,7 +24,6 @@ export LANG=en_US.UTF-8
 # User configuration
 setopt HIST_IGNORE_ALL_DUPS
 
-
 export rvm_ignore_dotfiles=yes
 
 # as per zsh-install notes

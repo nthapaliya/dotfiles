@@ -12,6 +12,7 @@ play-yt() {
 }
 
 git_up_oss() {
+  current=`pwd`
   base=~/OSS
   repos=(huddle kit puppet_modules tasks)
 
@@ -19,5 +20,7 @@ git_up_oss() {
     echo updating "$base/$repo"
     cd "$base/$repo"; git up
   done
+
+  cd $current
 }
 set +eu
