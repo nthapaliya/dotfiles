@@ -61,7 +61,7 @@ Plug 'unblevable/quick-scope'
 
 " Generating tmuxline and promptline
 " Plug 'edkolev/tmuxline.vim'
-" Plug 'edkolev/promptline.vim'
+Plug 'edkolev/promptline.vim'
 Plug 'tmux-plugins/vim-tmux'
 
 " Pertinent ones from before the great git catastrophe of 2016
@@ -196,7 +196,7 @@ autocmd FileType gitcommit setlocal commentstring=#\ %s
 autocmd FileType diff setlocal commentstring=#\ %s
 
 command Today r!date "+\%F (\%a \%b \%d)"
-command Now   r!date "+\%R"
+command -nargs=+ Now r!date "+\%R - <args>"
 " }}}
 
 " vim-airline fine tuning {{{
@@ -206,9 +206,6 @@ if $COMPATIBILITY
 else
   let g:airline_powerline_fonts = 1
 endif
-
-" let g:airline#extensions#tmuxline#enabled = 0
-" let g:airline#extensions#promptline#enabled = 0
 
 let g:airline#extensions#branch#displayed_head_limit = 8
 
@@ -229,7 +226,6 @@ let g:airline_mode_map = {
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#bufferline#enabled = 0
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -241,22 +237,17 @@ let g:promptline_theme =  {
         \'a'    : [235, 208],
         \'b'    : [232, 6],
         \'c'    : [15, 243],
-        \'x'    : [188, 234],
+        \'x'    : [15, 239],
         \'y'    : [15, 239],
         \'z'    : [233, 183],
         \'warn' : [235, 208]}
 
-let g:airline#extensions#tmuxline#enabled = 0
-" let g:tmuxline_theme = {
-"         \'a'    : [235, 208],
-"         \'b'    : [232, 6],
-"         \'c'    : [15, 243],
-"         \'x'    : [188, 234],
-"         \'y'    : [15, 239],
-"         \'z'    : [233, 183],
-"     \   'win'  : [ 103, 236 ],
-"     \   'cwin' : [ 236, 103 ],
-"     \   'bg'   : [ 244, 236 ],
-"     \ }
+" https://github.com/edkolev/promptline.vim#tldr-starting-point-for-a-personalized-prompt
 
-" }}}
+let g:promptline_preset = {
+      \'b' : [ promptline#slices#user() ],
+      \'c' : [ promptline#slices#cwd() ],
+      \'x' : [ promptline#slices#vcs_branch() ],
+      \'warn' : [ promptline#slices#last_exit_code() ]}
+
+let g:airline#extensions#tmuxline#enabled = 0
