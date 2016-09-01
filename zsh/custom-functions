@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eu
 play-yt() {
+  input="$@"
   youtube-dl \
     --default-search 'ytsearch' \
     --no-playlist \
@@ -8,7 +9,7 @@ play-yt() {
     --output '/tmp/%(title)s.%(ext)s' \
     --extract-audio --audio-format mp3 --keep-video \
     --exec 'mpv {}' \
-    "$1"
+    "$input"
 }
 
 git_up_oss() {
@@ -24,4 +25,37 @@ git_up_oss() {
 
   popd
 }
+
+giphy() {
+  input=` echo "$@" | tr ' ' '+' `
+  curl "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=$input" | jq .data.image_url | xargs -n1 curl | imgcat
+}
+
+# http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
+# Higher quality
+movtogif() {
+  [ -z "$1" ] && echo 'Error: Filename not specified' && return 1;
+
+  palette="/tmp/palette.png"
+  filters="fps=15,scale=iw*.5:-2:flags=lanczos"
+  palettefilters="diff_mode=rectangle:dither=sierra2"
+
+  ffmpeg -v warning -i "$1" -vf "$filters,palettegen" -y $palette
+  ffmpeg -v warning -i "$1" -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse=$palettefilters" -y "${1%.*}.gif"
+}
+
+smallify() {
+  [ -z "$1" ] && echo 'Error: Filename not specified' && return 1;
+  filters="fps=15,scale=iw*.5:-2"
+
+  ffmpeg -i "$1" -v warning -vf "$filters" -vcodec h264 -an -strict -2 -y "${1%.*}.mp4"
+}
+
+webmake() {
+  [ -z "$1" ] && echo 'Error: Filename not specified' && return 1;
+  filters="fps=15,scale=iw*.5:-2"
+
+  ffmpeg -i "$1" -v warning -vf "$filters" -c:v libvpx -b:v 500k -an -strict -2 -y "${1%.*}.webm"
+}
+
 set +eu

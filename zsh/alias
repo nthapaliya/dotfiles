@@ -10,7 +10,6 @@ alias vi="nvim"
 alias nyan="telnet nyancat.dakko.us"
 alias nw='tmux new-window'
 alias rs='rails s -b 127.0.0.1'
-alias git-hidden="git ls-files -v | grep '^h'"
 alias tmate='COMPATIBILITY=1 tmate'
 alias vu='vagrant up'
 alias vp='vagrant provision'

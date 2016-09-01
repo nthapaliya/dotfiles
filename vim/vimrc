@@ -31,6 +31,7 @@ Plug 'isRuslan/vim-es6'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'rodjek/vim-puppet'
+Plug 'vim-scripts/Arduino-syntax-file'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
@@ -195,8 +196,15 @@ augroup END
 autocmd FileType gitcommit setlocal commentstring=#\ %s
 autocmd FileType diff setlocal commentstring=#\ %s
 
-command Today r!date "+\%F (\%a \%b \%d)"
-command -nargs=+ Now r!date "+\%R - <args>"
+command Today execute 'normal G' | r!date "+\%F (\%a \%b \%d)"
+command -nargs=+ Now execute 'normal G' | r!date "+\%R - <args>"
+
+function Eslint()
+  !node_modules/eslint/bin/eslint.js --quiet --fix %
+  edit
+endfunction
+
+command Eslint call Eslint()
 " }}}
 
 " vim-airline fine tuning {{{
