@@ -14,23 +14,23 @@ call plug#begin('~/.vim/plugged')
 
 " Colors and themes
 Plug 'vim-airline/vim-airline'
-" Plug 'bling/vim-bufferline'
 Plug 'morhetz/gruvbox'
-Plug 'justinmk/molokai'
 
 " Ruby
-Plug 'janko-m/vim-test'
+" Plug 'janko-m/vim-test'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
 
-" Other languages
-Plug 'fatih/vim-go'
-Plug 'isRuslan/vim-es6'
+" Javascript
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+
+" Other languages
+Plug 'fatih/vim-go'
 Plug 'rodjek/vim-puppet'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'vim-scripts/Arduino-syntax-file'
 
 " FZF
@@ -38,41 +38,34 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 
 " Vim enhancements
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'christoomey/vim-tmux-navigator'
-" Plug 'ludovicchabant/vim-gutentags'
-Plug 'moll/vim-bbye'
-Plug 'justinmk/vim-sneak'
-Plug 'rizzatti/dash.vim'
-" Plug 'scrooloose/syntastic'
-Plug 'tommcdo/vim-lion'
-" Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-unimpaired'
-Plug 'unblevable/quick-scope'
+Plug 'ConradIrwin/vim-bracketed-paste' " TODO: Find out if I still need this
+Plug 'airblade/vim-gitgutter'          " show git marks on gutter
+Plug 'airblade/vim-rooter'             " vim opened in a sub-dir chdir's to git root
+Plug 'christoomey/vim-tmux-navigator'  " jump between vim and tmux panes easily
+Plug 'tommcdo/vim-lion'                " easily align things
+Plug 'tpope/vim-commentary'            " gc and gcc to comment/uncomment lines
+Plug 'tpope/vim-dispatch'              " TODO: actually use this for anything
+Plug 'tpope/vim-fugitive'              " git wrapper
+Plug 'tpope/vim-repeat'                " extends . commands
+Plug 'tpope/vim-rhubarb'               " extends fugitive for use with github
+Plug 'tpope/vim-sensible'              " sensible defaults
+Plug 'tpope/vim-surround'              " shortcuts for adding deleting or changing parens and quotes
+Plug 'tpope/vim-unimpaired'            " handy shortcuts which I can never remember
+Plug 'tpope/vim-vinegar'               " wrapper around netrw, file manager
+Plug 'unblevable/quick-scope'          " handy for f and t commands
+
+" Plug 'justinmk/vim-sneak'
+" Plug 'ludovicchabant/vim-gutentags' " TODO: Get this working properly
+" Plug 'moll/vim-bbye'
+" Plug 'neomake/neomake'              " TODO: Is this any good? (or delete)
+" Plug 'rizzatti/dash.vim'
+" Plug 'scrooloose/syntastic'         " TODO: Make this work or delete
 
 " Generating tmuxline and promptline
 " Plug 'edkolev/tmuxline.vim'
-Plug 'edkolev/promptline.vim'
-Plug 'tmux-plugins/vim-tmux'
-
-" Pertinent ones from before the great git catastrophe of 2016
-"  /Users/niraj/.vim/plugged/tern_for_vim/
-"  /Users/niraj/.vim/plugged/vim-airline-themes/
-"  /Users/niraj/.vim/plugged/vim-kalisi/
-
+" Plug 'edkolev/promptline.vim'
 
 call plug#end()
-
 " }}}
 
 " basic settings {{{
@@ -91,6 +84,8 @@ set scrolloff=8                                " leave 8 lines on top and bottom
 set shell=$SHELL                               " default shell set by environment
 set smartcase                                  " search case setting
 set title                                      " titlebar will be buffer filename
+set t_ut=                                      " https://sunaku.github.io/vim-256color-bce.html
+set termguicolors                              " enable true-color
 set ts=2 sts=2 sw=2 expandtab                  " tab-settings
 set visualbell                                 " don't beep
 
@@ -138,9 +133,12 @@ if has('nvim')
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
   tnoremap <C-l> <C-\><C-n><C-w>l
-  " set termguicolors
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+  " I'm not keeping this to enable true color, thats been deprecated
+  " I'm keeping this to 'fix' quick-scope
+  " https://github.com/unblevable/quick-scope/issues/32#issuecomment-241159662
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 " }}}
 
@@ -196,6 +194,10 @@ augroup END
 autocmd FileType gitcommit setlocal commentstring=#\ %s
 autocmd FileType diff setlocal commentstring=#\ %s
 
+autocmd BufRead,BufNewFile *.{es6,es6.js} set filetype=javascript " set all `es6` extensions to javascript
+" }}}
+
+" custom-commands {{{
 command Today execute 'normal G' | r!date "+\%F (\%a \%b \%d)"
 command -nargs=+ Now execute 'normal G' | r!date "+\%R - <args>"
 
@@ -252,10 +254,10 @@ let g:promptline_theme =  {
 
 " https://github.com/edkolev/promptline.vim#tldr-starting-point-for-a-personalized-prompt
 
-let g:promptline_preset = {
-      \'b' : [ promptline#slices#user() ],
-      \'c' : [ promptline#slices#cwd() ],
-      \'x' : [ promptline#slices#vcs_branch() ],
-      \'warn' : [ promptline#slices#last_exit_code() ]}
+" let g:promptline_preset = {
+"       \'b' : [ promptline#slices#user() ],
+"       \'c' : [ promptline#slices#cwd() ],
+"       \'x' : [ promptline#slices#vcs_branch() ],
+"       \'warn' : [ promptline#slices#last_exit_code() ]}
 
 let g:airline#extensions#tmuxline#enabled = 0
