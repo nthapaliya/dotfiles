@@ -54,12 +54,14 @@ Plug 'tpope/vim-unimpaired'            " handy shortcuts which I can never remem
 Plug 'tpope/vim-vinegar'               " wrapper around netrw, file manager
 Plug 'unblevable/quick-scope'          " handy for f and t commands
 
+" Linters
+Plug 'neomake/neomake'
+Plug 'jaawerth/neomake-local-eslint-first'
+
 " Plug 'justinmk/vim-sneak'
 " Plug 'ludovicchabant/vim-gutentags' " TODO: Get this working properly
 " Plug 'moll/vim-bbye'
-" Plug 'neomake/neomake'              " TODO: Is this any good? (or delete)
 " Plug 'rizzatti/dash.vim'
-" Plug 'scrooloose/syntastic'         " TODO: Make this work or delete
 
 " Generating tmuxline and promptline
 " Plug 'edkolev/tmuxline.vim'
@@ -69,6 +71,12 @@ call plug#end()
 " }}}
 
 " basic settings {{{
+
+" reload vimrc on change
+augroup reload_vimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
 
 set background=dark                            " dark theme
 set clipboard^=unnamed                         " adds unnamed to existing values
@@ -122,7 +130,7 @@ nnoremap Q <nop>                                 " don't enter ex mode accidenta
 " gui config {{{
 if has("gui_running")
   set guioptions=
-  set guifont=Sauce\ Code\ Powerline\ Light:h11
+  set guifont=Sauce\ Code\ Powerline\ Light:h15
 endif
 " }}}
 
@@ -149,23 +157,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" }}}
-
-" syntastic {{{
-
-let g:syntastic_scss_checkers = ['scss_lint']
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_mode_map = {
-      \ "mode": "active",
-      \ "active_filetypes": ["ruby"],
-      \ "passive_filetypes": ["puppet"] }
-
 " }}}
 
 " vim-test {{{
@@ -198,15 +189,8 @@ autocmd BufRead,BufNewFile *.{es6,es6.js} set filetype=javascript " set all `es6
 " }}}
 
 " custom-commands {{{
-command Today execute 'normal G' | r!date "+\%F (\%a \%b \%d)"
-command -nargs=+ Now execute 'normal G' | r!date "+\%R - <args>"
-
-function Eslint()
-  !node_modules/eslint/bin/eslint.js --quiet --fix %
-  edit
-endfunction
-
-command Eslint call Eslint()
+command! Today execute 'normal G' | r!date "+\%F (\%a \%b \%d)"
+command! -nargs=+ Now execute 'normal G' | r!date "+\%R - <args>"
 " }}}
 
 " vim-airline fine tuning {{{
@@ -243,14 +227,14 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " }}}
 
 " TODO: vim-promptline and tmuxline {{{
-let g:promptline_theme =  {
-        \'a'    : [235, 208],
-        \'b'    : [232, 6],
-        \'c'    : [15, 243],
-        \'x'    : [15, 239],
-        \'y'    : [15, 239],
-        \'z'    : [233, 183],
-        \'warn' : [235, 208]}
+" let g:promptline_theme =  {
+"         \'a'    : [235, 208],
+"         \'b'    : [232, 6],
+"         \'c'    : [15, 243],
+"         \'x'    : [15, 239],
+"         \'y'    : [15, 239],
+"         \'z'    : [233, 183],
+"         \'warn' : [235, 208]}
 
 " https://github.com/edkolev/promptline.vim#tldr-starting-point-for-a-personalized-prompt
 
@@ -261,3 +245,38 @@ let g:promptline_theme =  {
 "       \'warn' : [ promptline#slices#last_exit_code() ]}
 
 let g:airline#extensions#tmuxline#enabled = 0
+" }}}
+
+" neomake {{{
+autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
+
+" Callback for reloading file in buffer when eslint has finished and maybe has
+" autofixed some stuff
+function! s:Neomake_callback(options)
+    if (a:options.status == 0)
+        edit
+    endif
+endfunction
+
+" take the eslint maker from source and add --fix
+let g:neomake_javascript_eslint_maker = {
+        \ 'args': ['-f', 'compact', '--fix'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \ '%W%f: line %l\, col %c\, Warning - %m'
+        \ }
+
+
+" take the rubocop maker and add -a and remove strings with [Corrected] in them
+let rm_corrected_strings = 'substitute(v:val, ".\\+\\[Corrected\\].\\+", "", "g")'
+let g:neomake_ruby_rubocop_maker = {
+      \ 'args': ['--format', 'emacs', '-a', '-R', '-D'],
+      \ 'errorformat': '%f:%l:%c: %t: %m',
+      \ 'mapexpr': rm_corrected_strings,
+      \ 'postprocess': function('neomake#makers#ft#ruby#RubocopEntryProcess')
+      \ }
+
+" after setup, enable for filetypes
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+" }}}
