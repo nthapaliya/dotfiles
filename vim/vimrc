@@ -72,12 +72,6 @@ call plug#end()
 
 " basic settings {{{
 
-" reload vimrc on change
-augroup reload_vimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
-
 set background=dark                            " dark theme
 set clipboard^=unnamed                         " adds unnamed to existing values
 set cursorline                                 " highlight the cursorline
@@ -118,13 +112,15 @@ nnoremap <Right> :bnext<cr>
 " inoremap jk <esc>
 nnoremap Q <nop>                                 " don't enter ex mode accidentally
 
-" fzf.vim
+" FZF stuff
 " if $COMPATIBILITY
 "   nnoremap <C-p> :Files!<cr>
 " else
   nnoremap <C-p> :Files<cr>
 " endif
 
+nnoremap <leader>* :Ag <C-r>=expand('<cword>')<CR><CR>
+nnoremap • :Ag <C-r>=expand('<cword>')<CR><CR>
 " }}}
 
 " gui config {{{
@@ -177,15 +173,20 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
 
 " auto-commands {{{
-augroup filetype_vim
+
+augroup filetype_tweaks
   autocmd!
-  autocmd FileType vim setlocal foldmethod=marker
+  autocmd BufRead,BufNewFile *.{es6,es6.js} set filetype=javascript " set all `es6` extensions to javascript
+  autocmd FileType diff setlocal commentstring=#\ %s                " comment string for git diff
+  autocmd FileType gitcommit setlocal commentstring=#\ %s           " comment string for git commit message
 augroup END
 
-autocmd FileType gitcommit setlocal commentstring=#\ %s
-autocmd FileType diff setlocal commentstring=#\ %s
+augroup vim_filetype
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC                     " auto reload vimrc on save
+  autocmd FileType vim setlocal foldmethod=marker                   " vim filetype fold markers
+augroup END
 
-autocmd BufRead,BufNewFile *.{es6,es6.js} set filetype=javascript " set all `es6` extensions to javascript
 " }}}
 
 " custom-commands {{{
@@ -248,35 +249,37 @@ let g:airline#extensions#tmuxline#enabled = 0
 " }}}
 
 " neomake {{{
-autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
+" general neomake options
+augroup neomake_trigger_autocommands
+  autocmd!
+  autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
+augroup end
 
 " Callback for reloading file in buffer when eslint has finished and maybe has
 " autofixed some stuff
 function! s:Neomake_callback(options)
-    if (a:options.status == 0)
+  echo(a:options)
+    if (a:options.status == 0 || a:options.name == 'rubocop')
         edit
     endif
 endfunction
 
-" take the eslint maker from source and add --fix
-let g:neomake_javascript_eslint_maker = {
-        \ 'args': ['-f', 'compact', '--fix'],
-        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-        \ '%W%f: line %l\, col %c\, Warning - %m'
-        \ }
+" take the eslint args from source and add --fix
+let g:neomake_javascript_eslint_d_args = ['-f', 'compact', '--fix']
 
-
-" take the rubocop maker and add -a and remove strings with [Corrected] in them
-let rm_corrected_strings = 'substitute(v:val, ".\\+\\[Corrected\\].\\+", "", "g")'
-let g:neomake_ruby_rubocop_maker = {
-      \ 'args': ['--format', 'emacs', '-a', '-R', '-D'],
-      \ 'errorformat': '%f:%l:%c: %t: %m',
-      \ 'mapexpr': rm_corrected_strings,
-      \ 'postprocess': function('neomake#makers#ft#ruby#RubocopEntryProcess')
-      \ }
+" take the rubocop maker from source and add -a -R -D to args
+" add a mapexpr to rubocop maker to remove strings with [Corrected]
+function! s:create_rubocop_maker()
+  let l:rubocop_maker = neomake#makers#ft#ruby#rubocop()
+  let l:rubocop_maker.args = ['--format', 'emacs', '-a', '-R']
+  let l:rubocop_maker.mapexpr = 'substitute(v:val, ".\\+\\[Corrected\\].\\+", "", "g")'
+  return l:rubocop_maker
+endfunction
+let g:neomake_ruby_rubocop_maker = s:create_rubocop_maker()
 
 " after setup, enable for filetypes
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint_d']
+let g:neomake_jsx_enabled_makers = ['eslint_d']
+let g:neomake_python_enabled_makers = ['python', 'pep8']
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 " }}}
