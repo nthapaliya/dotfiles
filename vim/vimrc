@@ -13,14 +13,43 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Colors and themes
-Plug 'vim-airline/vim-airline'
+  " vim-airline/vim-airline {{{
+  Plug 'vim-airline/vim-airline'
+  if $COMPATIBILITY
+    let g:airline_left_sep=' '
+    let g:airline_right_sep=' '
+  else
+    let g:airline_powerline_fonts = 1
+  endif
+
+  let g:airline#extensions#branch#displayed_head_limit = 8
+
+  " Short forms, lets see if worth it
+  let g:airline_mode_map = {
+        \ '__' : '-',
+        \ 'n'  : 'N',
+        \ 'i'  : 'I',
+        \ 'R'  : 'R',
+        \ 'c'  : 'C',
+        \ 'v'  : 'V',
+        \ 'V'  : 'V',
+        \ '' : 'V',
+        \ 's'  : 'S',
+        \ 'S'  : 'S',
+        \ '' : 'S',
+        \ }
+
+  " Enable the list of buffers
+  let g:airline#extensions#tabline#enabled = 1
+
+  " Show just the filename
+  let g:airline#extensions#tabline#fnamemod = ':t'
+
+  " }}}
 Plug 'morhetz/gruvbox'
 
 " Ruby
-" Plug 'janko-m/vim-test'
-Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
 
 " Javascript
@@ -28,44 +57,114 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Other languages
-Plug 'fatih/vim-go'
+  " fatih/vim-go {{{
+  Plug 'fatih/vim-go'
+  let g:go_fmt_command = "goimports"
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_structs = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_build_constraints = 1
+  " }}}
 Plug 'rodjek/vim-puppet'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'vim-scripts/Arduino-syntax-file'
 
-" FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'junegunn/fzf.vim'
-
 " Vim enhancements
-Plug 'ConradIrwin/vim-bracketed-paste' " TODO: Find out if I still need this
-Plug 'airblade/vim-gitgutter'          " show git marks on gutter
-Plug 'airblade/vim-rooter'             " vim opened in a sub-dir chdir's to git root
-Plug 'christoomey/vim-tmux-navigator'  " jump between vim and tmux panes easily
-Plug 'tommcdo/vim-lion'                " easily align things
-Plug 'tpope/vim-commentary'            " gc and gcc to comment/uncomment lines
-Plug 'tpope/vim-dispatch'              " TODO: actually use this for anything
-Plug 'tpope/vim-fugitive'              " git wrapper
-Plug 'tpope/vim-repeat'                " extends . commands
-Plug 'tpope/vim-rhubarb'               " extends fugitive for use with github
-Plug 'tpope/vim-sensible'              " sensible defaults
-Plug 'tpope/vim-surround'              " shortcuts for adding deleting or changing parens and quotes
-Plug 'tpope/vim-unimpaired'            " handy shortcuts which I can never remember
-Plug 'tpope/vim-vinegar'               " wrapper around netrw, file manager
-Plug 'unblevable/quick-scope'          " handy for f and t commands
+
+  " junegunn/fzf {{{
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  Plug 'junegunn/fzf.vim'
+
+  if $COMPATIBILITY
+    nnoremap <C-p> :Files!<cr>
+  else
+    nnoremap <C-p> :Files<cr>
+  endif
+  " }}}
+
+  " unblevable/quick-scope {{{
+  Plug 'unblevable/quick-scope'          " handy for f and t commands
+  let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+    " I'm not keeping this to enable true color, thats been deprecated
+    " I'm keeping this to 'fix' quick-scope
+    " https://github.com/unblevable/quick-scope/issues/32#issuecomment-241159662
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " }}}
+
+" Plug 'ConradIrwin/vim-bracketed-paste' " TODO: Find out if I still need this
+Plug 'airblade/vim-gitgutter'            " show git marks on gutter
+Plug 'airblade/vim-rooter'               " vim opened in a sub-dir chdir's to git root
+Plug 'christoomey/vim-tmux-navigator'    " jump between vim and tmux panes easily
+Plug 'justinmk/vim-sneak'                " s <char> <char> motions
+Plug 'rizzatti/dash.vim'                 " Dash integration
+Plug 'tommcdo/vim-lion'                  " easily align things
+Plug 'tpope/vim-commentary'              " gc and gcc to comment/uncomment lines
+Plug 'tpope/vim-fugitive'                " git wrapper
+Plug 'tpope/vim-repeat'                  " extends . commands
+Plug 'tpope/vim-rhubarb'                 " extends fugitive for use with github
+Plug 'tpope/vim-sensible'                " sensible defaults
+Plug 'tpope/vim-surround'                " shortcuts for adding deleting or changing parens and quotes
+Plug 'tpope/vim-unimpaired'              " handy shortcuts which I can never remember
+Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
 
 " Linters
-Plug 'neomake/neomake'
-Plug 'jaawerth/neomake-local-eslint-first'
+  " neomake/neomake {{{
+  Plug 'neomake/neomake'
+  augroup neomake_trigger_autocommands
+    autocmd!
+    autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
+  augroup end
 
-" Plug 'justinmk/vim-sneak'
-" Plug 'ludovicchabant/vim-gutentags' " TODO: Get this working properly
-" Plug 'moll/vim-bbye'
-" Plug 'rizzatti/dash.vim'
+  " Callback for reloading file in buffer when eslint or rubocop has finished and maybe has
+  " autofixed some stuff
+  silent function! s:Neomake_callback(options)
+    if (a:options.status == 0 || a:options.name == 'rubocop')
+      edit
+    endif
+  endfunction
 
-" Generating tmuxline and promptline
-" Plug 'edkolev/tmuxline.vim'
-" Plug 'edkolev/promptline.vim'
+  " take the eslint args from source and add --fix
+  let g:neomake_javascript_eslint_d_args = ['-f', 'compact', '--fix']
+
+  " take the rubocop maker from source and add -a -R -D to args
+  " add a mapexpr to rubocop maker to remove strings with [Corrected]
+  let g:neomake_ruby_rubocop_maker = {
+        \ 'args': ['--format', 'emacs', '-a', '-R'],
+        \ 'errorformat': '%f:%l:%c: %t: %m',
+        \ 'mapexpr': 'substitute(v:val, ".\\+\\[Corrected\\].\\+", "", "g")',
+        \ 'postprocess': function('neomake#makers#ft#ruby#RubocopEntryProcess'),
+        \ }
+
+  " after setup, enable for filetypes
+  let g:neomake_javascript_enabled_makers = ['eslint_d']
+  let g:neomake_jsx_enabled_makers = ['eslint_d']
+  let g:neomake_python_enabled_makers = ['python', 'pep8', 'pylint']
+  let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+  " }}}
+
+  " TODO: vim-promptline and tmuxline {{{
+  " Plug 'edkolev/tmuxline.vim'
+  " Plug 'edkolev/promptline.vim'
+  " let g:promptline_theme =  {
+  "         \'a'    : [235, 208],
+  "         \'b'    : [232, 6],
+  "         \'c'    : [15, 243],
+  "         \'x'    : [15, 239],
+  "         \'y'    : [15, 239],
+  "         \'z'    : [233, 183],
+  "         \'warn' : [235, 208]}
+
+  " https://github.com/edkolev/promptline.vim#tldr-starting-point-for-a-personalized-prompt
+
+  " let g:promptline_preset = {
+  "       \'b' : [ promptline#slices#user() ],
+  "       \'c' : [ promptline#slices#cwd() ],
+  "       \'x' : [ promptline#slices#vcs_branch() ],
+  "       \'warn' : [ promptline#slices#last_exit_code() ]}
+
+  " let g:airline#extensions#tmuxline#enabled = 0
+  " }}}
 
 call plug#end()
 " }}}
@@ -104,20 +203,12 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>W  :%s/\s\+$<cr>                " to clean up trailing whitespace
 nnoremap <leader>ev :e $MYVIMRC<cr>              " quickly edit vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>         " quickly source vimrc
-nnoremap <leader>q  :Bdelete<CR>                 " close buffers sanely
-nnoremap <leader>D  :Dispatch<cr>                " map vim-dispatch
 nnoremap <Left> :bprev<cr>
 nnoremap <Right> :bnext<cr>
 
-" inoremap jk <esc>
-nnoremap Q <nop>                                 " don't enter ex mode accidentally
-
-" FZF stuff
-" if $COMPATIBILITY
-"   nnoremap <C-p> :Files!<cr>
-" else
-  nnoremap <C-p> :Files<cr>
-" endif
+inoremap jk <esc>
+inoremap <esc> <nop>
+nnoremap Q <nop>     " don't enter ex mode accidentally
 
 nnoremap <leader>* :Ag <C-r>=expand('<cword>')<CR><CR>
 nnoremap • :Ag <C-r>=expand('<cword>')<CR><CR>
@@ -138,53 +229,23 @@ if has('nvim')
   tnoremap <C-k> <C-\><C-n><C-w>k
   tnoremap <C-l> <C-\><C-n><C-w>l
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
-  " I'm not keeping this to enable true color, thats been deprecated
-  " I'm keeping this to 'fix' quick-scope
-  " https://github.com/unblevable/quick-scope/issues/32#issuecomment-241159662
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
-" }}}
-
-" vim-go {{{
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-" }}}
-
-" vim-test {{{
-
-" nmap <silent> <leader>tn :TestNearest<CR>
-" nmap <silent> <leader>tf :TestFile<CR>
-" nmap <silent> <leader>ta :TestSuite<CR>
-" nmap <silent> <leader>tl :TestLast<CR>
-" nmap <silent> <leader>tv :TestVisit<CR>
-let test#strategy = 'neovim'
-
-" }}}
-
-" quick-scope {{{
-
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
 " }}}
 
 " auto-commands {{{
 
-augroup filetype_tweaks
-  autocmd!
-  autocmd BufRead,BufNewFile *.{es6,es6.js} set filetype=javascript " set all `es6` extensions to javascript
-  autocmd FileType diff setlocal commentstring=#\ %s                " comment string for git diff
-  autocmd FileType gitcommit setlocal commentstring=#\ %s           " comment string for git commit message
-augroup END
-
 augroup vim_filetype
   autocmd!
-  autocmd BufWritePost $MYVIMRC source $MYVIMRC                     " auto reload vimrc on save
+  " tip for 'nested' comes from https://github.com/itchyny/lightline.vim/commit/5374a50bbbabe5616b13b08fdf687a965b3c0486
+  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC              " auto reload vimrc on save
   autocmd FileType vim setlocal foldmethod=marker                   " vim filetype fold markers
+augroup END
+
+augroup other_filetype_tweaks
+  autocmd!
+  autocmd BufRead,BufNewFile *.{es6} set filetype=javascript        " set all `es6` extensions to javascript
+  autocmd FileType diff setlocal commentstring=#\ %s                " comment string for git diff
+  autocmd FileType gitcommit setlocal commentstring=#\ %s           " comment string for git commit message
 augroup END
 
 " }}}
@@ -192,94 +253,4 @@ augroup END
 " custom-commands {{{
 command! Today execute 'normal G' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=+ Now execute 'normal G' | r!date "+\%R - <args>"
-" }}}
-
-" vim-airline fine tuning {{{
-if $COMPATIBILITY
-  let g:airline_left_sep=' '
-  let g:airline_right_sep=' '
-else
-  let g:airline_powerline_fonts = 1
-endif
-
-let g:airline#extensions#branch#displayed_head_limit = 8
-
-" Short forms, lets see if worth it
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-" }}}
-
-" TODO: vim-promptline and tmuxline {{{
-" let g:promptline_theme =  {
-"         \'a'    : [235, 208],
-"         \'b'    : [232, 6],
-"         \'c'    : [15, 243],
-"         \'x'    : [15, 239],
-"         \'y'    : [15, 239],
-"         \'z'    : [233, 183],
-"         \'warn' : [235, 208]}
-
-" https://github.com/edkolev/promptline.vim#tldr-starting-point-for-a-personalized-prompt
-
-" let g:promptline_preset = {
-"       \'b' : [ promptline#slices#user() ],
-"       \'c' : [ promptline#slices#cwd() ],
-"       \'x' : [ promptline#slices#vcs_branch() ],
-"       \'warn' : [ promptline#slices#last_exit_code() ]}
-
-let g:airline#extensions#tmuxline#enabled = 0
-" }}}
-
-" neomake {{{
-" general neomake options
-augroup neomake_trigger_autocommands
-  autocmd!
-  autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
-augroup end
-
-" Callback for reloading file in buffer when eslint has finished and maybe has
-" autofixed some stuff
-function! s:Neomake_callback(options)
-  echo(a:options)
-    if (a:options.status == 0 || a:options.name == 'rubocop')
-        edit
-    endif
-endfunction
-
-" take the eslint args from source and add --fix
-let g:neomake_javascript_eslint_d_args = ['-f', 'compact', '--fix']
-
-" take the rubocop maker from source and add -a -R -D to args
-" add a mapexpr to rubocop maker to remove strings with [Corrected]
-function! s:create_rubocop_maker()
-  let l:rubocop_maker = neomake#makers#ft#ruby#rubocop()
-  let l:rubocop_maker.args = ['--format', 'emacs', '-a', '-R']
-  let l:rubocop_maker.mapexpr = 'substitute(v:val, ".\\+\\[Corrected\\].\\+", "", "g")'
-  return l:rubocop_maker
-endfunction
-let g:neomake_ruby_rubocop_maker = s:create_rubocop_maker()
-
-" after setup, enable for filetypes
-let g:neomake_javascript_enabled_makers = ['eslint_d']
-let g:neomake_jsx_enabled_makers = ['eslint_d']
-let g:neomake_python_enabled_makers = ['python', 'pep8']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 " }}}
