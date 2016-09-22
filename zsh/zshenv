@@ -1,3 +1,44 @@
-export SHELL=$(which zsh)
-export EDITOR='nvim'
+export SHELL=/usr/local/bin/zsh
+export EDITOR=/usr/local/bin/nvim
+export PATH
+
+# export SHELL=$( which zsh )
 # export TERM='xterm-256color'
+
+function _path_remove {
+  PATH=${PATH/":$1"/} # delete any instances in the middle or at the end
+  PATH=${PATH/"$1:"/} # delete any instances at the beginning
+}
+
+function _path_prepend {
+  if [ -d "$1" ]; then
+    _path_remove "$1"
+    PATH=$1:$PATH
+  fi
+}
+
+function _path_append {
+  if [ -d "$1" ]; then
+    _path_remove "$1"
+    PATH=$PATH:$1
+  fi
+}
+
+ANACONDA_PATH="$HOME/Lang/anaconda"
+
+_path_prepend "/usr/local/bin"
+_path_prepend "$HOME/.dotfiles/bin"
+_path_prepend "$ANACONDA_PATH/bin"
+
+# _path_append $GOPATH/bin
+# _path_append /usr/local/opt/go/libexec/bin:$PATH
+
+
+# export USE_RVM=1
+if [ "$USE_RVM" ]; then
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+else
+  export RBENV_ROOT="$HOME/Lang/rbenv"
+  _path_prepend "$RBENV_ROOT/bin"
+  eval "$(rbenv init -)"
+fi

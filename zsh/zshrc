@@ -11,12 +11,10 @@ ZSH_THEME='lambda'
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # plugins=(git ruby tmux osx bundler)
-plugins=(gitfast ruby rake-fast tmux osx safe-paste golang fasd)
-
-PATH=/usr/local/bin:$PATH
+plugins=(gitfast ruby rake-fast tmux osx safe-paste golang fasd fzf)
 
 # export ZSH_TMUX_AUTOSTART=true
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -29,42 +27,23 @@ export rvm_ignore_dotfiles=yes
 # as per zsh-install notes
 unalias run-help
 autoload run-help
-HELPDIR=/usr/local/share/zsh/help
+export HELPDIR=/usr/local/share/zsh/help
 
 export GOPATH=$HOME/Lang/go
 
-PATH=$PATH:$HOME/.dotfiles/bin
-# PATH=$PATH:$GOPATH/bin
-# PATH=$PATH:/usr/local/opt/go/libexec/bin
-
-source $DOTFILES_PATH/zsh/alias
-source $DOTFILES_PATH/zsh/custom-functions
-
-# anaconda is installed here
-ANACONDA_PATH=$HOME/Lang/anaconda
-if [ -d "$ANACONDA_PATH" ]; then
-  PATH=$PATH:$HOME/.local/bin:$ANACONDA_PATH/bin
-fi
+source "$DOTFILES_PATH/zsh/alias"
+source "$DOTFILES_PATH/zsh/custom-functions"
 
 if [ -z "$COMPATIBILITY" ]; then
-  source $DOTFILES_PATH/zsh/promptline.sh
+  source "$DOTFILES_PATH/zsh/promptline.sh"
 else
+  true
   # To make FZF not try to open a tmux split, because of
   # incompatibilityes with tmate
   # export FZF_TMUX=0
   # source $DOTFILES_PATH/zsh/promptline_compat.sh
 fi
 
-# export USE_RVM=1
-if [ $USE_RVM ]; then
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-else
-  export RBENV_ROOT="$HOME/Lang/rbenv"
-  export PATH=$RBENV_ROOT/bin:$PATH
-  eval "$(rbenv init -)"
-fi
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# _path_prepend $ANACONDA_PATH/bin

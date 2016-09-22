@@ -27,7 +27,7 @@ git_up_oss() {
 }
 
 giphy() {
-  input=` echo "$@" | tr ' ' '+' `
+  input=$( echo "$@" | tr ' ' '+' )
   curl "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=$input" | jq .data.image_url | xargs -n1 curl | imgcat
 }
 
