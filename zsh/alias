@@ -29,3 +29,9 @@ alias now='date +"%R"'
 alias spec="git diff --name-only -z -- spec/**/*.rb | xargs -0 bundle exec rspec"
 # alias spec="git diff --porcelain -z --spec/**/*.rb | xargs -0 bundle exec rspec"
 alias vdirty="git status -s | awk '{print \$2}' | xargs -o nvim"
+
+alias gss="git status -s"
+alias gb="git branch"
+alias gco="git checkout"
+alias gcm="git checkout master"
+alias gdca="git diff --cached"

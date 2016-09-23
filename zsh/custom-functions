@@ -58,4 +58,14 @@ webmake() {
   ffmpeg -i "$1" -v warning -vf "$filters" -c:v libvpx -b:v 500k -an -strict -2 -y "${1%.*}.webm"
 }
 
+update_prezto() {
+  cd "${ZDOTDIR:-$HOME}/.zprezto/" &&
+    git stash &&
+    git checkout master &&
+    git pull &&
+    git submodule update --init --recursive &&
+    git checkout - &&
+    git stash pop
+}
+
 set +eu
