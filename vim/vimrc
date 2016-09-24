@@ -143,29 +143,6 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
   let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
   " }}}
 
-  " TODO: vim-promptline and tmuxline {{{
-  " Plug 'edkolev/tmuxline.vim'
-  " Plug 'edkolev/promptline.vim'
-  " let g:promptline_theme =  {
-  "         \'a'    : [235, 208],
-  "         \'b'    : [232, 6],
-  "         \'c'    : [15, 243],
-  "         \'x'    : [15, 239],
-  "         \'y'    : [15, 239],
-  "         \'z'    : [233, 183],
-  "         \'warn' : [235, 208]}
-
-  " https://github.com/edkolev/promptline.vim#tldr-starting-point-for-a-personalized-prompt
-
-  " let g:promptline_preset = {
-  "       \'b' : [ promptline#slices#user() ],
-  "       \'c' : [ promptline#slices#cwd() ],
-  "       \'x' : [ promptline#slices#vcs_branch() ],
-  "       \'warn' : [ promptline#slices#last_exit_code() ]}
-
-  " let g:airline#extensions#tmuxline#enabled = 0
-  " }}}
-
 call plug#end()
 " }}}
 
@@ -190,7 +167,14 @@ set termguicolors                              " enable true-color
 set ts=2 sts=2 sw=2 expandtab                  " tab-settings
 set visualbell                                 " don't beep
 
-colorscheme gruvbox
+if $COMPATIBILITY
+  colorscheme default
+else
+  colorscheme gruvbox
+endif
+
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
 
 " set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 
