@@ -35,3 +35,6 @@ alias gb="git branch"
 alias gco="git checkout"
 alias gcm="git checkout master"
 alias gdca="git diff --cached"
+
+
+alias lsd='ls -d .*'
