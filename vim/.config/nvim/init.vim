@@ -162,16 +162,19 @@ set scrolloff=8                                " leave 8 lines on top and bottom
 set shell=$SHELL                               " default shell set by environment
 set smartcase                                  " search case setting
 set title                                      " titlebar will be buffer filename
-set t_ut=                                      " https://sunaku.github.io/vim-256color-bce.html
 set termguicolors                              " enable true-color
 set ts=2 sts=2 sw=2 expandtab                  " tab-settings
 set visualbell                                 " don't beep
 
-if $COMPATIBILITY
-  colorscheme default
-else
-  colorscheme gruvbox
+" for vim in tmux only
+" :help xterm-true-color
+" https://github.com/vim/vim/issues/993
+if !has('nvim') && exists('$TMUX')
+  set t_8f=[38;2;%lu;%lu;%lum
+  set t_8b=[48;2;%lu;%lu;%lum
 endif
+
+colorscheme gruvbox
 
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
