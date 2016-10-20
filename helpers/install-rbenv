@@ -1,3 +1,5 @@
+#!/bin/bash
+
 rbenv_root="${RBENV_ROOT:-$HOME/.rbenv}"
 plugins_dir="$rbenv_root/plugins"
 

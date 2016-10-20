@@ -14,10 +14,10 @@ hash stow 2>/dev/null || {
 #
 case $1 in
   --install|-i)
-    stow -R bash git ruby vim tmux
+    stow -R bash bin git ruby vim tmux
     ;;
   --uninstall|-u)
-    stow -D bash git ruby vim tmux
+    stow -D bash bin git ruby vim tmux
     ;;
   *)
     echo $"Usage: $0 {--install|--uninstall}"
