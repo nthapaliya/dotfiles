@@ -93,6 +93,7 @@ Plug 'vim-scripts/Arduino-syntax-file'
   " }}}
 
 " Plug 'ConradIrwin/vim-bracketed-paste' " TODO: Find out if I still need this
+Plug 'mhinz/vim-grepper'
 Plug 'airblade/vim-gitgutter'            " show git marks on gutter
 Plug 'airblade/vim-rooter'               " vim opened in a sub-dir chdir's to git root
 Plug 'christoomey/vim-tmux-navigator'    " jump between vim and tmux panes easily
@@ -175,11 +176,6 @@ if !has('nvim') && exists('$TMUX')
 endif
 
 colorscheme gruvbox
-
-set grepprg=ag\ --vimgrep\ $*
-set grepformat=%f:%l:%c:%m
-
-" set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 
 " }}}
 
