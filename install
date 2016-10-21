@@ -12,14 +12,16 @@ hash stow 2>/dev/null || {
 
 # Actually making the symlinks
 #
+targets=( bash bin ctags git ruby terminfo tmux vim )
+
 case $1 in
-  --install|-i)
-    stow -R bash bin git ruby vim tmux
+  '')
+    stow -R --target="$HOME" "${targets[@]}"
     ;;
   --uninstall|-u)
-    stow -D bash bin git ruby vim tmux
+    stow -D --target="$HOME" "${targets[@]}"
     ;;
   *)
-    echo $"Usage: $0 {--install|--uninstall}"
-    exit 1
-  esac
+    echo $"Usage: $0 [-u|--uninstall]"
+    ;;
+esac

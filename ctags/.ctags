@@ -1,0 +1,35 @@
+--languages=-sql,html
+
+--langdef=JSX
+--langmap=jsx:.jsx
+--regex-jsx=/^[ \t]*import[ \t]+([^;]+)/\1/r,import,imports/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*function[ \t]+([A-Za-z0-9_]+[ \t]*[^{;]*)/\2/f,function,functions/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*class[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/c,class,classes/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*interface[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/i,interface,interfaces/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*mixin[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/m,mixin,mixins/
+
+--exclude=.git/*
+--exclude=bower_components/*
+--exclude=db/*
+--exclude=doc/*
+--exclude=node_modules/*
+--exclude=public/*
+--exclude=tmp/*
+--exclude=vendor/*
+
+--exclude=*.min.*
+--exclude=*.map
+--exclude=*.swp
+--exclude=*.bak
+--exclude=*.pyc
+--exclude=*.class
+--exclude=*.sln
+--exclude=*.Master
+--exclude=*.csproj
+--exclude=*.csproj.user
+--exclude=*.cache
+--exclude=*.dll
+--exclude=*.pdb
+--exclude=cscope.*
+--exclude=*.tar.*
+--exclude=*.bundle.js
