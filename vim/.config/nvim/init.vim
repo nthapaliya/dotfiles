@@ -93,6 +93,7 @@ Plug 'vim-scripts/Arduino-syntax-file'
   " }}}
 
 " Plug 'ConradIrwin/vim-bracketed-paste' " TODO: Find out if I still need this
+Plug 'AndrewRadev/splitjoin.vim'         " add gS and gJ mappings for smart splitting and joining of blocks
 Plug 'mhinz/vim-grepper'
 Plug 'airblade/vim-gitgutter'            " show git marks on gutter
 Plug 'airblade/vim-rooter'               " vim opened in a sub-dir chdir's to git root
@@ -162,6 +163,7 @@ set number                                     " show numbers in side gutter
 set scrolloff=8                                " leave 8 lines on top and bottom while scrolling
 set shell=$SHELL                               " default shell set by environment
 set smartcase                                  " search case setting
+set synmaxcol=300                              " do not highlight very long lines
 set title                                      " titlebar will be buffer filename
 set termguicolors                              " enable true-color
 set ts=2 sts=2 sw=2 expandtab                  " tab-settings
@@ -229,6 +231,7 @@ augroup other_filetype_tweaks
   autocmd BufRead,BufNewFile *.{es6} set filetype=javascript        " set all `es6` extensions to javascript
   autocmd FileType diff setlocal commentstring=#\ %s                " comment string for git diff
   autocmd FileType gitcommit setlocal commentstring=#\ %s           " comment string for git commit message
+  autocmd FileType help wincmd L                                    " open help window in vertical split
 augroup END
 
 " }}}
