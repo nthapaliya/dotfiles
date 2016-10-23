@@ -81,6 +81,10 @@ Plug 'vim-scripts/Arduino-syntax-file'
   else
     nnoremap <C-p> :Files<cr>
   endif
+
+  if has("gui_macvim")
+    let g:fzf_launcher = "run_fzf %s"
+  endif
   " }}}
 
   " unblevable/quick-scope {{{
