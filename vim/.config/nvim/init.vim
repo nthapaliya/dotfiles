@@ -189,9 +189,9 @@ colorscheme gruvbox
 let mapleader = "\<Space>"
 
 cmap w!! w !sudo tee % >/dev/null
-nnoremap <leader>W  :%s/\s\+$<cr>                " to clean up trailing whitespace
-nnoremap <leader>ev :e $MYVIMRC<cr>              " quickly edit vimrc
-nnoremap <leader>sv :source $MYVIMRC<cr>         " quickly source vimrc
+nnoremap <leader>W  :%s/\s\+$<cr>                                 " to clean up trailing whitespace
+nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<CR> " quickly edit vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>                          " quickly source vimrc
 nnoremap <Left> :bprev<cr>
 nnoremap <Right> :bnext<cr>
 
