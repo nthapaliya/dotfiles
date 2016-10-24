@@ -5,11 +5,11 @@
 	default = simple
 [core]
 	ignorecase = false
-	excludesfile = /Users/niraj/.gitignore_global
+	excludesfile = ~/.config/git/ignore_global
 	quotepath = false
 [alias]
 	up = "!git remote update -p; git merge --ff-only @{u}"
 	ctags = !.git/hooks/ctags-run
 	unique = log HEAD --not master
 [init]
-	templatedir = ~/.git_template
+	templatedir = ~/.config/git/template

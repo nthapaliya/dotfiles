@@ -36,11 +36,6 @@
 ehthumbs.db
 Thumbs.db
 
-# Overcommit gem #
-######################
-.overcommit.yml
-.git-hooks
-
 # Bundler folder
 ######################
 .bundle
@@ -48,5 +43,3 @@ Thumbs.db
 tags
 tags.temp
 tags.lock
-
-.rake_tasks
