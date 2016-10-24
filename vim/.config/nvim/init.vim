@@ -181,6 +181,10 @@ if !has('nvim') && exists('$TMUX')
   set t_8b=[48;2;%lu;%lu;%lum
 endif
 
+if !has('nvim')
+  set viminfo+=n~/.vim/viminfo
+endif
+
 colorscheme gruvbox
 
 " }}}

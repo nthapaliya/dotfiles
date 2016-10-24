@@ -4,7 +4,12 @@
 *.un~
 Session.vim
 .netrwhist
+viminfo
 *~
+
+# Ignore plugin directory
+plugged/
+autoload/
 
 
 ### OSX ###
@@ -33,9 +38,3 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-# Ignore plugin directory
-plugged/
-autoload/
-
-tags
