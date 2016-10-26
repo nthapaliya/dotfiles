@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eu
+
+package=$1
+brew uninstall $package
+for dep in $(join <(brew leaves) <(brew deps $package)); do
+  brew rm $dep
+done

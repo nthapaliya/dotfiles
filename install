@@ -12,7 +12,7 @@ hash stow 2>/dev/null || {
 
 # Actually making the symlinks
 #
-targets=( bash bin ctags git ruby terminfo tmux vim )
+targets=( bash bin ctags git ruby terminfo tmux vim homebrew )
 
 case $1 in
   '')

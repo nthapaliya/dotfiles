@@ -5,3 +5,6 @@ brew update
 
 echo "brew upgrade"
 brew upgrade
+
+echo "brew bundle dump --force --global"
+brew bundle dump --force --global
