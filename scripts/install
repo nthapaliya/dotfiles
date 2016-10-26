@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Checking for binaries first
+hash stow 2>/dev/null || {
+  echo 'Error! Missing command'
+  hash brew 2>/dev/null &&
+    printf 'Run "brew install stow"' ||
+    printf 'Use your package manager to install gnu stow'
+  echo ' and run this script again'
+  exit 1
+}
+
+# Actually making the symlinks
+#
+
+# should set DOTFILES_ROOT to, in order of precedence
+# - if already set, don't change anything
+# - else, try to look for the git toplevel folder
+# - if not in a git folder, default to $HOME/.dotfiles
+: ${DOTFILES_ROOT:="$( git rev-parse --show-toplevel 2> /dev/null )"}
+: ${DOTFILES_ROOT:="$HOME/.dotfiles"}
+
+case $1 in
+  '')
+    stow -R --dir="$DOTFILES_ROOT" --target="$HOME" home
+    ;;
+  --uninstall|-u)
+    stow -D --dir="$DOTFILES_ROOT" --target="$HOME" home
+    ;;
+  *)
+    echo $"Usage: $0 [-u|--uninstall]"
+    ;;
+esac

@@ -10,11 +10,11 @@ bash helpers/macOS-bootstrap.bash
 ### Link dotfiles ###
 
 ```
-./install
+./scripts/install
 ```
 
 ### Unlink dotfiles ###
 
 ```
-./install -u
+./scripts/install -u
 ```
