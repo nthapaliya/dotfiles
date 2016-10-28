@@ -4,7 +4,11 @@
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
+
+  augroup first_time_setup
+    autocmd!
+    autocmd VimEnter * PlugInstall
+  augroup end
 endif
 " }}}
 
@@ -59,7 +63,7 @@ Plug 'mxw/vim-jsx'
 " Other languages
   " fatih/vim-go {{{
   Plug 'fatih/vim-go'
-  let g:go_fmt_command = "goimports"
+  let g:go_fmt_command = 'goimports'
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
   let g:go_highlight_structs = 1
@@ -82,8 +86,8 @@ Plug 'vim-scripts/Arduino-syntax-file'
     nnoremap <C-p> :Files<cr>
   endif
 
-  if has("gui_macvim")
-    let g:fzf_launcher = "run_fzf %s"
+  if has('gui_macvim')
+    let g:fzf_launcher = 'run_fzf %s'
   endif
   " }}}
 
@@ -125,7 +129,7 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
   " Callback for reloading file in buffer when eslint or rubocop has finished and maybe has
   " autofixed some stuff
   silent function! s:Neomake_callback(options)
-    if (a:options.status == 0 || a:options.name == 'rubocop')
+    if (a:options.status == 0 || a:options.name ==# 'rubocop')
       edit
     endif
   endfunction
@@ -160,7 +164,6 @@ set cursorline                                 " highlight the cursorline
 set hidden                                     " can change buffers even if current is not written
 set list                                       " enable list characters
 set listchars=trail:·,extends:#,tab:▸·,nbsp:·  " specify list characters
-set nocompatible                               " enable vim specific behaviour
 set noerrorbells                               " don't beep
 set noshowmode                                 " don't need to echo mode
 set number                                     " show numbers in side gutter
@@ -208,7 +211,7 @@ nnoremap • :Ag <C-r>=expand('<cword>')<CR><CR>
 " }}}
 
 " gui config {{{
-if has("gui_running")
+if has('gui_running')
   set guioptions=
   set guifont=Sauce\ Code\ Powerline\ Light:h15
 endif
