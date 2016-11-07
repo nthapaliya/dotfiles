@@ -1,9 +1,17 @@
 #!/bin/bash
 
-set -eu
+package=${1:?Need to specify package or packages}
+force=$2
 
-package=$1
-brew uninstall $package
-for dep in $(join <(brew leaves) <(brew deps $package)); do
-  brew rm $dep
-done
+if [[ $force == '--force' ]] ; then
+  brew uninstall $package
+  for dep in $(join <(brew leaves) <(brew deps $package)); do
+    brew uninstall $dep
+  done
+else
+  echo 'use --force to force'
+  echo brew uninstall $package
+  for dep in $(join <(brew leaves) <(brew deps $package)); do
+    echo brew uninstall $dep
+  done
+fi
