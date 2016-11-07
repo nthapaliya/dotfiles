@@ -5,7 +5,6 @@
 	default = simple
 [core]
 	ignorecase = false
-	excludesfile = ~/.config/git/ignore_global
 	quotepath = false
 [alias]
 	up = "!git remote update -p; git merge --ff-only @{u}"
