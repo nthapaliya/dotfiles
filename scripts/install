@@ -22,10 +22,10 @@ hash stow 2>/dev/null || {
 
 case $1 in
   '')
-    stow -R --dir="$DOTFILES_ROOT" --target="$HOME" home
+    stow -R --dir="$DOTFILES_ROOT" --target="$HOME" home macos
     ;;
   --uninstall|-u)
-    stow -D --dir="$DOTFILES_ROOT" --target="$HOME" home
+    stow -D --dir="$DOTFILES_ROOT" --target="$HOME" home macos
     ;;
   *)
     echo $"Usage: $0 [-u|--uninstall]"
