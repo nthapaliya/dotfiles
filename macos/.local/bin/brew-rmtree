@@ -3,11 +3,12 @@
 require 'open3'
 require 'optparse'
 
-opts = { force: false, dry_run: false }
-OptionParser.new do |o|
-  o.on('--force') { |f| opts[:force] = f }
-  o.on('--dry-run') { |d| opts[:dry] = d }
-  o.parse!
+# Utils
+def sanity_check(package)
+  abort 'Need package name!' unless package
+  parents = used_by(package)
+  abort "You cannot uninstall this package, it is required by:
+  #{parents.join(', ')}" unless parents.empty?
 end
 
 def run_cmd(command)
@@ -16,51 +17,7 @@ def run_cmd(command)
   output.chomp.split
 end
 
-def dependencies(package)
-  run_cmd "brew deps #{package}"
-end
-
-def used_by(dependency)
-  run_cmd "brew uses --recursive --installed #{dependency}"
-end
-
-def map_used_by(deps)
-  mapped_deps = Hash[
-    deps.map.with_index do |dep, i|
-      print "Progress: #{i}/#{deps.length} \r"
-      [dep, used_by(dep)]
-    end
-  ]
-
-  # clear to beginning of line, tidy after oneself
-  print "\033[K"
-
-  mapped_deps
-end
-
-def sanity_check(package)
-  abort 'Need package name!' unless package
-  parents = used_by(package)
-  abort "You cannot uninstall this package, it is required by:
-  #{parents.join(', ')}" unless parents.empty?
-end
-
-def analyze(package)
-  deps = dependencies(package)
-  mapped_parents = map_used_by(deps)
-
-  safe_to_remove = [package]
-
-  not_safe_to_remove = mapped_parents.select do |_dep, parents|
-    parents -= [package]
-    !parents.empty?
-  end
-
-  safe_to_remove += deps - not_safe_to_remove.keys
-
-  [safe_to_remove, not_safe_to_remove]
-end
-
+# Printing convenience functions
 def print_unsafe(unsafe)
   return if unsafe.empty?
   puts 'Cannot remove these packages safely'
@@ -86,6 +43,15 @@ def print_summary(safe, unsafe)
   print_safe(safe)
 end
 
+# Brew commands
+def dependencies(package)
+  run_cmd "brew deps #{package}"
+end
+
+def used_by(dependency)
+  run_cmd "brew uses --recursive --installed #{dependency}"
+end
+
 def force_brew_rm(safe)
   safe.each do |package|
     command = "brew uninstall #{package}"
@@ -93,6 +59,36 @@ def force_brew_rm(safe)
     abort unless status.success?
     puts output
   end
+end
+
+def map_used_by(deps)
+  mapped_deps = Hash[
+    deps.map.with_index do |dep, i|
+      print "Progress: #{i}/#{deps.length} \r"
+      [dep, used_by(dep)]
+    end
+  ]
+
+  # clear to beginning of line, tidy after oneself
+  print "\033[K"
+
+  mapped_deps
+end
+
+def analyze(package)
+  deps = dependencies(package)
+  mapped_parents = map_used_by(deps)
+
+  safe_to_remove = [package]
+
+  not_safe_to_remove = mapped_parents.select do |_dep, parents|
+    parents -= [package]
+    !parents.empty?
+  end
+
+  safe_to_remove += deps - not_safe_to_remove.keys
+
+  [safe_to_remove, not_safe_to_remove]
 end
 
 def main(package, force)
@@ -104,6 +100,14 @@ def main(package, force)
   else
     print_summary(safe, unsafe)
   end
+end
+
+# Parse options and populate opts
+opts = { force: false, dry_run: false }
+OptionParser.new do |o|
+  o.on('--force') { |f| opts[:force] = f }
+  o.on('--dry-run') { |d| opts[:dry] = d }
+  o.parse!
 end
 
 main ARGV[0], opts[:force]
