@@ -119,3 +119,5 @@ OptionParser.new do |o|
 end
 
 main ARGV[0], opts[:force]
+
+# brew info --json=v1 --installed | jq

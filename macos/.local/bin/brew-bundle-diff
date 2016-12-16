@@ -5,8 +5,22 @@ require 'open3'
 DOTFILES_DIR = File.expand_path('~/Projects/dotfiles/')
 BREWFILE = 'macos/.Brewfile'.freeze
 
+def brewfile_git_info
+  command = "git log --follow -n1 --pretty=format:'%ar' #{BREWFILE}"
+  output, status = Open3.capture2(command)
+  abort unless status.success?
+  puts "Last commit was #{output}"
+  puts
+end
+
+def update_brewfile
+  command = 'brew bundle dump --force --global'
+  _, status = Open3.capture2(command)
+  abort unless status.success?
+end
+
 def lines
-  command = "cd #{DOTFILES_DIR}; git diff --word-diff=porcelain -- #{BREWFILE}"
+  command = "git diff --word-diff=porcelain -- #{BREWFILE}"
   raw_diff, status = Open3.capture2(command)
   abort unless status.success?
 
@@ -29,6 +43,9 @@ def parse_diffed_lines
   [additions, subtractions]
 end
 
+Dir.chdir(DOTFILES_DIR)
+update_brewfile
+brewfile_git_info
 additions, subtractions = parse_diffed_lines
 
 puts 'True Additions'
