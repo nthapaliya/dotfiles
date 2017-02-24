@@ -104,7 +104,11 @@ Plug 'vim-scripts/Arduino-syntax-file'
 Plug 'AndrewRadev/splitjoin.vim'         " add gS and gJ mappings for smart splitting and joining of blocks
 Plug 'mhinz/vim-grepper'
 Plug 'airblade/vim-gitgutter'            " show git marks on gutter
-Plug 'airblade/vim-rooter'               " vim opened in a sub-dir chdir's to git root
+" airblade/vim-rooter {{{
+  Plug 'airblade/vim-rooter'               " vim opened in a sub-dir chdir's to git root
+  " ignore node_modules, as it's no longer a good indicator or root-edness
+  let g:rooter_patterns = ['.git/']
+" }}}
 Plug 'christoomey/vim-tmux-navigator'    " jump between vim and tmux panes easily
 Plug 'justinmk/vim-sneak'                " s <char> <char> motions
 Plug 'rizzatti/dash.vim'                 " Dash integration
@@ -113,7 +117,9 @@ Plug 'tpope/vim-commentary'              " gc and gcc to comment/uncomment lines
 Plug 'tpope/vim-fugitive'                " git wrapper
 Plug 'tpope/vim-repeat'                  " extends . commands
 Plug 'tpope/vim-rhubarb'                 " extends fugitive for use with github
-Plug 'tpope/vim-sensible'                " sensible defaults
+if !has('nvim')
+  Plug 'tpope/vim-sensible'                " sensible defaults
+endif
 Plug 'tpope/vim-surround'                " shortcuts for adding deleting or changing parens and quotes
 Plug 'tpope/vim-unimpaired'              " handy shortcuts which I can never remember
 Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
@@ -126,7 +132,7 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
     autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
   augroup end
 
-  " Callback for reloading file in buffer when eslint or rubocop has finished and maybe has
+  " Callback for reloading file in buffer when eslint_d or rubocop has finished and maybe has
   " autofixed some stuff
   silent function! s:Neomake_callback(options)
     if (a:options.status == 0 || a:options.name ==# 'rubocop')
@@ -134,7 +140,7 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
     endif
   endfunction
 
-  " take the eslint args from source and add --fix
+  " take the eslint_d args from source and add --fix
   let g:neomake_javascript_eslint_d_args = ['-f', 'compact', '--fix']
 
   " take the rubocop maker from source and add -a -R -D to args
@@ -213,7 +219,7 @@ nnoremap • :Ag <C-r>=expand('<cword>')<CR><CR>
 " gui config {{{
 if has('gui_running')
   set guioptions=
-  set guifont=Sauce\ Code\ Powerline\ Light:h15
+  set guifont=Literation\ Mono\ Powerline:h13
 endif
 " }}}
 
@@ -248,6 +254,6 @@ augroup END
 " }}}
 
 " custom-commands {{{
-command! Today execute 'normal G' | r!date "+\%F (\%a \%b \%d)"
-command! -nargs=+ Now execute 'normal G' | r!date "+\%R - <args>"
+command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
+command! -nargs=+ Now execute 'normal G' | execute 'r!date "+\%R - <args>"' | execute 'normal >>'
 " }}}
