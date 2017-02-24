@@ -12,3 +12,5 @@
 	unique = log HEAD --not master
 [init]
 	templatedir = ~/.config/git/template
+[status]
+	showUntrackedFiles = all
