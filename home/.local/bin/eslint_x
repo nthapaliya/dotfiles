@@ -1,1 +1,9 @@
-[[ -e bin/eslint ]] && bin/eslint "$@" || eslint "$@"
+#!/bin/bash
+
+if [[ -e bin/eslint && -d vendor ]] ; then
+  pushd vendor
+  eslint_d --config .eslintrc.js "$@"
+  popd
+else
+  eslint_d "$@"
+fi
