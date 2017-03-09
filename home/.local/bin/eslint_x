@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[ -e bin/eslint && -d vendor ]] ; then
-  pushd vendor
+  pushd vendor > /dev/null
   eslint_d --config .eslintrc.js "$@"
-  popd
+  popd > /dev/null
 else
   eslint_d "$@"
 fi
