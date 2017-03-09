@@ -10,6 +10,7 @@
 	up = "!git remote update -p; git merge --ff-only @{u}"
 	ctags = !.git/hooks/ctags-run
 	unique = log HEAD --not master
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 [init]
 	templatedir = ~/.config/git/template
 [status]
