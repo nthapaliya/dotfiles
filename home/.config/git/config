@@ -3,6 +3,7 @@
 	email = nthapaliya@users.noreply.github.com
 [push]
 	default = simple
+	followTags = true
 [core]
 	ignorecase = false
 	quotepath = false
@@ -15,3 +16,5 @@
 	templatedir = ~/.config/git/template
 [status]
 	showUntrackedFiles = all
+[stash]
+	showPatch = true
