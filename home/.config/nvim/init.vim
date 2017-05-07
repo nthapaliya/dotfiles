@@ -1,6 +1,8 @@
-" .vimrc
+" .vimrc {{{
 
-" vim-plug autodownload {{{
+set encoding=utf-8
+scriptencoding utf-8
+
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -106,12 +108,11 @@ Plug 'mhinz/vim-grepper'
 Plug 'airblade/vim-gitgutter'            " show git marks on gutter
 " airblade/vim-rooter {{{
   Plug 'airblade/vim-rooter'               " vim opened in a sub-dir chdir's to git root
-  " ignore node_modules, as it's no longer a good indicator or root-edness
+  " ignore node_modules, as it's no longer a good indicator of root-edness
   let g:rooter_patterns = ['.git/']
 " }}}
 Plug 'christoomey/vim-tmux-navigator'    " jump between vim and tmux panes easily
 Plug 'justinmk/vim-sneak'                " s <char> <char> motions
-Plug 'rizzatti/dash.vim'                 " Dash integration
 Plug 'tommcdo/vim-lion'                  " easily align things
 Plug 'tpope/vim-commentary'              " gc and gcc to comment/uncomment lines
 Plug 'tpope/vim-fugitive'                " git wrapper
@@ -156,8 +157,6 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
   " after setup, enable for filetypes
   let g:neomake_javascript_enabled_makers = ['eslint_d']
   let g:neomake_jsx_enabled_makers = ['eslint_d']
-  let g:neomake_python_enabled_makers = ['python', 'pep8', 'pylint']
-  let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
   " }}}
 
 call plug#end()
@@ -165,30 +164,33 @@ call plug#end()
 
 " basic settings {{{
 
-set background=dark                            " dark theme
-set clipboard^=unnamed                         " adds unnamed to existing values
-set cursorline                                 " highlight the cursorline
-set hidden                                     " can change buffers even if current is not written
-set list                                       " enable list characters
-set listchars=trail:·,extends:#,tab:▸·,nbsp:·  " specify list characters
-set noerrorbells                               " don't beep
-set noshowmode                                 " don't need to echo mode
-set number                                     " show numbers in side gutter
-set scrolloff=8                                " leave 8 lines on top and bottom while scrolling
-set shell=$SHELL                               " default shell set by environment
-set smartcase                                  " search case setting
-set synmaxcol=300                              " do not highlight very long lines
-set title                                      " titlebar will be buffer filename
-set termguicolors                              " enable true-color
-set ts=2 sts=2 sw=2 expandtab                  " tab-settings
-set visualbell                                 " don't beep
+set autoread
+set background=dark                                 " dark theme
+set clipboard^=unnamed                              " adds unnamed to existing values
+set cursorline                                      " highlight the cursorline
+set hidden                                          " can change buffers even if current is not written
+set lazyredraw                                      " Don't update screen while macros are executing
+set list                                            " enable list characters
+set listchars=trail:·,extends:#,tab:▸·,nbsp:·       " specify list characters
+set mouse=a                                         " mouse scroll and focus working in vim
+set noerrorbells                                    " don't beep
+set noshowmode                                      " don't need to echo mode
+set number                                          " show numbers in side gutter
+set scrolloff=8                                     " leave 8 lines on top and bottom while scrolling
+set shell=$SHELL                                    " default shell set by environment
+set smartcase                                       " search case setting
+set synmaxcol=300                                   " do not highlight very long lines
+set tabstop=2 sts=2 sw=2 expandtab                  " tab-settings
+set termguicolors                                   " enable true-color
+set title                                           " titlebar will be buffer filename
+set visualbell                                      " don't beep
 
 " for vim in tmux only
 " :help xterm-true-color
 " https://github.com/vim/vim/issues/993
 if !has('nvim') && exists('$TMUX')
-  set t_8f=[38;2;%lu;%lu;%lum
-  set t_8b=[48;2;%lu;%lu;%lum
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 if !has('nvim')
@@ -200,7 +202,7 @@ colorscheme gruvbox
 " }}}
 
 " keymappings {{{
-let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>W  :%s/\s\+$<cr>                                 " to clean up trailing whitespace
@@ -214,7 +216,6 @@ inoremap <esc> <nop>
 nnoremap Q <nop>     " don't enter ex mode accidentally
 
 nnoremap <leader>* :Ag <C-r>=expand('<cword>')<CR><CR>
-nnoremap • :Ag <C-r>=expand('<cword>')<CR><CR>
 " }}}
 
 " gui config {{{
@@ -231,7 +232,6 @@ if has('nvim')
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
   tnoremap <C-l> <C-\><C-n><C-w>l
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 " }}}
 
