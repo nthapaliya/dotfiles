@@ -128,18 +128,29 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
 " Linters
   " neomake/neomake {{{
   Plug 'neomake/neomake'
+  let g:neomake_open_list = 2
   augroup neomake_trigger_autocommands
     autocmd!
-    autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
+    autocmd BufWritePost * Neomake
   augroup end
 
   " Callback for reloading file in buffer when eslint_d or rubocop has finished and maybe has
   " autofixed some stuff
-  silent function! s:Neomake_callback(options)
-    if (a:options.status == 0 || a:options.name ==# 'rubocop')
-      edit
-    endif
-  endfunction
+  if !has('gui')
+    augroup reload_non_gui
+      autocmd!
+      autocmd User NeomakeJobFinished nested call s:OnNeomakeJobFinished()
+    augroup end
+
+    silent function! s:OnNeomakeJobFinished()
+      let l:exit_code = g:neomake_hook_context.jobinfo.exit_code
+      let l:name = g:neomake_hook_context.jobinfo.maker.name
+      if (l:name ==# 'eslint_d' || l:name ==# 'rubocop')
+        " checktime
+        edit
+      endif
+    endfunction
+  endif
 
   " take the eslint_d args from source and add --fix
   let g:neomake_javascript_eslint_d_args = ['-f', 'compact', '--fix']
