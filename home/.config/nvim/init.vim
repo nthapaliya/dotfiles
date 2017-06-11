@@ -135,7 +135,7 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
 
   " Callback for reloading file in buffer when eslint_d or rubocop has finished and maybe has
   " autofixed some stuff
-  if !has('gui')
+  if !has('gui_running')
     augroup reload_non_gui
       autocmd!
       autocmd User NeomakeJobFinished nested call s:OnNeomakeJobFinished()
