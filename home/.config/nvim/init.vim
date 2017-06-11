@@ -128,7 +128,6 @@ Plug 'tpope/vim-vinegar'                 " wrapper around netrw, file manager
 " Linters
   " neomake/neomake {{{
   Plug 'neomake/neomake'
-  let g:neomake_open_list = 2
   augroup neomake_trigger_autocommands
     autocmd!
     autocmd BufWritePost * Neomake
@@ -261,11 +260,12 @@ augroup other_filetype_tweaks
   autocmd FileType diff setlocal commentstring=#\ %s                " comment string for git diff
   autocmd FileType gitcommit setlocal commentstring=#\ %s           " comment string for git commit message
   autocmd FileType help wincmd L                                    " open help window in vertical split
+  autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab      " tab-settings
 augroup END
 
 " }}}
 
 " custom-commands {{{
 command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
-command! -nargs=+ Now execute 'normal G' | execute 'r!date "+\%R - <args>"' | execute 'normal >>'
+command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
 " }}}

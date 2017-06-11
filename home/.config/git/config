@@ -18,3 +18,5 @@
 	showUntrackedFiles = all
 [stash]
 	showPatch = true
+[diff]
+	indentHeuristic = on
