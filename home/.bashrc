@@ -1,9 +1,9 @@
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 export PS1="\[\e[36m\]\w\[\e[m\] "
 
-alias vi='COMPATIBILITY=1 nvim'
-alias vim='COMPATIBILITY=1 vim'
-alias tmate='COMPATIBILITY=1 tmate'
+export COMPATIBILITY=1
+
+alias vi='nvim'
 alias ls="ls -G"
 
 export PATH=/usr/local/bin:$PATH

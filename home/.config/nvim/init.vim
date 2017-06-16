@@ -62,9 +62,12 @@ call plug#end()
 " basic settings {{{
 set autoread
 set background=dark
+set breakindent
 set clipboard^=unnamed
 set cursorline
 set hidden
+set ignorecase
+set infercase
 set lazyredraw
 set list
 set listchars=trail:·,extends:#,tab:▸·,nbsp:·
@@ -74,6 +77,7 @@ set noshowmode
 set number
 set scrolloff=8
 set shell=$SHELL
+set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
@@ -107,10 +111,8 @@ nnoremap <Left> :bprev<cr>
 nnoremap <Right> :bnext<cr>
 
 inoremap jk <esc>
-inoremap <esc> <nop>
 nnoremap Q <nop> " don't enter ex mode accidentally
-
-nnoremap <leader>* :Ag <C-r>=expand('<cword>')<CR><CR>
+nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 " }}}
 
 " gui config {{{
@@ -146,6 +148,7 @@ augroup other_filetype_tweaks
   autocmd FileType help wincmd L " open help window in vertical split
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
 augroup END
+
 " }}}
 
 " custom-commands {{{
