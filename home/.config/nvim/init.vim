@@ -234,7 +234,7 @@ endif
 
 " take the eslint_d args from source and add --fix
 let g:neomake_javascript_eslint_d_args = ['-f', 'compact', '--fix']
-let g:neomake_javascript_eslint_d_exe = 'eslint_x'
+let g:neomake_javascript_eslint_d_exe = 'eslint_d'
 
 " take the rubocop maker from source and add -a -R -D to args
 " add a mapexpr to rubocop maker to remove strings with [Corrected]
