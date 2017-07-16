@@ -20,3 +20,5 @@
 	showPatch = true
 [diff]
 	indentHeuristic = on
+[commit]
+	verbose = true
