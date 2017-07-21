@@ -150,11 +150,15 @@ augroup other_filetype_tweaks
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
 augroup END
 
+augroup general_autocommands
+  autocmd VimResized * wincmd =
+augroup END
 " }}}
 
 " custom-commands {{{
 command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
+command! This execute 'Ag ' . expand('%:t')
 " }}}
 
 " vim-airline/vim-airline {{{
@@ -210,6 +214,8 @@ let g:rooter_patterns = ['.git/']
 " }}}
 
 " neomake/neomake {{{
+let g:neomake_open_list = 2
+
 augroup neomake_trigger_autocommands
   autocmd!
   autocmd BufWritePost * Neomake
