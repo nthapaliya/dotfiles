@@ -51,6 +51,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'unblevable/quick-scope'
+Plug 'dag/vim-fish'
 
 Plug 'neomake/neomake'
 if !has('nvim')
@@ -77,7 +78,7 @@ set noerrorbells
 set noshowmode
 set number
 set scrolloff=8
-set shell=$SHELL
+set shell=/bin/bash
 set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
