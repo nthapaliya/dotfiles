@@ -1,8 +1,16 @@
 # Basic path config
-set -gx PATH $PATH ~/.local/bin ~/Lang/rbenv/bin
+
+for i in ~/.local/bin ~/Lang/rbenv/bin
+  if not contains $i $PATH
+    set -gx PATH $i $PATH
+  end
+end
+
+# set -gx PATH $PATH ~/.local/bin ~/Lang/rbenv/bin
 
 # Set $EDITOR
-set -gx EDITOR nvim
+set -gx EDITOR ( which nvim )
+set -gx VISUAL $EDITOR
 
 # set $SHELL
 set -gx SHELL /usr/local/bin/fish
@@ -10,7 +18,17 @@ set -gx SHELL /usr/local/bin/fish
 # Rbenv
 
 set -gx RBENV_ROOT ~/Lang/rbenv
-status --is-interactive; and source (rbenv init -|psub)
+if not contains ~/Lang/rbenv/shims $PATH
+  status --is-interactive; and source (~/Lang/rbenv/bin/rbenv init -|psub)
+end
+
+
+if status --is-interactive
+    set -gx CDPATH . ~/Projects/ ~/OSS
+end
+
+# man pager
+set -gx MANPAGER "nvim -c 'set ft=man' - "
 
 # general
 alias al='rg --files-with-matches --smart-case'
