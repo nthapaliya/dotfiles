@@ -57,3 +57,5 @@ abbr --add lsd 'ls -d .*'
 abbr --add htree 'tree -a -I plugged\|\.git'
 alias edit_config='eval $EDITOR ~/.config/fish/config.fish '
 alias reload_config='source ~/.config/fish/config.fish'
+
+alias rm 'rm -i'
