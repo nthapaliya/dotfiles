@@ -34,7 +34,7 @@ end
 
 # Abbreviations
 # work
-abbr --add mqa 'env HOST=qa.ossd.co BRANCH=(gcb) bundle exec mina full_deploy '
+abbr --add mqa 'ssh-add -k; env HOST=qa.ossd.co BRANCH=(gcb) bin/mina full_deploy;'
 abbr --add hud 'cd ~/OSS/huddle'
 abbr --add vd "cd ~/OSS/huddle/app/assets/javascripts/visual_directory"
 abbr --add vdc "cd ~/OSS/huddle/app/assets/javascripts/visual_directory/components"
