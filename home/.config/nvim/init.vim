@@ -146,6 +146,7 @@ augroup other_filetype_tweaks
   autocmd BufRead,BufNewFile *.{es6} set filetype=javascript
   autocmd FileType diff setlocal commentstring=#\ %s
   autocmd FileType gitcommit setlocal spell commentstring=#\ %s
+  autocmd FileType text setlocal spell commentstring=#\ %s
   autocmd FileType help wincmd L " open help window in vertical split
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
 augroup END
