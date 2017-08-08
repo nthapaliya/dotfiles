@@ -1,10 +1,10 @@
 # Global variables
 
 # $PATH
-for i in ~/.local/bin ~/Lang/rbenv/bin
-  if not contains $i $PATH
-    set PATH $i $PATH
-  end
+for i in ~/.local/bin
+    if not contains $i $PATH
+        set PATH $i $PATH
+    end
 end
 
 # Clear fish_greeting
@@ -17,20 +17,19 @@ set -gx VISUAL $EDITOR
 # $SHELL
 # set -gx SHELL /usr/local/bin/fish
 
-# RBENV_ROOT
-set -gx RBENV_ROOT ~/Lang/rbenv
-# $CDPATH
 if status --is-interactive
+    # $CDPATH
     set -gx CDPATH . ~/Projects/ ~/OSS
+
+    # rbenv setup
+    set -gx RBENV_ROOT ~/Lang/rbenv
+    if not contains ~/Lang/rbenv/shims $PATH
+        source (rbenv init -|psub)
+    end
 end
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
-
-# rbenv init
-if not contains ~/Lang/rbenv/shims $PATH
-  status --is-interactive; and source (~/Lang/rbenv/bin/rbenv init -|psub)
-end
 
 # Abbreviations
 # work
