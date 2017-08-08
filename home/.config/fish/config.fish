@@ -1,7 +1,7 @@
 # Global variables
 
 # $PATH
-for i in ~/.local/bin
+for i in ~/.local/bin ~/Lang/racket/bin
     if not contains $i $PATH
         set PATH $i $PATH
     end
@@ -33,7 +33,7 @@ set -gx MANPAGER "nvim -c 'set ft=man' - "
 
 # Abbreviations
 # work
-abbr --add mqa 'ssh-add -k; env HOST=qa.ossd.co BRANCH=(gcb) bin/mina full_deploy;'
+abbr --add mqa 'env HOST=qa.ossd.co BRANCH=(gcb) bin/mina full_deploy;'
 abbr --add hud 'cd ~/OSS/huddle'
 abbr --add vd "cd ~/OSS/huddle/app/assets/javascripts/visual_directory"
 abbr --add vdc "cd ~/OSS/huddle/app/assets/javascripts/visual_directory/components"
@@ -50,3 +50,6 @@ abbr --add gss 'git status -s'
 # dotfiles
 abbr --add lsd 'ls -d .*'
 abbr --add htree 'tree -a -I plugged\|\.git'
+
+set -gx FZF_DEFAULT_COMMAND 'rg --files .'
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
