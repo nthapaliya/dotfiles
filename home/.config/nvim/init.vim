@@ -82,7 +82,9 @@ set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
-set termguicolors
+if $TERM_PROGRAM == 'Iterm.app'
+  set termguicolors
+endif
 set title
 set visualbell
 
@@ -146,7 +148,7 @@ augroup other_filetype_tweaks
   autocmd BufRead,BufNewFile *.{es6} set filetype=javascript
   autocmd FileType diff setlocal commentstring=#\ %s
   autocmd FileType gitcommit setlocal spell commentstring=#\ %s
-  autocmd FileType text setlocal spell commentstring=#\ %s
+  autocmd FileType text setlocal spell commentstring=#\ %s textwidth=80
   autocmd FileType help wincmd L " open help window in vertical split
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
 augroup END
