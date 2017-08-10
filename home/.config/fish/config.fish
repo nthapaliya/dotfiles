@@ -44,6 +44,7 @@ abbr --add gb 'git branch'
 abbr --add gcm 'git checkout master'
 abbr --add gcmt 'git commit'
 abbr --add gco 'git checkout'
+abbr --add gd 'git diff'
 abbr --add gdca 'git diff --cached'
 abbr --add gss 'git status -s'
 
