@@ -29,6 +29,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Other languages
+Plug 'dag/vim-fish'
 Plug 'rodjek/vim-puppet'
 Plug 'tmux-plugins/vim-tmux'
 
@@ -50,7 +51,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'unblevable/quick-scope'
-Plug 'dag/vim-fish'
 
 Plug 'neomake/neomake'
 if !has('nvim')
@@ -110,12 +110,14 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>W  :%s/\s\+$<cr>
 nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<CR>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <Left> :bprev<cr>
-nnoremap <Right> :bnext<cr>
+nnoremap <Left>     :bprev<cr>
+nnoremap <Right>    :bnext<cr>
 
 inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
 nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
+
+nmap <leader>cs :let @*=expand("%:p")<CR>
 " }}}
 
 " gui config {{{
