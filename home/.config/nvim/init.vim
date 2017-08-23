@@ -167,13 +167,6 @@ command! This execute 'Ag ' . expand('%:t')
 " }}}
 
 " vim-airline/vim-airline {{{
-if $COMPATIBILITY
-  let g:airline_left_sep=' '
-  let g:airline_right_sep=' '
-else
-  let g:airline_powerline_fonts = 1
-endif
-
 let g:airline#extensions#branch#displayed_head_limit = 8
 
 " Short forms, lets see if worth it
