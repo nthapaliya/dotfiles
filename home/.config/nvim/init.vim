@@ -200,6 +200,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " junegunn/fzf {{{
 nnoremap <C-p> :Files<cr>
+nnoremap <leader>b :Buffers<cr>
 
 if has('gui_macvim')
   let g:fzf_launcher = 'run_fzf %s'
