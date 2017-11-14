@@ -52,7 +52,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'unblevable/quick-scope'
 
-Plug 'neomake/neomake'
+" Linter
+Plug 'w0rp/ale'
+
 if !has('nvim')
   Plug 'tpope/vim-sensible'
 endif
@@ -212,46 +214,13 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:rooter_patterns = ['.git/']
 " }}}
 
-" neomake/neomake {{{
-let g:neomake_open_list = 2
+" Plug 'w0rp/ale' {{{
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'ruby': ['rubocop'],
+\}
 
-augroup neomake_trigger_autocommands
-  autocmd!
-  autocmd BufWritePost * Neomake
-augroup end
-
-" Callback for reloading file in buffer when eslint_d
-" or rubocop has finished and maybe has autofixed some stuff
-if !has('gui_running')
-  augroup reload_non_gui
-    autocmd!
-    autocmd User NeomakeJobFinished nested call s:OnNeomakeJobFinished()
-  augroup end
-
-  silent function! s:OnNeomakeJobFinished()
-  let l:exit_code = g:neomake_hook_context.jobinfo.exit_code
-  let l:name = g:neomake_hook_context.jobinfo.maker.name
-  if (l:name ==# 'eslint_d' || l:name ==# 'rubocop')
-    " checktime
-    edit
-  endif
-endfunction
-endif
-
-" take the eslint_d args from source and add --fix
-let g:neomake_javascript_eslint_d_args = ['-f', 'compact', '--fix']
-let g:neomake_javascript_eslint_d_exe = 'eslint_d'
-
-" take the rubocop maker from source and add -a -R -D to args
-" add a mapexpr to rubocop maker to remove strings with [Corrected]
-let g:neomake_ruby_rubocop_maker = {
-      \ 'args': ['--format', 'emacs', '-a', '-R'],
-      \ 'errorformat': '%f:%l:%c: %t: %m',
-      \ 'mapexpr': 'substitute(v:val, ".\\+\\[Corrected\\].\\+", "", "g")',
-      \ 'postprocess': function('neomake#makers#ft#ruby#RubocopEntryProcess'),
-      \ }
-
-" after setup, enable for filetypes
-let g:neomake_javascript_enabled_makers = ['eslint_d']
-let g:neomake_jsx_enabled_makers = ['eslint_d']
+let g:airline#extensions#ale#enabled = 1
+let g:ale_javascript_eslint_executable = 'eslintme'
+let g:ale_fix_on_save = 1
 " }}}
