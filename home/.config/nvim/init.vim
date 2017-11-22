@@ -90,14 +90,6 @@ endif
 set title
 set visualbell
 
-" for vim in tmux only
-" :help xterm-true-color
-" https://github.com/vim/vim/issues/993
-if !has('nvim') && exists('$TMUX')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-
 if !has('nvim')
   set viminfo+=n~/.vim/viminfo
 endif
@@ -197,10 +189,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 nnoremap <C-p> :Files<cr>
 nnoremap <leader>b :Buffers<cr>
 
-if has('gui_macvim')
-  let g:fzf_launcher = 'run_fzf %s'
-endif
-
 " https://github.com/junegunn/fzf.vim#hide-statusline
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
@@ -213,10 +201,6 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " I'm keeping this to 'fix' quick-scope
 " https://github.com/unblevable/quick-scope/issues/32#issuecomment-241159662
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" }}}
-
-" airblade/vim-rooter {{{
-let g:rooter_patterns = ['.git/']
 " }}}
 
 " Plug 'w0rp/ale' {{{
