@@ -200,6 +200,11 @@ nnoremap <leader>b :Buffers<cr>
 if has('gui_macvim')
   let g:fzf_launcher = 'run_fzf %s'
 endif
+
+" https://github.com/junegunn/fzf.vim#hide-statusline
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 " }}}
 
 " unblevable/quick-scope {{{
