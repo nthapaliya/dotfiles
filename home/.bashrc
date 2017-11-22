@@ -1,5 +1,5 @@
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
-export PS1="\[\e[36m\]\w\[\e[m\] "
+export PS1="bash \[\e[36m\]\w\[\e[m\] "
 
 export COMPATIBILITY=1
 
