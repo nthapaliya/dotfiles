@@ -19,8 +19,11 @@ set -gx VISUAL $EDITOR
 # set -gx SHELL /usr/local/bin/fish
 
 # rbenv setup
-set -gx RBENV_ROOT ~/Lang/rbenv
-source (rbenv init -|psub)
+test -d ~/Lang/rbenv/bin; and set PATH ~/Lang/rbenv/bin $PATH
+if type -q rbenv
+  set -gx RBENV_ROOT ~/Lang/rbenv
+  source (rbenv init -|psub)
+end
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
