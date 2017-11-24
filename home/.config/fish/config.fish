@@ -1,10 +1,11 @@
+test -n "$FISH_CONFIG_LOADED" ; and exit ;
+set -gx FISH_CONFIG_LOADED true
+
 # Global variables
 
 # $PATH
 for i in ~/.local/bin ~/Lang/racket/bin
-    if not contains $i $PATH
-        set PATH $i $PATH
-    end
+    set PATH $i $PATH
 end
 
 # Clear fish_greeting
@@ -23,9 +24,7 @@ if status --is-interactive
 
     # rbenv setup
     set -gx RBENV_ROOT ~/Lang/rbenv
-    if not contains ~/Lang/rbenv/shims $PATH
-        source (rbenv init -|psub)
-    end
+    source (rbenv init -|psub)
 end
 
 # $MANPAGER
