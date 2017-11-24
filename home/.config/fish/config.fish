@@ -19,9 +19,6 @@ set -gx VISUAL $EDITOR
 # set -gx SHELL /usr/local/bin/fish
 
 if status --is-interactive
-    # $CDPATH
-    set -gx CDPATH . ~/Projects/ ~/OSS
-
     # rbenv setup
     set -gx RBENV_ROOT ~/Lang/rbenv
     source (rbenv init -|psub)
