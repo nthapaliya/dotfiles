@@ -4,7 +4,7 @@ set -gx FISH_CONFIG_LOADED true
 # Global variables
 
 # $PATH
-for i in ~/.local/bin ~/Lang/racket/bin
+for i in ~/.local/bin
     set PATH $i $PATH
 end
 
