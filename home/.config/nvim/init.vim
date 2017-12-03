@@ -38,7 +38,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'janko-m/vim-test'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'tommcdo/vim-lion'
@@ -50,6 +49,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'unblevable/quick-scope'
+
+" Tests from vim
+Plug 'janko-m/vim-test'
+Plug 'radenling/vim-dispatch-neovim'
+Plug 'tpope/vim-dispatch'
 
 " Linter
 Plug 'w0rp/ale'
@@ -78,7 +82,7 @@ set noerrorbells
 set noshowmode
 set number
 set scrolloff=8
-set shell=/bin/bash
+set shell=fish
 set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
@@ -123,6 +127,7 @@ endif
 " nvim config {{{
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
+  tnoremap jk <C-\><C-n>
   tnoremap <C-h> <C-\><C-n><C-w>h
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
@@ -211,4 +216,8 @@ let g:ale_fixers = {
 let g:airline#extensions#ale#enabled = 1
 let g:ale_javascript_eslint_executable = 'eslintme'
 let g:ale_fix_on_save = 1
+" }}}
+
+" Plug 'janko-m/vim-test' {{{
+let test#strategy = "dispatch"
 " }}}

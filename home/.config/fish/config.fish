@@ -18,11 +18,9 @@ set -gx VISUAL $EDITOR
 # $SHELL
 # set -gx SHELL /usr/local/bin/fish
 
-if status --is-interactive
-    # rbenv setup
-    set -gx RBENV_ROOT ~/Lang/rbenv
-    source (rbenv init -|psub)
-end
+# rbenv setup
+set -gx RBENV_ROOT ~/Lang/rbenv
+source (rbenv init -|psub)
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
@@ -47,7 +45,6 @@ abbr --add gss 'git status -s'
 # dotfiles
 abbr --add lsd 'ls -d .*'
 abbr --add htree 'tree -a -I plugged\|\.git'
-
 
 # fzf + rg
 set -gx FZF_DEFAULT_COMMAND 'rg --files .'
