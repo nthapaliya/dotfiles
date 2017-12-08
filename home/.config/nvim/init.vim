@@ -20,18 +20,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
 
-" Ruby
+" Language enhancements
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
-
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-
-" Other languages
-Plug 'dag/vim-fish'
-Plug 'rodjek/vim-puppet'
-Plug 'tmux-plugins/vim-tmux'
 
 " Vim enhancements
 Plug 'AndrewRadev/splitjoin.vim'
