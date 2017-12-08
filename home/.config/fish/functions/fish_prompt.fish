@@ -1,4 +1,8 @@
 function fish_prompt --description 'Write out the prompt'
+    set __fish_git_prompt_char_dirtystate '*'
+    set __fish_git_prompt_showdirtystate 'yes'
+    set __fish_git_prompt_showcolorhints 'yes'
+
     set -l last_status $status
     if test $last_status -ne 0
       set prompt_last_status " [$last_status]"
