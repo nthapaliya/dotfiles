@@ -1,4 +1,4 @@
---languages=-sql,html
+--languages=-sql,html,plistxml
 
 --langdef=JSX
 --langmap=jsx:.jsx
