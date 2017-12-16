@@ -49,3 +49,5 @@ abbr --add htree 'tree -a -I plugged\|\.git'
 # fzf + rg
 set -gx FZF_DEFAULT_COMMAND 'rg --files .'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+
+test -e .iterm2_shell_integration.fish; and source .iterm2_shell_integration.fish

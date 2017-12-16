@@ -12,3 +12,4 @@ export RBENV_ROOT=$HOME/Lang/rbenv
 eval "$( rbenv init - )"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.iterm2_shell_integration.bash ] && source ~/.iterm2_shell_integration.bash
