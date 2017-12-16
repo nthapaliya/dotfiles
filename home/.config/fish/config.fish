@@ -28,9 +28,11 @@ set -gx MANPAGER "nvim -c 'set ft=man' - "
 # Abbreviations
 # work
 abbr --add mqa 'env HOST=qa.ossd.co BRANCH=(gcb) bin/mina full_deploy;'
-abbr --add hud 'cd ~/OSS/huddle'
-abbr --add vd "cd ~/OSS/huddle/app/assets/javascripts/visual_directory"
-abbr --add vdc "cd ~/OSS/huddle/app/assets/javascripts/visual_directory/components"
+abbr --add h 'cd ~/OSS/huddle'
+abbr --add p 'cd ~/Projects'
+abbr --add d 'cd ~/Projects/dotfiles'
+abbr --add vd 'cd ~/OSS/huddle/app/assets/javascripts/visual_directory'
+abbr --add vdc 'cd ~/OSS/huddle/app/assets/javascripts/visual_directory/components'
 
 # git
 abbr --add g 'git'
@@ -48,6 +50,6 @@ abbr --add htree 'tree -a -I plugged\|\.git'
 
 # fzf + rg
 set -gx FZF_DEFAULT_COMMAND 'rg --files .'
-set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 
 test -e .iterm2_shell_integration.fish; and source .iterm2_shell_integration.fish
