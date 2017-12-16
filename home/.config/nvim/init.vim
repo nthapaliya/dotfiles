@@ -19,10 +19,11 @@ call plug#begin('~/.config/nvim/plugged')
 " Colors and themes
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next'
 
 " Language enhancements
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-rails'
+" Plug 'tpope/vim-rails'
 
 " Vim enhancements
 Plug 'AndrewRadev/splitjoin.vim'
@@ -31,13 +32,15 @@ Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim'
+Plug 'justinmk/vim-dirvish'
+Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-grepper'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'unblevable/quick-scope'
@@ -85,11 +88,13 @@ endif
 set title
 set visualbell
 
+set path+=app/assets/javascripts,node_modules
+
 if !has('nvim')
   set viminfo+=n~/.vim/viminfo
 endif
 
-colorscheme gruvbox
+colorscheme OceanicNext
 " }}}
 
 " keymappings {{{
@@ -112,7 +117,7 @@ nmap <leader>cs :let @*=expand("%:p")<CR>
 " gui config {{{
 if has('gui_running')
   set guioptions=
-  set guifont=Literation\ Mono\ Powerline:h13
+  set guifont=Fira Code:h13
 endif
 " }}}
 
@@ -176,6 +181,7 @@ let g:airline_mode_map = {
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
