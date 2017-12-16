@@ -42,7 +42,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
 Plug 'unblevable/quick-scope'
 
 " Tests from vim
@@ -214,6 +213,14 @@ let g:ale_fixers = {
 let g:airline#extensions#ale#enabled = 1
 let g:ale_javascript_eslint_executable = 'eslintme'
 let g:ale_fix_on_save = 1
+
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_delay = 500
+
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 " }}}
 
 " Plug 'janko-m/vim-test' {{{
