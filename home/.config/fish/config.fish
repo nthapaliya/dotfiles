@@ -1,12 +1,16 @@
 test -n "$FISH_CONFIG_LOADED" ; and exit ;
 set -gx FISH_CONFIG_LOADED true
 
-# Global variables
-
-# $PATH
-for i in ~/.local/bin
-    set PATH $i $PATH
+function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
+  for path in $argv
+    if test -d $path; and not contains $path $fish_user_paths
+      set -u fish_user_paths $fish_user_paths $path
+    end
+  end
 end
+
+# $fish_user_paths
+__set_fish_user_paths ~/.local/bin ~/.config/fzf/bin ~/Lang/*/bin
 
 # Clear fish_greeting
 set fish_greeting
@@ -19,7 +23,6 @@ set -gx VISUAL $EDITOR
 # set -gx SHELL /usr/local/bin/fish
 
 # rbenv setup
-test -d ~/Lang/rbenv/bin; and set PATH ~/Lang/rbenv/bin $PATH
 if type -q rbenv
   set -gx RBENV_ROOT ~/Lang/rbenv
   source (rbenv init -|psub)
