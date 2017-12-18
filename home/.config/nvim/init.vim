@@ -191,9 +191,11 @@ nnoremap <C-p> :Files<cr>
 nnoremap <leader>b :Buffers<cr>
 
 " https://github.com/junegunn/fzf.vim#hide-statusline
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup fzf
+  autocmd!
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup end
 " }}}
 
 " unblevable/quick-scope {{{
@@ -224,5 +226,5 @@ nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 " }}}
 
 " Plug 'janko-m/vim-test' {{{
-let test#strategy = "dispatch"
+let g:test#strategy = 'dispatch'
 " }}}
