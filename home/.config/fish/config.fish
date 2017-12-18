@@ -10,7 +10,7 @@ function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
 end
 
 # $fish_user_paths
-__set_fish_user_paths ~/.local/bin ~/.config/fzf/bin ~/Lang/*/bin
+__set_fish_user_paths ~/.local/bin ~/.config/fzf/bin ~/.local/lang/*/bin
 
 # Clear fish_greeting
 set fish_greeting
@@ -24,7 +24,7 @@ set -gx VISUAL $EDITOR
 
 # rbenv setup
 if type -q rbenv
-  set -gx RBENV_ROOT ~/Lang/rbenv
+  set -gx RBENV_ROOT ~/.local/lang/rbenv
   source (rbenv init -|psub)
 end
 
