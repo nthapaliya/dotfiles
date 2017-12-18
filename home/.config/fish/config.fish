@@ -10,7 +10,7 @@ function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
 end
 
 # $fish_user_paths
-__set_fish_user_paths ~/.local/bin ~/.config/fzf/bin ~/.local/lang/*/bin
+__set_fish_user_paths ~/.local/bin ~/.local/lang/*/bin
 
 # Clear fish_greeting
 set fish_greeting
