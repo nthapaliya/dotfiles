@@ -4,7 +4,7 @@ set -gx FISH_CONFIG_LOADED true
 function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
   for path in $argv
     if test -d $path; and not contains $path $fish_user_paths
-      set -u fish_user_paths $fish_user_paths $path
+      set -U fish_user_paths $fish_user_paths $path
     end
   end
 end
