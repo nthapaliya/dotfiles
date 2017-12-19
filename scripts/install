@@ -20,12 +20,18 @@ hash stow 2>/dev/null || {
 : ${DOTFILES_ROOT:="$( git rev-parse --show-toplevel 2> /dev/null )"}
 : ${DOTFILES_ROOT:="$HOME/.dotfiles"}
 
+DESTINATIONS=(home)
+
+if [[ $(uname) == 'Darwin' ]]; then
+  DESTINATIONS+=(macos)
+fi
+
 case $1 in
   '')
-    stow -R --dir="$DOTFILES_ROOT" --target="$HOME" home macos
+    stow -R --dir="$DOTFILES_ROOT" --target="$HOME" "${DESTINATIONS[@]}"
     ;;
   --uninstall|-u)
-    stow -D --dir="$DOTFILES_ROOT" --target="$HOME" home macos
+    stow -D --dir="$DOTFILES_ROOT" --target="$HOME" "${DESTINATIONS[@]}"
     ;;
   *)
     echo $"Usage: $0 [-u|--uninstall]"
