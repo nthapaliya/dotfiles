@@ -22,3 +22,5 @@
 	indentHeuristic = on
 [commit]
 	verbose = true
+[rebase]
+	autosquash = true
