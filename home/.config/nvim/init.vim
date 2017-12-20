@@ -81,11 +81,17 @@ set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
+set title
+set visualbell
+
 if $IS_MOSH !=? 'mosh'
   set termguicolors
 endif
-set title
-set visualbell
+
+if has('nvim')
+  set inccommand=nosplit
+  set incsearch
+endif
 
 set path+=app/assets/javascripts,node_modules
 
