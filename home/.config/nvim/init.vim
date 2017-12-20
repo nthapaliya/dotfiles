@@ -81,7 +81,7 @@ set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
-if $TERM_PROGRAM == 'Iterm.app'
+if $IS_MOSH !=? 'mosh'
   set termguicolors
 endif
 set title
