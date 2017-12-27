@@ -1,12 +1,15 @@
-test -n "$FISH_CONFIG_LOADED" ; and exit ;
+test -n "$FISH_CONFIG_LOADED"
+and exit
+
 set -gx FISH_CONFIG_LOADED true
 
 function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
-  for path in $argv
-    if test -d $path; and not contains $path $fish_user_paths
-      set -U fish_user_paths $fish_user_paths $path
+    for path in $argv
+        if test -d $path
+            and not contains $path $fish_user_paths
+            set -U fish_user_paths $fish_user_paths $path
+        end
     end
-  end
 end
 
 # $fish_user_paths
@@ -62,9 +65,10 @@ abbr --add lsd 'ls -d .*'
 abbr --add htree 'tree -a -I plugged\|\.git'
 
 if type -q rg
-  # fzf + rg
-  set -gx FZF_DEFAULT_COMMAND 'rg --files .'
-  set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+    # fzf + rg
+    set -gx FZF_DEFAULT_COMMAND 'rg --files .'
+    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 end
 
-test -e .iterm2_shell_integration.fish; and source .iterm2_shell_integration.fish
+test -e .iterm2_shell_integration.fish
+and source .iterm2_shell_integration.fish

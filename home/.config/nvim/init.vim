@@ -212,8 +212,16 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " }}}
 
+function! Fish_indent(buffers)
+  return {
+  \    'command': 'fish_indent -w %t',
+  \    'read_temporary_file': 1,
+  \    'suggested_filetypes': ['fish']}
+endfunction
+
 " Plug 'w0rp/ale' {{{
 let g:ale_fixers = {
+\   'fish': ['Fish_indent'],
 \   'javascript': ['eslint'],
 \   'ruby': ['rubocop'],
 \}
