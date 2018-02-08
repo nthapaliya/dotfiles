@@ -27,19 +27,19 @@ set -gx VISUAL $EDITOR
 
 # rbenv setup
 if type -q rbenv
-  set -gx RBENV_ROOT ~/.local/lang/rbenv
-  source (rbenv init -|psub)
+    set -gx RBENV_ROOT ~/.local/lang/rbenv
+    source (rbenv init -|psub)
 end
 
 # nvm setup
-set -gx NVM_DIR ~/.local/lang/nvm
-nvm use 9.3.0
+# set -gx NVM_DIR ~/.local/lang/nvm
+# nvm use 9.3.0
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
 
 # $IS_MOSH
-set -gx IS_MOSH (is_mosh --verbose)
+# set -gx IS_MOSH (is_mosh --verbose)
 
 # Abbreviations
 # work
@@ -70,5 +70,5 @@ if type -q rg
     set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 end
 
-test -e .iterm2_shell_integration.fish
-and source .iterm2_shell_integration.fish
+test -e ~/.iterm2_shell_integration.fish
+and source ~/.iterm2_shell_integration.fish
