@@ -43,6 +43,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
+Plug 'wincent/terminus'
 
 " Tests from vim
 Plug 'janko-m/vim-test'
@@ -65,6 +66,7 @@ set background=dark
 set breakindent
 set clipboard^=unnamed
 " set cursorline
+" set cursorcolumn
 set hidden
 set ignorecase
 set infercase
@@ -99,7 +101,7 @@ if !has('nvim')
   set viminfo+=n~/.vim/viminfo
 endif
 
-colorscheme OceanicNext
+colorscheme gruvbox
 " }}}
 
 " keymappings {{{
@@ -163,7 +165,7 @@ augroup END
 " custom-commands {{{
 command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
-command! This execute 'Ag ' . expand('%:t')
+command! This execute 'Ag ' . '/' .expand('%:t')
 " }}}
 
 " vim-airline/vim-airline {{{
@@ -212,6 +214,7 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " }}}
 
+" Plug 'w0rp/ale' {{{
 function! Fish_indent(buffers)
   return {
   \    'command': 'fish_indent -w %t',
@@ -219,10 +222,9 @@ function! Fish_indent(buffers)
   \    'suggested_filetypes': ['fish']}
 endfunction
 
-" Plug 'w0rp/ale' {{{
 let g:ale_fixers = {
 \   'fish': ['Fish_indent'],
-\   'javascript': ['eslint'],
+\   'javascript': ['prettier'],
 \   'ruby': ['rubocop'],
 \}
 
