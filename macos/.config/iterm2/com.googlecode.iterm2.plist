@@ -18,6 +18,8 @@
 	<integer>1</integer>
 	<key>AppleWindowTabbingMode</key>
 	<string>manual</string>
+	<key>AutoCommandHistory</key>
+	<false/>
 	<key>AutoHideTmuxClientSession</key>
 	<true/>
 	<key>CheckTestRelease</key>
@@ -384,6 +386,8 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>F6D5CD6D-B6EF-4D07-9BD8-0E5783C723F2</string>
+	<key>Default Toolbelt Width</key>
+	<real>250</real>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
@@ -395,6 +399,8 @@
 	<key>DisableWindowSizeSnap</key>
 	<true/>
 	<key>EnableDivisionView</key>
+	<false/>
+	<key>EnableProxyIcon</key>
 	<false/>
 	<key>EnableRendezvous</key>
 	<false/>
@@ -411,45 +417,31 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x48-0x120000</key>
+		<key>0x68-0x40000</key>
 		<dict>
 			<key>Action</key>
 			<integer>18</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x4a-0x120000</key>
+		<key>0x6a-0x40000</key>
 		<dict>
 			<key>Action</key>
 			<integer>21</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x4b-0x120000</key>
+		<key>0x6b-0x40000</key>
 		<dict>
 			<key>Action</key>
 			<integer>20</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x4c-0x120000</key>
+		<key>0x6c-0x40000</key>
 		<dict>
 			<key>Action</key>
 			<integer>19</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x4e-0x120000</key>
-		<dict>
-			<key>Action</key>
-			<integer>0</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x50-0x120000</key>
-		<dict>
-			<key>Action</key>
-			<integer>2</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -647,15 +639,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>138 114 606 469 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>484 274 796 473 0 0 1280 777 </string>
+	<string>242 309 1018 447 0 0 1280 777 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>630 92 650 685 0 0 1280 777 </string>
+	<string>1 24 570 753 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>640 31 634 746 0 0 1280 777 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 15 634 762 0 0 1280 777 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>564 246 650 426 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>640 24 640 753 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
@@ -666,6 +658,10 @@
 	<integer>0</integer>
 	<key>NeverWarnAboutShortLivedSessions_B7C5325B-8272-4100-8926-003884A12820</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_F6D5CD6D-B6EF-4D07-9BD8-0E5783C723F2</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_F6D5CD6D-B6EF-4D07-9BD8-0E5783C723F2_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -875,13 +871,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.20392157137393951</real>
+				<real>0.2627450980392157</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.28627452254295349</real>
+				<real>0.38039215686274508</real>
 				<key>Red Component</key>
-				<real>0.9843137264251709</real>
+				<real>0.99607843137254903</real>
 			</dict>
 			<key>Automatically Log</key>
 			<false/>
@@ -4196,11 +4192,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=44</string>
+	<string>https://iterm2.com/appcasts/nightly.xml?shard=44</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-12-19T04:37:30Z</date>
+	<date>2018-01-31T01:30:56Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -4208,6 +4204,8 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
+	<true/>
+	<key>ShowMetalFPSmeter</key>
 	<true/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
@@ -4237,7 +4235,7 @@
 	<integer>10</integer>
 	<key>ToolbeltTools</key>
 	<array>
-		<string>Notes</string>
+		<string>Jobs</string>
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
@@ -4251,16 +4249,18 @@
 	<true/>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
+	<key>UseMetal</key>
+	<true/>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
 	<string>.AppleSystemUIFont</string>
 	<key>WindowNumber</key>
-	<true/>
+	<false/>
 	<key>WindowStyle</key>
 	<integer>0</integer>
 	<key>WordCharacters</key>
-	<string></string>
+	<string>/-+\~_.</string>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>
 	<key>findMode_iTerm</key>
@@ -4268,7 +4268,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5.beta.2</string>
+	<string>3.2.20180130-nightly</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
