@@ -26,6 +26,10 @@
 	<true/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<true/>
+	<key>ClosingTmuxTabKillsTmuxWindows</key>
+	<true/>
+	<key>ClosingTmuxTabKillsTmuxWindows_selection</key>
+	<integer>0</integer>
 	<key>CommandSelection</key>
 	<true/>
 	<key>Control</key>
@@ -398,6 +402,8 @@
 	<true/>
 	<key>DisableWindowSizeSnap</key>
 	<true/>
+	<key>DrawOutlineAroundCursor</key>
+	<true/>
 	<key>EnableDivisionView</key>
 	<false/>
 	<key>EnableProxyIcon</key>
@@ -639,15 +645,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>138 114 606 469 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>242 309 1018 447 0 0 1280 777 </string>
+	<string>0 289 796 473 0 0 1280 777 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1 24 570 753 0 0 1280 777 </string>
+	<string>630 0 650 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 15 634 762 0 0 1280 777 </string>
+	<string>742 15 1178 1162 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>564 246 650 426 0 0 1280 777 </string>
+	<string>468 15 1442 1162 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>640 24 640 753 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
@@ -4076,10 +4082,12 @@
 	<key>NoSyncCoprocessCommandsToIgnoreErrorOutput</key>
 	<array/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
-	<true/>
+	<false/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
 	<integer>0</integer>
 	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
+	<true/>
+	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>A5D28CE2-9505-4670-AA5D-0B655A103A9A</string>
@@ -4140,6 +4148,8 @@
 	<integer>4</integer>
 	<key>PerformDNSLookups</key>
 	<false/>
+	<key>PerformDictionaryLookupOnQuickLook</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -4192,11 +4202,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/nightly.xml?shard=44</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=44</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-31T01:30:56Z</date>
+	<date>2018-02-15T03:22:31Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -4206,7 +4216,7 @@
 	<key>ShowFullScreenTabBar</key>
 	<true/>
 	<key>ShowMetalFPSmeter</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -4240,7 +4250,7 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1450045568</real>
+	<real>1518667648</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -4268,7 +4278,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.20180130-nightly</string>
+	<string>3.1.6beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
