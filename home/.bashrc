@@ -6,8 +6,6 @@ alias ls="ls -G"
 
 export PATH=~/.local/bin:/usr/local/bin:$PATH
 
-export IS_MOSH=$(is_mosh --verbose)
-
 [ -f ~/.iterm2_shell_integration.bash ] && source ~/.iterm2_shell_integration.bash
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

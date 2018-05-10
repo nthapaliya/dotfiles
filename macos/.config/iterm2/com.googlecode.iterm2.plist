@@ -388,6 +388,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>DarkThemeHasBlackTitlebar</key>
+	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>F6D5CD6D-B6EF-4D07-9BD8-0E5783C723F2</string>
 	<key>Default Toolbelt Width</key>
@@ -400,6 +402,8 @@
 	<false/>
 	<key>DisableFullscreenTransparency</key>
 	<true/>
+	<key>DisablePotentiallyInsecureEscapeSequences</key>
+	<false/>
 	<key>DisableWindowSizeSnap</key>
 	<true/>
 	<key>DrawOutlineAroundCursor</key>
@@ -635,7 +639,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1468 271 1276 77 1280 0 1920 1177 </string>
+	<string>23 143 1232 77 0 0 1280 800 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>311 316 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
@@ -645,13 +649,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>138 114 606 469 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>0 289 796 473 0 0 1280 777 </string>
+	<string>0 728 928 394 0 0 1920 1177 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
+	<key>NSWindow Frame com.apple.typography_panel_Menlo-Regular</key>
+	<string>346 608 260 68 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>630 0 650 777 0 0 1280 777 </string>
+	<string>324 351 650 426 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>742 15 1178 1162 0 0 1920 1177 </string>
+	<string>0 0 954 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>468 15 1442 1162 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -1325,7 +1331,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 13</string>
+			<string>Menlo-Regular 11</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2625,7 +2631,7 @@
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
-			<real>2</real>
+			<real>18.773270939086295</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -2724,7 +2730,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>0.90408509036144569</real>
+			<real>1</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -3017,7 +3023,9 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 13</string>
+			<string>Menlo-Regular 13</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Place Prompt at First Column</key>
@@ -3216,6 +3224,8 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Use Tab Color</key>
+			<false/>
+			<key>Use Underline Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
@@ -4206,7 +4216,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-15T03:22:31Z</date>
+	<date>2018-05-02T21:02:45Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -4250,7 +4260,7 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1518667648</real>
+	<real>1520299392</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -4278,7 +4288,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.6beta3</string>
+	<string>3.1.6beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

@@ -38,9 +38,6 @@ end
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
 
-# $IS_MOSH
-# set -gx IS_MOSH (is_mosh --verbose)
-
 # Abbreviations
 # work
 abbr --add mqa 'env HOST=qa.ossd.co BRANCH=(gcb) bin/mina full_deploy;'

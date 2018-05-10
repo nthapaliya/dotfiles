@@ -20,6 +20,7 @@
 	showPatch = true
 [diff]
 	indentHeuristic = on
+	renamelimit = 10000
 [commit]
 	verbose = true
 [rebase]
