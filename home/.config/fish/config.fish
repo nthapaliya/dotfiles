@@ -1,8 +1,3 @@
-test -n "$FISH_CONFIG_LOADED"
-and exit
-
-set -gx FISH_CONFIG_LOADED true
-
 function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
     for path in $argv
         if test -d $path
