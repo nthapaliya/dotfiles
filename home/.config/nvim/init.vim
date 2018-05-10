@@ -24,6 +24,7 @@ Plug 'mhartington/oceanic-next'
 " Language enhancements
 Plug 'sheerun/vim-polyglot'
 " Plug 'tpope/vim-rails'
+Plug 'jparise/vim-graphql'
 
 " Vim enhancements
 Plug 'AndrewRadev/splitjoin.vim'
@@ -85,17 +86,14 @@ set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
 set title
 set visualbell
-
-if $IS_MOSH !=? 'mosh'
-  set termguicolors
-endif
+set termguicolors
 
 if has('nvim')
   set inccommand=nosplit
   set incsearch
 endif
 
-set path+=app/assets/javascripts,node_modules
+set path+=app/javascript,node_modules
 
 if !has('nvim')
   set viminfo+=n~/.vim/viminfo
@@ -190,8 +188,6 @@ let g:airline_mode_map = {
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
 " }}}
 
 " junegunn/fzf {{{
@@ -208,10 +204,6 @@ augroup end
 
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" I'm not keeping this to enable true color, thats been deprecated
-" I'm keeping this to 'fix' quick-scope
-" https://github.com/unblevable/quick-scope/issues/32#issuecomment-241159662
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " }}}
 
 " Plug 'w0rp/ale' {{{
