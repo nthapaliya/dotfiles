@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gcb=$( git rev-parse --abbrev-ref HEAD )
+git branch --merged "$gcb" | grep -v "$gcb" | xargs git branch -d

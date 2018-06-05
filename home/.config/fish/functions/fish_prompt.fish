@@ -14,6 +14,10 @@ if not set -q __fish_git_prompt_color_branch
     set -g __fish_git_prompt_color_branch green --bold
 end
 
+if not set -q __fish_git_prompt_shorten_branch_len
+    set -g __fish_git_prompt_shorten_branch_len 15
+end
+
 function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
 

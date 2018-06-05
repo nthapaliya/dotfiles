@@ -5,3 +5,9 @@ brew update
 
 echo "brew upgrade"
 brew upgrade
+
+echo "brew cask outdated"
+brew cask outdated
+
+# echo "brew cask upgrade"
+# brew cask upgrade

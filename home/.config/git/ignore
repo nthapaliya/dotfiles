@@ -45,3 +45,4 @@ tags.temp
 tags.lock
 
 fishd.*
+.vscode/*
