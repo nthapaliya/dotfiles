@@ -1,7 +1,14 @@
 function vcommit
+    set -l filenames
     if count $argv >/dev/null
-        eval $EDITOR (git diff-tree --no-commit-id --name-only -r $argv)
+        set filenames (git diff-tree --no-commit-id --name-only -r $argv)
     else
-        eval $EDITOR (git diff-tree --no-commit-id --name-only -r HEAD)
+        set filenames (git diff-tree --no-commit-id --name-only -r HEAD)
+    end
+
+    if count $filenames >/dev/null
+        eval $EDITOR $filenames
+    else
+        echo 'Nothing to edit!'
     end
 end

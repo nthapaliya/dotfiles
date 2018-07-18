@@ -1,12 +1,13 @@
 function notes
+    set -l DAILY_DIR "$HOME/OSS/notes/daily2"
     if not count $argv >/dev/null
-        eval $EDITOR $HOME/OSS/notes/daily/( gdate +%F ).md
+        eval $EDITOR $DAILY_DIR/( gdate +%F ).md
     else
         if test $argv[1] = '-m'
-            echo - ( gdate +%H:%M ) - $argv[2..-1] >>$HOME/OSS/notes/daily/( gdate +%F ).md
+            echo - ( gdate +%H:%M ) - $argv[2..-1] >>$DAILY_DIR/( gdate +%F ).md
             return
         end
 
-        eval $EDITOR $HOME/OSS/notes/daily/( gdate +%F -d "$argv" ).md
+        eval $EDITOR $DAILY_DIR/( gdate +%F -d "$argv" ).md
     end
 end
