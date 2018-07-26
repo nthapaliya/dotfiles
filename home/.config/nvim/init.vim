@@ -65,7 +65,10 @@ call plug#end()
 set autoread
 set background=dark
 set breakindent
-set clipboard^=unnamed
+" Mac specific: clipboard.vim was adding 500-800ms to startup time. This fixes
+" that (for now)
+let g:clipboard = {'copy': {'+': 'pbcopy', '*': 'pbcopy'}, 'paste': {'+': 'pbpaste', '*': 'pbpaste'}, 'name': 'pbcopy', 'cache_enabled': 0}
+set clipboard^=unnamed,unnamedplus
 " set cursorline
 " set cursorcolumn
 set hidden
