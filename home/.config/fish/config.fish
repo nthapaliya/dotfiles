@@ -27,8 +27,8 @@ if type -q rbenv
 end
 
 # nvm setup
-# set -gx NVM_DIR ~/.local/lang/nvm
-# nvm use 9.3.0
+set -gx NVM_DIR ~/.local/opt/nvm
+nvm use 8.11.3
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
