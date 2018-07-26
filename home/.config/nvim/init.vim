@@ -167,7 +167,9 @@ augroup END
 " custom-commands {{{
 command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
-command! This execute 'Ag ' . '/' .expand('%:t')
+" Work specific - Use :This to find which files import the current javascript
+" file
+command! This call fzf#run(fzf#wrap({ 'sink': 'e', 'source': "jq -r '.[\"" . @% . "\"][]' .git/deps.json" }))
 " }}}
 
 " vim-airline/vim-airline {{{
