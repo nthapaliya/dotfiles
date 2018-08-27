@@ -639,7 +639,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>23 33 1232 77 0 0 1280 777 </string>
+	<string>1446 -21 1232 77 1280 -182 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>311 316 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
@@ -649,15 +649,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>138 114 606 469 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1281 412 796 486 1280 -182 1920 1080 </string>
+	<string>2042 275 1018 447 1280 -182 1920 1080 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>80 193 592 584 0 0 1280 777 </string>
+	<string>1532 173 592 584 1280 -182 1920 1080 </string>
 	<key>NSWindow Frame com.apple.typography_panel_Menlo-Regular</key>
 	<string>346 608 260 68 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 24 1280 753 0 0 1280 777 </string>
+	<string>1825 -158 1375 1056 1280 -182 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>630 351 650 426 0 0 1280 777 </string>
+	<string>2075 343 650 426 1280 -182 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>468 15 1442 1162 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -2375,6 +2375,8 @@
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
+			<true/>
+			<key>ASCII Ligatures</key>
 			<true/>
 			<key>Allow Title Reporting</key>
 			<false/>
@@ -4225,7 +4227,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-07-26T14:40:46Z</date>
+	<date>2018-08-02T18:04:24Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -4233,7 +4235,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowMetalFPSmeter</key>
 	<false/>
 	<key>ShowNewOutputIndicator</key>
@@ -4246,6 +4248,8 @@
 	<real>0.59999999999999998</real>
 	<key>StretchTabsToFillBar</key>
 	<false/>
+	<key>SuppressRestartAnnouncement</key>
+	<true/>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -4269,7 +4273,7 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1520299392</real>
+	<real>1533147136</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -4297,7 +4301,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.0beta8</string>
+	<string>3.2.0beta9</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
