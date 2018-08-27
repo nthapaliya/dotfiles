@@ -14,6 +14,7 @@
 	unique = log HEAD --not master
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	patch = !git --no-pager diff --no-color
+	preview = "!f() { git log --color --pretty=format:'%Cred%h %C(yellow)%an%Creset %s %Cgreen(%cr)' \"$@\" | fzf --nth 2.. --no-sort --ansi --reverse --preview 'git show --color {1} | diff-so-fancy' | awk '{ print $1 }' ; } ; f"
 [init]
 	templatedir = ~/.config/git/template
 [status]
