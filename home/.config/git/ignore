@@ -46,3 +46,5 @@ tags.lock
 
 fishd.*
 .vscode/*
+
+.nvmrc
