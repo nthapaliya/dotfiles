@@ -41,17 +41,19 @@ set -gx MANPAGER "nvim -c 'set ft=man' - "
 # Abbreviations
 # work
 abbr --add mqa 'env HOST=qa.ossd.co BRANCH=(gcb) bin/mina full_deploy;'
+abbr --add rsqa 'rsync -azvh osadmin@qa.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors'
 abbr --add h 'cd ~/OSS/huddle'
 abbr --add p 'cd ~/Projects'
 abbr --add d 'cd ~/Projects/dotfiles'
-abbr --add vd 'cd ~/OSS/huddle/app/assets/javascripts/visual_directory'
-abbr --add vdc 'cd ~/OSS/huddle/app/assets/javascripts/visual_directory/components'
+abbr --add vd 'cd ~/OSS/huddle/app/javascript/visual_directory'
+abbr --add vdc 'cd ~/OSS/huddle/app/javascript/visual_directory/components'
 
 # git
 abbr --add g 'git'
 abbr --add gb 'git branch'
 abbr --add gcm 'git checkout master'
 abbr --add gcmt 'git commit'
+abbr --add gcmta 'git commit --amend --no-edit'
 abbr --add gco 'git checkout'
 abbr --add gd 'git diff'
 abbr --add gdca 'git diff --cached'
