@@ -1,6 +1,6 @@
 function vcommit
     set -l filenames
-    set -l git_args
+    set -l git_rev
     set -l interactive
 
     for option in $argv
@@ -8,20 +8,21 @@ function vcommit
             case -i --interactive
                 set interactive true
             case \*
-                set git_args $git_args $option
+                set git_rev ( git rev-parse "$option" )
         end
 
     end
 
-    # if empty, set git_args to HEAD
-    if test -z "$git_args"
-        set git_args HEAD
+    # if empty, set git_rev to HEAD
+    if test -z "$git_rev"
+        set git_rev ( git rev-parse HEAD )
     end
 
     if test -n "$interactive"
-        set filenames ( git diff-tree --no-commit-id --name-only -r $git_args | fzf -m --height=40% --reverse)
+        set -l diff_cmd "git show --color $git_rev -- {} | diff-so-fancy"
+        set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev | fzf -m --reverse --preview "$diff_cmd")
     else
-        set filenames ( git diff-tree --no-commit-id --name-only -r $git_args )
+        set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
     end
 
 
