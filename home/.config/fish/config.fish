@@ -1,3 +1,8 @@
+test -n "$FISH_CONFIG_LOADED"
+and exit
+
+set -gx FISH_CONFIG_LOADED true
+
 function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
     for path in $argv
         if test -d $path
@@ -8,7 +13,7 @@ function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
 end
 
 # $fish_user_paths
-__set_fish_user_paths ~/.local/bin ~/.local/opt/*/bin
+__set_fish_user_paths ~/.local/opt/rbenv/shims ~/.local/bin ~/.local/opt/*/bin ~/.cargo/bin
 
 # Clear fish_greeting
 set fish_greeting
@@ -28,7 +33,7 @@ end
 
 # nvm setup
 set -gx NVM_DIR ~/.local/opt/nvm
-nvm use 8.11.3
+# nvm use 8.11.3
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
@@ -62,5 +67,10 @@ if type -q rg
     set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 end
 
-test -e ~/.iterm2_shell_integration.fish
+test "$TERM_PROGRAM" = 'iTerm.app'
+and test -e ~/.iterm2_shell_integration.fish
 and source ~/.iterm2_shell_integration.fish
+and exit
+
+test -z "$TMUX"
+and tm
