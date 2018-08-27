@@ -14,7 +14,7 @@ function vdirty
     end
 
     if test -n "$interactive"
-        set dirty_files ( git status -s $git_args | awk '{ print $NF }' | fzf -m --height=40% --reverse)
+        set dirty_files ( git status -s $git_args | awk '{ print $NF }' | fzf -m --reverse --preview="git diff --color {} | diff-so-fancy ")
     else
         set dirty_files ( git status -s $git_args | awk '{ print $NF }' )
     end
