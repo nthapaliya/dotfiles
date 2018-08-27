@@ -67,7 +67,18 @@ set background=dark
 set breakindent
 " Mac specific: clipboard.vim was adding 500-800ms to startup time. This fixes
 " that (for now)
-let g:clipboard = {'copy': {'+': 'pbcopy', '*': 'pbcopy'}, 'paste': {'+': 'pbpaste', '*': 'pbpaste'}, 'name': 'pbcopy', 'cache_enabled': 0}
+let g:clipboard = {
+\ 'copy': {
+\   '+': 'pbcopy',
+\   '*': 'pbcopy'
+\ },
+\ 'paste': {
+\   '+': 'pbpaste',
+\   '*': 'pbpaste'
+\ },
+\ 'name': 'pbcopy',
+\ 'cache_enabled': 0
+\ }
 set clipboard^=unnamed,unnamedplus
 " set cursorline
 " set cursorcolumn
@@ -169,7 +180,17 @@ command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
 " Work specific - Use :This to find which files import the current javascript
 " file
-command! This call fzf#run(fzf#wrap({ 'sink': 'e', 'source': "jq -r '.[\"" . @% . "\"][]' .git/deps.json" }))
+command! This call fzf#run(fzf#wrap({
+\ 'options': '-m',
+\ 'sink': 'e',
+\ 'source': "jq -r '.[\"" . @% . "\"][]' .git/deps.json"
+\ }))
+
+command! Vdirty call fzf#run(fzf#wrap({
+\ 'options': "-m",
+\ 'sink': 'e',
+\ 'source': "git status -s | awk '{ print $NF }' "
+\ }))
 " }}}
 
 " vim-airline/vim-airline {{{
@@ -177,18 +198,18 @@ let g:airline#extensions#branch#displayed_head_limit = 8
 
 " Short forms, lets see if worth it
 let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
+\ '__' : '-',
+\ 'n'  : 'N',
+\ 'i'  : 'I',
+\ 'R'  : 'R',
+\ 'c'  : 'C',
+\ 'v'  : 'V',
+\ 'V'  : 'V',
+\ '' : 'V',
+\ 's'  : 'S',
+\ 'S'  : 'S',
+\ '' : 'S',
+\ }
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -215,16 +236,17 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Plug 'w0rp/ale' {{{
 function! Fish_indent(buffers)
   return {
-  \    'command': 'fish_indent -w %t',
-  \    'read_temporary_file': 1,
-  \    'suggested_filetypes': ['fish']}
+  \ 'command': 'fish_indent -w %t',
+  \ 'read_temporary_file': 1,
+  \ 'suggested_filetypes': ['fish']
+  \ }
 endfunction
 
 let g:ale_fixers = {
-\   'fish': ['Fish_indent'],
-\   'javascript': ['prettier'],
-\   'ruby': ['rubocop'],
-\}
+\ 'fish': ['Fish_indent'],
+\ 'javascript': ['prettier'],
+\ 'ruby': ['rubocop'],
+\ }
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_javascript_eslint_executable = 'eslintme'
