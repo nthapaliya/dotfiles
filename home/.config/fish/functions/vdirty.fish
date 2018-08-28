@@ -17,7 +17,7 @@ function vdirty
         set -l preview_command '
         function __diff_or_cat
           if git ls-files --error-unmatch $argv >/dev/null 2>/dev/null
-            git diff --color | diff-so-fancy
+            git diff --color $argv | diff-so-fancy
           else
             set_color green; echo +++ NEW FILE +++ ; set_color normal; echo;
             bat --color always --paging never $argv
