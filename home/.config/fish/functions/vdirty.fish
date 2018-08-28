@@ -24,7 +24,7 @@ function vdirty
           end
         end
         __diff_or_cat {}'
-        set dirty_files ( git status -s $git_args | awk '{ print $NF }' | fzf -m --reverse --preview="$preview_command")
+        set dirty_files ( git status -s $git_args | awk '{ print $NF }' | fzf -m --reverse --preview="$preview_command" --preview-window=down:80% )
     else
         set dirty_files ( git status -s $git_args | awk '{ print $NF }' )
     end

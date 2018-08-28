@@ -20,7 +20,7 @@ function vcommit
 
     if test -n "$interactive"
         set -l diff_cmd "git show --color $git_rev -- {} | diff-so-fancy"
-        set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev | fzf -m --reverse --preview "$diff_cmd")
+        set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev | fzf -m --reverse --preview "$diff_cmd" --preview-window=down:80% )
     else
         set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
     end
