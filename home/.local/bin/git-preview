@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+git log \
+  --color \
+  --pretty=format:'%Cred%h %C(yellow)%an%Creset %s %Cgreen(%cr)' \
+  "$@" |\
+fzf \
+  --ansi \
+  --no-sort \
+  --nth 2.. \
+  --preview 'git show --color {1} | head -80 | diff-so-fancy' \
+  --preview-window=down:80% \
+  --reverse |\
+awk '{ print $1 }'
