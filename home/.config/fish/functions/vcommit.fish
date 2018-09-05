@@ -1,3 +1,16 @@
+function __gcc
+    set -q argv[1]
+    and set -l git_rev $argv[1]
+    or set -l git_rev HEAD
+
+    git diff-tree --no-commit-id -r --name-only $git_rev |
+    fzf \
+        -m \
+        --reverse \
+        --preview "git show --color $git_rev -- {-1} | diff-so-fancy | tail -n +7" \
+        --preview-window=down:80%
+end
+
 function vcommit
     set -l filenames
     set -l git_rev
@@ -19,8 +32,7 @@ function vcommit
     end
 
     if test -n "$interactive"
-        set -l diff_cmd "git show --color $git_rev -- {} | diff-so-fancy"
-        set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev | fzf -m --reverse --preview "$diff_cmd" --preview-window=down:80% )
+        set filenames ( __gcc $git_rev )
     else
         set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
     end

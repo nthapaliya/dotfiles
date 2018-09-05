@@ -14,19 +14,9 @@ function vdirty
     end
 
     if test -n "$interactive"
-        set -l preview_command '
-        function __diff_or_cat
-          if git ls-files --error-unmatch $argv >/dev/null 2>/dev/null
-            git diff --color $argv | diff-so-fancy
-          else
-            set_color green; echo +++ NEW FILE +++ ; set_color normal; echo;
-            bat --color always --paging never $argv
-          end
-        end
-        __diff_or_cat {}'
-        set dirty_files ( git status -s $git_args | awk '{ print $NF }' | fzf -m --reverse --preview="$preview_command" --preview-window=down:80% )
+        set dirty_files ( gf $git_args )
     else
-        set dirty_files ( git status -s $git_args | awk '{ print $NF }' )
+        set dirty_files ( git status -s -- $git_args | cut -c4- )
     end
 
     if test -n "$dirty_files"
