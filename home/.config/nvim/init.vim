@@ -178,17 +178,27 @@ augroup END
 " custom-commands {{{
 command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
+
+function! HandleInputs_(items)
+  execute 'edit' a:items[0]
+  for  filename in a:items[1:]
+    execute 'badd' filename
+  endfor
+endfunction
+
+let HandleInputs = function('HandleInputs_')
+
 " Work specific - Use :This to find which files import the current javascript
 " file
 command! This call fzf#run(fzf#wrap({
 \ 'options': '-m',
-\ 'sink': 'e',
+\ 'sink*': HandleInputs,
 \ 'source': "jq -r '.[\"" . @% . "\"][]' .git/deps.json"
 \ }))
 
 command! Vdirty call fzf#run(fzf#wrap({
-\ 'options': "-m",
-\ 'sink': 'e',
+\ 'options': '-m',
+\ 'sink*': HandleInputs,
 \ 'source': "git status -s | awk '{ print $NF }' "
 \ }))
 " }}}
