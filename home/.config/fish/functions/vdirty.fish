@@ -1,5 +1,4 @@
 function vdirty
-    set -l dirty_files
     set -l git_args
     set -l interactive
 
@@ -13,15 +12,9 @@ function vdirty
 
     end
 
-    if test -n "$interactive"
-        set dirty_files ( gf $git_args )
-    else
-        set dirty_files ( git status -s -- $git_args | cut -c4- )
-    end
+    test -n "$interactive"
+    and set -l dirty_files ( gf $git_args )
+    or set -l dirty_files ( git status -s -- $git_args | cut -c4- )
 
-    if test -n "$dirty_files"
-        eval $EDITOR $dirty_files
-    else
-        echo 'Nothing to edit!'
-    end
+    e $dirty_files
 end

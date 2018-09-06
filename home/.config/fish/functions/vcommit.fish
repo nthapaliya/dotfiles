@@ -12,7 +12,6 @@ function __gcc
 end
 
 function vcommit
-    set -l filenames
     set -l git_rev
     set -l interactive
 
@@ -31,16 +30,9 @@ function vcommit
         set git_rev ( git rev-parse HEAD )
     end
 
-    if test -n "$interactive"
-        set filenames ( __gcc $git_rev )
-    else
-        set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
-    end
+    test -n "$interactive"
+    and set -l filenames ( __gcc $git_rev )
+    or set -l filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
 
-
-    if count $filenames >/dev/null
-        eval $EDITOR $filenames
-    else
-        echo 'Nothing to edit!'
-    end
+    e $filenames
 end

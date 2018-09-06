@@ -18,7 +18,7 @@ function peek
 
     if test "$TYPE" = "file"
         if test -n "$edit"
-            eval $EDITOR ( type --force-path $name )
+            e ( type --force-path $name )
             return
         end
 
@@ -30,7 +30,7 @@ function peek
     end
 
     if test -n "$edit"
-        # eval $EDITOR ( functions $name | head -1 | cut -c14- | cut -d ' ' -f1 )
+        # e ( functions $name | head -1 | cut -c14- | cut -d ' ' -f1 )
         eval ( functions $name | head -1 | cut -c14- | awk '{ print "nvim", $1, "+" $NF }' )
 
         return
