@@ -1,3 +1,6 @@
 function rubo
-    git diff --name-only -z -- \*.{rb,rake} | xargs -0 bundle exec rubocop -a -R -D
+    set -l command 'git status -s -- \*.{rb,rake} | cut -c4- | xargs bundle exec rubocop -a -R -D'
+
+    echo $command
+    eval $command
 end
