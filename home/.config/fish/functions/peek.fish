@@ -1,15 +1,8 @@
 function peek
-    set -l name
-    set -l edit
+    argparse 'e/edit' -- $argv
+    or return
 
-    for option in $argv
-        switch $option
-            case -e --edit
-                set edit true
-            case \*
-                set name $option
-        end
-    end
+    set -l name $argv[1]
 
     set -l TYPE ( type -t $name )
 
@@ -17,7 +10,7 @@ function peek
     and return
 
     if test "$TYPE" = "file"
-        if test -n "$edit"
+        if test -n "$_flag_e"
             e ( type --force-path $name )
             return
         end
@@ -29,7 +22,7 @@ function peek
         return
     end
 
-    if test -n "$edit"
+    if test -n "$_flag_edit"
         # e ( functions $name | head -1 | cut -c14- | cut -d ' ' -f1 )
         eval ( functions $name | head -1 | cut -c14- | awk '{ print "nvim", $1, "+" $NF }' )
 

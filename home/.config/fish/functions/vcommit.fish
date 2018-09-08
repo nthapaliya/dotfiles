@@ -12,25 +12,13 @@ function __gcc
 end
 
 function vcommit
-    set -l git_rev
-    set -l interactive
+    argparse 'i/interactive' -- $argv
 
-    for option in $argv
-        switch "$option"
-            case -i --interactive
-                set interactive true
-            case \*
-                set git_rev ( git rev-parse "$option" )
-        end
+    test -n "$argv"
+    and set -l git_rev ( git rev-parse $argv[1] )
+    or set -l git_rev ( git rev-parse HEAD )
 
-    end
-
-    # if empty, set git_rev to HEAD
-    if test -z "$git_rev"
-        set git_rev ( git rev-parse HEAD )
-    end
-
-    test -n "$interactive"
+    test -n "$_flag_interactive"
     and set -l filenames ( __gcc $git_rev )
     or set -l filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
 
