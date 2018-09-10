@@ -1,3 +1,5 @@
+__shell_init
+
 test -n "$FISH_CONFIG_LOADED"
 and exit
 
