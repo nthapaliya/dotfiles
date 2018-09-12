@@ -93,7 +93,7 @@ set noerrorbells
 set noshowmode
 set number
 set scrolloff=8
-set shell=fish
+set shell=bash
 set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
