@@ -65,8 +65,7 @@ abbr --add htree 'tree -a -I plugged\|\.git'
 
 if type -q rg
     # fzf + rg
-    set -gx FZF_DEFAULT_COMMAND 'rg --files .'
-    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+    set -gx FZF_CTRL_T_COMMAND 'sort -u ( rg --files | psub ) ( git ls-files | psub ) ( git status --porcelain=v2 | awk \'{print $NF}\' | psub)'
 end
 
 test "$TERM_PROGRAM" = 'iTerm.app'
