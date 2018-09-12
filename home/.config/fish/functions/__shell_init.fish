@@ -4,7 +4,8 @@ set __preexec_query_template ( string replace -a -r '\s+' ' ' "\
 INSERT INTO history
     (shell_id, pwd, start_date, command)
 VALUES
-    (%s, '%s', strftime('%%s', 'now'), '%s') ; " )
+    (%s, '%s', strftime('%%s', 'now'), '%s') ;
+SELECT last_insert_rowid() ; " )
 
 set __posthist_query_template ( string replace -a -r '\s+' ' ' "\
 UPDATE history
@@ -13,12 +14,7 @@ SET
     status = %s,
     duration = %s
 WHERE
-    rowid = ( SELECT rowid from history
-      WHERE
-        shell_id = %s
-        AND command= '%s'
-        AND end_date IS NULL
-        ORDER BY rowid DESC LIMIT 1 ) ; " )
+    id = %s ; " )
 
 set __exit_query_template ( string replace -a -r '\s+' ' ' "\
 UPDATE shell
@@ -53,7 +49,7 @@ function __prehist --on-event fish_preexec
 
     set -l prehist_query ( printf "$__preexec_query_template" "$__shell_id" "$PWD" "$cmdline" )
 
-    command sqlite3 $__histfile "$prehist_query"
+    set -g __last_command_id ( command sqlite3 $__histfile "$prehist_query" )
 end
 
 function __posthist --on-event fish_postexec
@@ -64,7 +60,7 @@ function __posthist --on-event fish_postexec
     test (id -u) -eq 0
     and return
 
-    set -l posthist_query ( printf "$__posthist_query_template" "$prev_status" "$prev_duration" "$__shell_id" "$prev_cmdline" )
+    set -l posthist_query ( printf "$__posthist_query_template" "$prev_status" "$prev_duration" "$__last_command_id" )
 
     command sqlite3 $__histfile "$posthist_query"
 end
