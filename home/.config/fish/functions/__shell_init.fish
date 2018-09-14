@@ -14,7 +14,7 @@ SET
     status = %s,
     duration = %s
 WHERE
-    id = %s ; " )
+    id = %s AND end_date IS NULL ; " )
 
 set __exit_query_template ( string replace -a -r '\s+' ' ' "\
 UPDATE shell
@@ -42,6 +42,9 @@ VALUES
 SELECT last_insert_rowid() ; " )
 
 function __prehist --on-event fish_preexec
+    test -z "$argv"
+    and return
+
     test (id -u) -eq 0
     and return
 
@@ -52,10 +55,12 @@ function __prehist --on-event fish_preexec
     set -g __last_command_id ( command sqlite3 $__histfile "$prehist_query" )
 end
 
-function __posthist --on-event fish_postexec
-    set -l prev_status $status
-    set -l prev_duration $cmd_duration
-    set -l prev_cmdline (string replace -a \' \'\' $argv)
+function __posthist --on-event custom_postexec
+    set -l prev_status $argv[1]
+    set -l prev_duration $argv[2]
+
+    test -z "$__last_command_id"
+    and return
 
     test (id -u) -eq 0
     and return
@@ -63,9 +68,11 @@ function __posthist --on-event fish_postexec
     set -l posthist_query ( printf "$__posthist_query_template" "$prev_status" "$prev_duration" "$__last_command_id" )
 
     command sqlite3 $__histfile "$posthist_query"
+
+    set -g __last_command_id
 end
 
-function __on_exit --on-process-exit %self
+function __on_exit --on-event fish_exit
     set -l exit_query ( printf "$__exit_query_template" "$__shell_id" )
 
     command sqlite3 $__histfile "$exit_query"
