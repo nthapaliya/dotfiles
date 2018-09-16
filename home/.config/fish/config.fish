@@ -7,20 +7,17 @@ and exit
 
 set -gx FISH_CONFIG_LOADED true
 
-function __set_fish_user_paths -d 'Helper function to set up fish_user_paths'
-    for path in $argv
-        if test -d $path
-            and not contains $path $fish_user_paths
-            set -U fish_user_paths $fish_user_paths $path
-        end
-    end
-end
-
 # $fish_user_paths
-__set_fish_user_paths ~/.local/opt/rbenv/shims ~/.local/bin ~/.local/opt/*/bin ~/.cargo/bin
 
-# Clear fish_greeting
-set fish_greeting
+# to clear:
+# set -U fish_user_paths
+
+# to set:
+# set -U fish_user_paths \
+#     ~/.local/opt/rbenv/shims \
+#     ~/.local/bin \
+#     ~/.local/opt/{fzf,nvm,rbenv}/bin \
+#     ~/.cargo/bin
 
 # $EDITOR
 set -gx EDITOR ( which nvim )
