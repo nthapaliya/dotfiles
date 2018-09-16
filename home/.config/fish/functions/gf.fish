@@ -1,5 +1,5 @@
 function gf
-    set -l preview_command '
+    set preview_command '
       if git ls-files --error-unmatch {-1} >/dev/null 2>/dev/null
         git diff --color {-1} | diff-so-fancy | head -$LINES
       else
@@ -7,7 +7,7 @@ function gf
         bat --color always --paging never {-1} | head -$LINES
       end;'
 
-    set -l output
+    set output
     git -c color.status=always status --short -- $argv |
     __fzf_down \
         --bind='ctrl-e:execute( nvim {+-1} > /dev/tty )' \
@@ -18,7 +18,7 @@ function gf
         set -a output $outputline
     end
 
-    set -l selected_files ( string join \n $output[2..-1] | cut -c4- )
+    set selected_files ( string join \n $output[2..-1] | cut -c4- )
 
     test -z "$selected_files"
     and return

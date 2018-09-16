@@ -2,7 +2,7 @@ function gbb
     __fish_is_git_repository
     or return
 
-    set -l preview_command '
+    set preview_command '
     git log \
       --oneline \
       --graph \
@@ -17,7 +17,7 @@ function gbb
         --nth -1 \
         --preview "$preview_command" |
     read -l --all-lines --array output
-    set -l selected_branch ( echo $output[2] | cut -c3- )
+    set selected_branch ( echo $output[2] | cut -c3- )
 
     if test "$output[1]" = 'ctrl-v'
         echo $selected_branch

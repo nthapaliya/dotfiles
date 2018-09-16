@@ -1,7 +1,7 @@
 function __gcc
     set -q argv[1]
-    and set -l git_rev $argv[1]
-    or set -l git_rev HEAD
+    and set git_rev $argv[1]
+    or set git_rev HEAD
 
     git diff-tree --no-commit-id -r --name-only $git_rev |
     fzf \
@@ -15,12 +15,12 @@ function vcommit
     argparse 'i/interactive' -- $argv
 
     test -n "$argv"
-    and set -l git_rev ( git rev-parse $argv[1] )
-    or set -l git_rev ( git rev-parse HEAD )
+    and set git_rev ( git rev-parse $argv[1] )
+    or set git_rev ( git rev-parse HEAD )
 
     test -n "$_flag_interactive"
-    and set -l filenames ( __gcc $git_rev )
-    or set -l filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
+    and set filenames ( __gcc $git_rev )
+    or set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
 
     e $filenames
 end

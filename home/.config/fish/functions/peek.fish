@@ -2,9 +2,9 @@ function peek
     argparse 'e/edit' -- $argv
     or return
 
-    set -l name $argv[1]
+    set name $argv[1]
 
-    set -l TYPE ( type -t $name )
+    set TYPE ( type -t $name )
 
     test -z "$TYPE"
     and return

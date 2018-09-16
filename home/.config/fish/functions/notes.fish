@@ -1,5 +1,5 @@
 function notes
-    set -l DAILY_DIR "$HOME/OSS/notes/daily2"
+    set DAILY_DIR "$HOME/OSS/notes/daily2"
     if not count $argv >/dev/null
         nvim -c 'set tw=72' $DAILY_DIR/( gdate +%F ).md
     else

@@ -19,7 +19,7 @@ if not set -q __fish_git_prompt_shorten_branch_len
 end
 
 function fish_prompt --description 'Write out the prompt'
-    set -l last_status $status
+    set last_status $status
     emit custom_postexec $status $cmd_duration
 
     if set -q SSH_CLIENT

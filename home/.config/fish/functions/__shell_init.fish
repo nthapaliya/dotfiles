@@ -41,23 +41,23 @@ VALUES
     (strftime('%s', 'now'), (strftime('%s', 'now', 'localtime') - strftime('%s', 'now'))) ;
 SELECT last_insert_rowid() ; " )
 
-function __prehist --on-event fish_preexec
+function __handle_preexec --on-event fish_preexec
     test -z "$argv"
     and return
 
     test (id -u) -eq 0
     and return
 
-    set -l cmdline (string replace -a \' \'\' $argv)
+    set cmdline (string replace -a \' \'\' $argv)
 
-    set -l prehist_query ( printf "$__preexec_query_template" "$__shell_id" "$PWD" "$cmdline" )
+    set prehist_query ( printf "$__preexec_query_template" "$__shell_id" "$PWD" "$cmdline" )
 
     set -g __last_command_id ( command sqlite3 $__histfile "$prehist_query" )
 end
 
-function __posthist --on-event custom_postexec
-    set -l prev_status $argv[1]
-    set -l prev_duration $argv[2]
+function __handle_postexec --on-event custom_postexec
+    set prev_status $argv[1]
+    set prev_duration $argv[2]
 
     test -z "$__last_command_id"
     and return
@@ -65,21 +65,21 @@ function __posthist --on-event custom_postexec
     test (id -u) -eq 0
     and return
 
-    set -l posthist_query ( printf "$__posthist_query_template" "$prev_status" "$prev_duration" "$__last_command_id" )
+    set posthist_query ( printf "$__posthist_query_template" "$prev_status" "$prev_duration" "$__last_command_id" )
 
     command sqlite3 $__histfile "$posthist_query"
 
     set -g __last_command_id
 end
 
-function __on_exit --on-event fish_exit
-    set -l exit_query ( printf "$__exit_query_template" "$__shell_id" )
+function __handle_exit --on-event fish_exit
+    set exit_query ( printf "$__exit_query_template" "$__shell_id" )
 
     command sqlite3 $__histfile "$exit_query"
 end
 
 function __save_env
-    set -l save_env_query
+    set save_env_query
     begin
         set -l pairs
         env | while read line
@@ -98,7 +98,7 @@ function __save_env
 end
 
 function __set_shell_id
-    set -l shell_start_query "$__shell_start_query_template"
+    set shell_start_query "$__shell_start_query_template"
 
     set -g __shell_id ( command sqlite3 $__histfile "$shell_start_query" )
 end

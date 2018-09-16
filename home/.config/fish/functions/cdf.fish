@@ -1,13 +1,13 @@
 # TODO: tweak fzf params so its not so juddery
 function cdf
     test -f "$argv"
-    and set -l dir ( dirname "$argv" )
+    and set dir ( dirname "$argv" )
     and cd "$dir"
     and echo "$dir"
     and return
 
     test -d "$argv"
-    and set -l dir "$argv"
+    and set dir "$argv"
     and cd "$dir"
     and return
 
@@ -19,8 +19,8 @@ function cdf
     or return
 
     test -d "$result"
-    and set -l dir "$result"
-    or set -l dir ( dirname "$result" )
+    and set dir "$result"
+    or set dir ( dirname "$result" )
 
     test -n "$dir"
     and cd "$dir"

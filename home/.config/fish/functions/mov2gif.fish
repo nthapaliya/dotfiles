@@ -6,10 +6,10 @@ function mov2gif
             return 1
         end
 
-        set -lx palette "/tmp/palette.png"
-        set -lx filters "fps=15,scale=iw*.5:-2:flags=lanczos"
-        set -lx palettefilters "diff_mode=rectangle:dither=sierra2"
-        set -lx base (string replace -r .mov\$ '' $filename)
+        set palette "/tmp/palette.png"
+        set filters "fps=15,scale=iw*.5:-2:flags=lanczos"
+        set palettefilters "diff_mode=rectangle:dither=sierra2"
+        set base (string replace -r .mov\$ '' $filename)
 
         ffmpeg -v warning -i "$filename" -vf "$filters,palettegen" -y $palette
         ffmpeg -v warning -i "$filename" -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse=$palettefilters" -y "$base.gif"
