@@ -30,9 +30,10 @@ set -gx VISUAL $EDITOR
 # set -gx SHELL /usr/local/bin/fish
 
 # rbenv setup
-if type -q rbenv
+if command -sq rbenv && status --is-interactive
     set -gx RBENV_ROOT ~/.local/opt/rbenv
-    source (rbenv init -|psub)
+    set -gx RBENV_SHELL fish
+    # source (rbenv init -|psub)
 end
 
 # nvm setup
