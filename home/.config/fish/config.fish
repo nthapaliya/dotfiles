@@ -20,7 +20,7 @@ set -gx FISH_CONFIG_LOADED true
 #     ~/.cargo/bin
 
 # $EDITOR
-set -gx EDITOR ( which nvim )
+set -gx EDITOR /usr/local/bin/nvim
 set -gx VISUAL $EDITOR
 
 # $SHELL
@@ -40,40 +40,27 @@ set -gx NVM_DIR ~/.local/opt/nvm
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
 
-# Abbreviations
-# work
-abbr --add mqa 'env HOST=qa.ossd.co BRANCH=(gcb) bin/mina full_deploy;'
-abbr --add rsqa 'rsync -azvh osadmin@qa.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors'
-abbr --add h 'cd ~/OSS/huddle'
-abbr --add p 'cd ~/Projects'
-abbr --add d 'cd ~/Projects/dotfiles'
-abbr --add vd 'cd ~/OSS/huddle/app/javascript/visual_directory'
-abbr --add vdc 'cd ~/OSS/huddle/app/javascript/visual_directory/components'
-
-# git
-abbr --add g 'git'
-abbr --add gb 'git branch'
-abbr --add gcm 'git checkout master'
-abbr --add gcmt 'git commit'
-abbr --add gcmta 'git commit --amend --no-edit'
-abbr --add gco 'git checkout'
-abbr --add gd 'git diff'
-abbr --add gdca 'git diff --cached'
-abbr --add gss 'git status -s'
-
-# dotfiles
-abbr --add lsd 'ls -d .*'
-abbr --add htree 'tree -a -I plugged\|\.git'
-
-if type -q rg
+if command -sq rg
     # fzf + rg
     set -gx FZF_CTRL_T_COMMAND 'sort -u ( rg --files | psub ) ( git ls-files | psub ) ( git status --porcelain=v2 | awk \'{print $NF}\' | psub)'
 end
 
-test "$TERM_PROGRAM" = 'iTerm.app'
-and test -e ~/.iterm2_shell_integration.fish
-and source ~/.iterm2_shell_integration.fish
-and exit
+if test "$TERM_PROGRAM" = 'iTerm.app'
+    test -e ~/.iterm2_shell_integration.fish
+    and source ~/.iterm2_shell_integration.fish
+    exit
+end
 
-test -z "$TMUX"
-and tm
+if test -z "$KITTY_WINDOW_ID"
+    exit
+end
+
+if test -n "$TMUX"
+    exit
+end
+
+if tmux ls >/dev/null 2>/dev/null
+    exec tmux attach
+else
+    exec tmux new
+end
