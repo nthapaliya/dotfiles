@@ -13,6 +13,7 @@ function set_abbrs
     abbr -a -- gb 'git branch'
     abbr -a -- gcm 'git checkout master'
     abbr -a -- gco 'git checkout'
+    abbr -a -- gdca 'git diff --cached'
     abbr -a -- gss 'git status -s'
 
     # dotfiles
