@@ -1,4 +1,7 @@
-set __histfile ~/history.sql
+function __exec_sql
+    set __histfile ~/history2.sql
+    command sqlite3 -cmd 'PRAGMA foreign_keys = ON;' $__histfile "$argv"
+end
 
 set __preexec_query_template ( string replace -a -r '\s+' ' ' "\
 INSERT INTO history
@@ -10,18 +13,17 @@ SELECT last_insert_rowid() ; " )
 set __posthist_query_template ( string replace -a -r '\s+' ' ' "\
 UPDATE history
 SET
-    end_date = (strftime('%%s','now')),
     status = %s,
     duration = %s
 WHERE
-    id = %s AND end_date IS NULL ; " )
+    rowid = %s AND duration IS NULL ; " )
 
 set __exit_query_template ( string replace -a -r '\s+' ' ' "\
 UPDATE shell
 SET
     end_date = (strftime('%%s','now'))
 WHERE
-    id = %s ; " )
+    rowid = %s ; " )
 
 set __save_env_query_template ( string replace -a -r '\s+' ' ' "\
 INSERT OR IGNORE INTO env
@@ -52,22 +54,22 @@ function __handle_preexec --on-event fish_preexec
 
     set prehist_query ( printf "$__preexec_query_template" "$__shell_id" "$PWD" "$cmdline" )
 
-    set -g __last_command_id ( command sqlite3 $__histfile "$prehist_query" )
+    set -g __last_command_id ( __exec_sql $prehist_query )
 end
 
 function __handle_postexec --on-event custom_postexec
     set prev_status $argv[1]
     set prev_duration $argv[2]
 
-    test -z "$__last_command_id"
+    test (id -u) -eq 0
     and return
 
-    test (id -u) -eq 0
+    test -z "$__last_command_id"
     and return
 
     set posthist_query ( printf "$__posthist_query_template" "$prev_status" "$prev_duration" "$__last_command_id" )
 
-    command sqlite3 $__histfile "$posthist_query"
+    __exec_sql $posthist_query
 
     set -g __last_command_id
 end
@@ -75,32 +77,45 @@ end
 function __handle_exit --on-event fish_exit
     set exit_query ( printf "$__exit_query_template" "$__shell_id" )
 
-    command sqlite3 $__histfile "$exit_query"
+    __exec_sql $exit_query
 end
 
 function __save_env
-    set save_env_query
-    begin
-        set -l pairs
-        env | while read line
-            set -l pair (string split -m 1 '=' "$line")
-            set -l key "$pair[1]"
-            set -l val ( string replace --all \' \'\' "$pair[2]" )
+    set env_whitelist \
+        COLORTERM \
+        HOME \
+        LANG \
+        LOGNAME \
+        MAIL \
+        PATH \
+        PWD \
+        SHELL \
+        SHLVL \
+        SSH_CLIENT \
+        SSH_CONNECTION \
+        SSH_TTY \
+        TERM \
+        TMUX \
+        USER
 
-            set -a pairs "( '$key', '$val' )"
-        end
-        set -l values ( string join ', ' $pairs )
+    for key in $env_whitelist
+        set -q $key
+        or continue
 
-        set save_env_query ( printf "$__save_env_query_template" "$values" "$__shell_id" "$values" )
-    end
+        set -l val ( string replace --all \' \'\' -- $$key )
 
-    command sqlite3 $__histfile "$save_env_query"
+        echo "( '$key', '$val' )"
+    end | string join ', ' | read -lL values
+
+    set save_env_query ( printf "$__save_env_query_template" "$values" "$__shell_id" "$values" )
+
+    __exec_sql $save_env_query
 end
 
 function __set_shell_id
     set shell_start_query "$__shell_start_query_template"
 
-    set -g __shell_id ( command sqlite3 $__histfile "$shell_start_query" )
+    set -g __shell_id ( __exec_sql $shell_start_query )
 end
 
 function __shell_init
