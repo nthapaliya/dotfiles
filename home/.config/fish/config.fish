@@ -16,7 +16,7 @@ set -gx FISH_CONFIG_LOADED true
 # set -U fish_user_paths \
 #     ~/.local/opt/rbenv/shims \
 #     ~/.local/bin \
-#     ~/.local/opt/{fzf,nvm,rbenv}/bin \
+#     ~/.local/opt/{fzf}/bin \
 #     ~/.cargo/bin
 
 # $EDITOR
