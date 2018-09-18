@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -euo pipefail
+
+from=$1
+to=${2:-HEAD}
+
+url="$( git config --list |\
+  sed -nEe 's/^remote.origin.url=(https:\/\/github.com\/|git@github.com:)([^.]+)(\.git)?/\2/p' )"
+
+pull=$( git log --ancestry-path --format='%s' --reverse --merges "$from^..$to" |\
+  head -1 |\
+  sed -nEe 's/^Merge pull request #([0-9]+).+/\1/p' )
+
+if [[ -n "$pull" ]]; then
+  open "https://github.com/$url/pull/$pull"
+else
+  exit 1
+fi

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+
+url="$( git config --list |\
+  sed -nEe 's/^remote.origin.url=(https:\/\/github.com\/|git@github.com:)([^.]+)(\.git)?/\2/p' )"
+
+rev=${1:-HEAD}
+
+commit="$( git rev-parse --short "$rev" )"
+
+if [[ -n "$commit" ]]; then
+  open "https://github.com/$url/commit/$commit"
+else
+  exit 1
+fi
