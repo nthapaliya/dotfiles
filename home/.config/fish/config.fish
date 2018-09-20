@@ -42,7 +42,8 @@ set -gx MANPAGER "nvim -c 'set ft=man' - "
 
 if command -sq rg
     # fzf + rg
-    set -gx FZF_CTRL_T_COMMAND 'sort -u ( rg --files | psub ) ( git ls-files | psub ) ( git status --porcelain=v2 | awk \'{print $NF}\' | psub)'
+    set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --glob \'!.git\''
+    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 end
 
 if test "$TERM_PROGRAM" = 'iTerm.app'
