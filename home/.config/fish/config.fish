@@ -46,7 +46,7 @@ if command -sq rg
     set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 end
 
-if test "$TERM_PROGRAM" = 'iTerm.app'
+if test "$TERM_PROGRAM" = 'iTerm.app' && status --is-interactive
     test -e ~/.iterm2_shell_integration.fish
     and source ~/.iterm2_shell_integration.fish
     exit
