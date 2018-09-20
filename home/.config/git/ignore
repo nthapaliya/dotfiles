@@ -48,3 +48,13 @@ fishd.*
 .vscode/*
 
 .nvmrc
+
+node_modules/
+.git/
+
+*.min.js
+*.sql
+
+*.pack.js
+*.min.js
+*.map
