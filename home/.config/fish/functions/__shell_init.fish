@@ -1,6 +1,8 @@
 function __exec_sql
-    set __histfile ~/history2.sql
-    command sqlite3 -cmd 'PRAGMA foreign_keys = ON;' $__histfile "$argv"
+    set __histfile ~/history3.sql
+
+    env PATH=/usr/local/opt/sqlite/bin \
+        sqlite3 -cmd 'PRAGMA foreign_keys = ON;' "$__histfile" "$argv"
 end
 
 set __preexec_query_template ( string replace -a -r '\s+' ' ' "\
@@ -43,6 +45,15 @@ VALUES
     (strftime('%s', 'now'), (strftime('%s', 'now', 'localtime') - strftime('%s', 'now'))) ;
 SELECT last_insert_rowid() ; " )
 
+function __save_location_sync
+    set query_template "INSERT INTO location ( latitude, longitude, h_accuracy, altitude, v_accuracy, address, create_date ) VALUES ( %s, %s, %s, %s, %s, %s, strftime('%%s', 'now') ); "
+
+    set values ( whereami -a | jq '.latitude, .longitude, .h_accuracy, .altitude, .v_accuracy, .address' | string replace -a \' \'\' )
+    set query ( printf "$query_template" $values )
+
+    __exec_sql "$query"
+end
+
 function __handle_preexec --on-event fish_preexec
     test -z "$argv"
     and return
@@ -80,6 +91,12 @@ function __handle_exit --on-event fish_exit
     __exec_sql $exit_query
 end
 
+function __set_shell_id
+    set shell_start_query "$__shell_start_query_template"
+
+    set -g __shell_id ( __exec_sql $shell_start_query )
+end
+
 function __save_env
     set env_whitelist \
         COLORTERM \
@@ -112,13 +129,20 @@ function __save_env
     __exec_sql $save_env_query
 end
 
-function __set_shell_id
-    set shell_start_query "$__shell_start_query_template"
+function __save_location
+    command -sq whereami
+    and command -sq jq
+    or exit
 
-    set -g __shell_id ( __exec_sql $shell_start_query )
+    fish (begin
+      functions __exec_sql
+      functions __save_location_sync
+      echo __save_location_sync
+    end | psub) &
 end
 
 function __shell_init
     __set_shell_id
     __save_env
+    # __save_location
 end
