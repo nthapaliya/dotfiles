@@ -15,6 +15,7 @@ set -gx FISH_CONFIG_LOADED true
 # to set:
 # set -U fish_user_paths \
 #     ~/.local/opt/rbenv/shims \
+#     ~/.local/opt/nvm/versions/node/v8.11.4/bin/ \
 #     ~/.local/bin \
 #     ~/.local/opt/{fzf}/bin \
 #     ~/.cargo/bin
