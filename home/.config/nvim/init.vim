@@ -45,6 +45,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
 Plug 'wincent/terminus'
+Plug 'vim-scripts/BufOnly.vim'
+Plug 'tweekmonster/startuptime.vim'
 
 " Tests from vim
 Plug 'janko-m/vim-test'
@@ -112,6 +114,14 @@ set path+=app/javascript,node_modules
 
 if !has('nvim')
   set viminfo+=n~/.vim/viminfo
+endif
+
+" for vim in tmux only
+" :help xterm-true-color
+" https://github.com/vim/vim/issues/993
+if !has('nvim') && exists('$TMUX')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 colorscheme gruvbox
