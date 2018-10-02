@@ -1,7 +1,3 @@
-if status --is-interactive
-    __shell_init
-end
-
 test -n "$FISH_CONFIG_LOADED"
 and exit
 
