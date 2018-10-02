@@ -649,17 +649,17 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>138 114 606 469 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>328 222 796 486 0 0 1280 777 </string>
+	<string>1426 -128 796 486 1280 -193 1920 1057 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>1532 173 592 584 1280 -182 1920 1080 </string>
 	<key>NSWindow Frame com.apple.typography_panel_Menlo-Regular</key>
 	<string>346 608 260 68 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1280 -193 1109 777 1280 -193 1920 1080 </string>
+	<string>0 382 570 351 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>630 209 650 426 0 0 1280 777 </string>
+	<string>163 292 650 426 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2484 -88 570 351 1280 -182 1920 1080 </string>
+	<string>2484 -174 650 426 1280 -193 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>2523 217 570 351 1280 -182 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
@@ -2991,7 +2991,7 @@
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Place Prompt at First Column</key>
-			<true/>
+			<false/>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
@@ -3044,7 +3044,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Mark Indicators</key>
-			<false/>
+			<true/>
 			<key>Silence Bell</key>
 			<false/>
 			<key>Smart Cursor Color</key>
@@ -5050,7 +5050,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-09-11T16:45:40Z</date>
+	<date>2018-10-02T22:52:40Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -5124,7 +5124,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.1beta4</string>
+	<string>3.2.1beta6</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
