@@ -2,10 +2,6 @@ if not status --is-interactive
     exit
 end
 
-function _sfh
-    /Users/niraj/Projects/advanced-fish-history/bin/main $argv
-end
-
 function __handle_preexec --on-event fish_preexec
     test -z "$argv"
     and return
@@ -16,11 +12,11 @@ function __handle_preexec --on-event fish_preexec
     # handle this before the first command, to make
     # shell init feel snappier
     if test -z "$__shell_id"
-        set -g __shell_id ( _sfh shell-start )
+        set -g __shell_id ( env HOSTNAME=$hostname polygon shell-start )
     end
 
     set -g __last_command_id (
-    _sfh pre-exec \
+    polygon pre-exec \
       --command "$argv" \
       --shell-id $__shell_id
     )
@@ -36,13 +32,9 @@ function __handle_postexec --on-event custom_postexec
     test -z "$__last_command_id"
     and return
 
-    /Users/niraj/Projects/advanced-fish-history/bin/main post-exec \
+    polygon post-exec \
         --duration $prev_duration \
         --status $prev_status \
-        --history-id $__last_command_id &
+        --history-id $__last_command_id
     set -g __last_command_id
 end
-
-# function __handle_exit --on-event fish_exit
-#     _sfh shell-exit --shell-id $__shell_id
-# end
