@@ -3,7 +3,6 @@ function netinfo -d "get network information"
 
     # Get public ip address
     set public (dig +short myip.opendns.com @resolver1.opendns.com)
-    set hostname (uname -n)
 
     if test -z "$public" # We got an empty string, meaning:
         set public "No Internet connection available"
