@@ -3,19 +3,6 @@ and exit
 
 set -gx FISH_CONFIG_LOADED true
 
-# $fish_user_paths
-
-# to clear:
-# set -U fish_user_paths
-
-# to set:
-# set -U fish_user_paths \
-#     ~/.local/opt/rbenv/shims \
-#     ~/.local/opt/nvm/versions/node/v8.11.4/bin/ \
-#     ~/.local/bin \
-#     ~/.local/opt/{fzf}/bin \
-#     ~/.cargo/bin
-
 # $EDITOR
 set -gx EDITOR /usr/local/bin/nvim
 set -gx VISUAL $EDITOR
