@@ -10,16 +10,12 @@ set -gx VISUAL $EDITOR
 # $SHELL
 # set -gx SHELL /usr/local/bin/fish
 
-# rbenv setup
-if command -sq rbenv && status --is-interactive
-    set -gx RBENV_ROOT ~/.local/opt/rbenv
-    set -gx RBENV_SHELL fish
-    # source (rbenv init -|psub)
-end
-
 # nvm setup
 set -gx NVM_DIR ~/.local/opt/nvm
 # nvm use 8.11.3
+
+source /usr/local/share/chruby/chruby.fish
+source /usr/local/share/chruby/auto.fish
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
