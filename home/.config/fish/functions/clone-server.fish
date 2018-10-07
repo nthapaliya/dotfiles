@@ -14,7 +14,7 @@ function clone-server
 
     if test -z "$_flag_nobackup"
         echo 'backing up current local database'
-        set -l file ~/OSS/huddle/tmp/(gdate +%F--%R:%S)-backup.sql.gz
+        set -l file ~/OSS/huddle/tmp/(date +%F--%T)-backup.sql.gz
 
         mysqldump -uroot officespace --hex-blob | gzip >"$file"
 

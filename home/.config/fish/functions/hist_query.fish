@@ -1,3 +1,3 @@
 function hist_query
-	sqlite3 "file:$HOME/.local/share/history.sqlite?mode=ro" $argv
+    sqlite3 -readonly ~/.local/share/polygon/history.sqlite $argv
 end
