@@ -1,21 +1,19 @@
-test -n "$FISH_CONFIG_LOADED"
-and exit
-
-set -gx FISH_CONFIG_LOADED true
-
 # $EDITOR
 set -gx EDITOR /usr/local/bin/nvim
 set -gx VISUAL $EDITOR
 
+set -gx RBENV_ROOT ~/.local/opt/rbenv
+set -gx RBENV_SHELL fish
+
+if not contains $RBENV_ROOT/shims
+    set --prepend fish_user_paths $RBENV_ROOT/shims
+end
+
 # $SHELL
-# set -gx SHELL /usr/local/bin/fish
+set -gx SHELL /usr/local/bin/fish
 
 # nvm setup
 set -gx NVM_DIR ~/.local/opt/nvm
-# nvm use 8.11.3
-
-source /usr/local/share/chruby/chruby.fish
-source /usr/local/share/chruby/auto.fish
 
 # $MANPAGER
 set -gx MANPAGER "nvim -c 'set ft=man' - "
