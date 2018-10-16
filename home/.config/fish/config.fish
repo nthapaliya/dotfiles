@@ -30,16 +30,11 @@ if test "$TERM_PROGRAM" = 'iTerm.app' && status --is-interactive
     exit
 end
 
-if test -z "$KITTY_WINDOW_ID"
-    exit
-end
-
-if test -n "$TMUX"
-    exit
-end
-
-if tmux ls >/dev/null 2>/dev/null
-    exec tmux attach
-else
-    exec tmux new
+# translation: if kitty && !tmux
+if test -n "$KITTY_WINDOW_ID" -a -z "$TMUX"
+    if tmux ls >/dev/null 2>/dev/null
+        exec tmux attach
+    else
+        exec tmux new
+    end
 end
