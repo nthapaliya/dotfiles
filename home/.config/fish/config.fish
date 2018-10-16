@@ -5,7 +5,7 @@ set -gx VISUAL $EDITOR
 set -gx RBENV_ROOT ~/.local/opt/rbenv
 set -gx RBENV_SHELL fish
 
-if not contains $RBENV_ROOT/shims
+if not contains $RBENV_ROOT/shims $fish_user_paths
     set --prepend fish_user_paths $RBENV_ROOT/shims
 end
 
