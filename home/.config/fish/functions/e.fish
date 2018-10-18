@@ -1,5 +1,8 @@
 function e
-    test -n "$argv"
-    and eval $EDITOR $argv
-    or echo 'Nothing to edit!'
+    if test -n "$argv"
+        eval $EDITOR $argv
+    else
+        echo 'Nothing to edit!'
+        return 1
+    end
 end
