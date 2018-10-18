@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Tip from http://mislav.net/2014/02/hidden-documentation/
-set -e
-git log --format='%an' "$@" | \
-    sort | uniq -c | sort -rn
