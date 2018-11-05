@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+index=1
+
+git ls-files -m | while read -r file ; do
+  git commit "$file" -m $((index++))
+done
