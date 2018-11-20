@@ -16,13 +16,9 @@ function gbb
         --expect='ctrl-v' \
         --nth -1 \
         --preview "$preview_command" |
-    read -l --all-lines --array output
-    set selected_branch ( echo $output[2] | cut -c3- )
-
-    if test "$output[1]" = 'ctrl-v'
-        echo $selected_branch
-        return
-    end
+    tail -n 1 |
+    cut -c3- |
+    read -l selected_branch
 
     commandline -r "git checkout $selected_branch"
 end

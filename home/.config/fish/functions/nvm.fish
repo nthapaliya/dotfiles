@@ -6,7 +6,7 @@ function nvm-use
     set clean_fish_user_paths (string match -ev "$node_versions_path" $fish_user_paths)
 
     if test "$target_version" = 'system'
-        # set -gx PATH $clean_path
+        set -gx PATH $clean_path
         set -U fish_user_paths $clean_fish_user_paths
         return 0
     end
@@ -31,7 +31,7 @@ function nvm-use
         return 1
     end
 
-    # set -gx PATH $node_versions_path/$matched_version/bin $clean_path
+    set -gx PATH $node_versions_path/$matched_version/bin $clean_path
     set -U fish_user_paths $node_versions_path/$matched_version/bin $clean_fish_user_paths
 end
 

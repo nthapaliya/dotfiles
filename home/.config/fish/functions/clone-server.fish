@@ -1,5 +1,5 @@
 function clone-server
-    argparse -N1 --name clone-server 'f/full' 'b/nobackup' 'd/nodrop' -- $argv
+    argparse -N1 --name clone-server -x 'm,f' 'm/medium' 'f/full' 'b/nobackup' 'd/nodrop' -- $argv
 
     test $status -eq 0
     or return $status
@@ -49,11 +49,16 @@ function clone-server
 
         set mysql_dump_schema 'mysqldump -u officespace -v officespace --no-data' # all the CREATE TABLE statements
         set mysql_dump_data "mysqldump -u officespace -v officespace --no-create-info --hex-blob $ignored_tables_cmd" # only the INSERT INTO statements
-        set mysql_dump_floor "mysqldump -u officespace -v officespace --no-create-info --hex-blob Floor | sed -Ee 's/0x[0-9a-fA-F]{200,}/NULL/g'"
+
+        if test -n "$_flag_medium"
+            set mysql_dump_floor "mysqldump -u officespace -v officespace --no-create-info --hex-blob Floor "
+            set estimated_size 60m
+        else
+            set mysql_dump_floor "mysqldump -u officespace -v officespace --no-create-info --hex-blob Floor | sed -Ee 's/0x[0-9a-fA-F]{200,}/NULL/g'"
+            set estimated_size 3m
+        end
 
         set ssh_command "export MYSQL_PWD=\"`$password_script`\"; cat <($mysql_dump_schema) <($mysql_dump_data) <($mysql_dump_floor) | gzip"
-
-        set estimated_size 3m
     end
 
     rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors &

@@ -5,9 +5,11 @@ set -gx VISUAL $EDITOR
 set -gx RBENV_ROOT ~/.local/opt/rbenv
 set -gx RBENV_SHELL fish
 
-if not contains $RBENV_ROOT/shims
+if not contains $RBENV_ROOT/shims $fish_user_paths
     set --prepend fish_user_paths $RBENV_ROOT/shims
 end
+
+set -gx NODE_OPTIONS "--max-old-space-size=5120"
 
 # $SHELL
 set -gx SHELL /usr/local/bin/fish
@@ -30,16 +32,11 @@ if test "$TERM_PROGRAM" = 'iTerm.app' && status --is-interactive
     exit
 end
 
-if test -z "$KITTY_WINDOW_ID"
-    exit
-end
-
-if test -n "$TMUX"
-    exit
-end
-
-if tmux ls >/dev/null 2>/dev/null
-    exec tmux attach
-else
-    exec tmux new
+# translation: if kitty && !tmux
+if test -n "$KITTY_WINDOW_ID" -a -z "$TMUX"
+    if tmux ls >/dev/null 2>/dev/null
+        exec tmux attach
+    else
+        exec tmux new
+    end
 end

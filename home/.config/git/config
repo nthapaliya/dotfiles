@@ -10,10 +10,18 @@
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
+	assume = update-index --assume-unchanged
+	assumed = !git ls-files -v | grep ^h | cut -c 3-
+	branch-name = rev-parse --abbrev-ref HEAD
+	conflict = diff --name-only --diff-filter=U
 	ctags = !.git/hooks/ctags-run
 	patch = !git --no-pager diff --no-color
+	publish = !git push -u origin $(git branch-name)
+	purge = "!f() { local gcb=$(git branch-name) && git branch --merged \"$gcb\" | grep -v master | grep -v \"$gcb\" | xargs git branch -d ; } ; f"
+	unassume = update-index --no-assume-unchanged
 	unique = log HEAD --not master
 	up = "!git remote update -p; git merge --ff-only @{u}"
+	who = "f() { git log --format=%an \"$@\" | sort | uniq -c | sort -rn ; }; f"
 [init]
 	templatedir = ~/.config/git/template
 [status]
