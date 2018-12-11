@@ -1,9 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -euo pipefail
+set -eo pipefail
 
-index=1
-
-git ls-files -m | while read -r file ; do
-  git commit "$file" -m $((index++))
+git status --porcelain | cut -c4- | while read -r file ; do
+  git add "$file"
+  git commit -m "$((++index))"
 done
