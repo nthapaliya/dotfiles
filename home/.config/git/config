@@ -21,7 +21,7 @@
 	unassume = update-index --no-assume-unchanged
 	unique = log HEAD --not master
 	up = "!git remote update -p; git merge --ff-only @{u}"
-	who = "f() { git log --format=%an \"$@\" | sort | uniq -c | sort -rn ; }; f"
+	who = "!f() { git log --format=%an \"$@\" | sort | uniq -c | sort -rn ; }; f"
 [init]
 	templatedir = ~/.config/git/template
 [status]
