@@ -9,7 +9,7 @@ if not contains $RBENV_ROOT/shims $fish_user_paths
     set --prepend fish_user_paths $RBENV_ROOT/shims
 end
 
-set -gx NODE_OPTIONS "--max-old-space-size=5120"
+set -gx NODE_OPTIONS "--max-old-space-size=8000"
 
 # $SHELL
 set -gx SHELL /usr/local/bin/fish
