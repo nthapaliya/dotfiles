@@ -61,7 +61,8 @@ function clone-server
         set ssh_command "export MYSQL_PWD=\"`$password_script`\"; cat <($mysql_dump_schema) <($mysql_dump_data) <($mysql_dump_floor) | gzip"
     end
 
-    rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors &
+    # rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors &
+    rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/floor_regular_\*_4x_\*.png ~/OSS/huddle/floors &
     ssh -A osadmin@$server.ossd.co "$ssh_command" | pv -s $estimated_size | gunzip | mysql -uroot officespace
     fg
 end

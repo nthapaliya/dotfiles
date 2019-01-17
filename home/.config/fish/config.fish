@@ -5,11 +5,15 @@ set -gx VISUAL $EDITOR
 set -gx RBENV_ROOT ~/.local/opt/rbenv
 set -gx RBENV_SHELL fish
 
-if not contains $RBENV_ROOT/shims $fish_user_paths
-    set --prepend fish_user_paths $RBENV_ROOT/shims
+for path in ~/.local/bin ~/.local/opt/fzf/bin $RBENV_ROOT/shims
+    if not contains $path $fish_user_paths
+        set -U --prepend fish_user_paths $path
+    end
 end
 
-set -gx NODE_OPTIONS "--max-old-space-size=8000"
+set -gx NODE_OPTIONS "--max_old_space_size=16000"
+
+set -gx HOMEBREW_INSTALL_CLEANUP true
 
 # $SHELL
 set -gx SHELL /usr/local/bin/fish

@@ -8,6 +8,7 @@
 	ignorecase = false
 	quotepath = false
 	pager = diff-so-fancy | less --tabs=4 -RFX
+	commitGraph = true
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	assume = update-index --assume-unchanged
@@ -49,3 +50,8 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[protocol]
+	version = 2
+[log]
+	decorate = short
+	abbrevCommit = true

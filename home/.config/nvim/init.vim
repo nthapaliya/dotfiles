@@ -25,6 +25,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'sheerun/vim-polyglot'
 " Plug 'tpope/vim-rails'
 Plug 'jparise/vim-graphql'
+Plug 'rust-lang/rust.vim'
 
 " Vim enhancements
 Plug 'AndrewRadev/splitjoin.vim'
@@ -34,7 +35,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.local/opt/fzf', 'do': './install --all --xdg' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-grepper'
 Plug 'tommcdo/vim-lion'
@@ -47,6 +47,11 @@ Plug 'unblevable/quick-scope'
 Plug 'wincent/terminus'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'tweekmonster/startuptime.vim'
+
+" File management
+Plug 'francoiscabrol/ranger.vim'
+Plug 'justinmk/vim-dirvish'
+Plug 'rbgrouleff/bclose.vim'
 
 " Tests from vim
 Plug 'janko-m/vim-test'
@@ -154,7 +159,7 @@ endif
 " nvim config {{{
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
-  tnoremap jk <C-\><C-n>
+  " tnoremap jk <C-\><C-n>
   tnoremap <C-h> <C-\><C-n><C-w>h
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
@@ -181,6 +186,7 @@ augroup other_filetype_tweaks
 augroup END
 
 augroup general_autocommands
+  autocmd!
   autocmd VimResized * wincmd =
 augroup END
 " }}}
@@ -266,6 +272,7 @@ let g:ale_fixers = {
 \ 'fish': ['Fish_indent'],
 \ 'javascript': ['prettier'],
 \ 'ruby': ['rubocop'],
+\ 'rust': ['rustfmt'],
 \ }
 
 let g:airline#extensions#ale#enabled = 1
@@ -278,4 +285,8 @@ nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 
 " Plug 'janko-m/vim-test' {{{
 let g:test#strategy = 'dispatch'
+" }}}
+
+" Plug '' {{{
+let g:ranger_replace_netrw = 0
 " }}}
