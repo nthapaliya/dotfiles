@@ -1,5 +1,4 @@
-# TODO: I want this to be shorter, like `r`
-function cdr
+function r
     __fish_is_git_repository
     or return
 

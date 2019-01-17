@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Checking for binaries first
+hash stow 2>/dev/null || {
+  echo 'Error! Missing command'
+  hash brew 2>/dev/null &&
+    printf 'Run "brew install stow"' ||
+    printf 'Use your package manager to install gnu stow'
+  echo ' and run this script again'
+  exit 1
+}
+
+# Symlink files
+DESTINATIONS=(home)
+
+if [[ $(uname) == 'Darwin' ]]; then
+  DESTINATIONS+=(macos)
+fi
+
+case $1 in
+  '')
+    stow -R --target="$HOME" "${DESTINATIONS[@]}"
+    ;;
+  --uninstall|-u)
+    stow -D --target="$HOME" "${DESTINATIONS[@]}"
+    ;;
+  *)
+    echo $"Usage: $0 [-u|--uninstall]"
+    ;;
+esac

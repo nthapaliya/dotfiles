@@ -20,7 +20,7 @@ end
 
 function fish_prompt --description 'Write out the prompt'
     set last_status $status
-    emit custom_postexec $status $cmd_duration
+    emit custom_postexec $status $CMD_DURATION
 
     if set -q SSH_CLIENT
         or set -q SSH_TTY
