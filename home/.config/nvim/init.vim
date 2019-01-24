@@ -19,11 +19,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Colors and themes
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
-Plug 'mhartington/oceanic-next'
 
 " Language enhancements
 Plug 'sheerun/vim-polyglot'
-" Plug 'tpope/vim-rails'
 Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
 
@@ -34,36 +32,24 @@ Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.local/opt/fzf', 'do': './install --all --xdg' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim'
-Plug 'machakann/vim-sandwich'
-Plug 'mhinz/vim-grepper'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
 Plug 'wincent/terminus'
-Plug 'vim-scripts/BufOnly.vim'
-Plug 'tweekmonster/startuptime.vim'
 
-" File management
+" File/buffer management
 Plug 'francoiscabrol/ranger.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'rbgrouleff/bclose.vim'
-
-" Tests from vim
-Plug 'janko-m/vim-test'
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'tpope/vim-dispatch'
+Plug 'vim-scripts/BufOnly.vim'
 
 " Linter
 Plug 'w0rp/ale'
-
-if !has('nvim')
-  Plug 'tpope/vim-sensible'
-endif
 
 call plug#end()
 " }}}
@@ -105,14 +91,13 @@ set showbreak=\\\\\
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
-set title
-set visualbell
 set termguicolors
+set title
 set updatetime=100
+set visualbell
 
 if has('nvim')
   set inccommand=nosplit
-  set incsearch
 endif
 
 set path+=app/javascript,node_modules
@@ -144,7 +129,6 @@ nnoremap <Right>    :bnext<cr>
 
 inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
-nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 
 nmap <leader>cs :let @*=expand("%:p")<CR>
 " }}}
@@ -183,6 +167,7 @@ augroup other_filetype_tweaks
   autocmd FileType text setlocal spell commentstring=#\ %s textwidth=80
   autocmd FileType help wincmd L " open help window in vertical split
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
+  autocmd FileType ruby nnoremap <F5> :!time ruby %<cr>
 augroup END
 
 augroup general_autocommands
@@ -287,6 +272,6 @@ nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 let g:test#strategy = 'dispatch'
 " }}}
 
-" Plug '' {{{
+" Plug 'francoiscabrol/ranger.vim' {{{
 let g:ranger_replace_netrw = 0
 " }}}
