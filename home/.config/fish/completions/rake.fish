@@ -19,7 +19,7 @@ function __run_rake_completion
 end
 
 function __hashed_rakefiles
-    begin
+    fish_md5 (begin
         echo $PWD
         for file in rakefile Rakefile rakefile.rb Rakefile.rb
             test -e $file
@@ -30,7 +30,7 @@ function __hashed_rakefiles
             echo $file
             cat $file
         end
-    end | fish_md5
+    end | psub)
 end
 
 complete -n __run_rake_completion \
