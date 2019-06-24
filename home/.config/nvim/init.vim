@@ -41,6 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
 Plug 'wincent/terminus'
+Plug 'tpope/vim-dispatch'
 
 " File/buffer management
 Plug 'francoiscabrol/ranger.vim'
@@ -50,6 +51,8 @@ Plug 'vim-scripts/BufOnly.vim'
 
 " Linter
 Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'zxqfl/tabnine-vim', { 'do': './install.py' }
 
 call plug#end()
 " }}}
@@ -126,6 +129,12 @@ nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<CR>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <Left>     :bprev<cr>
 nnoremap <Right>    :bnext<cr>
+nnoremap <leader>*  *N"zyiw:Rg <c-r>z<cr>
+" *N -> Search for word under cursor, highlight, jump back to prev word (*
+" moves on to next)
+" "zyiw -> yank word under cursor (iw) and store in register z
+" :Rg <c-r>z -> Run : command Rg, <c-r>z replaces itself with z register
+" contents
 
 inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
