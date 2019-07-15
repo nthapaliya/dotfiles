@@ -17,9 +17,11 @@ QUERY="
   repository(owner: \\\"$OWNER\\\", name: \\\"$REPO_NAME\\\") {
     object(expression: \\\"$HASH\\\") {
       ... on Commit {
-        associatedPullRequests(first: 1) {
-          nodes {
-            url
+        status {
+          state
+          contexts {
+            state
+            targetUrl
           }
         }
       }
@@ -34,7 +36,7 @@ URL=$( \
     -X POST \
     --data "{ \"query\": \"query $(echo -n $QUERY) \" }" \
     https://api.github.com/graphql |
-  jq -r .data.repository.object.associatedPullRequests.nodes[0].url \
+  jq -r .data.repository.object.status.contexts[0].targetUrl \
   )
 
 

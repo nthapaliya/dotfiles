@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+url="$( git config --list |\
+  sed -nEe 's/^remote.origin.url=(https:\/\/github.com\/|git@github.com:)([^.]+)(\.git)?/\2/p' )"
+
+if [[ -n "$url" ]]; then
+  open "https://github.com/$url"
+else
+  exit 1
+fi
