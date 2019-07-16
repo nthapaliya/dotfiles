@@ -51,7 +51,7 @@ Plug 'vim-scripts/BufOnly.vim'
 
 " Linter
 Plug 'w0rp/ale'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'zxqfl/tabnine-vim', { 'do': './install.py' }
 
 call plug#end()
