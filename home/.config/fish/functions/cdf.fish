@@ -1,4 +1,3 @@
-# TODO: tweak fzf params so its not so juddery
 function cdf
     test -f "$argv"
     and set dir ( dirname "$argv" )
@@ -11,8 +10,10 @@ function cdf
     and cd "$dir"
     and return
 
-    sort -mu ( rg --files --sort-files . | psub ) ( git ls-files | psub ) ( git ls-tree -d -r HEAD --name-only | psub ) |
+    rg --files --hidden --glob '!.git' |
     fzf \
+        --reverse \
+        --height=40% \
         --no-multi \
         --query="$argv" |
     read -l result

@@ -5,8 +5,6 @@ function vconflict
         set git_rev ( git rev-parse HEAD )
     end
 
-    # set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
-    set filenames ( git status --short | grep '^UU' | cut -c4- )
-
-    e $filenames
+    # e ( git diff-tree --no-commit-id --name-only -r $git_rev )
+    e ( git status --short | grep '^UU' | cut -c4- )
 end

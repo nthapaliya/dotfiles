@@ -18,9 +18,9 @@ function vcommit
     and set git_rev ( git rev-parse $argv[1] )
     or set git_rev ( git rev-parse HEAD )
 
-    test -n "$_flag_interactive"
-    and set filenames ( __gcc $git_rev )
-    or set filenames ( git diff-tree --no-commit-id --name-only -r $git_rev )
-
-    e $filenames
+    if test -n "$_flag_interactive"
+        e ( __gcc $git_rev )
+    else
+        e ( git diff-tree --no-commit-id --name-only -r $git_rev )
+    end
 end

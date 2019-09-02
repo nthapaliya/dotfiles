@@ -1,4 +1,5 @@
-# TODO: this can be an abbr
 function edit_config
-    e ~/.config/fish/config.fish
+    set config ~/.config/fish/config.fish
+    e $config
+    and source $config
 end

@@ -1,16 +1,24 @@
 #! /bin/bash
 
-echo "brew update"
-brew update
+hfile=~/.brew_update_history
+last_update=$( tail -1 $hfile )
+current_date=$( date +%D )
 
-echo "brew upgrade"
-brew upgrade
+if [[ "$last_update" == "$current_date" ]]; then
+  exit
+fi
 
-# echo 'brew cleanup'
-# brew cleanup
+echo "$current_date" >> $hfile
 
-echo "brew cask outdated"
-brew cask outdated
+commands=( \
+  'brew update' \
+  'brew upgrade' \
+  # 'brew cleanup' \
+  'brew cask outdated' \
+  # 'brew cask upgrade' \
+  'nvim +PlugUpgrade +PlugUpdate'\
+  )
 
-# echo "brew cask upgrade"
-# brew cask upgrade
+for command in "${commands[@]}"; do
+  echo "$command" && $command
+done
