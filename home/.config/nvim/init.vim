@@ -203,15 +203,8 @@ let HandleInputs = function('HandleInputs_')
 command! This call fzf#run(fzf#wrap({
 \ 'options': '-m',
 \ 'sink*': HandleInputs,
-\ 'source': "jq -r '.[\"" . @% . "\"][]' .git/deps.json"
+\ 'source': "jq -r '.[\"" . @% . "\"][]' deps.json"
 \ }))
-
-command! Vdirty call fzf#run(fzf#wrap({
-\ 'options': '-m',
-\ 'sink*': HandleInputs,
-\ 'source': "git status -s | awk '{ print $NF }' "
-\ }))
-" }}}
 
 " vim-airline/vim-airline {{{
 let g:airline#extensions#branch#displayed_head_limit = 8

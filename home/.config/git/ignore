@@ -56,3 +56,5 @@ node_modules/
 *.pack.js
 *.min.js
 *.map
+
+deps.json
