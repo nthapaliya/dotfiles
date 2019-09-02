@@ -1,3 +1,4 @@
 function cls
-	clear; tmux clear-history
+    clear
+    tmux clear-history
 end
