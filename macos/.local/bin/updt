@@ -2,7 +2,7 @@
 
 hfile=~/.brew_update_history
 last_update=$( tail -1 $hfile )
-current_date=$( date +%D )
+current_date=$( date +%F )
 
 if [[ "$last_update" == "$current_date" ]]; then
   exit
@@ -16,7 +16,7 @@ commands=( \
   # 'brew cleanup' \
   'brew cask outdated' \
   # 'brew cask upgrade' \
-  'nvim +PlugUpgrade +PlugUpdate'\
+  'nvim +PlugUpgrade +PlugUpdate' \
   )
 
 for command in "${commands[@]}"; do
