@@ -22,8 +22,6 @@ Plug 'morhetz/gruvbox'
 
 " Language enhancements
 Plug 'sheerun/vim-polyglot'
-Plug 'jparise/vim-graphql'
-Plug 'rust-lang/rust.vim'
 
 " Vim enhancements
 Plug 'AndrewRadev/splitjoin.vim'
@@ -52,7 +50,6 @@ Plug 'vim-scripts/BufOnly.vim'
 " Linter
 Plug 'w0rp/ale'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'zxqfl/tabnine-vim', { 'do': './install.py' }
 
 call plug#end()
 " }}}
