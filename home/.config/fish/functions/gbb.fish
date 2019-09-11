@@ -6,5 +6,5 @@ function gbb
                  fzf --height '40%' --reverse --ansi |
                  awk '{ print $NF }' )
 
-    git checkout $branch
+    test -n "$branch" && git checkout "$branch"
 end
