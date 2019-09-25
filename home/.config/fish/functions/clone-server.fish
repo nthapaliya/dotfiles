@@ -1,5 +1,5 @@
 function clone-server
-    argparse -N1 --name clone-server -x 'm,f' 'm/medium' 'f/full' 'b/nobackup' 'd/nodrop' -- $argv
+    argparse -N1 --name clone-server 'f/full' -- $argv
 
     test $status -eq 0
     or return $status
@@ -11,31 +11,18 @@ function clone-server
         return 1
     end
 
-
-    if test -z "$_flag_nobackup"
-        echo 'backing up current local database'
-        set -l file ~/OSS/huddle/tmp/(date +%F--%T)-backup.sql.gz
-
-        mysqldump -uroot officespace --hex-blob | gzip >"$file"
-
-    else
-        echo 'Skipping local backup'
-    end
-
-    if test -z "$_flag_nodrop"
-        echo 'dropping local database and creating a new empty one'
-        mysql -uroot --execute='drop database if exists officespace; create database officespace;'
-    else
-        echo 'skip dropping database officespace'
-    end
+    echo 'backing up current local database'
+    set backup_file ~/OSS/huddle/tmp/(date +%F--%T)-backup.sql.gz
+    mysqldump -uroot --databases officespace --hex-blob --add-drop-database | gzip >"$backup_file"
 
     set password_script 'grep password /srv/www/huddle/shared/config/database.yml | cut -d : -f 2 | sed "s/^ *//;s/ *$//"'
 
 
     if test -n "$_flag_full"
-        set ssh_command "MYSQL_PWD=\"`$password_script`\" mysqldump -u officespace -v officespace --hex-blob | gzip"
+        set ssh_command "MYSQL_PWD=\"`$password_script`\" mysqldump -v -u officespace --databases officespace --add-drop-database --hex-blob | gzip"
+        rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors &
 
-        set estimated_size 90m
+        set estimated_size 95m
     else
         set ignored_tables \
             binary_attachments \
@@ -47,22 +34,18 @@ function clone-server
 
         set ignored_tables_cmd {--ignore-table=officespace.}{$ignored_tables}
 
-        set mysql_dump_schema 'mysqldump -u officespace -v officespace --no-data' # all the CREATE TABLE statements
-        set mysql_dump_data "mysqldump -u officespace -v officespace --no-create-info --hex-blob $ignored_tables_cmd" # only the INSERT INTO statements
-
-        if test -n "$_flag_medium"
-            set mysql_dump_floor "mysqldump -u officespace -v officespace --no-create-info --hex-blob Floor "
-            set estimated_size 60m
-        else
-            set mysql_dump_floor "mysqldump -u officespace -v officespace --no-create-info --hex-blob Floor | sed -Ee 's/0x[0-9a-fA-F]{200,}/NULL/g'"
-            set estimated_size 3m
-        end
+        set mysql_dump_schema 'mysqldump -u officespace --databases officespace --no-data --add-drop-database' # all the CREATE TABLE statements
+        set mysql_dump_data "mysqldump -u officespace officespace --no-create-info --hex-blob $ignored_tables_cmd" # only the INSERT INTO statements
+        set mysql_dump_floor "mysqldump -u officespace officespace --no-create-info --hex-blob Floor | sed -Ee 's/0x[0-9a-fA-F]{200,}/0xffffff/g'"
+        set estimated_size 4m
 
         set ssh_command "export MYSQL_PWD=\"`$password_script`\"; cat <($mysql_dump_schema) <($mysql_dump_data) <($mysql_dump_floor) | gzip"
+        rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/floor_regular_\*_4x_\*.png ~/OSS/huddle/floors &
     end
 
-    # rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors &
-    rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/floors/floor_regular_\*_4x_\*.png ~/OSS/huddle/floors &
+    rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/photos ~/OSS/huddle/ &
+
     ssh -A osadmin@$server.ossd.co "$ssh_command" | pv -s $estimated_size | gunzip | mysql -uroot officespace
+    fg
     fg
 end
