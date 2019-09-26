@@ -1,14 +1,14 @@
 #! /bin/bash
 
-hfile=~/.brew_update_history
-last_update=$( tail -1 $hfile )
-current_date=$( date +%F )
+hfile=~/Library/Caches/Homebrew/.updated
 
-if [[ "$last_update" == "$current_date" ]]; then
+time_diff=$(( $( date +%s ) - $( date -r $hfile +%s ) ))
+
+if [[ $time_diff -lt $(( 4 * 60 * 60 )) ]]; then
   exit
 fi
 
-echo "$current_date" >> $hfile
+touch $hfile
 
 commands=( \
   'brew update' \
