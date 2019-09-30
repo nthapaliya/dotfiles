@@ -95,6 +95,7 @@ set termguicolors
 set title
 set updatetime=100
 set visualbell
+set tags^=./.git/tags;
 
 if has('nvim')
   set inccommand=nosplit
