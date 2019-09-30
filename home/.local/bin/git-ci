@@ -1,21 +1,30 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 
-set -euo pipefail
+require 'json'
+require 'net/http'
+require 'uri'
 
-source "$HOME/creds.bash"
+def github_remote_information
+  re = %r{(git@github.com|https://github.com/):(?<owner>.+)/(?<repo_name>.+)$}
+  remote = `git config remote.origin.url`
+           .chomp
+           .match(re)
 
-REV=${1:-HEAD}
-HASH=$(git rev-parse "$REV")
+  exit 1 if remote.nil?
 
-URL="$( git config --list |\
-  sed -nEe 's/^remote.origin.url=(https:\/\/github.com\/|git@github.com:)([^.]+)(\.git)?/\2/p' )"
-OWNER=$(echo "$URL" | cut -d / -f 1)
-REPO_NAME=$(echo "$URL" | cut -d / -f 2)
+  [remote[:owner], remote[:repo_name]]
+end
 
-QUERY="
-{
-  repository(owner: \\\"$OWNER\\\", name: \\\"$REPO_NAME\\\") {
-    object(expression: \\\"$HASH\\\") {
+key = JSON.parse(File.read("#{Dir.home}/creds.json"))['GITHUB_API_KEY']
+
+hash = `git rev-parse #{ARGV.first || 'HEAD'}`.chomp
+
+owner, repo_name = github_remote_information
+
+query_string = "{
+  repository(owner: \"#{owner}\", name: \"#{repo_name}\") {
+    object(expression: \"#{hash}\") {
       ... on Commit {
         status {
           state
@@ -30,18 +39,31 @@ QUERY="
 }
 "
 
-URL=$( \
-  curl -s \
-    -H "Authorization: bearer $GITHUB_API_KEY" \
-    -X POST \
-    --data "{ \"query\": \"query $(echo -n $QUERY) \" }" \
-    https://api.github.com/graphql |
-  jq -r .data.repository.object.status.contexts[0].targetUrl \
-  )
+uri = URI.parse('https://api.github.com/graphql')
+request = Net::HTTP::Post.new(uri)
+request['Authorization'] = "bearer #{key}"
+request.body = JSON.dump(query: query_string)
 
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(request)
+end
 
-if [[ "$URL" != "null" ]]; then
-  open "$URL"
+parsed_response = JSON.parse(response.body)
+
+nested_keys = [
+  'data',
+  'repository',
+  'object',
+  'status',
+  'contexts',
+  0,
+  'targetUrl'
+]
+
+url = parsed_response.dig(*nested_keys)
+
+if url && url != 'null'
+  system("open #{url}")
 else
   exit 1
-fi
+end
