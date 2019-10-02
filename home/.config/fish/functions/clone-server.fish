@@ -1,9 +1,6 @@
 function clone-server
     argparse -N1 --name clone-server 'f/full' -- $argv
 
-    test $status -eq 0
-    or return $status
-
     set server $argv[1]
     if test -z "$server"
         echo 'No server name provided!'
@@ -11,8 +8,14 @@ function clone-server
         return 1
     end
 
+    if not type -q pv
+        echo "Error: missing command `pv`. Install pv, or make sure it is in the \$PATH, and try again."
+        return 1
+    end
+
     echo 'backing up current local database'
-    set backup_file ~/OSS/huddle/tmp/(date +%F--%T)-backup.sql.gz
+    set date (date +%F--%T)
+    set backup_file ~/OSS/huddle/tmp/$date-backup.sql.gz
     mysqldump -uroot --databases officespace --hex-blob --add-drop-database | gzip >"$backup_file"
 
     set password_script 'grep password /srv/www/huddle/shared/config/database.yml | cut -d : -f 2 | sed "s/^ *//;s/ *$//"'
@@ -45,7 +48,13 @@ function clone-server
 
     rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/photos ~/OSS/huddle/ &
 
-    ssh -A osadmin@$server.ossd.co "$ssh_command" | pv -s $estimated_size | gunzip | mysql -uroot officespace
+    set server_db ~/OSS/huddle/tmp/$server-$date.sql.gz
+
+    echo "downloading db from $server"
+    ssh -A osadmin@$server.ossd.co "$ssh_command" | pv -s $estimated_size >$server_db
+
+    echo 'loading db into mysql'
+    pv $server_db | gunzip | mysql -uroot officespace
     fg
     fg
 end
