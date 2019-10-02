@@ -22,8 +22,6 @@ Plug 'morhetz/gruvbox'
 
 " Language enhancements
 Plug 'sheerun/vim-polyglot'
-Plug 'jparise/vim-graphql'
-Plug 'rust-lang/rust.vim'
 
 " Vim enhancements
 Plug 'AndrewRadev/splitjoin.vim'
@@ -52,7 +50,6 @@ Plug 'vim-scripts/BufOnly.vim'
 " Linter
 Plug 'w0rp/ale'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'zxqfl/tabnine-vim', { 'do': './install.py' }
 
 call plug#end()
 " }}}
@@ -98,6 +95,7 @@ set termguicolors
 set title
 set updatetime=100
 set visualbell
+set tags^=./.git/tags;
 
 if has('nvim')
   set inccommand=nosplit
@@ -201,17 +199,10 @@ let HandleInputs = function('HandleInputs_')
 " Work specific - Use :This to find which files import the current javascript
 " file
 command! This call fzf#run(fzf#wrap({
-\ 'options': '-m',
+\ 'options': '-m --with-nth 3.. --delimiter /',
 \ 'sink*': HandleInputs,
-\ 'source': "jq -r '.[\"" . @% . "\"][]' .git/deps.json"
+\ 'source': "get-js-deps " . @%
 \ }))
-
-command! Vdirty call fzf#run(fzf#wrap({
-\ 'options': '-m',
-\ 'sink*': HandleInputs,
-\ 'source': "git status -s | awk '{ print $NF }' "
-\ }))
-" }}}
 
 " vim-airline/vim-airline {{{
 let g:airline#extensions#branch#displayed_head_limit = 8
@@ -265,6 +256,7 @@ endfunction
 let g:ale_fixers = {
 \ 'fish': ['Fish_indent'],
 \ 'javascript': ['prettier'],
+\ 'javascriptreact': ['prettier'],
 \ 'ruby': ['rubocop'],
 \ 'rust': ['rustfmt'],
 \ }

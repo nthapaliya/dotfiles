@@ -1,45 +1,69 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 
-set -euo pipefail
+require 'json'
+require 'net/http'
+require 'uri'
 
-source "$HOME/creds.bash"
+def github_remote_information
+  re = %r{(git@github.com|https://github.com/):(?<owner>.+)/(?<repo_name>.+)$}
+  remote = `git config remote.origin.url`
+           .chomp
+           .match(re)
 
-REV=${1:-HEAD}
-HASH=$(git rev-parse "$REV")
+  exit 1 if remote.nil?
 
-URL="$( git config --list |\
-  sed -nEe 's/^remote.origin.url=(https:\/\/github.com\/|git@github.com:)([^.]+)(\.git)?/\2/p' )"
-OWNER=$(echo "$URL" | cut -d / -f 1)
-REPO_NAME=$(echo "$URL" | cut -d / -f 2)
+  [remote[:owner], remote[:repo_name]]
+end
 
-QUERY="
-{
-  repository(owner: \\\"$OWNER\\\", name: \\\"$REPO_NAME\\\") {
-    object(expression: \\\"$HASH\\\") {
-      ... on Commit {
-        associatedPullRequests(first: 1) {
-          nodes {
-            url
+key = JSON.parse(File.read("#{Dir.home}/creds.json"))['GITHUB_API_KEY']
+
+rev_parse_args = ARGV.empty? ? 'HEAD' : ARGV.join(' ')
+
+hashes = `git rev-parse #{rev_parse_args}`.chomp.split("\n")
+
+owner, repo_name = github_remote_information
+
+fragment = hashes.map do |hash|
+  "_#{hash}: object(expression: \"#{hash}\") {
+        ... on Commit {
+          associatedPullRequests(first: 5) {
+            nodes {
+              url
+            }
           }
         }
       }
-    }
+      "
+end.join("\n")
+
+query_string = "{
+  repository(owner: \"#{owner}\", name: \"#{repo_name}\") {
+  #{fragment}
   }
-}
+ }
 "
 
-URL=$( \
-  curl -s \
-    -H "Authorization: bearer $GITHUB_API_KEY" \
-    -X POST \
-    --data "{ \"query\": \"query $(echo -n $QUERY) \" }" \
-    https://api.github.com/graphql |
-  jq -r .data.repository.object.associatedPullRequests.nodes[0].url \
-  )
+uri = URI.parse('https://api.github.com/graphql')
+request = Net::HTTP::Post.new(uri)
+request['Authorization'] = "bearer #{key}"
+request.body = JSON.dump(query: query_string)
 
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(request)
+end
 
-if [[ "$URL" != "null" ]]; then
-  open "$URL"
+parsed_response = JSON.parse(response.body)
+
+urls = parsed_response
+       .dig('data', 'repository')
+       .values
+       .map { |v| v.dig('associatedPullRequests', 'nodes', 0, 'url') }
+
+if urls.length > 1
+  puts urls
+elsif urls.length == 1 && urls.first != 'null'
+  system("open #{urls.first}")
 else
   exit 1
-fi
+end

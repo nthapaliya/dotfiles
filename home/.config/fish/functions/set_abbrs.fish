@@ -4,9 +4,10 @@ function set_abbrs
     end
 
     # Work stuff
-    abbr -a -- mqa 'ssh-add -k ; env HOST=qa.ossd.co BRANCH=(git branch-name) bin/mina full_deploy;'
+    abbr -a -- mqa 'ssh-add -k ; env HOST=qa.ossd.co BRANCH=(git branch --show-current) bin/mina full_deploy;'
     abbr -a -- rsqa 'rsync -azvh osadmin@qa.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors'
     abbr -a -- h 'cd ~/OSS/huddle'
+    abbr -a -- q 'cd ~/OSS/qa'
 
     # git
     abbr -a -- g 'git'

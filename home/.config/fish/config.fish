@@ -2,21 +2,21 @@
 set -gx EDITOR /usr/local/bin/nvim
 set -gx VISUAL $EDITOR
 
-set -gx RBENV_ROOT ~/.local/opt/rbenv
-set -gx RBENV_SHELL fish
-
-for path in ~/.local/bin ~/.local/opt/fzf/bin $RBENV_ROOT/shims
-    if not contains $path $fish_user_paths
-        set -U --prepend fish_user_paths $path
-    end
-end
-
-set -gx NODE_OPTIONS "--max_old_space_size=16000"
-
-set -gx HOMEBREW_INSTALL_CLEANUP true
-
 # $SHELL
 set -gx SHELL /usr/local/bin/fish
+
+set -gx RBENV_ROOT ~/.local/opt/rbenv
+set -gx RBENV_SHELL $SHELL
+
+set -U fish_user_paths \
+    ~/.local/bin \
+    ~/.local/opt/fzf/bin \
+    ~/.local/opt/nvm/versions/node/v8.15.0/bin \
+    ~/.local/opt/elasticsearch-5.4.0/bin \
+    $RBENV_ROOT/shims \
+    ~/.cargo/bin
+
+set -gx NODE_OPTIONS "--max_old_space_size=16000"
 
 # nvm setup
 set -gx NVM_DIR ~/.local/opt/nvm
@@ -26,7 +26,7 @@ set -gx MANPAGER "nvim -c 'set ft=man' - "
 
 if command -sq rg
     # fzf + rg
-    set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --glob \'!.git\''
+    set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden'
     set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 end
 

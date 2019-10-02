@@ -1,16 +1,24 @@
 #! /bin/bash
 
-echo "brew update"
-brew update
+hfile=~/Library/Caches/Homebrew/.updated
 
-echo "brew upgrade"
-brew upgrade
+time_diff=$(( $( date +%s ) - $( date -r $hfile +%s ) ))
 
-# echo 'brew cleanup'
-# brew cleanup
+if [[ $time_diff -lt $(( 4 * 60 * 60 )) ]]; then
+  exit
+fi
 
-echo "brew cask outdated"
-brew cask outdated
+touch $hfile
 
-# echo "brew cask upgrade"
-# brew cask upgrade
+commands=( \
+  'brew update' \
+  'brew upgrade' \
+  # 'brew cleanup' \
+  'brew cask outdated' \
+  # 'brew cask upgrade' \
+  'nvim +PlugUpgrade +PlugUpdate' \
+  )
+
+for command in "${commands[@]}"; do
+  echo "$command" && $command
+done
