@@ -256,6 +256,7 @@ endfunction
 let g:ale_fixers = {
 \ 'fish': ['Fish_indent'],
 \ 'javascript': ['prettier'],
+\ 'javascriptreact': ['prettier'],
 \ 'ruby': ['rubocop'],
 \ 'rust': ['rustfmt'],
 \ }
