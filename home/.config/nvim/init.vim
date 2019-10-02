@@ -199,9 +199,9 @@ let HandleInputs = function('HandleInputs_')
 " Work specific - Use :This to find which files import the current javascript
 " file
 command! This call fzf#run(fzf#wrap({
-\ 'options': '-m',
+\ 'options': '-m --with-nth 3.. --delimiter /',
 \ 'sink*': HandleInputs,
-\ 'source': "jq -r '.[\"" . @% . "\"][]' deps.json"
+\ 'source': "get-js-deps " . @%
 \ }))
 
 " vim-airline/vim-airline {{{
