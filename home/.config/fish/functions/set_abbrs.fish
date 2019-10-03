@@ -16,6 +16,7 @@ function set_abbrs
     abbr -a -- gco 'git checkout'
     abbr -a -- gdca 'git diff --cached'
     abbr -a -- gss 'git status -s'
+    abbr -a -- gs 'git status'
 
     # dotfiles
     abbr -a -- d 'cd ~/Projects/dotfiles'
