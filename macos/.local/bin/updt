@@ -2,7 +2,11 @@
 
 hfile=~/Library/Caches/Homebrew/.updated
 
-time_diff=$(( $( date +%s ) - $( date -r $hfile +%s ) ))
+if [[ -f $hfile ]] ; then
+  time_diff=$(( $( date +%s ) - $( date -r "$hfile" +%s ) ))
+else
+  time_diff=999999999
+fi
 
 if [[ $time_diff -lt $(( 4 * 60 * 60 )) ]]; then
   exit
