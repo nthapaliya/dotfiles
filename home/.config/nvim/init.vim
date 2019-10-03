@@ -1,20 +1,10 @@
 " .vimrc {{{
 set encoding=utf-8
 scriptencoding utf-8
-
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-  augroup first_time_setup
-    autocmd!
-    autocmd VimEnter * PlugInstall
-  augroup end
-endif
 " }}}
 
 " vim-plug config {{{
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.local/opt/nvim/plugged')
 
 " Colors and themes
 Plug 'vim-airline/vim-airline'
