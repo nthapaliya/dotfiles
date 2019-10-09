@@ -10,7 +10,7 @@ function cdf
     and cd "$dir"
     and return
 
-    rg --files --hidden --glob '!.git' |
+    fd -H --type file --type directory |
     fzf \
         --reverse \
         --height=40% \
