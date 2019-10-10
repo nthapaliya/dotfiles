@@ -2,7 +2,6 @@ function cdf
     test -f "$argv"
     and set dir ( dirname "$argv" )
     and cd "$dir"
-    and echo "$dir"
     and return
 
     test -d "$argv"
@@ -25,5 +24,4 @@ function cdf
 
     test -n "$dir"
     and cd "$dir"
-    and echo "$dir"
 end
