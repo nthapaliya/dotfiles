@@ -252,6 +252,13 @@ nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 let g:test#strategy = 'dispatch'
 " }}}
 
-" Plug 'francoiscabrol/ranger.vim' {{{
-let g:ranger_replace_netrw = 0
+" neoclide/coc.nvim {{{
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nmap <silent> <Plug>d <Plug>(coc-definition)
+nmap <silent> <Plug>r <Plug>(coc-references)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+nmap <leader>rn <Plug>(coc-rename)
 " }}}
