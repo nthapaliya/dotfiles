@@ -62,15 +62,17 @@ set noshowmode
 set number
 set scrolloff=8
 set shell=bash
+set shortmess+=c
 set showbreak=\\\\\
+set signcolumn=yes
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
+set tags^=./.git/tags;
 set termguicolors
 set title
 set updatetime=100
 set visualbell
-set tags^=./.git/tags;
 
 if has('nvim')
   set inccommand=nosplit
