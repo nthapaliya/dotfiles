@@ -8,13 +8,15 @@ set -gx SHELL /usr/local/bin/fish
 set -gx RBENV_ROOT ~/.local/opt/rbenv
 set -gx RBENV_SHELL $SHELL
 
+set -gx CARGO_HOME ~/.local/opt/cargo
+set -gx RUSTUP_HOME ~/.local/opt/rustup
+
 set -U fish_user_paths \
     ~/.local/bin \
     ~/.local/opt/fzf/bin \
     ~/.local/opt/nvm/versions/node/v8.15.0/bin \
-    ~/.local/opt/elasticsearch-5.4.0/bin \
     $RBENV_ROOT/shims \
-    ~/.cargo/bin
+    $CARGO_HOME/bin
 
 set -gx NODE_OPTIONS "--max_old_space_size=16000"
 
