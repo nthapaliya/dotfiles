@@ -151,6 +151,8 @@ augroup other_filetype_tweaks
   autocmd FileType help wincmd L " open help window in vertical split
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
   autocmd FileType ruby nnoremap <F5> :!time ruby %<cr>
+  autocmd FileType rust nnoremap <F5> :!cargo run<cr>
+  autocmd  FileType fzf set noshowmode noruler nonu
 augroup END
 
 augroup general_autocommands
