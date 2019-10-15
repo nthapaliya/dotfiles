@@ -58,11 +58,11 @@ parsed_response = JSON.parse(response.body)
 urls = parsed_response
        .dig('data', 'repository')
        .values
-       .map { |v| v.dig('associatedPullRequests', 'nodes', 0, 'url') }
+       .map { |v| v&.dig('associatedPullRequests', 'nodes', 0, 'url') }
 
 if urls.length > 1
   puts urls
-elsif urls.length == 1 && urls.first != 'null'
+elsif urls.length == 1 && !urls.first.nil? && urls.first != 'null'
   system("open #{urls.first}")
 else
   exit 1
