@@ -14,6 +14,7 @@ brew "git"
 brew "jq"
 brew "librsvg"
 brew "mariadb", restart_service: true
+brew "mas"
 brew "neovim"
 brew "pv"
 brew "rbenv"
@@ -23,4 +24,15 @@ brew "stow"
 brew "tmux"
 brew "yarn"
 cask "font-fira-code"
+cask "gitup"
+cask "google-chrome"
+cask "iterm2"
 cask "kitty"
+mas "Airmail", id: 918858936
+mas "DaisyDisk", id: 411643860
+mas "Day One", id: 1055511498
+mas "Magnet", id: 441258766
+mas "Numbers", id: 409203825
+mas "RetroClip", id: 1332064978
+mas "Wipr", id: 1320666476
+mas "WireGuard", id: 1451685025
