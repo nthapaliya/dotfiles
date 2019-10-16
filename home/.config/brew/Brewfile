@@ -4,13 +4,21 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "kiliankoe/location", "https://github.com/kiliankoe/location.git"
+tap "universal-ctags/universal-ctags"
+brew "bat"
+brew "sqlite"
+brew "coreutils"
 brew "crystal"
 brew "curl"
 brew "diff-so-fancy"
 brew "fd"
+brew "ffmpeg"
 brew "fish"
 brew "geos"
 brew "git"
+brew "gnu-time"
+brew "htop"
+brew "imagemagick"
 brew "jq"
 brew "librsvg"
 brew "mariadb", restart_service: true
@@ -20,14 +28,22 @@ brew "pv"
 brew "rbenv"
 brew "redis", restart_service: true
 brew "ripgrep"
+brew "shellcheck"
 brew "stow"
+brew "terminal-notifier"
 brew "tmux"
 brew "yarn"
+brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+cask "appcleaner"
+cask "calibre"
 cask "font-fira-code"
 cask "gitup"
 cask "google-chrome"
+cask "iina"
 cask "iterm2"
+cask "keepingyouawake"
 cask "kitty"
+cask "transmission"
 mas "Airmail", id: 918858936
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
@@ -36,3 +52,4 @@ mas "Numbers", id: 409203825
 mas "RetroClip", id: 1332064978
 mas "Wipr", id: 1320666476
 mas "WireGuard", id: 1451685025
+mas "Xcode", id: 497799835
