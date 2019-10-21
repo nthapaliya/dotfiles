@@ -11,6 +11,8 @@ set -gx RBENV_SHELL $SHELL
 set -gx CARGO_HOME ~/.local/opt/cargo
 set -gx RUSTUP_HOME ~/.local/opt/rustup
 
+set XDG_CACHE_HOME "$HOME/Library/Caches/org.freedesktop"
+
 set -U fish_user_paths \
     ~/.local/bin \
     ~/.local/opt/fzf/bin \
