@@ -1,6 +1,10 @@
 function __cache_or_get_rake_completion -d "Create rake completions"
     set rakefile_hash (__hashed_rakefiles)
-    set cache_location $HOME/.cache/fish/completions/rake
+
+    set -q XDG_CACHE_HOME
+    or set XDG_CACHE_HOME $HOME/.cache
+
+    set cache_location $XDG_CACHE_HOME/fish/completions/rake
     set rake_cache_file "$cache_location/$rakefile_hash"
 
     mkdir -p $cache_location

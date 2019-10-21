@@ -11,6 +11,8 @@ set -gx RBENV_SHELL $SHELL
 set -gx CARGO_HOME ~/.local/opt/cargo
 set -gx RUSTUP_HOME ~/.local/opt/rustup
 
+set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
+
 set -U fish_user_paths \
     ~/.local/bin \
     ~/.local/opt/fzf/bin \
