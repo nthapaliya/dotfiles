@@ -1,6 +1,9 @@
 #! /bin/bash
 
-hfile=~/Library/Caches/Homebrew/.updated
+brew_cache_dir=~/Library/Caches/Homebrew
+[[ ! -d $brew_cache_dir ]] && mkdir -p $brew_cache_dir
+
+hfile=$brew_cache_dir/.updated
 
 if [[ -f $hfile ]] ; then
   time_diff=$(( $( date +%s ) - $( date -r "$hfile" +%s ) ))
