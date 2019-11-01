@@ -47,6 +47,20 @@ call plug#end()
 set autoread
 set background=dark
 set breakindent
+" Mac specific: clipboard.vim was adding 500-800ms to startup time. This fixes
+" that (for now)
+let g:clipboard = {
+\ 'copy': {
+\   '+': 'pbcopy',
+\   '*': 'pbcopy'
+\ },
+\ 'paste': {
+\   '+': 'pbpaste',
+\   '*': 'pbpaste'
+\ },
+\ 'name': 'pbcopy',
+\ 'cache_enabled': 0
+\ }
 set clipboard^=unnamed,unnamedplus
 " set cursorline
 " set cursorcolumn
@@ -179,7 +193,7 @@ let HandleInputs = function('HandleInputs_')
 command! This call fzf#run(fzf#wrap({
 \ 'options': '-m --with-nth 3.. --delimiter /',
 \ 'sink*': HandleInputs,
-\ 'source': "get-js-deps " . @%
+\ 'source': 'redis-cli -n 1 HGET huddle_deps ' . @% . ' | tr : "\n"'
 \ }))
 
 " }}}
