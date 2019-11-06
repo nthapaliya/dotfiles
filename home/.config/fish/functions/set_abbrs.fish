@@ -8,6 +8,9 @@ function set_abbrs
     abbr -a -- rsqa 'rsync -azvh osadmin@qa.ossd.co:/srv/www/huddle/shared/floors/ ~/OSS/huddle/floors'
     abbr -a -- h 'cd ~/OSS/huddle'
     abbr -a -- q 'cd ~/OSS/qa'
+    abbr -a -- ofe 'open http://localhost:3000/manager/editor'
+    abbr -a -- oma 'open http://localhost:3000/manager'
+    abbr -a -- ovd 'open http://localhost:3000/visual_directory'
 
     # git
     abbr -a -- g 'git'
