@@ -38,7 +38,6 @@ Plug 'vim-scripts/BufOnly.vim'
 
 " Linter
 Plug 'w0rp/ale'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 " }}}
@@ -268,13 +267,3 @@ nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 let g:test#strategy = 'dispatch'
 " }}}
 
-" neoclide/coc.nvim {{{
-inoremap <silent><expr> <c-space> coc#refresh()
-
-nmap <silent> <Plug>d <Plug>(coc-definition)
-nmap <silent> <Plug>r <Plug>(coc-references)
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-nmap <leader>rn <Plug>(coc-rename)
-" }}}
