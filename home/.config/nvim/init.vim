@@ -30,6 +30,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
 Plug 'wincent/terminus'
 Plug 'tpope/vim-dispatch'
+if !has('nvim')
+  Plug 'tpope/vim-sensible'
+endif
 
 " File/buffer management
 Plug 'justinmk/vim-dirvish'
@@ -89,13 +92,15 @@ set visualbell
 
 if has('nvim')
   set inccommand=nosplit
+  set pumblend=40
 endif
-
-set path+=app/javascript,node_modules
 
 if !has('nvim')
   set viminfo+=n~/.local/share/nvim/viminfo
+  set hlsearch
 endif
+
+set path+=app/javascript,node_modules
 
 " for vim in tmux only
 " :help xterm-true-color
@@ -190,7 +195,7 @@ let HandleInputs = function('HandleInputs_')
 " Work specific - Use :This to find which files import the current javascript
 " file
 command! This call fzf#run(fzf#wrap({
-\ 'options': '-m --with-nth 3.. --delimiter /',
+\ 'options': '-1 -m --with-nth 3.. --delimiter /',
 \ 'sink*': HandleInputs,
 \ 'source': 'redis-cli -n 1 HGET huddle_deps ' . @% . ' | tr : "\n"'
 \ }))
@@ -262,8 +267,3 @@ let g:ale_disable_lsp = 1
 nmap <silent> <leader>j <Plug>(ale_next_wrap)
 nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 " }}}
-
-" Plug 'janko-m/vim-test' {{{
-let g:test#strategy = 'dispatch'
-" }}}
-
