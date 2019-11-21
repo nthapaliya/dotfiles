@@ -21,7 +21,7 @@ begin
 
   Pry.config.history.file = HISTORY_FILE
   Pry.config.should_load_rc = false
-  Pry.config.editor = 'nvim'
+  Pry.config.editor = 'vim'
 
   Pry.start
 

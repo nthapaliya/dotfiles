@@ -24,7 +24,7 @@ commands=( \
   'brew cask outdated' \
   'brew bundle dump --force --file=~/.config/brew/Brewfile' \
   # 'brew cask upgrade' \
-  'nvim +PlugUpgrade +PlugUpdate' \
+  'vim +PlugUpgrade +PlugUpdate' \
   )
 
 for command in "${commands[@]}"; do

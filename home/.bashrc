@@ -1,7 +1,7 @@
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 export PS1="bash \[\e[36m\]\w\[\e[m\] "
 
-alias vi='nvim'
+alias vi='vim'
 alias ls="ls -G"
 
 export PATH=~/.local/bin:$PATH

@@ -12,5 +12,5 @@ function peek
     end
 
     # e ( functions $name | head -1 | cut -c14- | cut -d ' ' -f1 )
-    eval ( functions $name | head -1 | cut -c14- | awk '{ print "nvim", $1, "+" $NF }' )
+    eval ( functions $name | head -1 | cut -c14- | awk '{ print "vi", $1, "+" $NF }' )
 end

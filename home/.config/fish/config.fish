@@ -1,5 +1,9 @@
 # $EDITOR
-set -gx EDITOR /usr/local/bin/nvim
+if command -sq nvim
+    set -gx EDITOR nvim
+else
+    set -gx EDITOR vim
+end
 set -gx VISUAL $EDITOR
 
 # $SHELL
@@ -26,7 +30,12 @@ set -gx NODE_OPTIONS "--max_old_space_size=16000"
 set -gx NVM_DIR ~/.local/opt/nvm
 
 # $MANPAGER
-set -gx MANPAGER "nvim -c 'set ft=man' - "
+if command -sq nvim
+    set -gx MANPAGER "nvim -c 'set ft=man' - "
+end
+
+# Brewfile
+set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
 if command -sq fd
     # fzf + fd
