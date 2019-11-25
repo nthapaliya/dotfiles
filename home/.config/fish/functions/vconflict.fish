@@ -5,6 +5,5 @@ function vconflict
         set git_rev ( git rev-parse HEAD )
     end
 
-    # e ( git diff-tree --no-commit-id --name-only -r $git_rev )
-    e ( git status --short | grep '^UU' | cut -c4- )
+    e (git conflict)
 end
