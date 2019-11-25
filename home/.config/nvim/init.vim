@@ -9,19 +9,25 @@ call plug#begin('~/.local/opt/nvim/plugged')
 " Colors and themes
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 
 " Language enhancements
 Plug 'sheerun/vim-polyglot'
 
 " Vim enhancements
+if !has('nvim')
+  Plug 'tpope/vim-sensible'
+endif
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.local/opt/fzf', 'do': './install --all --xdg' }
 Plug 'junegunn/fzf.vim'
+Plug 'rhysd/git-messenger.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
@@ -29,10 +35,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
 Plug 'wincent/terminus'
-Plug 'tpope/vim-dispatch'
-if !has('nvim')
-  Plug 'tpope/vim-sensible'
-endif
+Plug 'zenbro/mirror.vim'
 
 " File/buffer management
 Plug 'justinmk/vim-dirvish'
@@ -110,7 +113,7 @@ if !has('nvim') && exists('$TMUX')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-colorscheme gruvbox
+colorscheme nord
 " }}}
 
 " keymappings {{{
