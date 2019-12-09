@@ -47,6 +47,7 @@ function clone-server
     end
 
     rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/photos ~/OSS/huddle/ &
+    rsync -azvh osadmin@$server.ossd.co:/srv/www/huddle/shared/storage ~/OSS/huddle/ &
 
     set server_db ~/OSS/huddle/tmp/$server-$date.sql.gz
 
@@ -55,6 +56,7 @@ function clone-server
 
     echo 'loading db into mysql'
     pv $server_db | gunzip | mysql -uroot officespace
+    fg
     fg
     fg
 end
