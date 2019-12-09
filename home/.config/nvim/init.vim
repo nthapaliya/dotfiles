@@ -9,7 +9,6 @@ call plug#begin('~/.local/opt/nvim/plugged')
 " Colors and themes
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
-Plug 'arcticicestudio/nord-vim'
 
 " Language enhancements
 Plug 'sheerun/vim-polyglot'
@@ -113,7 +112,7 @@ if !has('nvim') && exists('$TMUX')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-colorscheme nord
+colorscheme gruvbox
 " }}}
 
 " keymappings {{{
