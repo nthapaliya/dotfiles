@@ -9,25 +9,14 @@ set -gx VISUAL $EDITOR
 # $SHELL
 set -gx SHELL /usr/local/bin/fish
 
-set -gx RBENV_ROOT ~/.local/opt/rbenv
-set -gx RBENV_SHELL $SHELL
-
-set -gx CARGO_HOME ~/.local/opt/cargo
-set -gx RUSTUP_HOME ~/.local/opt/rustup
-
 set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
 
 set -U fish_user_paths \
     ~/.local/bin \
     ~/.local/opt/fzf/bin \
-    ~/.local/opt/nvm/versions/node/v8.15.0/bin \
-    $RBENV_ROOT/shims \
-    $CARGO_HOME/bin
+    ~/.local/opt/asdf/installs/rust/stable/bin
 
 set -gx NODE_OPTIONS "--max_old_space_size=16000"
-
-# nvm setup
-set -gx NVM_DIR ~/.local/opt/nvm
 
 # $MANPAGER
 if command -sq nvim
@@ -42,6 +31,11 @@ if command -sq fd
     set -gx FZF_DEFAULT_COMMAND 'fd -H --type file'
     set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
     set -gx FZF_ALT_C_COMMAND 'fd -H --type directory'
+end
+
+if command -sq asdf
+    set -gx ASDF_DATA_DIR ~/.local/opt/asdf
+    source /usr/local/opt/asdf/asdf.fish
 end
 
 if test "$TERM_PROGRAM" = 'iTerm.app' && status --is-interactive
