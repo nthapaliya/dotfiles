@@ -1,4 +1,5 @@
-function peek
+function edit --description 'alias edit peek'
+
     set name $argv[1]
 
     set TYPE ( type -t $name )
