@@ -24,6 +24,8 @@ commands=( \
   'brew cask outdated' \
   'brew bundle dump --force --file=~/.config/brew/Brewfile' \
   # 'brew cask upgrade' \
+  'mas outdated' \
+  # 'mas upgrade'
   'vim +PlugUpgrade +PlugUpdate' \
   )
 

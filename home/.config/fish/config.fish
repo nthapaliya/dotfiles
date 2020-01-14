@@ -20,7 +20,9 @@ set -gx NODE_OPTIONS "--max_old_space_size=16000"
 
 # $MANPAGER
 if command -sq nvim
-    set -gx MANPAGER "nvim -c 'set ft=man' - "
+    set -gx MANPAGER "nvim +Man!"
+else
+    set -gx MANPAGER "vim -M +MANPAGER -"
 end
 
 # Brewfile
