@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+# vim: set ft=ruby:
+
+HISTORY_FILE = File.join(Dir.home, '.local', 'share', 'irb', 'history')
+Pry.config.history.file = HISTORY_FILE
+Pry.config.requires = ['table_print']
+
+begin
+  require 'hirb'
+  Pry.config.print = proc do |output, value, pry|
+    Hirb::View.view_or_page_output(value) ||
+      Pry::DEFAULT_PRINT.call(output, value, pry)
+  end
+
+  Hirb.enable
+rescue LoadError
+  puts 'Cannot load hirb!'
+end
+
+begin
+  require 'rb-readline'
+
+  def RbReadline.rl_reverse_search_history(_sign, _key)
+    rl_insert_text `grep -v exit #{HISTORY_FILE} | fzf --tac |  tr '\n' ' '`
+  end
+rescue LoadError
+  puts 'cannot load rb-readline!'
+end
