@@ -14,7 +14,9 @@ set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
 set -U fish_user_paths \
     ~/.local/bin \
     ~/.local/opt/fzf/bin \
+    ~/.local/opt/asdf/installs/golang/1.13.5/packages/bin \
     ~/.local/opt/asdf/installs/rust/stable/bin
+# ^^ evaluate whether or not we need rust/stable/bin in $PATH
 
 set -gx NODE_OPTIONS "--max_old_space_size=16000"
 
