@@ -131,7 +131,6 @@ nnoremap <leader>*  *N"zyiw:Rg <c-r>z<cr>
 " :Rg <c-r>z -> Run : command Rg, <c-r>z replaces itself with z register
 " contents
 
-inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
 
 nmap <leader>cs :let @*=expand("%:p")<CR>
