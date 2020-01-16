@@ -237,6 +237,40 @@ augroup fzf
   autocmd  FileType fzf set laststatus=0 noshowmode noruler
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup end
+
+" Terminal buffer options for fzf
+if has('nvim') && exists('&winblend') && &termguicolors
+  set winblend=10
+
+  hi NormalFloat guibg=None
+  if exists('g:fzf_colors.bg')
+    call remove(g:fzf_colors, 'bg')
+  endif
+
+  if stridx($FZF_DEFAULT_OPTS, '--reverse') == -1
+    let $FZF_DEFAULT_OPTS .= ' --reverse'
+  endif
+
+  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
+    let $FZF_DEFAULT_OPTS .= ' --border'
+  endif
+
+  function! FloatingFZF()
+    let width = float2nr(&columns * 0.9)
+    let height = float2nr(&lines * 0.6)
+    let opts = {
+          \ 'relative': 'editor',
+          \ 'row': 1,
+          \ 'col': (&columns - width) / 2,
+          \ 'width': width,
+          \ 'height': height
+          \ }
+
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+endif
 " }}}
 
 " unblevable/quick-scope {{{
