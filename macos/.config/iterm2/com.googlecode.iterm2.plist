@@ -12,6 +12,8 @@
 	<false/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
+	<key>ApplePressAndHoldEnabled</key>
+	<false/>
 	<key>AppleScrollAnimationEnabled</key>
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
@@ -621,17 +623,17 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2456 -212 1177 622 1680 -390 2560 1417 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
-	<string>679 662 616 174 0 0 1920 1057 </string>
+	<string>2332 733 616 174 1680 71 1920 1057 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>2650 148 700 622 1680 -390 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>2170 635 1018 447 1680 294 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>888 631 650 426 0 0 1920 1057 </string>
+	<string>2716 702 650 426 1680 71 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1681 377 1090 751 1680 71 1920 1057 </string>
+	<string>1 601 650 426 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2466 339 1090 762 1680 71 1920 1057 </string>
+	<string>840 0 840 1027 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>289 -275 1122 762 0 0 1920 1057 </string>
 	<key>NeverWarnAboutOverrides</key>
@@ -3135,6 +3137,7 @@
 		<string>3.3.0beta12</string>
 		<string>3.3.7beta3</string>
 		<string>3.3.0beta13</string>
+		<string>3.3.8beta5</string>
 		<string>3.3.1beta1</string>
 		<string>3.3.6</string>
 		<string>3.3.5beta1</string>
@@ -3142,6 +3145,8 @@
 		<string>3.3.3beta2</string>
 		<string>3.3.5beta3</string>
 		<string>3.3.7beta2</string>
+		<string>3.3.8beta1</string>
+		<string>3.3.7</string>
 	</array>
 	<key>NoSyncAutoBurialReveal</key>
 	<true/>
@@ -3156,6 +3161,8 @@
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
+	<key>NoSyncHaveUsedCopyMode</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallUtilitiesPackage</key>
@@ -3165,7 +3172,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>4D20B3B6-1F85-4C3B-AF33-42CF84233A5E</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>49</integer>
+	<integer>63</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4130,7 +4137,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-11-21T16:53:56Z</date>
+	<date>2020-01-28T14:32:54Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4212,7 +4219,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.7beta3</string>
+	<string>3.3.8beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
