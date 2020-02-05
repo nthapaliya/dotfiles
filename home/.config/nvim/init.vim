@@ -124,13 +124,14 @@ nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<CR>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <Left>     :bprev<cr>
 nnoremap <Right>    :bnext<cr>
-nnoremap <leader>*  *N"zyiw:Rg <c-r>z<cr>
 " *N -> Search for word under cursor, highlight, jump back to prev word (*
 " moves on to next)
 " "zyiw -> yank word under cursor (iw) and store in register z
 " :Rg <c-r>z -> Run : command Rg, <c-r>z replaces itself with z register
 " contents
+nnoremap <leader>*  *N"zyiw:Rg <c-r>z<cr>
 
+inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
 
 nmap <leader>cs :let @*=expand("%:p")<CR>
@@ -229,6 +230,7 @@ let g:airline#extensions#tabline#show_buffers = 1
 
 " junegunn/fzf {{{
 nnoremap <C-p> :Files<cr>
+nnoremap <C-g> :GFiles?<cr>
 nnoremap <leader>b :Buffers<cr>
 
 " https://github.com/junegunn/fzf.vim#hide-statusline
@@ -238,38 +240,43 @@ augroup fzf
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup end
 
-" Terminal buffer options for fzf
-if has('nvim') && exists('&winblend') && &termguicolors
-  set winblend=10
+" Using floating windows of Neovim to start fzf
+if has('nvim')
+  function! FloatingFZF(width, height, border_highlight)
+    function! s:create_float(hl, opts)
+      let buf = nvim_create_buf(v:false, v:true)
+      let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
+      let win = nvim_open_win(buf, v:true, opts)
+      call setwinvar(win, '&winhighlight', 'NormalFloat:'.a:hl)
+      call setwinvar(win, '&colorcolumn', '')
+      return buf
+    endfunction
 
-  hi NormalFloat guibg=None
-  if exists('g:fzf_colors.bg')
-    call remove(g:fzf_colors, 'bg')
-  endif
+    " Size and position
+    let width = float2nr(&columns * a:width)
+    let height = float2nr(&lines * a:height)
+    let row = float2nr((&lines - height) / 2)
+    let col = float2nr((&columns - width) / 2)
 
-  if stridx($FZF_DEFAULT_OPTS, '--reverse') == -1
-    let $FZF_DEFAULT_OPTS .= ' --reverse'
-  endif
+    " Border
+    let top = '╭' . repeat('─', width - 2) . '╮'
+    let mid = '│' . repeat(' ', width - 2) . '│'
+    let bot = '╰' . repeat('─', width - 2) . '╯'
+    let border = [top] + repeat([mid], height - 2) + [bot]
 
-  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
-    let $FZF_DEFAULT_OPTS .= ' --border'
-  endif
+    " Draw frame
+    let s:frame = s:create_float(a:border_highlight, {'row': row, 'col': col, 'width': width, 'height': height})
+    call nvim_buf_set_lines(s:frame, 0, -1, v:true, border)
 
-  function! FloatingFZF()
-    let width = float2nr(&columns * 0.9)
-    let height = float2nr(&lines * 0.6)
-    let opts = {
-          \ 'relative': 'editor',
-          \ 'row': 1,
-          \ 'col': (&columns - width) / 2,
-          \ 'width': width,
-          \ 'height': height
-          \ }
-
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    " Draw viewport
+    call s:create_float('Normal', {'row': row + 1, 'col': col + 2, 'width': width - 4, 'height': height - 2})
+    autocmd BufWipeout <buffer> execute 'bwipeout' s:frame
   endfunction
 
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+  let g:fzf_layout = { 'window': 'call FloatingFZF(0.9, 0.6, "Comment")' }
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 endif
 " }}}
 
