@@ -1,0 +1,2 @@
+--ignore=plug/.vim/.old
+--ignore=fish_user_key_bindings.fish
