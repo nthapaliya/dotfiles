@@ -1,1 +1,1 @@
-../../../../../../.local/opt/fzf/shell/key-bindings.fish
+/Users/ndthp/.local/opt/fzf/shell/key-bindings.fish
