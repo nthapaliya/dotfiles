@@ -20,6 +20,8 @@ set -U fish_user_paths \
 
 set -gx NODE_OPTIONS "--max_old_space_size=16000"
 
+# set -gx GOPATH ~/.local/opt/asdf/installs/golang/1.13.5/packages
+
 # $MANPAGER
 if command -sq nvim
     set -gx MANPAGER "nvim +Man!"
