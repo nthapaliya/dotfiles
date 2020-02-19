@@ -10,19 +10,12 @@ hash stow 2>/dev/null || {
   exit 1
 }
 
-# Symlink files
-DESTINATIONS=(home)
-
-if [[ $(uname) == 'Darwin' ]]; then
-  DESTINATIONS+=(macos)
-fi
-
 case $1 in
   '')
-    stow -R --target="$HOME" "${DESTINATIONS[@]}"
+    stow -R --target="$HOME" home
     ;;
   --uninstall|-u)
-    stow -D --target="$HOME" "${DESTINATIONS[@]}"
+    stow -D --target="$HOME" home
     ;;
   *)
     echo $"Usage: $0 [-u|--uninstall]"
