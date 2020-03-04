@@ -1,3 +1,3 @@
 function rubox
-    bundle exec rubocop -a -R -D **/*.{rb,rake}
+    bundle exec rubocop -a -D **/*.{rb,rake}
 end
