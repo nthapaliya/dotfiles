@@ -322,6 +322,9 @@ let g:ale_javascript_eslint_executable = 'eslintme'
 let g:ale_fix_on_save = 1
 let g:ale_disable_lsp = 1
 
+let g:ale_rust_cargo_check_tests = 1
+let g:ale_rust_cargo_use_clippy = 1
+
 nmap <silent> <leader>j <Plug>(ale_next_wrap)
 nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 " }}}
