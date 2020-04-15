@@ -40,6 +40,9 @@ function __clear_variables
 end
 
 function __polygon_handle_preexec --on-event fish_preexec
+    if string trim --left -q "$argv"
+        return
+    end
     set -g _start_date ( date +%s )
     set -g _command (string trim "$argv")
     set -g _pwd "$PWD"

@@ -7,6 +7,9 @@ if not command -sq hexagon
 end
 
 function __hexagon_handle_preexec --on-event fish_preexec
+    if string trim --left -q "$argv"
+        return
+    end
     set -g _hexagon_command (string trim "$argv")
     set -g _hexagon_pwd "$PWD"
 end
