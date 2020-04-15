@@ -9,7 +9,10 @@ set -g __fish_git_prompt_char_untrackedfiles '*'
 
 function fish_prompt --description 'Write out the prompt'
     set last_status $status
-    emit custom_postexec $status $CMD_DURATION
+
+    # Once fish is updated, you can delete this line
+    # And make stuff in conf.d respond to regular postexec
+    emit custom_postexec $last_status $CMD_DURATION
 
     if set -q SSH_CLIENT
         or set -q SSH_TTY
