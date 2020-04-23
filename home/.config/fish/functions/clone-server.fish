@@ -25,8 +25,6 @@ function clone-server
 
     if test -n "$_flag_full"
         set ssh_command "MYSQL_PWD=\"`$password_script`\" mysqldump -v -u officespace --databases officespace --add-drop-database --hex-blob | gzip"
-
-        set estimated_size 95m
     else
         set ignored_tables \
             binary_attachments \
@@ -41,7 +39,6 @@ function clone-server
         set mysql_dump_schema 'mysqldump -u officespace --databases officespace --no-data --add-drop-database' # all the CREATE TABLE statements
         set mysql_dump_data "mysqldump -u officespace officespace --no-create-info --hex-blob $ignored_tables_cmd" # only the INSERT INTO statements
         set mysql_dump_floor "mysqldump -u officespace officespace --no-create-info --hex-blob Floor | sed -Ee 's/0x[0-9a-fA-F]{200,}/0xffffff/g'"
-        set estimated_size 4m
 
         set ssh_command "export MYSQL_PWD=\"`$password_script`\"; cat <($mysql_dump_schema) <($mysql_dump_data) <($mysql_dump_floor) | gzip"
     end
@@ -52,7 +49,7 @@ function clone-server
     set server_db $HUDDLE_DIR/tmp/$server-$date.sql.gz
 
     echo "downloading db from $server"
-    ssh -A osadmin@$server.ossd.co "$ssh_command" | pv -s $estimated_size >$server_db
+    ssh -A osadmin@$server.ossd.co "$ssh_command" | pv >$server_db
 
     echo 'loading db into mysql'
     pv $server_db | gunzip | mysql -uroot officespace
