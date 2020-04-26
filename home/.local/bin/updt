@@ -15,8 +15,6 @@ if [[ $time_diff -lt $(( 4 * 60 * 60 )) ]]; then
   exit
 fi
 
-touch $hfile
-
 commands=( \
   'brew update' \
   'brew upgrade' \
@@ -32,3 +30,5 @@ commands=( \
 for command in "${commands[@]}"; do
   echo "$command" && $command
 done
+
+touch $hfile

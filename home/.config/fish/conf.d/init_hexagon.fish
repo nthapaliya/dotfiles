@@ -1,8 +1,6 @@
 if not status --is-interactive
-    exit
-end
-
-if not command -sq hexagon
+    or not command -sq hexagon
+    or test (id -u) -eq 0
     exit
 end
 
@@ -16,22 +14,17 @@ end
 
 set -gx HOSTNAME $hostname
 
-# once fish is updated, you can change custom_postexec to regular fish_postexec
-# need work getting the command duration though
-function __hexagon_handle_postexec --on-event custom_postexec
+# eventually we might be able to use postexec
+function __hexagon_handle_postexec --on-event fish_prompt
     # Local variables
-    set prev_status $argv[1]
-    set prev_duration $argv[2]
+    set prev_status $status
+    set prev_duration $CMD_DURATION
     set prev_cmd $_hexagon_command
     set prev_pwd $_hexagon_pwd
 
     # Clear globals
     set -e _hexagon_command
     set -e _hexagon_pwd
-
-    # Sudo detection, but I'm not sure it works
-    test (id -u) -eq 0
-    and return
 
     test -z "$prev_cmd"
     and return
