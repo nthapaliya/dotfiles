@@ -5,5 +5,5 @@ function vconflict
         set git_rev ( git rev-parse HEAD )
     end
 
-    e (git conflict)
+    nvim (git conflict)
 end

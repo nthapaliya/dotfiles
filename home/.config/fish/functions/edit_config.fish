@@ -1,5 +1,5 @@
 function edit_config
     set config ~/.config/fish/config.fish
-    e $config
+    nvim $config
     and source $config
 end
