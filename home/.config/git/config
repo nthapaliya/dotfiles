@@ -29,6 +29,7 @@
 [stash]
 	showPatch = true
 [diff]
+	algorithm = patience
 	indentHeuristic = on
 	renamelimit = 10000
 [commit]
