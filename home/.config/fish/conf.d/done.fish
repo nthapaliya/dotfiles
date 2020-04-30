@@ -8,7 +8,7 @@ function __done_ended --on-event fish_prompt
     set exit_status $status
     set cmd_duration $CMD_DURATION
 
-    test $cmd_duration -lt 60000; and return
+    test $cmd_duration -lt 10000; and return
 
     test "$__done_initial_window_id" = (__done_get_focused_window_id)
     and test -n "$TMUX"
