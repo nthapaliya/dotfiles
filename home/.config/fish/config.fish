@@ -5,8 +5,6 @@ set -gx VISUAL $EDITOR
 # $SHELL
 set -gx SHELL /usr/local/bin/fish
 
-set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
-
 set -U fish_user_paths \
     ~/.local/bin
 
@@ -25,7 +23,5 @@ if command -sq fd
     set -gx FZF_ALT_C_COMMAND 'fd -H --type directory'
 end
 
-if command -sq asdf
-    set -gx ASDF_DATA_DIR ~/.local/opt/asdf
-    source /usr/local/opt/asdf/asdf.fish
-end
+test -e ~/.asdf/asdf.fish
+and source ~/.asdf/asdf.fish
