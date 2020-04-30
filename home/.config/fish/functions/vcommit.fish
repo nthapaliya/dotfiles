@@ -19,8 +19,8 @@ function vcommit
     or set git_rev ( git rev-parse HEAD )
 
     if test -n "$_flag_interactive"
-        e ( __gcc $git_rev )
+        nvim ( __gcc $git_rev )
     else
-        e ( git diff-tree --no-commit-id --name-only -r $git_rev )
+        nvim ( git diff-tree --no-commit-id --name-only -r $git_rev )
     end
 end

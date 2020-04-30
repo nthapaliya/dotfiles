@@ -6,9 +6,9 @@ function edit --description 'edit fish functions and bash scripts in $PATH'
     and return
 
     if test "$TYPE" = "file"
-        e ( type --force-path $name )
+        nvim ( type --force-path $name )
         return
     end
 
-    vi ( functions --details $name )
+    nvim ( functions --details $name )
 end

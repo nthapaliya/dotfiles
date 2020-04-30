@@ -19,8 +19,8 @@ function vdirty
     set git_args $argv
 
     if test -n "$_flag_interactive"
-        e ( __gf )
+        nvim ( __gf )
     else
-        e ( git status -s -- $git_args | cut -c4- )
+        nvim ( git status -s -- $git_args | cut -c4- )
     end
 end

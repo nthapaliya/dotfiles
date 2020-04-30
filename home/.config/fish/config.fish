@@ -1,9 +1,5 @@
 # $EDITOR
-if command -sq nvim
-    set -gx EDITOR nvim
-else
-    set -gx EDITOR vim
-end
+set -gx EDITOR nvim
 set -gx VISUAL $EDITOR
 
 # $SHELL
@@ -20,11 +16,7 @@ set -gx NODE_OPTIONS "--max_old_space_size=16000"
 # set -gx GOPATH ~/.local/opt/asdf/installs/golang/1.13.5/packages
 
 # $MANPAGER
-if command -sq nvim
-    set -gx MANPAGER "nvim +Man!"
-else
-    set -gx MANPAGER "vim -M +MANPAGER -"
-end
+set -gx MANPAGER "nvim +Man!"
 
 # Brewfile
 set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile

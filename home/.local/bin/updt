@@ -24,7 +24,7 @@ commands=( \
   # 'brew cask upgrade' \
   'mas outdated' \
   # 'mas upgrade'
-  'vim +PlugUpgrade +PlugUpdate' \
+  'nvim +PlugUpgrade +PlugUpdate' \
   )
 
 for command in "${commands[@]}"; do
