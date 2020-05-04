@@ -14,6 +14,8 @@ function set_abbrs
     abbr -a -- rubox 'bin/rubocop -a -D **/*.{rb,rake}'
     abbr -a -- rubo 'git status -s -- \*.{rb,rake} | cut -c4- | xargs bin/rubocop -a -D'
     abbr -a -- spec 'git status -s -- spec/**/*_spec.rb | cut -c4- | xargs bin/rspec'
+    abbr -a -- vconflict 'nvim (git conflict)'
+    abbr -a -- vdirty 'nvim ( git status -s | cut -c4- )'
 
     # git
     abbr -a -- g 'git'
