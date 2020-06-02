@@ -69,6 +69,7 @@ set clipboard^=unnamed,unnamedplus
 " set cursorline
 " set cursorcolumn
 set hidden
+set hlsearch
 set ignorecase
 set infercase
 set lazyredraw
@@ -93,12 +94,8 @@ set visualbell
 
 if has('nvim')
   set inccommand=nosplit
-  set pumblend=40
-endif
-
-if !has('nvim')
+else
   set viminfo+=n~/.local/share/nvim/viminfo
-  set hlsearch
 endif
 
 set path+=app/javascript,node_modules
