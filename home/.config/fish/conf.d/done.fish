@@ -1,3 +1,5 @@
+test (uname) = 'Darwin'; or exit
+
 function __done_get_focused_window_id
     lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
 end
