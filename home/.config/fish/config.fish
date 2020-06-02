@@ -8,8 +8,7 @@ set -gx SHELL /usr/local/bin/fish
 set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
 
 set -U fish_user_paths \
-    ~/.local/bin \
-    ~/.local/opt/fzf/bin
+    ~/.local/bin
 
 set -gx NODE_OPTIONS "--max_old_space_size=16000"
 
@@ -31,19 +30,4 @@ end
 if command -sq asdf
     set -gx ASDF_DATA_DIR ~/.local/opt/asdf
     source /usr/local/opt/asdf/asdf.fish
-end
-
-if test "$TERM_PROGRAM" = 'iTerm.app' && status --is-interactive
-    test -e ~/.iterm2_shell_integration.fish
-    and source ~/.iterm2_shell_integration.fish
-    exit
-end
-
-# translation: if kitty && !tmux
-if test -n "$KITTY_WINDOW_ID" -a -z "$TMUX"
-    if tmux ls >/dev/null 2>/dev/null
-        exec tmux attach
-    else
-        exec tmux new
-    end
 end
