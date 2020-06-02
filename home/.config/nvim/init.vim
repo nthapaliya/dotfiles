@@ -21,7 +21,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'dir': '~/.local/opt/fzf', 'do': './install --all --xdg' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'tommcdo/vim-lion'
@@ -87,7 +87,6 @@ set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
 set tags^=./.git/tags;
-set termguicolors
 set title
 set updatetime=100
 set visualbell
@@ -323,7 +322,6 @@ let g:ale_fix_on_save = 1
 let g:ale_disable_lsp = 1
 
 let g:ale_rust_cargo_check_tests = 1
-let g:ale_rust_cargo_use_clippy = 1
 
 nmap <silent> <leader>j <Plug>(ale_next_wrap)
 nmap <silent> <leader>k <Plug>(ale_previous_wrap)

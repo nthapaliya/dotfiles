@@ -15,13 +15,8 @@ function updt
     set commands \
         'brew update' \
         'brew upgrade' \
-        # 'brew cleanup' \
         'brew cask outdated' \
-        'brew bundle dump --force --file=~/.config/brew/Brewfile' \
-        # 'brew cask upgrade' \
-        'mas outdated' \
-        # 'mas upgrade'
-        'nvim +PlugUpgrade +PlugUpdate'
+        'brew bundle dump --force --file=~/.config/brew/Brewfile'
 
     for command in $commands
         echo $command
