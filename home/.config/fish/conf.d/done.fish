@@ -1,5 +1,31 @@
 test (uname) = 'Darwin'; or exit
 
+function humanized_duration
+    set duration $argv[1]
+
+    set ms (math -s0 $duration % 1000)
+    set duration (math -s0 $duration / 1000)
+
+    set ss (math -s0 $duration % 60)
+    set duration (math -s0 $duration / 60)
+
+    set mm (math -s0 $duration % 60)
+    set duration (math -s0 $duration / 60)
+
+    set hh (math -s0 $duration % 24)
+    set duration (math -s0 $duration / 24)
+
+    set dd $duration
+
+    test $dd -ne 0; and set -a values "$dd"d
+    test $hh -ne 0; and set -a values "$hh"h
+    test $mm -ne 0; and set -a values "$mm"m
+    test $ss -ne 0; and set -a values "$ss"s
+    set -a values "$ms"ms
+
+    string join ' ' $values
+end
+
 function __done_get_focused_window_id
     lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
 end
@@ -17,20 +43,15 @@ function __done_ended --on-event fish_prompt
     and tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $fish_pid"
     and return
 
-    for i in 1000 60 60 60
-        set -a l (math $cmd_duration % $i)
-        set cmd_duration (math -s0 $cmd_duration / $i)
-    end
+    set duration (humanized_duration $cmd_duration)
 
-    set humanized_duration (printf "%ih %im %is %ims\n" $l[4] $l[3] $l[2] $l[1] | string replace --all --regex '\b0[h|m|s] \b' '')
-
-    set title "Done in $humanized_duration"
+    set title "Done in $duration"
     set wd (string replace --regex "^$HOME" "~" (pwd))
     set subtitle "$wd/"
     set message "$history[1]"
 
     if test $exit_status -ne 0
-        set title "Failed ($exit_status) after $humanized_duration"
+        set title "Failed ($exit_status) after $duration"
     end
 
     terminal-notifier -message "$message" -title "$title" -subtitle "$subtitle"
