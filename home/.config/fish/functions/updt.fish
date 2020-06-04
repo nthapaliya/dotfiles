@@ -16,6 +16,7 @@ function updt
         'brew update' \
         'brew upgrade' \
         'brew cask outdated' \
+        'curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy >~/.local/bin/diff-so-fancy' \
         'brew bundle dump --force --file=~/.config/brew/Brewfile'
 
     for command in $commands
