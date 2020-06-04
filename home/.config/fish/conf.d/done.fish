@@ -27,7 +27,20 @@ function humanized_duration
 end
 
 function __done_get_focused_window_id
-    lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
+    set tm_format "#{session_attached} #{window_active} #{pane_active} #{pane_pid}"
+    set prefix (lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4)
+
+    test "$TERM_PROGRAM" = 'Apple_Terminal'
+    and set __suffix "$TERM_SESSION_ID"
+
+    test -n "$TMUX"
+    and set __suffix (
+      tmux list-panes -a -F "$tm_format" |
+      string match -r '^1 1 1 (\d+)$' |
+      tail -1
+    )
+
+    printf "$prefix-$__suffix"
 end
 
 set -g __done_initial_window_id (__done_get_focused_window_id)
@@ -39,8 +52,6 @@ function __done_ended --on-event fish_prompt
     test $cmd_duration -lt 10000; and return
 
     test "$__done_initial_window_id" = (__done_get_focused_window_id)
-    and test -n "$TMUX"
-    and tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $fish_pid"
     and return
 
     set duration (humanized_duration $cmd_duration)
