@@ -19,7 +19,9 @@ function fish_prompt --description 'Write out the prompt'
         printf '%s%s@%s ' (set_color yellow) (whoami) (prompt_hostname)
     end
 
-    printf '%s%s%s%s' (set_color cyan) (prompt_pwd) (set_color normal) (fish_git_prompt)
+    # TODO: remove double underscore from __fish_git_prompt
+    # when Raspbian has fish version greater than v3.1.2
+    printf '%s%s%s%s' (set_color cyan) (prompt_pwd) (set_color normal) (__fish_git_prompt)
 
     if test $last_status -ne 0
         printf '%s[%s]' (set_color red) $last_status
