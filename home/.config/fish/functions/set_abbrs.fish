@@ -11,6 +11,7 @@ function set_abbrs
     abbr -a -- ofe 'open http://localhost:3000/manager/editor'
     abbr -a -- oma 'open http://localhost:3000/manager'
     abbr -a -- ovd 'open http://localhost:3000/visual_directory'
+    abbr -a -- odp 'open http://localhost:3000/manager/distancing/floors/1702'
     abbr -a -- rubox 'bin/rubocop -a -D **/*.{rb,rake}'
     abbr -a -- rubo 'git status -s -- \*.{rb,rake} | cut -c4- | xargs bin/rubocop -a -D'
     abbr -a -- spec 'git status -s -- spec/**/*_spec.rb | cut -c4- | xargs bin/rspec'
