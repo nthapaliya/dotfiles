@@ -7,7 +7,7 @@ function updt
 
     if test -f $hfile
         set time_diff (math (date +%s) - (date -r $hfile +%s))
-        test "$time_diff" -lt 14400; and return 1
+        test "$time_diff" -lt (math 8 \* 60 \* 60); and return 1
     end
 
     touch $hfile
