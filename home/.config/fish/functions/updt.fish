@@ -1,4 +1,8 @@
 function updt
+    if test (uname) != 'Darwin'
+        return 1
+    end
+
     set brew_cache_dir ~/Library/Caches/Homebrew
 
     test -d $brew_cache_dir; or mkdir -p $brew_cache_dir
