@@ -5,13 +5,13 @@
         "revision": "e96cb8ba2f8876089dae27efe3200f2ba0ef587f"
       },
       "homebrew/cask": {
-        "revision": "af396f8dfb3232d0d26eedc95e9fbd3c385b98d4"
+        "revision": "4954e652d14281312605cab1673a441be3989c9d"
       },
       "homebrew/cask-fonts": {
-        "revision": "43bb18005c1698e89ce6498351b012f7a1d803b0"
+        "revision": "c616bb69650c30468be9b27beed704a2bcf85c0a"
       },
       "homebrew/core": {
-        "revision": "34bfabe564223bc4f0e6e06a7e3cf46b482a01ad"
+        "revision": "d5426abfb0e56175f83ee4baf05fee58b64aca4a"
       },
       "homebrew/services": {
         "revision": "d2df55c36f67d10cd78bc58c84ac03e0c574d437"
@@ -1266,11 +1266,15 @@
             }
           }
         }
+      },
+      "youtube-dl": {
+        "version": "2020.06.16.1",
+        "bottle": false
       }
     },
     "cask": {
       "firefox": {
-        "version": "69.0.3",
+        "version": "77.0.1",
         "options": {
           "full_name": "firefox"
         }
@@ -1282,19 +1286,19 @@
         }
       },
       "gitup": {
-        "version": "1.0.11",
+        "version": "1.1.3",
         "options": {
           "full_name": "gitup"
         }
       },
       "google-chrome": {
-        "version": "77.0.3865.120",
+        "version": "83.0.4103.97",
         "options": {
           "full_name": "google-chrome"
         }
       },
       "iina": {
-        "version": "1.0.6",
+        "version": "1.0.7",
         "options": {
           "full_name": "iina"
         }
@@ -1306,7 +1310,7 @@
         }
       },
       "keepingyouawake": {
-        "version": "1.4.2",
+        "version": "1.5.1",
         "options": {
           "full_name": "keepingyouawake"
         }
@@ -1318,7 +1322,7 @@
         }
       },
       "sublime-merge": {
-        "version": "1119",
+        "version": "2020",
         "options": {
           "full_name": "sublime-merge"
         }
@@ -1394,7 +1398,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.4.0-41-g0125c4c",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "34bfabe564223bc4f0e6e06a7e3cf46b482a01ad",
+        "Homebrew/homebrew-core": "d5426abfb0e56175f83ee4baf05fee58b64aca4a",
         "CLT": "1103.0.32.59",
         "Xcode": "11.5",
         "macOS": "10.15.6"

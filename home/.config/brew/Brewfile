@@ -4,59 +4,77 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
-brew "autoconf"
-brew "automake"
+# GNU File, Shell, and Text utilities
 brew "coreutils"
-brew "libtool"
-brew "libyaml"
+# Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
+# Library for command-line editing
 brew "readline"
-brew "unixodbc"
+# Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-brew "libpng"
+# Statistics utility to count lines of code
 brew "cloc"
-brew "crystal"
+# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
-brew "ffmpeg"
+# User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# Geometry Engine
 brew "geos"
+# GitHub command-line tool
 brew "gh"
-brew "ghostscript"
+# Distributed revision control system
 brew "git"
+# GNU implementation of time utility
 brew "gnu-time"
+# GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# Improved top (interactive process viewer)
 brew "htop"
-brew "imagemagick"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
-brew "libimagequant"
-brew "librsvg"
+# Drop-in replacement for MySQL
 brew "mariadb", restart_service: true
+# Mac App Store command-line interface
 brew "mas"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-brew "pngcrush"
-brew "pngquant"
-brew "poppler"
+# Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
+# Monitor data's progress through a pipe
 brew "pv"
+# Persistent key-value database, with built-in net interface
 brew "redis", restart_service: true
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Utility that provides fast incremental file transfer
 brew "rsync"
+# Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Displays the differences between SQLite databases
 brew "sqldiff"
+# Analyze how space is allocated inside an SQLite file
 brew "sqlite-analyzer"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
-brew "svgo"
+# Send macOS User Notifications from the command-line
 brew "terminal-notifier"
+# Terminal multiplexer
 brew "tmux"
+# Display directories as trees (with optional color/HTML output)
 brew "tree"
-brew "uncrustify"
+# Vi 'workalike' with many additional features
 brew "vim"
-brew "vips"
+# JavaScript package manager
 brew "yarn"
-brew "zlib"
+# Download YouTube videos from the command-line
+brew "youtube-dl"
+# Maintained ctags implementation
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "firefox"
 cask "font-fira-code"
