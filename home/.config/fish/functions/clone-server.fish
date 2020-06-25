@@ -28,7 +28,6 @@ function clone-server
     else
         set ignored_tables \
             binary_attachments \
-            Floor \
             request_manager_reports \
             request_statistics_reports \
             sessions \
@@ -38,9 +37,8 @@ function clone-server
 
         set mysql_dump_schema 'mysqldump -u officespace --databases officespace --no-data --add-drop-database' # all the CREATE TABLE statements
         set mysql_dump_data "mysqldump -u officespace officespace --no-create-info --hex-blob $ignored_tables_cmd" # only the INSERT INTO statements
-        set mysql_dump_floor "mysqldump -u officespace officespace --no-create-info --hex-blob Floor | sed -Ee 's/0x[0-9a-fA-F]{200,}/0xffffff/g'"
 
-        set ssh_command "export MYSQL_PWD=\"`$password_script`\"; cat <($mysql_dump_schema) <($mysql_dump_data) <($mysql_dump_floor) | gzip"
+        set ssh_command "export MYSQL_PWD=\"`$password_script`\"; cat <($mysql_dump_schema) <($mysql_dump_data) | gzip"
     end
 
     # Needs homebrew version of rsync, not the built in one
