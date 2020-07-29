@@ -1,5 +1,5 @@
 nodejs 8.16.2
-ruby 2.6.2
+ruby 2.7.1
 rust stable
 direnv 2.20.0
 golang 1.13.5
