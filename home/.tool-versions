@@ -1,4 +1,4 @@
-nodejs 8.16.2
+nodejs 12.16.1
 ruby 2.7.1
 rust stable
 direnv 2.20.0
