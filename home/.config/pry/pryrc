@@ -2,30 +2,32 @@
 
 # vim: set ft=ruby:
 
-HISTORY_FILE = File.join(Dir.home, '.local', 'share', 'irb', 'history')
-Pry.config.history.file = HISTORY_FILE
-Pry.config.requires = ['table_print']
+history_file = File.join(Dir.home, '.local', 'share', 'irb', 'history')
+Pry.config.history_file = history_file
 
-begin
-  require 'hirb'
-  Pry.config.print = proc do |output, value, pry|
-    (Hirb::View.view_or_page_output(value) rescue false) ||
-      Pry::DEFAULT_PRINT.call(output, value, pry)
-  end
+# TODO: make this work independent of OSS gemfile
+require 'rb-readline'
 
-  Hirb.enable
-rescue LoadError
-  puts 'Cannot load hirb!'
+def RbReadline.rl_reverse_search_history(_sign, _key)
+  rl_insert_text `grep -v exit #{history_file} | fzf --tac |  tr '\n' ' '`
 end
 
-begin
-  # ugly hack for now
-  $LOAD_PATH << '/Users/ndthp/.local/opt/asdf/installs/ruby/2.6.2/lib/ruby/gems/2.6.0/gems/rb-readline-0.5.5/lib'
-  require 'rb-readline'
+def pbcopy(input)
+  str = input.to_s
+  IO.popen('pbcopy', 'w') { |f| f << str }
+end
 
-  def RbReadline.rl_reverse_search_history(_sign, _key)
-    rl_insert_text `grep -v exit #{HISTORY_FILE} | fzf --tac |  tr '\n' ' '`
-  end
-rescue LoadError
-  puts 'cannot load rb-readline!'
+def reload
+  # puts "reloading #{__FILE__}"
+
+  warn_level = $VERBOSE
+
+  # This is to suppress the annoying already initialized constant warnings
+  $VERBOSE = nil
+
+  load __FILE__
+
+  $VERBOSE = warn_level
+
+  true
 end
