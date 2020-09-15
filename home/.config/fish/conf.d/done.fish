@@ -40,7 +40,7 @@ function __done_get_focused_window_id
       tail -1
     )
 
-    printf "$prefix-$__suffix"
+    printf "$prefix_$__suffix"
 end
 
 set -g __done_initial_window_id (__done_get_focused_window_id)
