@@ -22,7 +22,7 @@ function updt
         'brew bundle dump --force --describe --file=~/.config/brew/Brewfile &' \
         'brew update' \
         'brew upgrade' \
-        'brew cask outdated'
+        'brew outdated --cask'
 
     for command in $commands
         echo $command
