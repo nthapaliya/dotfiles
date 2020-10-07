@@ -19,7 +19,7 @@ function updt
     set commands \
         'curl --silent -L https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy >~/.local/bin/diff-so-fancy &' \
         'curl --silent -L https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim >~/.config/nvim/autoload/plug.vim &' \
-        'brew bundle dump --force --describe --file=~/.config/brew/Brewfile &' \
+        'brew bundle dump --force --describe --file=~/.config/brew/Brewfile' \
         'brew update' \
         'brew upgrade' \
         'brew outdated --cask'
