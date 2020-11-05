@@ -18,7 +18,7 @@ function clone-server
     echo 'backing up current local database'
     set date (date +%F--%T)
     set backup_file $HUDDLE_DIR/tmp/$date-backup.sql.gz
-    mysqldump -uroot --databases officespace --hex-blob --add-drop-database | gzip >"$backup_file"
+    mysqldump -uroot -proot --databases officespace --hex-blob --add-drop-database | gzip >"$backup_file"
 
     set password_script 'grep password /srv/www/huddle/shared/config/database.yml | cut -d : -f 2 | sed "s/^ *//;s/ *$//"'
 
@@ -50,6 +50,6 @@ function clone-server
     ssh -A osadmin@$server.ossd.co "$ssh_command" | pv >$server_db
 
     echo 'loading db into mysql'
-    pv $server_db | gunzip | mysql -uroot officespace
+    pv $server_db | gunzip | mysql -uroot -proot officespace
     fg
 end
