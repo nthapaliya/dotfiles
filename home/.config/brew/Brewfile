@@ -4,12 +4,22 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
+# Automatic configure script builder
+brew "autoconf"
+# Tool for generating GNU Standards-compliant Makefiles
+brew "automake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Generic library support script
+brew "libtool"
+# YAML Parser
+brew "libyaml"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
 # Library for command-line editing
 brew "readline"
+# ODBC 3 connectivity for UNIX
+brew "unixodbc"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -38,14 +48,18 @@ brew "gnu-time"
 brew "gnupg"
 # Improved top (interactive process viewer)
 brew "htop"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # Drop-in replacement for MySQL
 brew "mariadb", restart_service: true
 # Mac App Store command-line interface
 brew "mas"
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
 # Monitor data's progress through a pipe
@@ -97,4 +111,3 @@ mas "RetroClip", id: 1332064978
 mas "Slack", id: 803453959
 mas "Wipr", id: 1320666476
 mas "WireGuard", id: 1451685025
-mas "Xcode", id: 497799835
