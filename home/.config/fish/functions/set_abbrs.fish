@@ -16,12 +16,18 @@ function set_abbrs
     abbr -a -- rubo 'git status -s -- \*.{rb,rake} | cut -c4- | xargs bin/rubocop -a -D'
     abbr -a -- spec 'git status -s -- spec/**/*_spec.rb | cut -c4- | xargs bin/rspec'
     abbr -a -- vconflict 'nvim (git conflict)'
+
+    # add to local git config
+    # [alias]
+    # release-branch = !git branch -r --list 'origin/v3.*.x' | cut -d '/' -f 2 | sort -V | tail -1
+    abbr -a -- gcr 'git checkout (git release-branch)'
+
     abbr -a -- vdirty 'nvim ( git status -s | cut -c4- )'
 
     # git
     abbr -a -- g 'git'
     abbr -a -- gb 'git branch'
-    abbr -a -- gcm 'git checkout master'
+    abbr -a -- gcm 'git checkout main'
     abbr -a -- gco 'git checkout'
     abbr -a -- gdca 'git diff --cached'
     abbr -a -- gss 'git status -s'

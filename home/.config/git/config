@@ -17,7 +17,6 @@
 	patch = !git --no-pager diff --no-color
 	publish = !git push -u origin $(git branch --show-current)
 	purge = "!f() { local gcb=$(git branch --show-current) && git branch --merged \"$gcb\" | grep -v master | grep -v \"$gcb\" | awk '{ print $NF }' | xargs git branch -d ; } ; f"
-	release-branch = !git branch -r | grep 'origin/v3\\...\\.x$' | grep -o 'v3\\...\\.x$' | sort -V | tail -1
 	unassume = update-index --no-assume-unchanged
 	unique = log HEAD --not master
 	up = "!git remote update -p; git merge --ff-only @{u}"
@@ -44,7 +43,7 @@
 	newNormal = green bold
 	newHighlight = green bold 22
 [color "diff"]
-	meta = yellow
+	meta = 11
 	frag = magenta bold
 	commit = yellow bold
 	old = red bold
