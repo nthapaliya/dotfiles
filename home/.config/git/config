@@ -54,3 +54,5 @@
 [log]
 	decorate = short
 	abbrevCommit = true
+[interactive]
+	diffFilter = diff-so-fancy --patch

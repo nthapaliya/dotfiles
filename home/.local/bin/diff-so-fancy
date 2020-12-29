@@ -350,6 +350,7 @@ use warnings FATAL => 'all';
 my $remove_file_add_header     = 1;
 my $remove_file_delete_header  = 1;
 my $clean_permission_changes   = 1;
+my $patch_mode                 = 0;
 my $manually_color_lines       = 0; # Usually git/hg colorizes the lines, but for raw patches we use this
 my $change_hunk_indicators     = git_config_boolean("diff-so-fancy.changeHunkIndicators","true");
 my $strip_leading_indicators   = git_config_boolean("diff-so-fancy.stripLeadingSymbols","true");
@@ -382,6 +383,13 @@ if ($args->{color_on}) {
 } elsif ($args->{color_off}) {
 	$manually_color_lines = 0;
 	$color_forced         = 1;
+}
+
+# `git add --patch` requires our output to match the number of lines from the
+# input. So, when patch mode is active, we print out empty lines to pad our
+# output to match any lines we've consumed.
+if ($args->{patch}) {
+	$patch_mode = 1;
 }
 
 # We only process ARGV if we don't have STDIN
@@ -511,6 +519,10 @@ sub do_dsf_stuff {
 
 			$last_file_seen =~ s|^\w/||; # Remove a/ (and handle diff.mnemonicPrefix).
 			$in_hunk = 0;
+			if ($patch_mode) {
+				# we are consuming one line, and the debt must be paid
+				print "\n";
+			}
 		########################################
 		# Find the first file: --- a/README.md #
 		########################################
@@ -614,6 +626,9 @@ sub do_dsf_stuff {
 		} elsif ($remove_file_delete_header && $line =~ /^${ansi_color_regex}deleted file mode/) {
 			# Don't print the line (i.e. remove it from the output);
 			$last_file_mode = "delete";
+			if ($patch_mode) {
+				print "\n";
+			}
 		################################
 		# Look for binary file changes #
 		################################
@@ -634,6 +649,9 @@ sub do_dsf_stuff {
 			}
 
 			my ($new_mode) = $next =~ m/new mode (\d+)/;
+			if ($patch_mode) {
+				print "\n";
+			}
 			print "$last_file_seen changed file mode from $old_mode to $new_mode\n";
 
 		###############
@@ -876,13 +894,20 @@ sub strip_leading_indicators {
 	if ($manually_color_lines) {
 		if (defined($5) && $5 eq "+") {
 			my $add_line_color = get_config_color("add_line");
-			$line              = $add_line_color . $line . $reset_color;
+			$line              = $add_line_color . insert_reset_at_line_end($line);
 		} elsif (defined($5) && $5 eq "-") {
 			my $remove_line_color = get_config_color("remove_line");
-			$line                 = $remove_line_color . $line . $reset_color;
+			$line                 = $remove_line_color . insert_reset_at_line_end($line);
 		}
 	}
 
+	return $line;
+}
+
+# Insert the color reset code at end of line, but before any newlines
+sub insert_reset_at_line_end {
+	my $line = shift();
+	$line =~ s/^(.*)([\n\r]+)?$/${1}${reset_color}${2}/;
 	return $line;
 }
 
@@ -1017,9 +1042,13 @@ diff -u one.txt two.txt | diff-so-fancy  # Use d-s-f on unified diff output
 
 diff-so-fancy --colors                   # View the commands to set the recommended colors
 diff-so-fancy --set-defaults             # Configure git-diff to use diff-so-fancy and suggested colors
+diff-so-fancy --patch                    # Use diff-so-fancy in patch mode (interoperable with `git add --patch`)
 
 # Configure git to use d-s-f for *all* diff operations
-git config --global core.pager \"diff-so-fancy | less --tabs=4 -RFX\"\n";
+git config --global core.pager \"diff-so-fancy | less --tabs=4 -RFX\"
+
+# Configure git to use d-s-f for `git add --patch`
+git config --global interactive.diffFilter \"diff-so-fancy --patch\"\n";
 
 	return $out;
 }
