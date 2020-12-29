@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+
+if tmux ls >/dev/null 2>/dev/null
+    exec tmux attach
+else
+    exec tmux new
+end

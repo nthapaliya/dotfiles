@@ -1,12 +1,3 @@
-# translation: if !tmux then do this stuff
-if test -z "$TMUX"
-    if tmux ls >/dev/null 2>/dev/null
-        exec tmux attach
-    else
-        exec tmux new
-    end
-end
-
 # $EDITOR
 set -gx EDITOR nvim
 set -gx VISUAL $EDITOR
