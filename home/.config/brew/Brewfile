@@ -1,3 +1,4 @@
+tap "elastic/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -94,6 +95,8 @@ brew "vips"
 brew "yarn"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
+# Distributed search & analytics engine
+brew "elastic/tap/elasticsearch-full"
 # Maintained ctags implementation
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "firefox"
@@ -119,3 +122,4 @@ mas "RetroClip", id: 1332064978
 mas "Slack", id: 803453959
 mas "Wipr", id: 1320666476
 mas "WireGuard", id: 1451685025
+mas "Xcode", id: 497799835
