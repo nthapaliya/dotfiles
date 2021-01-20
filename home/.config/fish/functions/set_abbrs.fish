@@ -14,7 +14,8 @@ function set_abbrs
     abbr -a -- odp 'open http://localhost:3000/manager/distancing/floors/1702'
     abbr -a -- rubox 'bin/rubocop -a -D **/*.{rb,rake}'
     abbr -a -- rubo 'git status -s -- \*.{rb,rake} | cut -c4- | xargs bin/rubocop -a -D'
-    abbr -a -- spec 'git status -s -- spec/**/*_spec.rb | cut -c4- | xargs bin/rspec'
+    abbr -a -- spec 'bin/rspec (git status -s -- spec/**/*_spec.rb | cut -c4-)'
+    abbr -a -- jest 'yarn run jest -- (git status -s | grep __tests__ | cut -c4-)'
     abbr -a -- vconflict 'nvim (git conflict)'
 
     # add to local git config

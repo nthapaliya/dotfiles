@@ -16,7 +16,7 @@
 	ctags = !.git/hooks/ctags-run
 	patch = !git --no-pager diff --no-color
 	publish = !git push -u origin $(git branch --show-current)
-	purge = "!f() { local gcb=$(git branch --show-current); git branch --merged \"$gcb\" | awk -v gcb=\"$gcb\" '!(/master/ || /main/ || $0 ~ gcb ){ print $NF }' | xargs git branch -d ; } ; f"
+	purge = "!f() { local gcb=$(git branch --show-current); git branch --merged \"$gcb\" | awk '/^[[:space:]]/{ print $NF }' | xargs git branch -d ; } ; f"
 	unassume = update-index --no-assume-unchanged
 	unique = log HEAD --not master
 	up = "!git remote update -p; git merge --ff-only @{u}"
