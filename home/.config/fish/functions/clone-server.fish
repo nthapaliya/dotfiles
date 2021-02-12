@@ -44,7 +44,7 @@ function clone-server
     # Needs homebrew version of rsync, not the built in one
     # rsync -ahz --info=progress2 --no-inc-recursive osadmin@main.ossd.co:/srv/www/huddle/shared/{photos,storage} ~/OSS/huddle/
 
-    rsync -ahz --info=progress2 --no-inc-recursive osadmin@$server.ossd.co:/srv/www/huddle/shared/{photos,storage} $HUDDLE_DIR/ &
+    rsync -ahz --info=progress2 --no-inc-recursive osadmin@$server.ossd.co:/srv/www/huddle/shared/{photos,storage} ./ &
 
     set server_db $HUDDLE_DIR/tmp/$server-$date.sql.gz
 
