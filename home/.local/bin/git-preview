@@ -15,4 +15,4 @@ fzf \
   --preview 'git show --color {1} | head -80 | diff-so-fancy' \
   --preview-window=down:80% \
   --reverse |\
-awk '{ print $1 }'
+awk '{ print $1 }' | tee /dev/tty | pbcopy
