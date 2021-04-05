@@ -1,25 +1,29 @@
-# $EDITOR
-set -gx EDITOR nvim
-set -gx VISUAL $EDITOR
-
-# $SHELL
-set -gx SHELL /usr/local/bin/fish
-
-set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
-
+# Universal variables
 set -U fish_user_paths \
     ~/.local/bin
 
-set -gx NODE_OPTIONS "--max_old_space_size=16000"
+# Global variables
+set -gx SHELL (which fish)
 
-# $MANPAGER
-set -gx MANPAGER "nvim +Man!"
+if command -sq nvim
+    set -gx EDITOR nvim
+    set -gx VISUAL $EDITOR
+    set -gx MANPAGER "nvim +Man!"
+end
 
-# Brewfile
-set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
+if test (uname) = Darwin
+    set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
+end
+
+if command -sq node
+    set -gx NODE_OPTIONS "--max_old_space_size=16000"
+end
+
+if command -sq brew
+    set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
+end
 
 if command -sq fd
-    # fzf + fd
     set -gx FZF_DEFAULT_COMMAND 'fd -H --type file'
     set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
     set -gx FZF_ALT_C_COMMAND 'fd -H --type directory'
