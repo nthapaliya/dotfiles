@@ -13,6 +13,9 @@ function updt
 
     touch $hfile
 
+    echo 'Updating neovim plugins'
+    nvim --headless +PlugUpdate +qall
+
     echo 'Running curl commands...'
     curl --silent -L https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim >~/.config/nvim/autoload/plug.vim
     curl --silent -L https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish >~/.config/fish/conf.d/done.fish
