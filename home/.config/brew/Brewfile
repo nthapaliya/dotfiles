@@ -67,6 +67,8 @@ brew "mas"
 brew "mosh", args: ["HEAD"]
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Utility for managing network connections
+brew "netcat"
 # Port scanning utility for large networks
 brew "nmap"
 # PNG image optimizing utility
@@ -137,6 +139,7 @@ mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
 mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825
+mas "Pixelmator Pro", id: 1289583905
 mas "RetroClip", id: 1332064978
 mas "Slack", id: 803453959
 mas "Wipr", id: 1320666476
