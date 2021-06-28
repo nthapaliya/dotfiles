@@ -167,24 +167,6 @@ augroup END
 " custom-commands {{{
 command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
-
-function! HandleInputs_(items)
-  execute 'edit' a:items[0]
-  for  filename in a:items[1:]
-    execute 'badd' filename
-  endfor
-endfunction
-
-let HandleInputs = function('HandleInputs_')
-
-" Work specific - Use :This to find which files import the current javascript
-" file
-command! This call fzf#run(fzf#wrap({
-\ 'options': '-1 -m --with-nth 3.. --delimiter /',
-\ 'sink*': HandleInputs,
-\ 'source': 'redis-cli -n 1 HGET huddle_deps ' . @% . ' | tr : "\n"'
-\ }))
-
 " }}}
 
 " vim-airline/vim-airline {{{

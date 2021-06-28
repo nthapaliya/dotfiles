@@ -1,10 +1,8 @@
-tap "elastic/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
 # Download with resuming and segmented downloading
@@ -41,8 +39,6 @@ brew "ffmpeg"
 brew "fish"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# Geometry Engine
-brew "geos"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
@@ -53,32 +49,20 @@ brew "gnu-time"
 brew "gnupg"
 # Improved top (interactive process viewer)
 brew "htop"
-# Tools and libraries to manipulate images in many formats
-brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Library to render SVG files using Cairo
-brew "librsvg"
-# Drop-in replacement for MySQL
-brew "mariadb", restart_service: true
 # Mac App Store command-line interface
 brew "mas"
-# Remote terminal application
-brew "mosh", args: ["HEAD"]
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Utility for managing network connections
 brew "netcat"
 # Port scanning utility for large networks
 brew "nmap"
-# PNG image optimizing utility
-brew "pngquant"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
 # Monitor data's progress through a pipe
 brew "pv"
-# Persistent key-value database, with built-in net interface
-brew "redis", restart_service: true
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
@@ -97,18 +81,10 @@ brew "terminal-notifier"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Vi 'workalike' with many additional features
-brew "vim"
-# Image processing library
-brew "vips"
 # JavaScript package manager
 brew "yarn"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
-# Distributed search & analytics engine
-brew "elastic/tap/elasticsearch-full"
-# Maintained ctags implementation
-brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 # Web browser
 cask "firefox"
 cask "font-fira-code"
@@ -141,7 +117,5 @@ mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825
 mas "Pixelmator Pro", id: 1289583905
 mas "RetroClip", id: 1332064978
-mas "Slack", id: 803453959
 mas "Wipr", id: 1320666476
 mas "WireGuard", id: 1451685025
-mas "Xcode", id: 497799835

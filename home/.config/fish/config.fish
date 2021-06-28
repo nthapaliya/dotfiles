@@ -15,10 +15,6 @@ if test (uname) = Darwin
     set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
 end
 
-if command -sq node
-    set -gx NODE_OPTIONS "--max_old_space_size=16000"
-end
-
 if command -sq brew
     set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 end
