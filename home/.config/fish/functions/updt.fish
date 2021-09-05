@@ -17,12 +17,8 @@ function updt
     nvim --headless +PlugUpdate +qall
     echo
 
-    echo 'Running curl commands...'
-    curl --silent -L https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim >~/.config/nvim/autoload/plug.vim
-    curl --silent -L https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish >~/.config/fish/conf.d/done.fish
-
     # Run this manually
-    # __update_dsf
+    # __update_from_github
 
     echo 'Running brew commands...'
     brew bundle dump --force --describe --file=~/.config/brew/Brewfile
@@ -31,15 +27,18 @@ function updt
     brew outdated --cask
 end
 
-function __update_dsf
-    brew install cpanminus
-    cpanm App::FatPacker
-    echo '#!/bin/bash'\n \
-        'fatpack_bin=$(find /usr/local/Cellar/perl -name fatpack | tail -1)'\n \
-        '$fatpack_bin "$@"' >~/.local/bin/fatpack
-    chmod +x ~/.local/bin/fatpack
+function __update_from_github
+    set -l dotfiles /Users/niraj/Projects/dotfiles/home
+    set -l plug_stuff \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+        $dotfiles/.config/nvim/autoload/plug.vim
+    set -l done_stuff \
+        https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish \
+        $dotfiles/.config/fish/conf.d/done.fish
+    curl --silent -L $plug_stuff[1] >$plug_stuff[2]
+    curl --silent -L $done_stuff[1] >$done_stuff[2]
 
-    git -C ~/Projects clone https://github.com/so-fancy/diff-so-fancy.git
-    git -C ~/Projects/diff-so-fancy up
-    ~/Projects/diff-so-fancy/third_party/build_fatpack/build.pl --output ~/Projects/dotfiles/home/.local/bin/diff-so-fancy
+    set -l dsf_url (curl -s https://api.github.com/repos/so-fancy/diff-so-fancy/releases/latest | jq -r .assets[0].browser_download_url)
+    set -l dsf_file $dotfiles/.local/bin/diff-so-fancy
+    curl -L $dsf_url >$dsf_file && chmod +x $dsf_file
 end
