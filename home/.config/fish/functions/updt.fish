@@ -24,7 +24,6 @@ function updt
     brew bundle dump --force --describe --file=~/.config/brew/Brewfile
     brew update
     brew upgrade
-    brew outdated --cask
 end
 
 function __update_from_github
