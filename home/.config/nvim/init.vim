@@ -42,7 +42,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'vim-scripts/BufOnly.vim'
 
 " Linter
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 " }}}
@@ -273,10 +273,14 @@ function! Fish_indent(buffers)
   \ }
 endfunction
 
+let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+
 let g:ale_fixers = {
 \ 'fish': ['Fish_indent'],
 \ 'javascript': ['prettier'],
 \ 'javascriptreact': ['prettier'],
+\ 'typescript': ['prettier'],
+\ 'typescriptreact': ['prettier'],
 \ 'ruby': ['rubocop'],
 \ 'rust': ['rustfmt'],
 \ }
