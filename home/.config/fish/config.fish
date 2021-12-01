@@ -1,5 +1,6 @@
 # Universal variables
 set -U fish_user_paths \
+    /opt/homebrew/bin \
     ~/.local/bin
 
 # Global variables
@@ -27,5 +28,5 @@ end
 
 if command -sq asdf
     set -gx ASDF_DATA_DIR ~/.local/opt/asdf
-    source /usr/local/opt/asdf/asdf.fish
+    source /opt/homebrew/opt/asdf/libexec/asdf.fish
 end
