@@ -20,6 +20,7 @@ endif
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'andymass/vim-matchup'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -279,10 +280,12 @@ let g:ale_fixers = {
 \ 'fish': ['Fish_indent'],
 \ 'javascript': ['prettier'],
 \ 'javascriptreact': ['prettier'],
-\ 'typescript': ['prettier'],
-\ 'typescriptreact': ['prettier'],
+\ 'json': ['jq'],
+\ 'jsonc': ['jq'],
 \ 'ruby': ['rubocop'],
 \ 'rust': ['rustfmt'],
+\ 'typescript': ['prettier'],
+\ 'typescriptreact': ['prettier'],
 \ }
 
 let g:airline#extensions#ale#enabled = 1
