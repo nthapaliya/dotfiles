@@ -18,7 +18,10 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'do': ':TSUpdate'}
 Plug 'rbgrouleff/bclose.vim'
+Plug 'rstacruz/vim-closer'
 Plug 'sheerun/vim-polyglot'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
@@ -31,12 +34,12 @@ Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'wincent/terminus'
-Plug 'zenbro/mirror.vim'
 
 call plug#end()
 " }}}
 
 " basic settings {{{
+set completeopt=menuone,noselect
 set autoread
 set background=dark
 set breakindent
@@ -132,6 +135,7 @@ augroup END
 augroup general_autocommands
   autocmd!
   autocmd VimResized * wincmd =
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup END
 " }}}
 
