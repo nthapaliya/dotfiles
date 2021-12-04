@@ -6,25 +6,20 @@ scriptencoding utf-8
 " vim-plug config {{{
 call plug#begin('~/.local/opt/nvim/plugged')
 
-" Colors and themes
-Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
-
-" Language enhancements
-Plug 'sheerun/vim-polyglot'
-
-" Vim enhancements
-if !has('nvim')
-  Plug 'tpope/vim-sensible'
-endif
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'rhysd/git-messenger.vim'
+Plug 'justinmk/vim-dirvish'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -34,16 +29,9 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
+Plug 'vim-scripts/BufOnly.vim'
 Plug 'wincent/terminus'
 Plug 'zenbro/mirror.vim'
-
-" File/buffer management
-Plug 'justinmk/vim-dirvish'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'vim-scripts/BufOnly.vim'
-
-" Linter
-Plug 'dense-analysis/ale'
 
 call plug#end()
 " }}}
@@ -53,11 +41,11 @@ set autoread
 set background=dark
 set breakindent
 set clipboard^=unnamed,unnamedplus
-" set cursorline
-" set cursorcolumn
+set cursorline
 set hidden
 set hlsearch
 set ignorecase
+set inccommand=nosplit
 set infercase
 set lazyredraw
 set list
@@ -70,7 +58,7 @@ set scrolloff=8
 set shell=bash
 set shortmess+=c
 set showbreak=\\\\\
-set signcolumn=yes
+set signcolumn=number
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
@@ -79,23 +67,7 @@ set title
 set updatetime=100
 set visualbell
 
-if has('nvim')
-  set inccommand=nosplit
-else
-  set viminfo+=n~/.local/share/nvim/viminfo
-endif
-
-set path+=app/javascript,node_modules
-
-" for vim in tmux only
-" :help xterm-true-color
-" https://github.com/vim/vim/issues/993
-if !has('nvim') && exists('$TMUX')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-
-colorscheme gruvbox
+colorscheme tokyonight
 " }}}
 
 " keymappings {{{
@@ -118,6 +90,7 @@ command! Bd bp\|bd \#
 inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
 
+" Copy current file path to clipboard
 nmap <leader>cs :let @*=expand("%:p")<CR>
 " }}}
 
@@ -129,14 +102,11 @@ endif
 " }}}
 
 " nvim config {{{
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  " tnoremap jk <C-\><C-n>
-  tnoremap <C-h> <C-\><C-n><C-w>h
-  tnoremap <C-j> <C-\><C-n><C-w>j
-  tnoremap <C-k> <C-\><C-n><C-w>k
-  tnoremap <C-l> <C-\><C-n><C-w>l
-endif
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 " }}}
 
 " auto-commands {{{
@@ -170,30 +140,6 @@ command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
 " }}}
 
-" vim-airline/vim-airline {{{
-let g:airline#extensions#branch#displayed_head_limit = 8
-
-" Short forms, lets see if worth it
-let g:airline_mode_map = {
-\ '__' : '-',
-\ 'n'  : 'N',
-\ 'i'  : 'I',
-\ 'R'  : 'R',
-\ 'c'  : 'C',
-\ 'v'  : 'V',
-\ 'V'  : 'V',
-\ '' : 'V',
-\ 's'  : 'S',
-\ 'S'  : 'S',
-\ '' : 'S',
-\ }
-
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-
-" }}}
-
 " junegunn/fzf {{{
 nnoremap <C-p> :Files<cr>
 nnoremap <C-g> :GFiles?<cr>
@@ -207,43 +153,41 @@ augroup fzf
 augroup end
 
 " Using floating windows of Neovim to start fzf
-if has('nvim')
-  function! FloatingFZF(width, height, border_highlight)
-    function! s:create_float(hl, opts)
-      let buf = nvim_create_buf(v:false, v:true)
-      let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
-      let win = nvim_open_win(buf, v:true, opts)
-      call setwinvar(win, '&winhighlight', 'NormalFloat:'.a:hl)
-      call setwinvar(win, '&colorcolumn', '')
-      return buf
-    endfunction
-
-    " Size and position
-    let width = float2nr(&columns * a:width)
-    let height = float2nr(&lines * a:height)
-    let row = float2nr((&lines - height) / 2)
-    let col = float2nr((&columns - width) / 2)
-
-    " Border
-    let top = '╭' . repeat('─', width - 2) . '╮'
-    let mid = '│' . repeat(' ', width - 2) . '│'
-    let bot = '╰' . repeat('─', width - 2) . '╯'
-    let border = [top] + repeat([mid], height - 2) + [bot]
-
-    " Draw frame
-    let s:frame = s:create_float(a:border_highlight, {'row': row, 'col': col, 'width': width, 'height': height})
-    call nvim_buf_set_lines(s:frame, 0, -1, v:true, border)
-
-    " Draw viewport
-    call s:create_float('Normal', {'row': row + 1, 'col': col + 2, 'width': width - 4, 'height': height - 2})
-    autocmd BufWipeout <buffer> execute 'bwipeout' s:frame
+function! FloatingFZF(width, height, border_highlight)
+  function! s:create_float(hl, opts)
+    let buf = nvim_create_buf(v:false, v:true)
+    let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
+    let win = nvim_open_win(buf, v:true, opts)
+    call setwinvar(win, '&winhighlight', 'NormalFloat:'.a:hl)
+    call setwinvar(win, '&colorcolumn', '')
+    return buf
   endfunction
 
-  let g:fzf_layout = { 'window': 'call FloatingFZF(0.9, 0.6, "Comment")' }
+  " Size and position
+  let width = float2nr(&columns * a:width)
+  let height = float2nr(&lines * a:height)
+  let row = float2nr((&lines - height) / 2)
+  let col = float2nr((&columns - width) / 2)
+
+  " Border
+  let top = '╭' . repeat('─', width - 2) . '╮'
+  let mid = '│' . repeat(' ', width - 2) . '│'
+  let bot = '╰' . repeat('─', width - 2) . '╯'
+  let border = [top] + repeat([mid], height - 2) + [bot]
+
+  " Draw frame
+  let s:frame = s:create_float(a:border_highlight, {'row': row, 'col': col, 'width': width, 'height': height})
+  call nvim_buf_set_lines(s:frame, 0, -1, v:true, border)
+
+  " Draw viewport
+  call s:create_float('Normal', {'row': row + 1, 'col': col + 2, 'width': width - 4, 'height': height - 2})
+  autocmd BufWipeout <buffer> execute 'bwipeout' s:frame
+endfunction
+
+let g:fzf_layout = { 'window': 'call FloatingFZF(0.9, 0.6, "Comment")' }
 
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-endif
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -265,36 +209,25 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
 
-" Plug 'w0rp/ale' {{{
-function! Fish_indent(buffers)
-  return {
-  \ 'command': 'fish_indent -w %t',
-  \ 'read_temporary_file': 1,
-  \ 'suggested_filetypes': ['fish']
-  \ }
-endfunction
-
-let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
-
-let g:ale_fixers = {
-\ 'fish': ['Fish_indent'],
-\ 'javascript': ['prettier'],
-\ 'javascriptreact': ['prettier'],
-\ 'json': ['jq'],
-\ 'jsonc': ['jq'],
-\ 'ruby': ['rubocop'],
-\ 'rust': ['rustfmt'],
-\ 'typescript': ['prettier'],
-\ 'typescriptreact': ['prettier'],
-\ }
-
-let g:airline#extensions#ale#enabled = 1
-let g:ale_javascript_eslint_executable = 'eslintme'
-let g:ale_fix_on_save = 1
-let g:ale_disable_lsp = 1
-
-let g:ale_rust_cargo_check_tests = 1
-
-nmap <silent> <leader>j <Plug>(ale_next_wrap)
-nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+" " Plug 'neoclide/coc' {{{
+nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
+
+" " Plug 'w0rp/ale' {{{
+" Need to replace ALE Fixers
+" " }}}
+
+lua << END
+require('lualine').setup {
+  options = {
+    icons_enabled = false,
+    theme = 'tokyonight',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+  }
+}
+
+require('gitsigns').setup()
+END
