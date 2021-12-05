@@ -3,39 +3,50 @@ set encoding=utf-8
 scriptencoding utf-8
 " }}}
 
-" vim-plug config {{{
-call plug#begin('~/.local/opt/nvim/plugged')
+" packer config {{{
+lua << END
+-- Skip some remote provider loading
+vim.g.loaded_python_provider = 0
+vim.g.python_host_prog = '/usr/bin/python2'
+vim.g.python3_host_prog = '/usr/bin/python'
+vim.g.node_host_prog = '/usr/bin/neovim-node-host'
 
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'airblade/vim-rooter'
-Plug 'andymass/vim-matchup'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'do': ':TSUpdate'}
-Plug 'rbgrouleff/bclose.vim'
-Plug 'rstacruz/vim-closer'
-Plug 'sheerun/vim-polyglot'
-Plug 'tommcdo/vim-lion'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'unblevable/quick-scope'
-Plug 'vim-scripts/BufOnly.vim'
-Plug 'wincent/terminus'
+-- Disable some built-in plugins we don't want
+local disabled_built_ins = {
+  'gzip',
+  'man',
+  'matchit',
+  'matchparen',
+  'shada_plugin',
+  'tarPlugin',
+  'tar',
+  'zipPlugin',
+  'zip',
+  'netrwPlugin',
+}
 
-call plug#end()
+for i = 1, 10 do
+  vim.g['loaded_' .. disabled_built_ins[i]] = 1
+end
+END
+
+lua << END
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+end
+
+vim.cmd [[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]]
+
+require('plugins')
+END
+
 " }}}
 
 " basic settings {{{
@@ -61,7 +72,8 @@ set scrolloff=8
 set shell=bash
 set shortmess+=c
 set showbreak=\\\\\
-set signcolumn=number
+" set signcolumn=number
+set signcolumn=yes
 set smartcase
 set synmaxcol=300
 set tabstop=2 sts=2 sw=2 expandtab
@@ -88,7 +100,6 @@ nnoremap <Right>    :bnext<cr>
 " :Rg <c-r>z -> Run : command Rg, <c-r>z replaces itself with z register
 " contents
 nnoremap <leader>*  *N"zyiw:Rg <c-r>z<cr>
-command! Bd bp\|bd \#
 
 inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
@@ -129,7 +140,7 @@ augroup other_filetype_tweaks
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
   autocmd FileType ruby nnoremap <F5> :!time ruby %<cr>
   autocmd FileType rust nnoremap <F5> :!cargo run<cr>
-  autocmd  FileType fzf set noshowmode noruler nonu
+  autocmd FileType fzf set noshowmode noruler nonu
 augroup END
 
 augroup general_autocommands
@@ -146,7 +157,7 @@ command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execut
 
 " junegunn/fzf {{{
 nnoremap <C-p> :Files<cr>
-nnoremap <C-g> :GFiles?<cr>
+nnoremap <leader>g :GFiles?<cr>
 nnoremap <leader>b :Buffers<cr>
 
 " https://github.com/junegunn/fzf.vim#hide-statusline
@@ -155,83 +166,119 @@ augroup fzf
   autocmd  FileType fzf set laststatus=0 noshowmode noruler
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup end
-
-" Using floating windows of Neovim to start fzf
-function! FloatingFZF(width, height, border_highlight)
-  function! s:create_float(hl, opts)
-    let buf = nvim_create_buf(v:false, v:true)
-    let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
-    let win = nvim_open_win(buf, v:true, opts)
-    call setwinvar(win, '&winhighlight', 'NormalFloat:'.a:hl)
-    call setwinvar(win, '&colorcolumn', '')
-    return buf
-  endfunction
-
-  " Size and position
-  let width = float2nr(&columns * a:width)
-  let height = float2nr(&lines * a:height)
-  let row = float2nr((&lines - height) / 2)
-  let col = float2nr((&columns - width) / 2)
-
-  " Border
-  let top = '╭' . repeat('─', width - 2) . '╮'
-  let mid = '│' . repeat(' ', width - 2) . '│'
-  let bot = '╰' . repeat('─', width - 2) . '╯'
-  let border = [top] + repeat([mid], height - 2) + [bot]
-
-  " Draw frame
-  let s:frame = s:create_float(a:border_highlight, {'row': row, 'col': col, 'width': width, 'height': height})
-  call nvim_buf_set_lines(s:frame, 0, -1, v:true, border)
-
-  " Draw viewport
-  call s:create_float('Normal', {'row': row + 1, 'col': col + 2, 'width': width - 4, 'height': height - 2})
-  autocmd BufWipeout <buffer> execute 'bwipeout' s:frame
-endfunction
-
-let g:fzf_layout = { 'window': 'call FloatingFZF(0.9, 0.6, "Comment")' }
-
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-" }}}
+" " }}}
 
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
 
-" " Plug 'neoclide/coc' {{{
-nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" " neoclide/coc {{{
+" nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
+" nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
-" " Plug 'w0rp/ale' {{{
-" Need to replace ALE Fixers
-" " }}}
+lua << EOF
+local nvim_lsp = require('lspconfig')
 
-lua << END
-require('lualine').setup {
-  options = {
-    icons_enabled = false,
-    theme = 'tokyonight',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-  }
+-- https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts) -- this!!
+  buf_set_keymap('n', '<leader>k', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', '<leader>j', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+  vim.cmd [[
+    augroup Hover
+      autocmd!
+      " autocmd CursorHold * lua vim.diagnostic.open_float()
+    augroup end
+  ]]
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- lsp installer config
+-- copied from: https://github.com/williamboman/nvim-lsp-installer#setup
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.on_server_ready(function(server)
+server:setup({
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+    capabilities = capabilities,
+    },
+  handlers = {
+    ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = false,
+      underline = false
+      }
+    ),
+    }
+  })
+end)
+
+-- https://github.com/neovim/nvim-lspconfig/wiki/Snippets
+-- nvim-cmp setup
+local luasnip = require 'luasnip'
+local cmp = require'cmp'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
 }
-
-require('gitsigns').setup()
-END
+EOF

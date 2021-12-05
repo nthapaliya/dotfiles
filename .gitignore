@@ -3,3 +3,4 @@ fish_user_key_bindings.fish
 fzf_key_bindings.fish
 fish_variables
 home/.local/bin
+packer_compiled.lua

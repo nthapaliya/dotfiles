@@ -14,7 +14,7 @@ function updt
     touch $hfile
 
     echo 'Updating neovim plugins'
-    nvim --headless +PlugUpdate +qall
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
     echo
 
     # Run this manually
