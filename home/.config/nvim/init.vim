@@ -86,6 +86,8 @@ set tags^=./.git/tags;
 set title
 set updatetime=100
 set visualbell
+set laststatus=2
+set showtabline=2
 
 colorscheme tokyonight
 " }}}
@@ -95,7 +97,7 @@ let g:mapleader = "\<Space>"
 
 cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>W  :%s/\s\+$<cr>
-nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<CR>
+nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <Left>     :bprev<cr>
 nnoremap <Right>    :bnext<cr>
@@ -107,10 +109,13 @@ nnoremap <Right>    :bnext<cr>
 nnoremap <leader>*  *N"zyiw:Rg <c-r>z<cr>
 
 inoremap jk <esc>
-nnoremap Q <nop> " don't enter ex mode accidentally
+" don't enter ex-mode accidentally
+nnoremap Q <nop>
+" disable (for now) the command history mode
+nnoremap q: <nop>
 
 " Copy current file path to clipboard
-nmap <leader>cs :let @*=expand("%:p")<CR>
+" nmap <leader>cs :let @*=expand("%:p")<CR>
 " }}}
 
 " gui config {{{
@@ -291,8 +296,13 @@ EOF
 " }}}
 
 " telescope {{{
-nnoremap <leader>p :Telescope find_files<cr>
-nnoremap <leader>g :Telescope git_status<cr>
-nnoremap <leader>b :Telescope buffers<cr>
-nnoremap <leader>e :Telescope file_browser<cr>
+nnoremap <c-p> :Telescope find_files<cr>
+nnoremap <leader>tb :Telescope buffers<cr>
+nnoremap <leader>te :Telescope file_browser<cr>
+nnoremap <leader>tg :Telescope git_status<cr>
+nnoremap <leader>to :Telescope oldfiles<cr>
+" }}}
+
+" trouble {{{
+nnoremap <leader>tt :TroubleToggle<cr>
 " }}}
