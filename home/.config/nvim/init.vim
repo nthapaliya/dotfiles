@@ -7,31 +7,31 @@ scriptencoding utf-8
 lua << END
 -- Skip some remote provider loading
 vim.g.loaded_python_provider = 0
-vim.g.python_host_prog = '/usr/bin/python2'
-vim.g.python3_host_prog = '/usr/bin/python'
-vim.g.node_host_prog = '/usr/bin/neovim-node-host'
+vim.g.python_host_prog = "/usr/bin/python2"
+vim.g.python3_host_prog = "/usr/bin/python"
+vim.g.node_host_prog = "/usr/bin/neovim-node-host"
 
 -- Disable some built-in plugins we don't want
 local disabled_built_ins = {
-  'gzip',
-  'matchit',
-  'matchparen',
-  'shada_plugin',
-  'tarPlugin',
-  'tar',
-  'zipPlugin',
-  'zip',
-  'netrwPlugin',
+  "gzip",
+  "matchit",
+  "matchparen",
+  "shada_plugin",
+  "tarPlugin",
+  "tar",
+  "zipPlugin",
+  "zip",
+  "netrwPlugin"
 }
 
 for _, name in ipairs(disabled_built_ins) do
-  vim.g['loaded_' .. name] = 1
+  vim.g["loaded_" .. name] = 1
 end
 END
 
 lua << END
 -- local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
--- 
+--
 -- if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 --   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 -- end
@@ -141,6 +141,12 @@ augroup vim_filetype
   autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
+augroup TrimTrailingWhiteSpace
+    au!
+    au BufWritePre * %s/\s\+$//e
+    au BufWritePre * %s/\n\+\%$//e
+augroup END
+
 augroup other_filetype_tweaks
   autocmd!
   autocmd FileType diff setlocal commentstring=#\ %s
@@ -198,4 +204,11 @@ nnoremap <leader>to :Telescope oldfiles<cr>
 
 " trouble {{{
 nnoremap <leader>tt :TroubleToggle<cr>
+" }}}
+
+" formatter.nvim {{{
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.tsx,*.json,*.lua,*.fish FormatWrite
+augroup END
 " }}}
