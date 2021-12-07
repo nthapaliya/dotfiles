@@ -1,5 +1,5 @@
-require('packer').startup({ function(use)
-  use 'wbthomason/packer.nvim'
+return require('packer').startup({ function(use)
+  use { 'wbthomason/packer.nvim', opt = true }
 
   use 'AndrewRadev/splitjoin.vim'
   use 'airblade/vim-rooter'
@@ -15,8 +15,8 @@ require('packer').startup({ function(use)
     end
   }
   use 'christoomey/vim-tmux-navigator'
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
+  use { 'junegunn/fzf', disable = true }
+  use { 'junegunn/fzf.vim', disable = true }
   use 'justinmk/vim-dirvish'
   use { 'rbgrouleff/bclose.vim', disable = true }
   use 'rstacruz/vim-closer'
@@ -71,10 +71,29 @@ require('packer').startup({ function(use)
             section_separators = { left = '', right = ''},
           },
           tabline = {
-            lualine_a = {'buffers'},
+            lualine_a = {'filename'},
+            lualine_y = {'buffers'},
             lualine_z = {'tabs'}
           }
         })
+    end
+  }
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+      require('telescope').setup{
+        defaults = {
+          layout_strategy = 'flex',
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            -- path_display = {'shorten'},
+          }
+        },
+      }
     end
   }
 
@@ -87,6 +106,7 @@ require('packer').startup({ function(use)
     "folke/trouble.nvim",
     config = function()
       require("trouble").setup {
+        icons = false,
         fold_open = "v",
         fold_closed = ">",
         indent_lines = false,

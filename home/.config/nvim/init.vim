@@ -14,7 +14,6 @@ vim.g.node_host_prog = '/usr/bin/neovim-node-host'
 -- Disable some built-in plugins we don't want
 local disabled_built_ins = {
   'gzip',
-  'man',
   'matchit',
   'matchparen',
   'shada_plugin',
@@ -25,17 +24,17 @@ local disabled_built_ins = {
   'netrwPlugin',
 }
 
-for i = 1, 10 do
-  vim.g['loaded_' .. disabled_built_ins[i]] = 1
+for _, name in ipairs(disabled_built_ins) do
+  vim.g['loaded_' .. name] = 1
 end
 END
 
 lua << END
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-end
+-- local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+-- 
+-- if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+--   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+-- end
 
 vim.cmd [[
   augroup Packer
@@ -44,7 +43,13 @@ vim.cmd [[
   augroup end
 ]]
 
-require('plugins')
+vim.cmd [[command! PackerInstall packadd packer.nvim | lua require('plugins').install()]]
+vim.cmd [[command! PackerUpdate packadd packer.nvim | lua require('plugins').update()]]
+vim.cmd [[command! PackerSync packadd packer.nvim | lua require('plugins').sync()]]
+vim.cmd [[command! PackerClean packadd packer.nvim | lua require('plugins').clean()]]
+vim.cmd [[command! PackerCompile packadd packer.nvim | lua require('plugins').compile()]]
+
+-- require('plugins')
 END
 
 " }}}
@@ -55,7 +60,7 @@ set autoread
 set background=dark
 set breakindent
 set clipboard^=unnamed,unnamedplus
-set cursorline
+" set cursorline
 set hidden
 set hlsearch
 set ignorecase
@@ -140,7 +145,7 @@ augroup other_filetype_tweaks
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
   autocmd FileType ruby nnoremap <F5> :!time ruby %<cr>
   autocmd FileType rust nnoremap <F5> :!cargo run<cr>
-  autocmd FileType fzf set noshowmode noruler nonu
+  " autocmd FileType fzf set noshowmode noruler nonu
 augroup END
 
 augroup general_autocommands
@@ -156,28 +161,29 @@ command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execut
 " }}}
 
 " junegunn/fzf {{{
-nnoremap <C-p> :Files<cr>
-nnoremap <leader>g :GFiles?<cr>
-nnoremap <leader>b :Buffers<cr>
+" nnoremap <leader>p :Files<cr>
+" nnoremap <leader>g :GFiles?<cr>
+" nnoremap <leader>b :Buffers<cr>
 
-" https://github.com/junegunn/fzf.vim#hide-statusline
-augroup fzf
-  autocmd!
-  autocmd  FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-augroup end
+" " https://github.com/junegunn/fzf.vim#hide-statusline
+" augroup fzf
+"   autocmd!
+"   autocmd  FileType fzf set laststatus=0 noshowmode noruler
+"     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+" augroup end
 " " }}}
 
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
 
-" " neoclide/coc {{{
+" neoclide/coc {{{
 " nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
 " nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
+" {{{ lspconfig/nvim-cmp
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
@@ -282,3 +288,11 @@ cmp.setup {
   },
 }
 EOF
+" }}}
+
+" telescope {{{
+nnoremap <leader>p :Telescope find_files<cr>
+nnoremap <leader>g :Telescope git_status<cr>
+nnoremap <leader>b :Telescope buffers<cr>
+nnoremap <leader>e :Telescope file_browser<cr>
+" }}}
