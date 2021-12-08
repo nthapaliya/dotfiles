@@ -326,8 +326,21 @@ return require("packer").startup({
       end,
     })
 
-    use({ "folke/tokyonight.nvim", branch = "main" })
-    -- use { 'neoclide/coc.nvim', branch = 'release' }
+    use({
+      "folke/tokyonight.nvim",
+      branch = "main",
+      config = function()
+        vim.g.tokyonight_colors = {
+          gitSigns = {
+            add = "#00ff00",
+            change = "#00eeff",
+            delete = "#ff4b2b",
+          },
+        }
+        vim.cmd([[colorscheme tokyonight]])
+      end,
+    })
+
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({ "nvim-treesitter/nvim-treesitter-textobjects", run = ":TSUpdate" })
     use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })
