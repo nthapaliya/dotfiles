@@ -27,14 +27,10 @@ function updt
 end
 
 function __update_from_github
-    set -l dotfiles /Users/niraj/Projects/dotfiles/home
-    set -l plug_stuff \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
-        $dotfiles/.config/nvim/autoload/plug.vim
+    set -l dotfiles ~/Projects/dotfiles/home
     set -l done_stuff \
         https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish \
         $dotfiles/.config/fish/conf.d/done.fish
-    curl --silent -L $plug_stuff[1] >$plug_stuff[2]
     curl --silent -L $done_stuff[1] >$done_stuff[2]
 
     set -l dsf_url (curl -s https://api.github.com/repos/so-fancy/diff-so-fancy/releases/latest | jq -r .assets[0].browser_download_url)
