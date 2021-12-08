@@ -21,11 +21,11 @@ function netinfo -d "get network information"
         set activated (ifconfig -uv $val | grep 'status: ' | awk '{print $2}')
 
         # We want information about active network ports...
-        if test $activated = 'active' ^/dev/null
+        if test "$activated" = active 2>/dev/null
             set ipaddress (ifconfig -uv $val | grep 'inet ' | awk '{print $2}')
 
             # and of these, the ones with an IP-address assigned to it
-            if test -n "$ipaddress" ^/dev/null
+            if test -n "$ipaddress" 2>/dev/null
 
                 # Do we have an IP address?
                 # Then give us the information
@@ -41,7 +41,7 @@ function netinfo -d "get network information"
                 echo -n ' ('
                 echo -n $val
                 echo ')'
-                echo "--------------"
+                echo --------------
 
                 # Is this a WiFi associated port? If so, then we want the network name
                 switch $label
@@ -67,7 +67,7 @@ function netinfo -d "get network information"
             end
 
             # Don't display the inactive ports.
-        else if test $activated = 'inactive' ^/dev/null
+        else if test "$activated" = inactive 2>/dev/null
         end
     end
 end
