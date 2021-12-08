@@ -188,12 +188,6 @@ command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execut
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
 
-" neoclide/coc {{{
-" nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
-" nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-" }}}
-
 " telescope {{{
 nnoremap <c-p> :Telescope find_files<cr>
 nnoremap <leader>tb :Telescope buffers<cr>
