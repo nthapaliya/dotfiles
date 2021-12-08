@@ -5,8 +5,6 @@ return require("packer").startup({
     use("AndrewRadev/splitjoin.vim")
     use("airblade/vim-rooter")
     use("christoomey/vim-tmux-navigator")
-    use({ "junegunn/fzf", disable = true })
-    use({ "junegunn/fzf.vim", disable = true })
     use("justinmk/vim-dirvish")
     use({ "rbgrouleff/bclose.vim", disable = true })
     use("rstacruz/vim-closer")

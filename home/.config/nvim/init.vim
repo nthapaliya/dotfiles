@@ -156,7 +156,6 @@ augroup other_filetype_tweaks
   autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
   autocmd FileType ruby nnoremap <F5> :!time ruby %<cr>
   autocmd FileType rust nnoremap <F5> :!cargo run<cr>
-  " autocmd FileType fzf set noshowmode noruler nonu
 augroup END
 
 augroup general_autocommands
@@ -170,19 +169,6 @@ augroup END
 command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
 command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
 " }}}
-
-" junegunn/fzf {{{
-" nnoremap <leader>p :Files<cr>
-" nnoremap <leader>g :GFiles?<cr>
-" nnoremap <leader>b :Buffers<cr>
-
-" " https://github.com/junegunn/fzf.vim#hide-statusline
-" augroup fzf
-"   autocmd!
-"   autocmd  FileType fzf set laststatus=0 noshowmode noruler
-"     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-" augroup end
-" " }}}
 
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
