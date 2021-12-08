@@ -169,7 +169,7 @@ return require("packer").startup({
       config = function()
         -- local nvim_lsp = require('lspconfig')
         -- https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-        local on_attach = function(client, bufnr)
+        local on_attach = function(_, bufnr)
           local function buf_set_keymap(...)
             vim.api.nvim_buf_set_keymap(bufnr, ...)
           end
