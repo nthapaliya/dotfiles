@@ -125,10 +125,7 @@ return require("packer").startup({
           buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
           -- Mappings.
-          local opts = {
-            noremap = true,
-            silent = true,
-          }
+          local opts = { noremap = true, silent = true }
 
           buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
           buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
@@ -296,6 +293,15 @@ return require("packer").startup({
         "nvim-treesitter/nvim-treesitter-textobjects",
       },
       run = ":TSUpdate",
+      config = function()
+        require("nvim-treesitter.configs").setup({
+          ensure_installed = "maintained",
+          highlight = {
+            enable = true,
+            disable = {},
+          },
+        })
+      end,
     })
 
     use({
@@ -332,6 +338,7 @@ return require("packer").startup({
     use({
       { "L3MON4D3/LuaSnip", before = "nvim-cmp" },
       { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lsp", after = "nvim-lsp-installer" },
       { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
       { "hrsh7th/cmp-path", after = "nvim-cmp" },
       { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
@@ -340,7 +347,7 @@ return require("packer").startup({
     use({
       "hrsh7th/nvim-cmp",
       opt = true,
-      event = "InsertEnter *",
+      event = "InsertEnter",
       config = function()
         -- Set completeopt to have a better completion experience
         vim.o.completeopt = "menuone,noselect"
