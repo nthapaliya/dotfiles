@@ -109,7 +109,6 @@ return require("packer").startup({
       "williamboman/nvim-lsp-installer",
       requires = {
         { "neovim/nvim-lspconfig", before = "nvim-lsp-installer" },
-        { "hrsh7th/cmp-nvim-lsp", before = "nvim-lsp-installer" },
       },
       config = function()
         -- https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
@@ -146,11 +145,43 @@ return require("packer").startup({
           ]])
         end
 
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+        -- copied blob from:
+        -- https://github.com/hrsh7th/cmp-nvim-lsp/blob/246a41c55668d5f84afcd805ee73b6e419375ae0/lua/cmp_nvim_lsp/init.lua#L18-L44
+        local update_capabilities = function(capabilities, override)
+          local if_nil = function(val, default)
+            if val == nil then
+              return default
+            end
+            return val
+          end
+
+          override = override or {}
+
+          local completionItem = capabilities.textDocument.completion.completionItem
+
+          completionItem.snippetSupport = if_nil(override.snippetSupport, true)
+          completionItem.preselectSupport = if_nil(override.preselectSupport, true)
+          completionItem.insertReplaceSupport = if_nil(override.insertReplaceSupport, true)
+          completionItem.labelDetailsSupport = if_nil(override.labelDetailsSupport, true)
+          completionItem.deprecatedSupport = if_nil(override.deprecatedSupport, true)
+          completionItem.commitCharactersSupport = if_nil(override.commitCharactersSupport, true)
+          completionItem.tagSupport = if_nil(override.tagSupport, { valueSet = { 1 } })
+          completionItem.resolveSupport = if_nil(override.resolveSupport, {
+            properties = {
+              "documentation",
+              "detail",
+              "additionalTextEdits",
+            },
+          })
+
+          return capabilities
+        end
 
         local lsp_installer = require("nvim-lsp-installer")
         lsp_installer.on_server_ready(function(server)
+          local capabilities = vim.lsp.protocol.make_client_capabilities()
+          capabilities = update_capabilities(capabilities)
+
           local opts = {
             on_attach = on_attach,
             flags = {
