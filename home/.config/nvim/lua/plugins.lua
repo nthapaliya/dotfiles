@@ -2,15 +2,15 @@ return require("packer").startup({
   function()
     use({ "wbthomason/packer.nvim", opt = true })
 
-    use("AndrewRadev/splitjoin.vim")
+    use({ "AndrewRadev/splitjoin.vim", opt = true, keys = { { "n", "gS" }, { "n", "gJ" } } })
     use("airblade/vim-rooter")
     use("christoomey/vim-tmux-navigator")
     use("justinmk/vim-dirvish")
-    use({ "rbgrouleff/bclose.vim", disable = true })
+    -- use({ "rbgrouleff/bclose.vim", disable = true })
     use("rstacruz/vim-closer")
-    use({ "sheerun/vim-polyglot", disable = true })
+    -- use({ "sheerun/vim-polyglot", disable = true })
     use("tommcdo/vim-lion")
-    use({ "tpope/vim-commentary", disable = true })
+    -- use({ "tpope/vim-commentary", disable = true })
     use("tpope/vim-fugitive")
     use("tpope/vim-repeat")
     use("tpope/vim-rhubarb")
@@ -107,9 +107,7 @@ return require("packer").startup({
 
     use({
       "williamboman/nvim-lsp-installer",
-      requires = {
-        { "neovim/nvim-lspconfig", before = "nvim-lsp-installer" },
-      },
+      requires = { { "neovim/nvim-lspconfig", before = "nvim-lsp-installer" } },
       config = function()
         -- https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
         local on_attach = function(_, bufnr)
