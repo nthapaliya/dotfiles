@@ -105,6 +105,7 @@ remap("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 local autocmds = {
   on_save = {
     { "BufWritePost", "plugins.lua", [[source <afile> | PackerCompile]] },
+    { "BufWritePost", "*/nvim/lua/config/*.lua", [[source <afile> | PackerCompile]] },
     { "BufWritePost", [[$MYVIMRC]], "nested", "source", [[$MYVIMRC]] },
     { "BufWritePost", [[*.tsx,*.json,*.lua,*.fish]], "FormatWrite" },
   },
