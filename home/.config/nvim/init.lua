@@ -7,8 +7,8 @@ end
 
 -- If there are cache issues, comment this out, as well as
 -- the `compile_path` line in plugins.lua, and rerun :PackerCompile
--- require("impatient").enable_profile()
--- require("packer_compiled")
+require("impatient").enable_profile()
+require("packer_compiled")
 
 -- This will never need to be uncommented as long as we don't forget :PackerCompile
 -- require('plugins')

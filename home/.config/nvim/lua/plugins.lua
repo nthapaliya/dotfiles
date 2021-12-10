@@ -1,6 +1,7 @@
 return require("packer").startup({
   function()
     use({ "wbthomason/packer.nvim", opt = true })
+    use("lewis6991/impatient.nvim")
     use("norcalli/nvim_utils")
 
     use({ "AndrewRadev/splitjoin.vim", opt = true, keys = { { "n", "gS" }, { "n", "gJ" } } })
@@ -68,8 +69,8 @@ return require("packer").startup({
 
     use({
       "folke/tokyonight.nvim",
-      opt = true,
-      event = "VimEnter",
+      -- opt = true,
+      -- event = "VimEnter",
       branch = "main",
       config = require("config.tokyonight"),
     })
@@ -118,5 +119,6 @@ return require("packer").startup({
   config = {
     display = { open_fn = require("packer.util").float },
     profile = { enable = true },
+    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
   },
 })
