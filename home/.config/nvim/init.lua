@@ -106,8 +106,8 @@ remap("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 -- Autocmds
 local autocmds = {
   on_save = {
-    { "BufWritePost", "plugins.lua", [[source <afile> | PackerCompile]] },
     { "BufWritePost", "*/nvim/lua/config/*.lua", [[source <afile> | PackerCompile]] },
+    { "BufWritePost", "plugins.lua", [[source <afile> | PackerCompile]] },
     { "BufWritePost", [[$MYVIMRC]], "nested", "source", [[$MYVIMRC]] },
     { "BufWritePost", [[*.tsx,*.json,*.lua,*.fish]], "FormatWrite" },
   },
@@ -115,10 +115,10 @@ local autocmds = {
     -- { "FileType", "vim", "setlocal foldmethod=marker" },
     { "FileType", "diff", [[setlocal commentstring=#\ %s']] },
     { "FileType", "gitcommit", [[setlocal spell commentstring=#\ %s textwidth=80']] },
-    { "FileType", "text", [[setlocal spell commentstring=#\ %s textwidth=80']] },
     { "FileType", "markdown", "setlocal tabstop=4 sts=4 sw=4 expandtab" },
     { "FileType", "ruby", "nnoremap <F5> :!time ruby %<cr>" },
     { "FileType", "rust", "nnoremap <F5> :!cargo run<cr>" },
+    { "FileType", "text", [[setlocal spell commentstring=#\ %s textwidth=80']] },
   },
   general = {
     { "VimResized", "*", "wincmd =" },
