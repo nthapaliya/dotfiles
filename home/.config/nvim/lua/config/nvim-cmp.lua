@@ -20,9 +20,10 @@ return function()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
+      ["<C-c>"] = cmp.mapping.close(),
       ["<CR>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
+        select = false,
       }),
       ["<Tab>"] = function(fallback)
         if cmp.visible() then
@@ -44,10 +45,8 @@ return function()
       end,
     },
     sources = {
-      { name = "buffer" },
-      { name = "luasnip" },
       { name = "nvim_lsp" },
-      { name = "nvim_lua" },
+      { name = "luasnip" },
       { name = "path" },
     },
   })
