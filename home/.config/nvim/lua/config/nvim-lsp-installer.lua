@@ -71,6 +71,11 @@ return function()
     return capabilities
   end
 
+  vim.diagnostic.config({
+    virtual_text = false,
+    underline = false,
+  })
+
   local lsp_installer = require("nvim-lsp-installer")
   lsp_installer.on_server_ready(function(server)
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -81,12 +86,6 @@ return function()
       flags = {
         debounce_text_changes = 150,
         capabilities = capabilities,
-      },
-      handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = false,
-          underline = false,
-        }),
       },
     }
 
