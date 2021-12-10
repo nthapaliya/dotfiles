@@ -5,9 +5,7 @@ if not status --is-interactive
 end
 
 function __hexagon_handle_preexec --on-event fish_preexec
-    # I think this was a rudimentary 'private mode'
-    # Following the behavior of other shells I think
-    # TODO: verfiy this
+    # Rudimentary 'private mode', similar to bash and fish behavior
     if string trim --left -q "$argv"
         return
     end
@@ -22,7 +20,6 @@ end
 
 set -gx HOSTNAME $hostname
 
-# eventually we might be able to use postexec
 function __hexagon_handle_postexec --on-event fish_postexec
     # Local variables
     set prev_status $status
