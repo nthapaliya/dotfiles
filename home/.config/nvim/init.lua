@@ -90,6 +90,8 @@ remap("n", "<leader>tb", [[:Telescope buffers<cr>]], opts)
 remap("n", "<leader>te", [[:Telescope file_browser<cr>]], opts)
 remap("n", "<leader>tg", [[:Telescope git_status<cr>]], opts)
 remap("n", "<leader>to", [[:Telescope oldfiles<cr>]], opts)
+remap("n", "<leader>*", [[:Telescope grep_string<cr>]], opts)
+-- remap("n", "<leader>*", [[*N"zyiw:Rg <c-r>z<cr>]], opts)
 
 -- Trouble
 remap("n", "<leader>tt", [[:TroubleToggle<cr>]], opts)
@@ -110,7 +112,7 @@ local autocmds = {
     { "BufWritePost", [[*.tsx,*.json,*.lua,*.fish]], "FormatWrite" },
   },
   filetype = {
-    { "FileType", "vim", "setlocal foldmethod=marker" }, -- TODO: revisit
+    -- { "FileType", "vim", "setlocal foldmethod=marker" },
     { "FileType", "diff", [[setlocal commentstring=#\ %s']] },
     { "FileType", "gitcommit", [[setlocal spell commentstring=#\ %s textwidth=80']] },
     { "FileType", "text", [[setlocal spell commentstring=#\ %s textwidth=80']] },
@@ -141,17 +143,3 @@ command! PackerSync packadd packer.nvim | lua require('plugins').sync()
 command! PackerClean packadd packer.nvim | lua require('plugins').clean()
 command! PackerCompile packadd packer.nvim | lua require('plugins').compile()
 ]])
-
--- TODOS:
-
--- 1:
---[[ Find a way to <space>*, which would fzf Rg the word under
-the cursor, try using Telescope
-
-" *N -> Search for word under cursor, highlight, jump back to prev word (*
-" moves on to next)
-" "zyiw -> yank word under cursor (iw) and store in register z
-" :Rg <c-r>z -> Run : command Rg, <c-r>z replaces itself with z register
-" contents
-" TODO: Find a way to do this in Telescope
-nnoremap <leader>*  *N"zyiw:Rg <c-r>z<cr> ]]
