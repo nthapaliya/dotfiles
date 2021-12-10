@@ -26,7 +26,7 @@
 [stash]
 	showPatch = true
 [diff]
-	algorithm = patience
+	algorithm = histogram
 	indentHeuristic = on
 	renamelimit = 10000
 	colormoved = default
