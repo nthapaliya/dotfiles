@@ -32,8 +32,4 @@ function __update_from_github
         https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish \
         $dotfiles/.config/fish/conf.d/done.fish
     curl --silent -L $done_stuff[1] >$done_stuff[2]
-
-    set -l dsf_url (curl -s https://api.github.com/repos/so-fancy/diff-so-fancy/releases/latest | jq -r .assets[0].browser_download_url)
-    set -l dsf_file $dotfiles/.local/bin/diff-so-fancy
-    curl -L $dsf_url >$dsf_file && chmod +x $dsf_file
 end
