@@ -6,10 +6,5 @@ return function()
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
     },
-    tabline = {
-      lualine_a = { "filename" },
-      lualine_y = { "buffers" },
-      lualine_z = { "tabs" },
-    },
   })
 end

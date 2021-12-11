@@ -24,6 +24,13 @@ return require("packer").startup({
     use("nvim-lua/plenary.nvim")
 
     use({
+      "akinsho/bufferline.nvim",
+      opt = true,
+      event = "VimEnter",
+      config = require("config.bufferline"),
+    })
+
+    use({
       "mhartington/formatter.nvim",
       opt = true,
       cmd = { "FormatWrite" },
