@@ -74,6 +74,7 @@ return function()
   vim.diagnostic.config({
     virtual_text = false,
     underline = false,
+    update_in_insert = false,
   })
 
   local lsp_installer = require("nvim-lsp-installer")
