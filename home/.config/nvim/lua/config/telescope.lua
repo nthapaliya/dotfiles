@@ -1,7 +1,16 @@
 return function()
   require("telescope").setup({
     defaults = {
+      color_devicons = false,
+      layout_config = { prompt_position = "top" },
       layout_strategy = "flex",
+      sorting_strategy = "ascending",
+      mappings = {
+        i = {
+          ["<esc>"] = require("telescope.actions").close,
+          ["<C-u>"] = false,
+        },
+      },
       vimgrep_arguments = {
         "rg",
         "--color=never",
