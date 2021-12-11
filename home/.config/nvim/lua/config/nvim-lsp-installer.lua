@@ -90,6 +90,10 @@ return function()
       },
     }
 
+    if server.name == "solargraph" then
+      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    end
+
     if server.name == "sumneko_lua" then
       opts.settings = {
         Lua = {
