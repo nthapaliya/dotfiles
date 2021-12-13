@@ -32,4 +32,4 @@ if command -sq asdf
 end
 
 # Setup fish completions
-# eval (brew --prefix)/opt/fzf/install --xdg --no-completion --no-update-rc --keybindings --no-bash --no-zsh
+# eval (brew --prefix)/opt/fzf/install --xdg --no-completion --no-update-rc --key-bindings --no-bash --no-zsh
