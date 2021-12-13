@@ -11,6 +11,7 @@ require("impatient").enable_profile()
 require("packer_compiled")
 
 -- This will never need to be uncommented as long as we don't forget :PackerCompile
+-- vim.cmd[[packadd packer.nvim]]
 -- require('plugins')
 
 -- Disable some built-in plugins we don't want
@@ -72,6 +73,7 @@ local opts = { noremap = true, silent = true }
 
 remap("n", "<leader>W", [[:%s/\s\+$<cr>]], opts)
 remap("n", "<leader>ev", [[:execute 'e ' . resolve(expand($MYVIMRC))<cr>]], opts)
+remap("n", "<leader>d", [[:cd ~/Projects/dotfiles<cr>]], opts)
 remap("n", "<leader>sv", [[:source $MYVIMRC<cr>]], opts)
 remap("n", "<Left>", [[:bprev<cr>]], opts)
 remap("n", "<Right>", [[:bnext<cr>]], opts)
