@@ -31,6 +31,5 @@ function set_uvars
 
     if command -sq asdf
         set -U ASDF_DATA_DIR ~/.local/opt/asdf
-        source /opt/homebrew/opt/asdf/libexec/asdf.fish
     end
 end
