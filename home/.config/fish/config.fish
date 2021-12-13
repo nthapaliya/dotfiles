@@ -30,3 +30,6 @@ if command -sq asdf
     set -gx ASDF_DATA_DIR ~/.local/opt/asdf
     source /opt/homebrew/opt/asdf/libexec/asdf.fish
 end
+
+# Setup fish completions
+# eval (brew --prefix)/opt/fzf/install --xdg --no-completion --no-update-rc --keybindings --no-bash --no-zsh

@@ -12,7 +12,7 @@ require("packer_compiled")
 
 -- This will never need to be uncommented as long as we don't forget :PackerCompile
 -- vim.cmd[[packadd packer.nvim]]
--- require('plugins')
+-- require('plugins').sync()
 
 -- Disable some built-in plugins we don't want
 local disabled_built_ins = {
