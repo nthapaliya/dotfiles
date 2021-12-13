@@ -111,7 +111,7 @@ return require("packer").startup({
     })
 
     use({
-      { "L3MON4D3/LuaSnip", before = "nvim-cmp" },
+      { "L3MON4D3/LuaSnip" },
       { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
       { "hrsh7th/cmp-nvim-lsp", after = "nvim-lsp-installer" },
       { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
@@ -121,6 +121,7 @@ return require("packer").startup({
 
     use({
       "hrsh7th/nvim-cmp",
+      after = "LuaSnip",
       opt = true,
       event = "InsertEnter",
       config = require("config.nvim-cmp"),
