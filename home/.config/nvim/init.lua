@@ -98,12 +98,13 @@ remap("n", "<leader>*", [[:Telescope grep_string<cr>]], opts)
 -- Trouble
 remap("n", "<leader>tt", [[:TroubleToggle<cr>]], opts)
 
--- Terminal stuff, not sure I ever used these
-remap("t", "<Esc>", [[<C-\><C-n>]], opts)
-remap("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
-remap("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
-remap("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
-remap("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
+_G.set_terminal_mappings = function()
+  remap("t", "<Esc>", [[<C-\><C-n>]], opts)
+  remap("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
+  remap("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
+  remap("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
+  remap("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
+end
 
 -- Autocmds
 local autocmds = {
@@ -129,6 +130,12 @@ local autocmds = {
   trimtrailingwhitespace = {
     { "BufWritePre", "*", [[%s/\s\+$//e]] },
     { "BufWritePre", "*", [[%s/\n\+\%$//e]] },
+  },
+  terminal = {
+    { "TermOpen", "term://*", "setlocal nonumber norelativenumber" },
+    { "TermOpen", "term://*", "startinsert" },
+    { "TermOpen", "term://*", "lua set_terminal_mappings()" },
+    { "BufWinEnter,WinEnter", "term://*", "startinsert" },
   },
 }
 
