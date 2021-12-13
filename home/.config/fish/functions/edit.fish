@@ -1,7 +1,7 @@
 function edit --description 'edit fish functions and bash scripts in $PATH'
     set name $argv[1]
 
-    if test "$name" = "config"
+    if test "$name" = config
         set config ~/.config/fish/config.fish
         nvim $config
         and source $config
@@ -10,12 +10,16 @@ function edit --description 'edit fish functions and bash scripts in $PATH'
 
     set TYPE ( type -t $name )
 
-    test -z "$TYPE"
-    and return
+    test -z "$TYPE"; and return
 
-    if test "$TYPE" = "file"
+    if test "$TYPE" = file
+        if string match -q binary (file -b --mime-encoding (which $name))
+            echo 'binary file!'
+            return 1
+        end
+
         nvim ( type --force-path $name )
-        return
+        return 0
     end
 
     nvim ( functions --details $name )

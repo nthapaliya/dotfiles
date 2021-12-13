@@ -6,8 +6,10 @@ function dns
     switch $argv[1]
         case open
             sudo networksetup -setdnsservers Wi-Fi $cloudfare $google
-        case close
+        case pihole
             sudo networksetup -setdnsservers Wi-Fi $pihole
+        case clear
+            sudo networksetup -setdnsservers Wi-Fi empty
     end
 
     echo 'dns set to:'

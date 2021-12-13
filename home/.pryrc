@@ -1,1 +1,0 @@
-.config/pry/pryrc

@@ -4,7 +4,7 @@ export PS1="bash \[\e[36m\]\w\[\e[m\] "
 alias vi='vim'
 alias ls="ls -G"
 
-export PATH=~/.local/bin:$PATH
+export PATH=/opt/homebrew/bin:~/.local/bin:$PATH
 
 [ -f ~/.iterm2_shell_integration.bash ] && source ~/.iterm2_shell_integration.bash
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -1,18 +1,14 @@
-set -g __fish_git_prompt_describe_style 'branch'
+set -g __fish_git_prompt_describe_style branch
 set -g __fish_git_prompt_shorten_branch_len 15
-set -g __fish_git_prompt_showcolorhints 'yes'
-set -g __fish_git_prompt_showdirtystate 'yes'
-set -g __fish_git_prompt_showuntrackedfiles 'yes'
+set -g __fish_git_prompt_showcolorhints yes
+set -g __fish_git_prompt_showdirtystate yes
+set -g __fish_git_prompt_showuntrackedfiles yes
 
 set -g __fish_git_prompt_char_dirtystate '*'
 set -g __fish_git_prompt_char_untrackedfiles '*'
 
 function fish_prompt --description 'Write out the prompt'
     set last_status $status
-
-    # Once fish is updated, you can delete this line
-    # And make stuff in conf.d respond to regular postexec
-    emit custom_postexec $last_status $CMD_DURATION
 
     if set -q SSH_CLIENT
         or set -q SSH_TTY

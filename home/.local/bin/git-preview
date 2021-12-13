@@ -8,11 +8,11 @@ git log \
 fzf \
   --multi \
   --ansi \
-  --bind 'ctrl-e:execute[git show --color {1} | diff-so-fancy | less -R > /dev/tty]' \
+  --bind 'ctrl-e:execute[git show --color {1} | delta --diff-so-fancy | less -R > /dev/tty]' \
   --no-sort \
   --nth 2.. \
   --with-nth=2.. \
-  --preview 'git show --color {1} | head -80 | diff-so-fancy' \
+  --preview 'git show --color {1} | head -80 | delta --diff-so-fancy' \
   --preview-window=down:80% \
   --reverse |\
 awk '{ print $1 }' | tee /dev/tty | pbcopy

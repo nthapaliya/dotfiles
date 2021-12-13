@@ -24,9 +24,13 @@ def reload
   true
 end
 
-# TODO: make this work independent of OSS gemfile
+# gem install rb-readline
+# gem install pry
 require 'rb-readline'
+require 'readline'
 
-def RbReadline.rl_reverse_search_history(_sign, _key)
-  rl_insert_text `grep -v exit #{Pry.config.history_file} | fzf --tac |  tr '\n' ' '`
+if defined?(RbReadline)
+  def RbReadline.rl_reverse_search_history(_sign, _key)
+    rl_insert_text `grep -v exit #{Pry.config.history_file} | fzf --tac |  tr '\n' ' '`
+  end
 end
