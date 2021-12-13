@@ -30,6 +30,6 @@ function set_uvars
     end
 
     if command -sq asdf
-        set -U ASDF_DATA_DIR ~/.local/opt/asdf
+        set -Ux ASDF_DATA_DIR ~/.local/opt/asdf
     end
 end
