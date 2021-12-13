@@ -47,14 +47,16 @@ return require("packer").startup({
 
     use({
       "williamboman/nvim-lsp-installer",
-      requires = { { "neovim/nvim-lspconfig", before = "nvim-lsp-installer" } },
+      requires = "neovim/nvim-lspconfig",
+      after = "nvim-lspconfig",
       config = require("config.nvim-lsp-installer"),
     })
 
     use({
       "lewis6991/gitsigns.nvim",
       opt = true,
-      before = { "nvim-lua/plenary.nvim" },
+      requires = "nvim-lua/plenary.nvim",
+      after = "plenary.nvim",
       event = "VimEnter",
       config = require("config.gitsigns"),
     })
@@ -69,7 +71,8 @@ return require("packer").startup({
     use({
       "nvim-telescope/telescope.nvim",
       opt = true,
-      before = { "nvim-lua/plenary.nvim" },
+      requires = "nvim-lua/plenary.nvim",
+      after = "plenary.nvim",
       cmd = { "Telescope" },
       config = require("config.telescope"),
     })
