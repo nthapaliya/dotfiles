@@ -2,9 +2,8 @@ return function()
   require("telescope").setup({
     defaults = {
       color_devicons = false,
-      layout_config = { prompt_position = "top" },
       layout_strategy = "flex",
-      sorting_strategy = "ascending",
+      scroll_strategy = "limit",
       mappings = {
         i = {
           ["<esc>"] = require("telescope.actions").close,
@@ -29,7 +28,7 @@ return function()
       },
       file_browser = {
         hidden = true,
-        dir_icon = ">>",
+        dir_icon = "▶",
       },
       -- grep_string = {
       --   additional_args = function()

@@ -1,9 +1,10 @@
 return function()
   require("trouble").setup({
     icons = false,
-    fold_open = "v",
-    fold_closed = ">",
+    fold_open = "▼",
+    fold_closed = "▶",
     indent_lines = false,
+    -- TODO: find some nice unicode icons for this
     signs = {
       error = "error",
       warning = "warn",
