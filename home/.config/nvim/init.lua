@@ -5,14 +5,16 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
--- If there are cache issues, comment this out, as well as
--- the `compile_path` line in plugins.lua, and rerun :PackerCompile
-require("impatient").enable_profile()
-require("packer_compiled")
-
--- This will never need to be uncommented as long as we don't forget :PackerCompile
--- vim.cmd[[packadd packer.nvim]]
--- require('plugins').sync()
+local status, _ = pcall(require, "packer_compiled")
+if status then
+  -- If there are cache issues, comment this out, as well as
+  -- the `compile_path` line in plugins.lua, and rerun :PackerCompile
+  require("impatient").enable_profile()
+  -- require("packer_compiled")
+else
+  vim.cmd([[packadd packer.nvim]])
+  require("plugins").sync()
+end
 
 -- Disable some built-in plugins we don't want
 local disabled_built_ins = {
