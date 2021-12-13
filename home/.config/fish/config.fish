@@ -1,35 +1,18 @@
-# Universal variables
-set -U fish_user_paths \
-    /opt/homebrew/bin \
-    ~/.local/bin
+if not set -q fish_vars_set
+    set -U fish_vars_set 1
 
-# Global variables
-set -gx SHELL (which fish)
+    echo Setting up for the first time!
+    set_abbrs
+    set_colors
+    set_uvars
 
-if command -sq nvim
-    set -gx EDITOR nvim
-    set -gx VISUAL $EDITOR
-    set -gx MANPAGER "nvim +Man!"
+    # Setup fish completions
+    if command -sq fzf
+        eval (brew --prefix)/opt/fzf/install \
+            --no-completion \
+            --no-update-rc \
+            --key-bindings \
+            --no-bash \
+            --no-zsh
+    end
 end
-
-if test (uname) = Darwin
-    set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
-end
-
-if command -sq brew
-    set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
-end
-
-if command -sq fd
-    set -gx FZF_DEFAULT_COMMAND 'fd -H --type file'
-    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
-    set -gx FZF_ALT_C_COMMAND 'fd -H --type directory'
-end
-
-if command -sq asdf
-    set -gx ASDF_DATA_DIR ~/.local/opt/asdf
-    source /opt/homebrew/opt/asdf/libexec/asdf.fish
-end
-
-# Setup fish completions
-# eval (brew --prefix)/opt/fzf/install --xdg --no-completion --no-update-rc --key-bindings --no-bash --no-zsh
