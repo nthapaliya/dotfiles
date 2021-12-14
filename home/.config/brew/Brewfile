@@ -104,6 +104,8 @@ cask "iina"
 cask "iterm2"
 # Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
+# GPU-based terminal emulator
+cask "kitty"
 # Git client
 cask "sublime-merge"
 # Open-source BitTorrent client
