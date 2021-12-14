@@ -22,6 +22,7 @@ return require("packer").startup({
     use({ "vim-scripts/BufOnly.vim", opt = true, cmd = { "BufOnly" } })
     use("wincent/terminus")
     use("nvim-lua/plenary.nvim")
+    use({ "junegunn/fzf.vim", requires = "junegunn/fzf" })
 
     use({
       "akinsho/bufferline.nvim",

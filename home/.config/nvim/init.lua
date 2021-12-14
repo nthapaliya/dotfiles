@@ -88,14 +88,11 @@ remap("n", "q:", [[<nop>]], opts)
 remap("v", "q:", [[<nop>]], opts)
 
 -- Plugins
--- Telescope
-remap("n", "<c-p>", [[:Telescope find_files<cr>]], opts)
-remap("n", "<leader>tb", [[:Telescope buffers<cr>]], opts)
-remap("n", "<leader>te", [[:Telescope file_browser<cr>]], opts)
-remap("n", "<leader>tg", [[:Telescope git_status<cr>]], opts)
-remap("n", "<leader>to", [[:Telescope oldfiles<cr>]], opts)
-remap("n", "<leader>*", [[:Telescope grep_string<cr>]], opts)
--- remap("n", "<leader>*", [[*N"zyiw:Rg <c-r>z<cr>]], opts)
+-- Fzf.vim
+remap("n", "<c-p>", [[:Files<cr>]], opts)
+remap("n", "<leader>g", [[:GFiles?<cr>]], opts)
+remap("n", "<leader>b", [[:Buffers<cr>]], opts)
+remap("n", "<leader>*", [[:RgCursor<cr>]], opts)
 
 -- Trouble
 remap("n", "<leader>tt", [[:TroubleToggle<cr>]], opts)
@@ -153,4 +150,17 @@ command! PackerUpdate packadd packer.nvim | lua require('plugins').update()
 command! PackerSync packadd packer.nvim | lua require('plugins').sync()
 command! PackerClean packadd packer.nvim | lua require('plugins').clean()
 command! PackerCompile packadd packer.nvim | lua require('plugins').compile()
+]])
+
+_G.rg = function(string_arg)
+  local cmd = "rg --column --line-number --no-heading --color=always --smart-case -. -- "
+    .. vim.fn.shellescape(string_arg)
+  local spec_dict = vim.fn["fzf#vim#with_preview"]()
+
+  vim.fn["fzf#vim#grep"](cmd, 1, spec_dict)
+end
+
+vim.cmd([[
+command! -nargs=* Rg       :lua rg(<q-args>)<cr>
+command! -nargs=0 RgCursor :lua rg(vim.fn.expand('<cword>'))<cr>
 ]])
