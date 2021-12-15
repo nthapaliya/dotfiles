@@ -2,7 +2,6 @@ return require("packer").startup({
   function()
     use({ "wbthomason/packer.nvim", opt = true })
     use("lewis6991/impatient.nvim")
-    use("norcalli/nvim_utils")
 
     use({ "AndrewRadev/splitjoin.vim", opt = true, keys = { { "n", "gS" }, { "n", "gJ" } } })
     use("airblade/vim-rooter")
