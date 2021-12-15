@@ -31,14 +31,6 @@ return function()
     --   vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     -- end
 
-    vim.cmd([[
-          augroup Hover
-            autocmd!
-            autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false})
-          augroup end
-          ]])
-  end
-
   -- copied blob from:
   -- https://github.com/hrsh7th/cmp-nvim-lsp/blob/246a41c55668d5f84afcd805ee73b6e419375ae0/lua/cmp_nvim_lsp/init.lua#L18-L44
   local update_capabilities = function(capabilities, override)
@@ -72,10 +64,17 @@ return function()
   end
 
   vim.diagnostic.config({
-    virtual_text = false,
+    severity_sort = true,
     underline = false,
     update_in_insert = false,
+    virtual_text = false,
   })
+
+  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
 
   local lsp_installer = require("nvim-lsp-installer")
   lsp_installer.on_server_ready(function(server)
@@ -85,8 +84,7 @@ return function()
     local opts = {
       on_attach = on_attach,
       flags = {
-        debounce_text_changes = 150,
-        capabilities = capabilities,
+        debounce_text_changes = 250,
       },
     }
 
