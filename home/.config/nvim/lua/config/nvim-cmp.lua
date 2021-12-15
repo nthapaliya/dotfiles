@@ -1,13 +1,17 @@
 return function()
+  local cmp = require("cmp")
+
   -- luasnip setup
   local luasnip = require("luasnip")
 
+  -- cmp-nvim-lsp
+  require("cmp_nvim_lsp")
+
   -- nvim-cmp setup
-  local cmp = require("cmp")
   cmp.setup({
     snippet = {
       expand = function(args)
-        require("luasnip").lsp_expand(args.body)
+        luasnip.lsp_expand(args.body)
       end,
     },
     mapping = {
@@ -43,8 +47,20 @@ return function()
     },
     sources = {
       { name = "nvim_lsp" },
+      { name = "buffer" },
       { name = "luasnip" },
-      { name = "path" },
+    },
+    formatting = {
+      format = require("lspkind").cmp_format({
+        with_text = false,
+        menu = {
+          -- ⸢ ⸣ ⸤ ⸥
+          buffer = "⸢Buffer",
+          luasnip = "⸢LuaSnip⸥",
+          nvim_lsp = "⸢LSP⸥",
+        },
+        maxwidth = 50,
+      }),
     },
   })
 end
