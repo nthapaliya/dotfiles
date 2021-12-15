@@ -24,36 +24,6 @@ return function()
     buf_set_keymap("n", "<leader>j", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
     buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     buf_set_keymap("n", "<leader>ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  -- copied blob from:
-  -- https://github.com/hrsh7th/cmp-nvim-lsp/blob/246a41c55668d5f84afcd805ee73b6e419375ae0/lua/cmp_nvim_lsp/init.lua#L18-L44
-  local update_capabilities = function(capabilities, override)
-    local if_nil = function(val, default)
-      if val == nil then
-        return default
-      end
-      return val
-    end
-
-    override = override or {}
-
-    local completionItem = capabilities.textDocument.completion.completionItem
-
-    completionItem.snippetSupport = if_nil(override.snippetSupport, true)
-    completionItem.preselectSupport = if_nil(override.preselectSupport, true)
-    completionItem.insertReplaceSupport = if_nil(override.insertReplaceSupport, true)
-    completionItem.labelDetailsSupport = if_nil(override.labelDetailsSupport, true)
-    completionItem.deprecatedSupport = if_nil(override.deprecatedSupport, true)
-    completionItem.commitCharactersSupport = if_nil(override.commitCharactersSupport, true)
-    completionItem.tagSupport = if_nil(override.tagSupport, { valueSet = { 1 } })
-    completionItem.resolveSupport = if_nil(override.resolveSupport, {
-      properties = {
-        "documentation",
-        "detail",
-        "additionalTextEdits",
-      },
-    })
-
-    return capabilities
   end
 
   vim.diagnostic.config({
@@ -72,12 +42,27 @@ return function()
   local lsp_installer = require("nvim-lsp-installer")
   lsp_installer.on_server_ready(function(server)
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = update_capabilities(capabilities)
+    local completionItem = capabilities.textDocument.completion.completionItem
+    completionItem.snippetSupport = true
+    completionItem.preselectSupport = true
+    completionItem.insertReplaceSupport = true
+    completionItem.labelDetailsSupport = true
+    completionItem.deprecatedSupport = true
+    completionItem.commitCharactersSupport = true
+    completionItem.tagSupport = { valueSet = { 1 } }
+    completionItem.resolveSupport = {
+      properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+      },
+    }
 
     local opts = {
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 250,
+        capabilities = capabilities,
       },
     }
 
