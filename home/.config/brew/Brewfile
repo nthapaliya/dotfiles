@@ -92,7 +92,7 @@ brew "youtube-dl"
 cask "emacs-mac"
 # Web browser
 cask "firefox"
-cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 cask "font-ibm-plex"
 # Git interface focused on visual interaction
 cask "gitup"
@@ -106,6 +106,8 @@ cask "iterm2"
 cask "keepingyouawake"
 # GPU-based terminal emulator
 cask "kitty"
+# Tool to control external monitor brightness & volume
+cask "monitorcontrol"
 # Git client
 cask "sublime-merge"
 # Open-source BitTorrent client
