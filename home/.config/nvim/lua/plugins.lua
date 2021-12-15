@@ -21,6 +21,13 @@ return require("packer").startup({
     use({ "vim-scripts/BufOnly.vim", opt = true, cmd = { "BufOnly" } })
     use("wincent/terminus")
     use("nvim-lua/plenary.nvim")
+
+    use({
+      "jose-elias-alvarez/null-ls.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = require("config.null-ls"),
+    })
+
     use({ "junegunn/fzf.vim", requires = "junegunn/fzf" })
 
     use({

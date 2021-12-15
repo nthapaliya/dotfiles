@@ -111,7 +111,6 @@ local autocmds = {
     { "BufWritePost", "*/nvim/lua/config/*.lua", [[source <afile> | PackerCompile]] },
     { "BufWritePost", "plugins.lua", [[source <afile> | PackerCompile]] },
     { "BufWritePost", [[$MYVIMRC]], "nested", "source", [[$MYVIMRC]] },
-    { "BufWritePost", [[*.tsx,*.json,*.lua,*.fish]], "FormatWrite" },
   },
   filetype = {
     -- { "FileType", "vim", "setlocal foldmethod=marker" },

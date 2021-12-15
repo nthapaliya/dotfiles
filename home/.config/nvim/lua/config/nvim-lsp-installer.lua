@@ -24,13 +24,6 @@ return function()
     buf_set_keymap("n", "<leader>j", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
     buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     buf_set_keymap("n", "<leader>ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
-    -- TODO: null-ls setup
-    -- we'd have to disable 'Formatter' first
-    -- if client.resolved_capabilities.document_formatting then
-    --   vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-    -- end
-
   -- copied blob from:
   -- https://github.com/hrsh7th/cmp-nvim-lsp/blob/246a41c55668d5f84afcd805ee73b6e419375ae0/lua/cmp_nvim_lsp/init.lua#L18-L44
   local update_capabilities = function(capabilities, override)
@@ -88,8 +81,12 @@ return function()
       },
     }
 
-    if server.name == "solargraph" then
-      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    if server.name == "tsserver" then
+      opts.on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        on_attach(client, bufnr)
+      end
     end
 
     if server.name == "sumneko_lua" then
