@@ -3,6 +3,8 @@
 
 # Set as SSH command
 # ssh foo@bar -t '/usr/local/bin/tmux new-session -A -s 0'
+# Set as et command
+# et pi@raspberrypi.local --command 'tmux new-session -A -s 0'
 
 function tm
     set args $argv 0
