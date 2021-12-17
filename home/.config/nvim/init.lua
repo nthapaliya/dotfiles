@@ -69,7 +69,7 @@ vim.opt.tabstop = 2
 vim.g.mapleader = " "
 vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 
--- Remaps
+-- Keymaps
 local remap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
@@ -81,6 +81,7 @@ remap("n", "<Left>", [[:bprev<cr>]], opts)
 remap("n", "<Right>", [[:bnext<cr>]], opts)
 remap("c", "w!!", [[w !sudo tee % >/dev/null]], {})
 remap("i", "jk", [[<esc>]], opts)
+remap("n", "<leader>q", [[:Bdelete<cr>]], opts)
 
 -- Don't enter ex-mode and command history mode respectively
 remap("n", "Q", [[<nop>]], opts)
@@ -89,10 +90,10 @@ remap("v", "q:", [[<nop>]], opts)
 
 -- Plugins
 -- Fzf.vim
-remap("n", "<c-p>", [[:Files<cr>]], opts)
-remap("n", "<leader>g", [[:GFiles?<cr>]], opts)
-remap("n", "<leader>b", [[:Buffers<cr>]], opts)
-remap("n", "<leader>*", [[:RgCursor<cr>]], opts)
+remap("n", "<c-p>", ":FzfLua files<cr>", opts)
+remap("n", "<leader>g", ":FzfLua git_status<cr>", opts)
+remap("n", "<leader>b", ":FzfLua buffers<cr>", opts)
+-- remap("n", "<leader>*", ":FzfLua files<cr>", opts)
 
 -- Trouble
 remap("n", "<leader>tt", [[:TroubleToggle<cr>]], opts)
@@ -154,24 +155,26 @@ nvim_create_augroups(autocmds)
 
 -- Commands
 vim.cmd([[
-command! Today execute 'normal Go<esc>' | r!date "+\%F (\%a \%b \%d)"
-command! -nargs=* Now execute 'normal G' | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
+command! Today execute 'normal Go<esc>'    | r!date "+\%F (\%a \%b \%d)"
+command! -nargs=* Now execute 'normal G'   | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
 command! PackerInstall packadd packer.nvim | lua require('plugins').install()
-command! PackerUpdate packadd packer.nvim | lua require('plugins').update()
-command! PackerSync packadd packer.nvim | lua require('plugins').sync()
-command! PackerClean packadd packer.nvim | lua require('plugins').clean()
+command! PackerUpdate packadd packer.nvim  | lua require('plugins').update()
+command! PackerSync packadd packer.nvim    | lua require('plugins').sync()
+command! PackerClean packadd packer.nvim   | lua require('plugins').clean()
 command! PackerCompile packadd packer.nvim | lua require('plugins').compile()
 ]])
 
-_G.rg = function(string_arg)
-  local cmd = "rg --column --line-number --no-heading --color=always --smart-case -. -- "
-    .. vim.fn.shellescape(string_arg)
-  local spec_dict = vim.fn["fzf#vim#with_preview"]()
+_G.gx = function()
+  if vim.bo.filetype == "lua" then
+    local word = vim.fn.expand("<cWORD>")
+    local matcher = '"%S+/%S+"'
+    local match = string.match(word, matcher)
 
-  vim.fn["fzf#vim#grep"](cmd, 1, spec_dict)
+    if match ~= nil then
+      local github_url = "https://github.com/" .. match
+      os.execute("open " .. github_url)
+    end
+  end
 end
 
-vim.cmd([[
-command! -nargs=* Rg       :lua rg(<q-args>)<cr>
-command! -nargs=0 RgCursor :lua rg(vim.fn.expand('<cword>'))<cr>
-]])
+remap("n", "gx", ":lua gx()<cr>", opts)
