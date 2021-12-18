@@ -19,10 +19,11 @@ return function()
       -- null_ls.builtins.diagnostics.proselint,
       -- null_ls.builtins.diagnostics.write_good,
     },
-    on_attach = function(client, _)
+    on_attach = function(client, bufnr)
       if client.resolved_capabilities.document_formatting then
         vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
       end
+      require("config/lsp_on_attach").on_attach(client, bufnr)
     end,
   })
 end
