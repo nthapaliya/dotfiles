@@ -3,9 +3,8 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "mistertea/et"
 tap "railwaycat/emacsmacport"
-# Download with resuming and segmented downloading
-brew "aria2"
 # Automatic configure script builder
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -24,10 +23,8 @@ brew "unixodbc"
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Statistics utility to count lines of code
-brew "cloc"
-# Get, unpack, build, and install modules from CPAN
-brew "cpanminus"
+# Fix common misspellings in source code and text files
+brew "codespell"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Simple, fast and user-friendly alternative to find
@@ -56,18 +53,10 @@ brew "jq"
 brew "mas"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Utility for managing network connections
-brew "netcat"
-# Port scanning utility for large networks
-brew "nmap"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
-# Monitor data's progress through a pipe
-brew "pv"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Utility that provides fast incremental file transfer
-brew "rsync"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Displays the differences between SQLite databases
@@ -84,10 +73,14 @@ brew "terminal-notifier"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Maintained ctags implementation
+brew "universal-ctags"
 # JavaScript package manager
 brew "yarn"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
+# Remote terminal with IP roaming
+brew "mistertea/et/et"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 cask "emacs-mac"
 # Web browser
@@ -114,6 +107,8 @@ cask "sublime-merge"
 cask "transmission"
 # Open-source code editor
 cask "visual-studio-code"
+# Video communication and virtual meeting platform
+cask "zoom"
 mas "1Password 7", id: 1333542190
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498

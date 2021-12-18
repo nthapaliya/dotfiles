@@ -3,7 +3,6 @@ function set_abbrs
         abbr -e $abbreviation
     end
 
-
     # git
     abbr -a -- g git
     abbr -a -- gb 'git branch'
