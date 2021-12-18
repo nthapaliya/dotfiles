@@ -165,6 +165,11 @@ command! PackerCompile packadd packer.nvim | lua require('plugins').compile()
 ]])
 
 _G.gx = function()
+  local open = function(url)
+    vim.cmd("silent! !open " .. vim.fn.shellescape(url, 1) .. ">&/dev/null")
+  end
+
+  -- try for Plug/Packer style 'urls': aka "username/repo"
   if vim.bo.filetype == "lua" then
     local word = vim.fn.expand("<cWORD>")
     local matcher = '"%S+/%S+"'
@@ -172,9 +177,12 @@ _G.gx = function()
 
     if match ~= nil then
       local github_url = "https://github.com/" .. match
-      os.execute("open " .. github_url)
+      open(github_url)
+      return
     end
   end
+
+  open(vim.fn.expand("<cfile>"))
 end
 
 remap("n", "gx", ":lua gx()<cr>", opts)
