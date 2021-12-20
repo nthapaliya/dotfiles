@@ -12,7 +12,7 @@ function set_uvars
     if command -sq nvim
         set -Ux EDITOR (which nvim)
         set -Ux VISUAL $EDITOR
-        set -U MANPAGER "nvim +Man!"
+        set -Ux MANPAGER "nvim +Man!"
     end
 
     if test (uname) = Darwin
