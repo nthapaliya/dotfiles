@@ -7,7 +7,7 @@ function set_uvars
         ~/.local/bin
 
     set -e -g SHELL
-    set -U SHELL (which fish)
+    set -Ux SHELL (which fish)
 
     if command -sq nvim
         set -Ux EDITOR (which nvim)
@@ -20,13 +20,13 @@ function set_uvars
     end
 
     if command -sq brew
-        set -U HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
+        set -Ux HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
     end
 
-    if command -sq fd and command -sq fzf
-        set -U FZF_DEFAULT_COMMAND 'fd -H --type file'
-        set -U FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
-        set -U FZF_ALT_C_COMMAND 'fd -H --type directory'
+    if command -sq fd && command -sq fzf
+        set -Ux FZF_DEFAULT_COMMAND 'fd -H --type file'
+        set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+        set -Ux FZF_ALT_C_COMMAND 'fd -H --type directory'
     end
 
     if command -sq asdf
