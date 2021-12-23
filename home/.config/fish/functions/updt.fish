@@ -13,12 +13,11 @@ function updt
 
     touch $hfile
 
-    echo 'Updating neovim plugins'
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c PackerSync
+
     echo
 
     # Run this manually
-    # __update_from_github
+    # __update_others
 
     echo 'Running brew commands...'
     brew bundle dump --force --describe --file=~/.config/brew/Brewfile
@@ -26,10 +25,16 @@ function updt
     brew upgrade
 end
 
-function __update_from_github
+function __update_others
+    echo Updating `done.fish`
     set -l dotfiles ~/Projects/dotfiles/home
     set -l done_stuff \
         https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish \
         $dotfiles/.config/fish/conf.d/done.fish
     curl --silent -L $done_stuff[1] >$done_stuff[2]
+
+
+    echo 'Updating neovim plugins'
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c PackerSync
+    nvim --headless -c "LspInstall --sync solargraph bashls eslint rust_analyzer tailwindcss vimls tsserver sumneko_lua" -c q
 end
