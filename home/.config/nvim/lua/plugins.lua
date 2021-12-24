@@ -89,19 +89,24 @@ return require("packer").startup({
     -- lsp
     use({
       "jose-elias-alvarez/null-ls.nvim",
+      opt = true,
+      after = "coq_nvim",
       requires = "nvim-lua/plenary.nvim",
       config = require("config/null-ls"),
     })
 
     use({
       "williamboman/nvim-lsp-installer",
+      opt = true,
+      after = "coq_nvim",
       requires = "neovim/nvim-lspconfig",
       config = require("config/nvim-lsp-installer"),
     })
 
-    -- compleitions
+    -- completions
     use({
       "hrsh7th/nvim-cmp",
+      disable = true,
       opt = true,
       event = "InsertEnter",
       config = require("config/nvim-cmp"),
@@ -115,6 +120,27 @@ return require("packer").startup({
         { "saadparwaiz1/cmp_luasnip" },
         -- { "hrsh7th/cmp-cmdline" },
       },
+    })
+
+    use({
+      "ms-jpq/coq_nvim",
+      requires = {
+        { "ms-jpq/coq.artifacts", branch = "artifacts" },
+      },
+      disable = false,
+      branch = "coq",
+      run = ":COQdeps",
+      opt = true,
+      event = "InsertEnter",
+      config = function()
+        vim.g.coq_settings = {
+          xdg = true,
+          ["clients.tree_sitter.enabled"] = false,
+          ["clients.tmux.enabled"] = false,
+          ["clients.snippets.enabled"] = false,
+        }
+        require("coq").Now("--shut-up")
+      end,
     })
 
     -- other

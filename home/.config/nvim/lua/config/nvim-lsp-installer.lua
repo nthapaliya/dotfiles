@@ -35,7 +35,7 @@ return function()
       on_attach = require("config/lsp_on_attach").on_attach,
       flags = {
         debounce_text_changes = 250,
-        capabilities = capabilities,
+        -- capabilities = capabilities, -- enable this if nvim-cmp is enabled
       },
     }
 
@@ -71,6 +71,7 @@ return function()
       }
     end
 
-    server:setup(opts)
+    -- server:setup(opts) -- this line if nvim-cmp is enabled
+    server:setup(require("coq").lsp_ensure_capabilities(opts)) -- this line for coq
   end)
 end
