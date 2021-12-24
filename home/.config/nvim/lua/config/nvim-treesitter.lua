@@ -19,7 +19,7 @@ return function()
     },
   })
 
-  vim.o.foldlevel = 20
+  vim.wo.foldlevel = 20
   vim.wo.foldmethod = "expr"
   vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 end
