@@ -109,12 +109,11 @@ end
 -- Autocmds
 local autocmds = {
   on_save = {
-    { "BufWritePost", "*/nvim/lua/config/*.lua", [[source <afile> | PackerCompile]] },
-    { "BufWritePost", "plugins.lua", [[source <afile> | PackerCompile]] },
+    { "BufWritePost", "*/nvim/lua/config/*.lua", "PackerCompile" },
+    { "BufWritePost", "*/nvim/lua/plugins.lua", "PackerCompile" },
     { "BufWritePost", [[$MYVIMRC]], "nested", "source", [[$MYVIMRC]] },
   },
   filetype = {
-    -- { "FileType", "vim", "setlocal foldmethod=marker" },
     { "FileType", "diff", [[setlocal commentstring=#\ %s]] },
     { "FileType", "gitcommit", [[setlocal spell commentstring=#\ %s textwidth=80]] },
     { "FileType", "markdown", "setlocal tabstop=4 sts=4 sw=4 expandtab" },
