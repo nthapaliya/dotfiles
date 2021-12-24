@@ -120,6 +120,7 @@ return require("packer").startup({
     -- other
     use({
       "mhartington/formatter.nvim",
+      disable = true,
       opt = true,
       cmd = { "FormatWrite" },
       config = require("config/formatter"),
