@@ -90,7 +90,7 @@ remap("v", "q:", [[<nop>]], opts)
 
 -- Plugins
 -- Fzf.vim
-remap("n", "<c-p>", ":FzfLua files<cr>", opts)
+remap("n", "<c-t>", ":FzfLua files<cr>", opts)
 remap("n", "<leader>g", ":FzfLua git_status<cr>", opts)
 remap("n", "<leader>b", ":FzfLua buffers<cr>", opts)
 -- remap("n", "<leader>*", ":FzfLua files<cr>", opts)
