@@ -18,4 +18,8 @@ return function()
       additional_vim_regex_highlighting = { "org" },
     },
   })
+
+  vim.o.foldlevel = 20
+  vim.wo.foldmethod = "expr"
+  vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 end
