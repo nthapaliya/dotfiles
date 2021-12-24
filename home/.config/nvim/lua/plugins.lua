@@ -146,6 +146,17 @@ return require("packer").startup({
       config = require("config/trouble"),
     })
 
+    use({
+      "nvim-orgmode/orgmode",
+      after = "nvim-treesitter",
+      config = function()
+        require("orgmode").setup({
+          org_agenda_files = { "~/org/*" },
+          org_default_notes_file = "~/org/refile.org",
+        })
+      end,
+    })
+
     -- Honorable mentions
     -- use({ "junegunn/fzf.vim", requires = "junegunn/fzf" })
     -- use({ "rbgrouleff/bclose.vim", disable = true })
