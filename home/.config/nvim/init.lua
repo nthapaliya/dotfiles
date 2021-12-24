@@ -155,8 +155,6 @@ nvim_create_augroups(autocmds)
 
 -- Commands
 vim.cmd([[
-command! Today execute 'normal Go<esc>'    | r!date "+\%F (\%a \%b \%d)"
-command! -nargs=* Now execute 'normal G'   | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
 command! PackerInstall packadd packer.nvim | lua require('plugins').install()
 command! PackerUpdate packadd packer.nvim  | lua require('plugins').update()
 command! PackerSync packadd packer.nvim    | lua require('plugins').sync()
@@ -186,3 +184,9 @@ _G.gx = function()
 end
 
 remap("n", "gx", ":lua gx()<cr>", opts)
+
+-- -- Rewrite these in lua
+-- vim.cmd([[
+-- command! Today execute 'normal Go<esc>'    | r!date "+\%F (\%a \%b \%d)"
+-- command! -nargs=* Now execute 'normal G'   | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
+-- ]])
