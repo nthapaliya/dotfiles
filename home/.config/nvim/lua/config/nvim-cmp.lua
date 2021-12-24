@@ -49,6 +49,7 @@ return function()
       { name = "nvim_lsp" },
       { name = "buffer" },
       { name = "luasnip" },
+      { name = "path" },
     },
     formatting = {
       format = require("lspkind").cmp_format({
