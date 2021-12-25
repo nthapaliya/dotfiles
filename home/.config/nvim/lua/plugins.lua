@@ -15,6 +15,7 @@ return require("packer").startup({
     use({ "tommcdo/vim-lion" })
     use({ "unblevable/quick-scope" })
     use({ "wincent/terminus" })
+    use({ "ojroques/vim-oscyank" })
 
     -- tpope
     use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })

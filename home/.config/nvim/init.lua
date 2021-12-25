@@ -135,6 +135,14 @@ local autocmds = {
     { "TermOpen", "term://*", "lua set_terminal_mappings()" },
     { "BufWinEnter,WinEnter", "term://*", "startinsert" },
   },
+  oscyank = {
+    {
+      "TextYankPost *",
+      [[if $SSH_CLIENT != '' && v:event.operator is 'y' && v:event.regname is '' | ]],
+      [[execute 'OSCYankReg "' | ]],
+      [[endif]],
+    },
+  },
 }
 
 -- https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567
@@ -183,6 +191,8 @@ _G.gx = function()
 end
 
 remap("n", "gx", ":lua gx()<cr>", opts)
+
+-- vim.g.oscyank_silent = true
 
 -- -- Rewrite these in lua
 -- vim.cmd([[
