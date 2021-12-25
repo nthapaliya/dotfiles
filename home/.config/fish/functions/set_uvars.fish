@@ -1,10 +1,23 @@
 function set_uvars
+    # clean up any previously set universal vars
+    set -U --names | grep -v fish_ | while read VAR
+        set -e -g $VAR
+    end
+
     set -e -g fish_greeting
     set -U fish_greeting
 
-    set -U fish_user_paths \
-        /opt/homebrew/bin \
-        ~/.local/bin
+    set -U fish_user_paths ~/.local/bin
+
+    if test Darwin = (uname)
+        # TODO: Check if M1 or Intel
+        set -p fish_user_paths /opt/homebrew/bin
+    end
+
+    if not command -sq fzf
+        vim +PlugInstall +q
+        set -a fish_user_paths ~/.local/share/vim/plugged/fzf/bin
+    end
 
     set -e -g SHELL
     set -Ux SHELL (which fish)

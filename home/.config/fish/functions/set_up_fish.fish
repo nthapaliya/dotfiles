@@ -1,9 +1,6 @@
 function set_up_fish
     echo Setting up for the first time!
 
-    echo 'Do you want to delete existing fish_variables?'
-    rm -i ~/.config/fish/fish_variables
-
     set -U fish_vars_set 1
 
     set_abbrs
