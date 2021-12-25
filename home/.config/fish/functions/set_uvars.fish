@@ -13,6 +13,9 @@ function set_uvars
         set -Ux EDITOR (which nvim)
         set -Ux VISUAL $EDITOR
         set -Ux MANPAGER "nvim +Man!"
+    else
+        set -Ux EDITOR (which vim)
+        set -Ux VISUAL $EDITOR
     end
 
     if test (uname) = Darwin

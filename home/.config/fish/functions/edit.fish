@@ -3,7 +3,7 @@ function edit --description 'edit fish functions and bash scripts in $PATH'
 
     if test "$name" = config
         set config ~/.config/fish/config.fish
-        nvim $config
+        vi $config
         and source $config
         return
     end
@@ -18,9 +18,9 @@ function edit --description 'edit fish functions and bash scripts in $PATH'
             return 1
         end
 
-        nvim ( type --force-path $name )
+        vi ( type --force-path $name )
         return 0
     end
 
-    nvim ( functions --details $name )
+    vi ( functions --details $name )
 end

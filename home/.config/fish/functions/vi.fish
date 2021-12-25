@@ -1,3 +1,7 @@
-function vi --wraps=nvim --description 'alias vi=nvim'
-    nvim $argv
+function vi
+    if command -sq nvim
+        command nvim $argv
+    else
+        command vim $argv
+    end
 end

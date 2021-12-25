@@ -11,8 +11,8 @@ function set_abbrs
     abbr -a -- gdca 'git diff --cached'
     abbr -a -- gs 'git status -s  | cut -c4-'
     abbr -a -- gss 'git status -s'
-    abbr -a -- vconflict 'nvim (git conflict)'
-    abbr -a -- vdirty 'nvim ( git status -s | cut -c4- )'
+    abbr -a -- vconflict 'vi (git conflict)'
+    abbr -a -- vdirty 'vi ( git status -s | cut -c4- )'
 
     # dotfiles
     abbr -a -- d 'cd ~/Projects/dotfiles'
