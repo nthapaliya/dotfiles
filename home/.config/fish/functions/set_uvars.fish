@@ -26,10 +26,15 @@ function set_uvars
         set -Ux HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
     end
 
-    if command -sq fd && command -sq fzf
-        set -Ux FZF_DEFAULT_COMMAND 'fd -H --type file'
-        set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
-        set -Ux FZF_ALT_C_COMMAND 'fd -H --type directory'
+    if command -sq fzf
+        if command -sq fd
+            set -Ux FZF_DEFAULT_COMMAND 'fd -H --type file'
+            set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+            set -Ux FZF_ALT_C_COMMAND 'fd -H --type directory'
+        else if command -sq rg
+            set -Ux FZF_DEFAULT_COMMAND 'rg --files --hidden --glob \'!.git\''
+            set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+        end
     end
 
     if command -sq asdf
