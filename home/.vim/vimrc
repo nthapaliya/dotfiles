@@ -1,0 +1,149 @@
+" vim-plug config {{{
+call plug#begin('~/.local/share/vim/plugged')
+
+" Colors and themes
+Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
+
+" Language enhancements
+Plug 'sheerun/vim-polyglot'
+
+" Vim enhancements
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'andymass/vim-matchup'
+Plug 'aymericbeaumet/vim-symlink'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'ojroques/vim-oscyank'
+Plug 'rhysd/vim-healthcheck'
+Plug 'tommcdo/vim-lion'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'wincent/terminus'
+Plug 'unblevable/quick-scope'
+
+" File/buffer management
+Plug 'justinmk/vim-dirvish'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'vim-scripts/BufOnly.vim'
+
+call plug#end()
+" }}}
+
+" basic settings {{{
+scriptencoding utf-8
+syntax on
+filetype plugin indent on
+
+set autoindent
+set autoread
+set background=dark
+set backspace=indent,eol,start
+set backupdir=~/.local/share/vim//,/tmp//
+set breakindent
+set clipboard^=unnamed,unnamedplus
+set directory=~/.local/share/vim//,/tmp//
+set encoding=utf-8
+set hidden
+set history=1000
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set list
+set listchars=trail:·,extends:#,tab:▸·,nbsp:·
+set mouse=a
+set noerrorbells
+set number
+set ruler
+set scrolloff=8
+set shell=bash
+set shortmess+=c
+set showbreak=\\\\\
+set showmatch
+set smartcase
+set synmaxcol=300
+set tabstop=2 sts=2 sw=2 expandtab
+set tags^=./.git/tags;
+set title
+set undodir=~/.local/share/vim//,/tmp//
+set updatetime=100
+set visualbell
+set wildmenu
+
+colorscheme gruvbox
+
+" for vim in tmux only
+" :help xterm-true-color
+" https://github.com/vim/vim/issues/993
+if exists('$TMUX')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+" }}}
+
+" keymappings {{{
+let g:mapleader = "\<Space>"
+
+cmap w!! w !sudo tee % >/dev/null
+nnoremap <leader>W  :%s/\s\+$<cr>
+nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<CR>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <Left>     :bprev<cr>
+nnoremap <Right>    :bnext<cr>
+
+inoremap jk <esc>
+nnoremap Q <nop> " don't enter ex mode accidentally
+" }}}
+
+" auto-commands {{{
+augroup vim_filetype
+  autocmd!
+  " tip for 'nested' comes from https://github.com/itchyny/lightline.vim/commit/5374a50bbbabe5616b13b08fdf687a965b3c0486
+  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+augroup other_filetype_tweaks
+  autocmd!
+  autocmd FileType diff setlocal commentstring=#\ %s
+  autocmd FileType gitcommit setlocal spell commentstring=#\ %s
+  autocmd FileType text setlocal spell commentstring=#\ %s textwidth=80
+  autocmd FileType markdown set tabstop=4 sts=4 sw=4 expandtab
+  autocmd  FileType fzf set noshowmode noruler nonu
+augroup END
+
+augroup general_autocommands
+  autocmd!
+  autocmd VimResized * wincmd =
+  autocmd TextYankPost * if $SSH_CLIENT != '' && v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+augroup END
+" }}}
+
+" vim-airline/vim-airline {{{
+let g:airline#extensions#branch#displayed_head_limit = 8
+
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+" }}}
+
+" junegunn/fzf {{{
+nnoremap <C-t> :Files<cr>
+nnoremap <leader>g vGFiles?<cr>
+nnoremap <leader>b :Buffers<cr>
+" }}}
+
+" other settings {{{
+let g:oscyank_silent = v:true
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:matchup_matchparen_offscreen = {}
+" }}}
