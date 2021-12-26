@@ -15,7 +15,6 @@ function set_uvars
     end
 
     if not command -sq fzf
-        vim +PlugInstall +q
         set -a fish_user_paths ~/.local/share/vim/plugged/fzf/bin
     end
 
