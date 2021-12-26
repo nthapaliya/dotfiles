@@ -56,9 +56,10 @@ return function()
         with_text = false,
         menu = {
           -- ⸢ ⸣ ⸤ ⸥
-          buffer = "⸢Buffer",
-          luasnip = "⸢LuaSnip⸥",
           nvim_lsp = "⸢LSP⸥",
+          buffer = "⸢Buffer⸥",
+          luasnip = "⸢LuaSnip⸥",
+          path = "⸢Path⸥",
         },
         maxwidth = 50,
       }),

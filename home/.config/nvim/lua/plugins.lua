@@ -1,5 +1,5 @@
 return require("packer").startup({
-  function()
+  function(use)
     -- important ones
     use({ "wbthomason/packer.nvim", opt = true })
     use({ "lewis6991/impatient.nvim" })
@@ -107,9 +107,8 @@ return require("packer").startup({
     -- completions
     use({
       "hrsh7th/nvim-cmp",
-      disable = true,
       opt = true,
-      event = "InsertEnter",
+      -- event = "InsertEnter",
       config = require("config/nvim-cmp"),
       requires = {
         { "L3MON4D3/LuaSnip" },
@@ -125,14 +124,11 @@ return require("packer").startup({
 
     use({
       "ms-jpq/coq_nvim",
-      requires = {
-        { "ms-jpq/coq.artifacts", branch = "artifacts" },
-      },
-      disable = false,
+      requires = { { "ms-jpq/coq.artifacts", branch = "artifacts" } },
       branch = "coq",
       run = ":COQdeps",
       opt = true,
-      event = "InsertEnter",
+      event = "BufRead",
       config = function()
         vim.g.coq_settings = {
           xdg = true,
@@ -140,7 +136,7 @@ return require("packer").startup({
           ["clients.tmux.enabled"] = false,
           ["clients.snippets.enabled"] = false,
         }
-        require("coq").Now("--shut-up")
+        vim.cmd([[COQnow --shut-up]])
       end,
     })
 
