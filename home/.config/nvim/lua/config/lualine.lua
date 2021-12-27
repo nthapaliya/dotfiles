@@ -6,4 +6,6 @@ return function()
       section_separators = { left = "", right = "" },
     },
   })
+
+  require("buftabline").setup({ tab_format = " #{b}#{f} " })
 end

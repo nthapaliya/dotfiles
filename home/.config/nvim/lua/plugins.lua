@@ -43,14 +43,6 @@ return require("packer").startup({
 
     -- visual niceties
     use({
-      "akinsho/bufferline.nvim",
-      opt = true,
-      requires = { "kyazdani42/nvim-web-devicons" },
-      event = "VimEnter",
-      config = require("config/bufferline"),
-    })
-
-    use({
       "lewis6991/gitsigns.nvim",
       opt = true,
       requires = { "nvim-lua/plenary.nvim" },
@@ -61,7 +53,7 @@ return require("packer").startup({
     use({
       "nvim-lualine/lualine.nvim",
       opt = true,
-      requires = { "kyazdani42/nvim-web-devicons" },
+      requires = { "jose-elias-alvarez/buftabline.nvim" },
       event = "VimEnter",
       config = require("config/lualine"),
     })
