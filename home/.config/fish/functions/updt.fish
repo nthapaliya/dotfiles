@@ -13,7 +13,7 @@ end
 
 function __checktime
     set hfile ~/.local/share/updt/last_updated
-    mkdir -p (dirname $hfile)
+    test -d (dirname $hfile); or mkdir -p (dirname $hfile)
 
     if not test -f $hfile
         touch $hfile
@@ -27,14 +27,16 @@ function __checktime
 end
 
 function __updt_os_agnostic
-    echo 'Updating `done.fish`'
-    curl --silent -L --remote-name \
-        --output-dir ~/Projects/dotfiles/home/.config/fish/conf.d/ \
-        https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
-    echo 'Updating `plug.vim`'
-    curl --silent -L --remote-name \
-        --output-dir ~/Projects/dotfiles/home/.vim/autoload/ \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if not set -q SSH_CLIENT
+        echo 'Updating `done.fish`'
+        curl --silent -L --remote-name \
+            --output-dir ~/Projects/dotfiles/home/.config/fish/conf.d/ \
+            https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
+        echo 'Updating `plug.vim`'
+        curl --silent -L --remote-name \
+            --output-dir ~/Projects/dotfiles/home/.vim/autoload/ \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    end
 
     if command -sq nvim
         echo 'Updating neovim plugins'
@@ -42,6 +44,6 @@ function __updt_os_agnostic
     end
     if command -sq vim
         echo 'Updating vim plugins'
-        vim +PlugUpdate +PlugUpgrade +qall
+        vim +PlugUpdate +qall
     end
 end
