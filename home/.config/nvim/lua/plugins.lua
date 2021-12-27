@@ -68,10 +68,17 @@ return require("packer").startup({
 
     use({
       "folke/tokyonight.nvim",
-      -- opt = true,
+      opt = true,
       -- event = "VimEnter",
       branch = "main",
       config = require("config/tokyonight"),
+    })
+
+    use({
+      "rebelot/kanagawa.nvim",
+      config = function()
+        vim.cmd([[colorscheme kanagawa]])
+      end,
     })
 
     -- treesitter
