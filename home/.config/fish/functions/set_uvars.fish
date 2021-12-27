@@ -1,7 +1,7 @@
 function set_uvars
     # clean up any previously set universal vars
     set -U --names | grep -v fish_ | while read VAR
-        set -e -g $VAR
+        set -e $VAR
     end
 
     set -e -g fish_greeting
@@ -18,8 +18,7 @@ function set_uvars
         set -a fish_user_paths ~/.local/share/vim/plugged/fzf/bin
     end
 
-    set -e -g SHELL
-    set -Ux SHELL (which fish)
+    set -Ux SHELL fish
 
     if command -sq nvim
         set -Ux EDITOR (which nvim)
