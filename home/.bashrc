@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 export PS1="bash \[\e[36m\]\w\[\e[m\] "
 
