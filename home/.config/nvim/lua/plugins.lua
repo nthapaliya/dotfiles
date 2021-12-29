@@ -78,10 +78,7 @@ return require("packer").startup({
       "nvim-treesitter/nvim-treesitter",
       opt = true,
       event = "BufRead",
-      requires = {
-        "nvim-treesitter/nvim-treesitter-refactor",
-        "nvim-treesitter/nvim-treesitter-textobjects",
-      },
+      requires = { "andymass/vim-matchup" },
       run = ":TSUpdate",
       config = require("config/nvim-treesitter"),
     })
@@ -154,12 +151,6 @@ return require("packer").startup({
       requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
       keys = { { "n", "gcc" }, { "n", "gcb" }, { "v", "gc" } },
       config = require("config/Comment"),
-    })
-
-    use({
-      "andymass/vim-matchup",
-      after = "nvim-treesitter",
-      config = require("config/vim-matchup"),
     })
 
     use({
