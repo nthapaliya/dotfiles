@@ -177,7 +177,7 @@ _G.gx = function()
   -- try for Plug/Packer style 'urls': aka "username/repo"
   if vim.bo.filetype == "lua" then
     local word = vim.fn.expand("<cWORD>")
-    local matcher = '"%S+/%S+"'
+    local matcher = '"(%S+/%S+)"'
     local match = string.match(word, matcher)
 
     if match ~= nil then

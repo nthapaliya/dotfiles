@@ -176,7 +176,7 @@ return require("packer").startup({
     -- use({ "tpope/vim-commentary", disable = true })
   end,
   config = {
-    display = { open_fn = require("packer.util").float },
+    -- display = { open_fn = require("packer.util").float },
     profile = { enable = true },
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
   },
