@@ -14,4 +14,5 @@ function dns
 
     echo 'dns set to:'
     networksetup -getdnsservers Wi-Fi
+    echo options are `open`, `pihole` and `clear`
 end
