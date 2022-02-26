@@ -38,10 +38,10 @@ function __updt_os_agnostic
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     end
 
-    if command -sq nvim
-        echo 'Updating neovim plugins'
-        nvim -c 'autocmd User PackerComplete quitall' -c PackerSync
-    end
+    # if command -sq nvim
+    #     echo 'Updating neovim plugins'
+    #     nvim -c 'autocmd User PackerComplete quitall' -c PackerSync
+    # end
     if command -sq vim
         echo 'Updating vim plugins'
         vim +PlugUpdate +qall

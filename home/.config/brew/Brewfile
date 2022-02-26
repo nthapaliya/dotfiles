@@ -5,6 +5,8 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "mistertea/et"
 tap "railwaycat/emacsmacport"
+# Download with resuming and segmented downloading
+brew "aria2"
 # Automatic configure script builder
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -59,6 +61,8 @@ brew "mas"
 brew "neovim"
 # Tiny, lightning fast, feature-packed file manager
 brew "nnn"
+# Shell command parallelization utility
+brew "parallel"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
 # File browser
@@ -79,6 +83,8 @@ brew "stylua"
 brew "terminal-notifier"
 # Terminal multiplexer
 brew "tmux"
+# Upgrade all the things
+brew "topgrade"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Maintained ctags implementation
@@ -89,6 +95,8 @@ brew "yarn"
 brew "yt-dlp"
 # Remote terminal with IP roaming
 brew "mistertea/et/et"
+# E-books management software
+cask "calibre"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 cask "emacs-mac"
 # Web browser
@@ -99,6 +107,8 @@ cask "font-ibm-plex"
 cask "gitup"
 # Web browser
 cask "google-chrome"
+# Open-source video transcoder
+cask "handbrake"
 # Free and open-source media player
 cask "iina"
 # Terminal emulator as alternative to Apple's Terminal app
