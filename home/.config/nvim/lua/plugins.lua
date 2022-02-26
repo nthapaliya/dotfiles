@@ -11,7 +11,7 @@ return require("packer").startup({
     use({ "aymericbeaumet/vim-symlink" })
     use({ "christoomey/vim-tmux-navigator" })
     use({ "justinmk/vim-dirvish" })
-    use({ "rstacruz/vim-closer" })
+    use({ "rstacruz/vim-closer", opt = true })
     use({ "tommcdo/vim-lion" })
     use({ "unblevable/quick-scope" })
     use({ "wincent/terminus" })
@@ -50,27 +50,25 @@ return require("packer").startup({
       config = require("config/gitsigns"),
     })
 
+    -- -- TODO: figure out how to use this one
+    -- use("ggandor/lightspeed.nvim")
+    --
+    use({
+      "jose-elias-alvarez/buftabline.nvim",
+      event = "VimEnter",
+      config = require("config/buftabline"),
+    })
+
     use({
       "nvim-lualine/lualine.nvim",
-      opt = true,
-      requires = { "jose-elias-alvarez/buftabline.nvim" },
       event = "VimEnter",
       config = require("config/lualine"),
     })
 
     use({
       "folke/tokyonight.nvim",
-      opt = true,
-      -- event = "VimEnter",
       branch = "main",
       config = require("config/tokyonight"),
-    })
-
-    use({
-      "rebelot/kanagawa.nvim",
-      config = function()
-        vim.cmd([[colorscheme kanagawa]])
-      end,
     })
 
     -- treesitter
@@ -102,36 +100,15 @@ return require("packer").startup({
 
     -- completions
     use({
-      "hrsh7th/nvim-cmp",
-      opt = true,
-      -- event = "InsertEnter",
-      config = require("config/nvim-cmp"),
-      requires = {
-        { "L3MON4D3/LuaSnip" },
-        { "onsails/lspkind-nvim" },
-        { "hrsh7th/cmp-buffer" },
-        { "hrsh7th/cmp-nvim-lsp" },
-        { "hrsh7th/cmp-path" },
-        { "hrsh7th/cmp-nvim-lua" },
-        { "saadparwaiz1/cmp_luasnip" },
-        -- { "hrsh7th/cmp-cmdline" },
-      },
-    })
-
-    use({
       "ms-jpq/coq_nvim",
-      requires = { { "ms-jpq/coq.artifacts", branch = "artifacts" } },
       branch = "coq",
-      run = ":COQdeps",
       opt = true,
-      event = "BufRead",
+      event = "InsertEnter",
+      requires = { {
+        "ms-jpq/coq.artifacts",
+        branch = "artifacts",
+      } },
       config = function()
-        vim.g.coq_settings = {
-          xdg = true,
-          ["clients.tree_sitter.enabled"] = false,
-          ["clients.tmux.enabled"] = false,
-          ["clients.snippets.enabled"] = false,
-        }
         vim.cmd([[COQnow --shut-up]])
       end,
     })

@@ -27,37 +27,17 @@ return function()
 
   for _, name in pairs(servers) do
     local server_is_found, server = lsp_installer.get_server(name)
-    if server_is_found then
-      if not server:is_installed() then
-        print("Installing " .. name)
-        server:install()
-      end
+    if server_is_found and not server:is_installed() then
+      print("Installing " .. name)
+      server:install()
     end
   end
 
   lsp_installer.on_server_ready(function(server)
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local completionItem = capabilities.textDocument.completion.completionItem
-    completionItem.snippetSupport = true
-    completionItem.preselectSupport = true
-    completionItem.insertReplaceSupport = true
-    completionItem.labelDetailsSupport = true
-    completionItem.deprecatedSupport = true
-    completionItem.commitCharactersSupport = true
-    completionItem.tagSupport = { valueSet = { 1 } }
-    completionItem.resolveSupport = {
-      properties = {
-        "documentation",
-        "detail",
-        "additionalTextEdits",
-      },
-    }
-
     local default_opts = {
       on_attach = require("config/lsp_on_attach").on_attach,
       flags = {
         debounce_text_changes = 250,
-        -- capabilities = capabilities,
       },
     }
 
@@ -86,7 +66,6 @@ return function()
     }
 
     local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
-    -- server:setup(server_options)
     server:setup(require("coq").lsp_ensure_capabilities(server_options))
   end)
 end
