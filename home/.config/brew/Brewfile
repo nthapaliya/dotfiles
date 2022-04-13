@@ -89,6 +89,8 @@ brew "topgrade"
 brew "tree"
 # Maintained ctags implementation
 brew "universal-ctags"
+# Internet file retriever
+brew "wget"
 # JavaScript package manager
 brew "yarn"
 # Fork of youtube-dl with additional features and fixes
