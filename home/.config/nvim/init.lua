@@ -66,110 +66,130 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 
 -- Globals
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 
 -- Keymaps
-local remap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
-remap("n", "<leader>W", [[:%s/\s\+$<cr>]], opts)
-remap("n", "<leader>ev", [[:execute 'e ' . resolve(expand($MYVIMRC))<cr>]], opts)
-remap("n", "<leader>d", [[:cd ~/Projects/dotfiles<cr>]], opts)
-remap("n", "<leader>sv", [[:source $MYVIMRC<cr>]], opts)
-remap("n", "<Left>", [[:BufPrev<cr>]], opts)
-remap("n", "<Right>", [[:BufNext<cr>]], opts)
-remap("c", "w!!", [[w !sudo tee % >/dev/null]], {})
-remap("i", "jk", [[<esc>]], opts)
-remap("n", "<leader>q", [[:Bdelete<cr>]], opts)
+vim.keymap.set("n", "<leader>W", [[:%s/\s\+$<cr>]])
+vim.keymap.set("n", "<leader>ev", [[:execute 'e ' . resolve(expand($MYVIMRC))<cr>]])
+vim.keymap.set("n", "<leader>d", [[:cd ~/Projects/dotfiles<cr>]])
+vim.keymap.set("n", "<leader>sv", [[:source $MYVIMRC<cr>]])
+vim.keymap.set("n", "<Left>", [[:BufPrev<cr>]])
+vim.keymap.set("n", "<Right>", [[:BufNext<cr>]])
+vim.keymap.set("c", "w!!", [[w !sudo tee % >/dev/null]])
+vim.keymap.set("i", "jk", [[<esc>]])
+vim.keymap.set("n", "<leader>q", [[:Bdelete<cr>]])
 
 -- Don't enter ex-mode and command history mode respectively
-remap("n", "Q", [[<nop>]], opts)
-remap("n", "q:", [[<nop>]], opts)
-remap("v", "q:", [[<nop>]], opts)
+vim.keymap.set("n", "Q", [[<nop>]])
+vim.keymap.set("n", "q:", [[<nop>]])
+vim.keymap.set("v", "q:", [[<nop>]])
 
 -- Plugins
 -- Fzf.vim
-remap("n", "<c-t>", ":FzfLua files<cr>", opts)
-remap("n", "<leader>g", ":FzfLua git_status<cr>", opts)
-remap("n", "<leader>b", ":FzfLua buffers<cr>", opts)
--- remap("n", "<leader>*", ":FzfLua files<cr>", opts)
+vim.keymap.set("n", "<c-t>", ":FzfLua files<cr>")
+vim.keymap.set("n", "<leader>g", ":FzfLua git_status<cr>")
+vim.keymap.set("n", "<leader>b", ":FzfLua buffers<cr>")
+-- vim.keymap.set("n", "<leader>*", ":FzfLua files<cr>")
 
 -- Trouble
-remap("n", "<leader>tt", [[:TroubleToggle<cr>]], opts)
-
-_G.set_terminal_mappings = function()
-  remap("t", "<Esc>", [[<C-\><C-n>]], opts)
-  remap("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
-  remap("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
-  remap("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
-  remap("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
-end
+vim.keymap.set("n", "<leader>tt", [[:TroubleToggle<cr>]])
 
 -- Autocmds
 local autocmds = {
   on_save = {
-    { "BufWritePost", "*/nvim/lua/config/*.lua", "PackerCompile" },
-    { "BufWritePost", "*/nvim/lua/plugins.lua", "PackerCompile" },
-    { "BufWritePost", [[$MYVIMRC]], "nested", "source", [[$MYVIMRC]] },
+    { event = "BufWritePost", pattern = "*/nvim/init.lua", command = "source $MYVIMRC" },
+    {
+      event = "BufWritePost",
+      pattern = { "*/nvim/lua/config/*.lua", "*/nvim/lua/plugins.lua" },
+      command = "source <afile> | PackerCompile",
+    },
   },
+
   filetype = {
-    { "FileType", "diff", [[setlocal commentstring=#\ %s]] },
-    { "FileType", "gitcommit", [[setlocal spell commentstring=#\ %s textwidth=80]] },
-    { "FileType", "markdown", "setlocal tabstop=4 sts=4 sw=4 expandtab" },
-    { "FileType", "ruby", "nnoremap <F5> :!time ruby %<cr>" },
-    { "FileType", "rust", "nnoremap <F5> :!cargo run<cr>" },
-    { "FileType", "text", [[setlocal spell commentstring=#\ %s textwidth=80]] },
+    { event = "FileType", pattern = "diff", command = [[setlocal commentstring=#\ %s]] },
+    { event = "FileType", pattern = "gitcommit", command = [[setlocal spell commentstring=#\ %s textwidth=80]] },
+    { event = "FileType", pattern = "markdown", command = "setlocal tabstop=4 sts=4 sw=4 expandtab" },
+    { event = "FileType", pattern = "ruby", command = "nnoremap <F5> :!time ruby %<cr>" },
+    { event = "FileType", pattern = "rust", command = "nnoremap <F5> :!cargo run<cr>" },
+    { event = "FileType", pattern = "text", command = [[setlocal spell commentstring=#\ %s textwidth=80]] },
   },
+
   general = {
-    { "VimResized", "*", "wincmd =" },
-    { "TextYankPost", "*", "silent!", "lua vim.highlight.on_yank()" },
+    { event = "VimResized", pattern = "*", command = "wincmd =" },
+    {
+      event = "TextYankPost",
+      pattern = "*",
+      callback = function()
+        vim.highlight.on_yank()
+      end,
+    },
   },
+
   trimtrailingwhitespace = {
-    { "BufWritePre", "*", [[%s/\s\+$//e]] },
-    { "BufWritePre", "*", [[%s/\n\+\%$//e]] },
+    { event = "BufWritePre", pattern = "*", command = [[%s/\s\+$//e]] },
+    { event = "BufWritePre", pattern = "*", command = [[%s/\n\+\%$//e]] },
   },
+
   terminal = {
-    { "TermOpen", "term://*", "setlocal nonumber norelativenumber" },
-    { "TermOpen", "term://*", "startinsert" },
-    { "TermOpen", "term://*", "lua set_terminal_mappings()" },
-    { "BufWinEnter,WinEnter", "term://*", "startinsert" },
+    { event = "TermOpen", pattern = "term://*", command = "setlocal nonumber norelativenumber" },
+    { event = "TermOpen", pattern = "term://*", command = "startinsert" },
+    {
+      event = "TermOpen",
+      pattern = "term://*",
+      callback = function()
+        vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+        vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
+        vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]])
+        vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]])
+        vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
+      end,
+    },
+    {
+      event = { "BufWinEnter", "WinEnter" },
+      pattern = "term://*",
+      command = "startinsert",
+    },
   },
+
   oscyank = {
     {
-      "TextYankPost *",
-      [[if $SSH_CLIENT != '' && v:event.operator is 'y' && v:event.regname is '' | ]],
-      [[execute 'OSCYankReg "' | ]],
-      [[endif]],
+      event = "TextYankPost",
+      pattern = "*",
+      callback = function()
+        local is_ssh = string.len(vim.env.SSH_CLIENT or "") > 0
+        local event = vim.api.nvim_get_vvar("event")
+        if is_ssh and event.operator == "y" and event.regname == "" then
+          vim.cmd('OSCYankReg "')
+        end
+        -- print(vim.inspect(arguments))
+        -- [[if $SSH_CLIENT != '' && v:event.operator is 'y' && v:event.regname is '' | ]],
+        -- [[execute 'OSCYankReg "' | ]],
+        -- [[endif]],
+      end,
     },
   },
 }
 
--- https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567
-local nvim_create_augroups = function(definitions)
-  for group_name, definition in pairs(definitions) do
-    vim.api.nvim_command("augroup " .. group_name)
-    vim.api.nvim_command("autocmd!")
-    for _, def in ipairs(definition) do
-      local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
-      vim.api.nvim_command(command)
-    end
-    vim.api.nvim_command("augroup END")
+for group_name, definitions in pairs(autocmds) do
+  local group_id = vim.api.nvim_create_augroup(group_name, { clear = true })
+  for _, definition in ipairs(definitions) do
+    local autocmd_event = definition.event
+    definition.event = nil
+    definition.group = group_id
+    vim.api.nvim_create_autocmd(autocmd_event, definition)
   end
 end
 
-nvim_create_augroups(autocmds)
-
 -- Commands
-vim.cmd([[
-command! PackerInstall packadd packer.nvim | lua require('plugins').install()
-command! PackerUpdate packadd packer.nvim  | lua require('plugins').update()
-command! PackerSync packadd packer.nvim    | lua require('plugins').sync()
-command! PackerClean packadd packer.nvim   | lua require('plugins').clean()
-command! PackerCompile packadd packer.nvim | lua require('plugins').compile()
-]])
+vim.api.nvim_create_user_command("PackerInstall", "packadd packer.nvim | lua require('plugins').install()", {})
+vim.api.nvim_create_user_command("PackerUpdate", "packadd packer.nvim  | lua require('plugins').update()", {})
+vim.api.nvim_create_user_command("PackerSync", "packadd packer.nvim    | lua require('plugins').sync()", {})
+vim.api.nvim_create_user_command("PackerClean", "packadd packer.nvim   | lua require('plugins').clean()", {})
+vim.api.nvim_create_user_command("PackerCompile", "packadd packer.nvim | lua require('plugins').compile()", {})
 
-_G.gx = function()
+vim.keymap.set("n", "gx", function()
   local open = function(url)
     vim.cmd("silent! !open " .. vim.fn.shellescape(url, 1) .. ">&/dev/null")
   end
@@ -188,9 +208,7 @@ _G.gx = function()
   end
 
   open(vim.fn.expand("<cfile>"))
-end
-
-remap("n", "gx", ":lua gx()<cr>", opts)
+end)
 
 -- vim.g.oscyank_silent = true
 

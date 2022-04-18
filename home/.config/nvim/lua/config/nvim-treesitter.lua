@@ -1,6 +1,10 @@
 return function()
   require("nvim-treesitter.configs").setup({
-    ensure_installed = "maintained",
+    ensure_installed = {
+      "lua",
+      "ruby",
+      "rust",
+    },
     indent = { enable = true },
     highlight = { enable = true },
 
