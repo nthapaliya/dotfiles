@@ -12,7 +12,7 @@ if status then
   require("impatient").enable_profile()
   -- require("packer_compiled")
 else
-  vim.cmd([[packadd packer.nvim]])
+  vim.cmd("packadd packer.nvim")
   require("plugins").sync()
 end
 
@@ -72,19 +72,18 @@ vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 
 -- Keymaps
 vim.keymap.set("n", "<leader>W", [[:%s/\s\+$<cr>]])
-vim.keymap.set("n", "<leader>ev", [[:execute 'e ' . resolve(expand($MYVIMRC))<cr>]])
-vim.keymap.set("n", "<leader>d", [[:cd ~/Projects/dotfiles<cr>]])
-vim.keymap.set("n", "<leader>sv", [[:source $MYVIMRC<cr>]])
-vim.keymap.set("n", "<Left>", [[:BufPrev<cr>]])
-vim.keymap.set("n", "<Right>", [[:BufNext<cr>]])
-vim.keymap.set("c", "w!!", [[w !sudo tee % >/dev/null]])
-vim.keymap.set("i", "jk", [[<esc>]])
-vim.keymap.set("n", "<leader>q", [[:Bdelete<cr>]])
+vim.keymap.set("n", "<leader>ev", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
+vim.keymap.set("n", "<leader>d", ":cd ~/Projects/dotfiles<cr>")
+vim.keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>")
+vim.keymap.set("n", "<Left>", ":BufPrev<cr>")
+vim.keymap.set("n", "<Right>", ":BufNext<cr>")
+vim.keymap.set("c", "w!!", "w !sudo tee % >/dev/null")
+vim.keymap.set("i", "jk", "<esc>")
+vim.keymap.set("n", "<leader>q", ":Bdelete<cr>")
 
 -- Don't enter ex-mode and command history mode respectively
-vim.keymap.set("n", "Q", [[<nop>]])
-vim.keymap.set("n", "q:", [[<nop>]])
-vim.keymap.set("v", "q:", [[<nop>]])
+vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set({ "n", "v" }, "q:", "<nop>")
 
 -- Plugins
 -- Fzf.vim
@@ -94,7 +93,7 @@ vim.keymap.set("n", "<leader>b", ":FzfLua buffers<cr>")
 -- vim.keymap.set("n", "<leader>*", ":FzfLua files<cr>")
 
 -- Trouble
-vim.keymap.set("n", "<leader>tt", [[:TroubleToggle<cr>]])
+vim.keymap.set("n", "<leader>tt", ":TroubleToggle<cr>")
 
 -- Autocmds
 local autocmds = {
