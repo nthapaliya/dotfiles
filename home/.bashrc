@@ -7,3 +7,4 @@ alias vi='vim'
 alias ls="ls -G"
 
 export PATH=/opt/homebrew/bin:~/.local/bin:$PATH
+export HISTCONTROL=ignoreboth:erasedups
