@@ -49,6 +49,13 @@ return function()
           require("config/lsp_on_attach").on_attach(client, bufnr)
         end
       end,
+      ["solargraph"] = function()
+        default_opts.on_attach = function(client, bufnr)
+          client.resolved_capabilities.document_formatting = false
+          client.resolved_capabilities.document_range_formatting = false
+          require("config/lsp_on_attach").on_attach(client, bufnr)
+        end
+      end,
       ["sumneko_lua"] = function()
         local runtime_path = vim.split(package.path, ";")
         table.insert(runtime_path, "lua/?.lua")
@@ -66,6 +73,6 @@ return function()
     }
 
     local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
-    server:setup(require("coq").lsp_ensure_capabilities(server_options))
+    server:setup(server_options)
   end)
 end

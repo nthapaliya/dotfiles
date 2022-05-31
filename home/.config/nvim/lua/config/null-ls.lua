@@ -8,7 +8,7 @@ return function()
       -- null_ls.builtins.formatting.trim_whitespace,
       null_ls.builtins.formatting.fish_indent,
       null_ls.builtins.formatting.prettier,
-      null_ls.builtins.formatting.rustywind,
+      null_ls.builtins.formatting.rubocop,
       null_ls.builtins.formatting.stylua.with({
         args = { "--indent-type", "Spaces", "--indent-width", 2, "-" },
       }),

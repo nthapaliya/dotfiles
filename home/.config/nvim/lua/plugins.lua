@@ -84,34 +84,20 @@ return require("packer").startup({
     -- lsp
     use({
       "jose-elias-alvarez/null-ls.nvim",
-      opt = true,
-      after = "coq_nvim",
+      -- opt = true,
       requires = "nvim-lua/plenary.nvim",
       config = require("config/null-ls"),
     })
 
     use({
       "williamboman/nvim-lsp-installer",
-      opt = true,
-      after = "coq_nvim",
+      -- opt = true,
       requires = "neovim/nvim-lspconfig",
       config = require("config/nvim-lsp-installer"),
     })
 
     -- completions
-    use({
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-      opt = true,
-      event = "InsertEnter",
-      requires = { {
-        "ms-jpq/coq.artifacts",
-        branch = "artifacts",
-      } },
-      config = function()
-        vim.cmd([[COQnow --shut-up]])
-      end,
-    })
+    -- nvim cmp
 
     -- other
     use({
