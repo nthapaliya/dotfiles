@@ -1,20 +1,5 @@
--- packer bootstrap: install to opt
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-end
-
-local status, _ = pcall(require, "packer_compiled")
-if status then
-  -- If there are cache issues, comment this out, as well as
-  -- the `compile_path` line in plugins.lua, and rerun :PackerCompile
-  require("impatient").enable_profile()
-  -- require("packer_compiled")
-else
-  vim.cmd("packadd packer.nvim")
-  require("plugins").sync()
-end
+require("plugins")
+require("impatient")
 
 -- Disable some built-in plugins we don't want
 local disabled_built_ins = {
@@ -46,7 +31,6 @@ vim.opt.shell = "bash"
 vim.opt.shortmess:append("c")
 vim.opt.showbreak = [[\\\\\]]
 vim.opt.showmode = false
-vim.opt.showtabline = 2
 vim.opt.signcolumn = "yes"
 vim.opt.synmaxcol = 300
 vim.opt.title = true
@@ -75,8 +59,8 @@ vim.keymap.set("n", "<leader>W", [[:%s/\s\+$<cr>]])
 vim.keymap.set("n", "<leader>ev", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
 vim.keymap.set("n", "<leader>d", ":cd ~/Projects/dotfiles<cr>")
 vim.keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>")
-vim.keymap.set("n", "<Left>", ":BufPrev<cr>")
-vim.keymap.set("n", "<Right>", ":BufNext<cr>")
+vim.keymap.set("n", "<Left>", ":bp<cr>")
+vim.keymap.set("n", "<Right>", ":bn<cr>")
 vim.keymap.set("c", "w!!", "w !sudo tee % >/dev/null")
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>q", ":Bdelete<cr>")
@@ -92,9 +76,6 @@ vim.keymap.set("n", "<leader>g", ":FzfLua git_status<cr>")
 vim.keymap.set("n", "<leader>b", ":FzfLua buffers<cr>")
 -- vim.keymap.set("n", "<leader>*", ":FzfLua files<cr>")
 
--- Trouble
-vim.keymap.set("n", "<leader>tt", ":TroubleToggle<cr>")
-
 -- Autocmds
 local autocmds = {
   on_save = {
@@ -104,6 +85,7 @@ local autocmds = {
       pattern = { "*/nvim/lua/config/*.lua", "*/nvim/lua/plugins.lua" },
       command = "source <afile> | PackerCompile",
     },
+    { event = "BufWritePost", pattern = "*", command = "FormatWrite" },
   },
 
   filetype = {
@@ -182,12 +164,6 @@ for group_name, definitions in pairs(autocmds) do
 end
 
 -- Commands
-vim.api.nvim_create_user_command("PackerInstall", "packadd packer.nvim | lua require('plugins').install()", {})
-vim.api.nvim_create_user_command("PackerUpdate", "packadd packer.nvim  | lua require('plugins').update()", {})
-vim.api.nvim_create_user_command("PackerSync", "packadd packer.nvim    | lua require('plugins').sync()", {})
-vim.api.nvim_create_user_command("PackerClean", "packadd packer.nvim   | lua require('plugins').clean()", {})
-vim.api.nvim_create_user_command("PackerCompile", "packadd packer.nvim | lua require('plugins').compile()", {})
-
 vim.keymap.set("n", "gx", function()
   local open = function(url)
     vim.cmd("silent! !open " .. vim.fn.shellescape(url, 1) .. ">&/dev/null")

@@ -1,7 +1,20 @@
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 return require("packer").startup({
   function(use)
     -- important ones
-    use({ "wbthomason/packer.nvim", opt = true })
+    use({ "wbthomason/packer.nvim" })
     use({ "lewis6991/impatient.nvim" })
     use({ "nvim-lua/plenary.nvim" })
 
@@ -11,7 +24,7 @@ return require("packer").startup({
     use({ "aymericbeaumet/vim-symlink" })
     use({ "christoomey/vim-tmux-navigator" })
     use({ "justinmk/vim-dirvish" })
-    use({ "rstacruz/vim-closer", opt = true })
+    use({ "rstacruz/vim-closer" })
     use({ "tommcdo/vim-lion" })
     use({ "unblevable/quick-scope" })
     use({ "wincent/terminus" })
@@ -33,14 +46,6 @@ return require("packer").startup({
     -- fuzzy finders
     use({ "ibhagwan/fzf-lua", opt = true, cmd = { "FzfLua" }, requires = { "kyazdani42/nvim-web-devicons" } })
 
-    use({
-      "nvim-telescope/telescope.nvim",
-      opt = true,
-      requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
-      cmd = { "Telescope" },
-      config = require("config/telescope"),
-    })
-
     -- visual niceties
     use({
       "lewis6991/gitsigns.nvim",
@@ -54,21 +59,24 @@ return require("packer").startup({
     -- use("ggandor/lightspeed.nvim")
     --
     use({
-      "jose-elias-alvarez/buftabline.nvim",
-      event = "VimEnter",
-      config = require("config/buftabline"),
+      "ojroques/nvim-hardline",
+      config = function()
+        require("hardline").setup({
+          bufferline = true,
+          bufferline_settings = {
+            separator = "",
+          },
+          theme = "gruvbox",
+        })
+      end,
     })
 
     use({
-      "nvim-lualine/lualine.nvim",
-      event = "VimEnter",
-      config = require("config/lualine"),
-    })
-
-    use({
-      "folke/tokyonight.nvim",
-      branch = "main",
-      config = require("config/tokyonight"),
+      "ellisonleao/gruvbox.nvim",
+      config = function()
+        vim.o.background = "dark"
+        vim.cmd([[colorscheme gruvbox]])
+      end,
     })
 
     -- treesitter
@@ -81,28 +89,9 @@ return require("packer").startup({
       config = require("config/nvim-treesitter"),
     })
 
-    -- lsp
-    use({
-      "jose-elias-alvarez/null-ls.nvim",
-      -- opt = true,
-      requires = "nvim-lua/plenary.nvim",
-      config = require("config/null-ls"),
-    })
-
-    use({
-      "williamboman/nvim-lsp-installer",
-      -- opt = true,
-      requires = "neovim/nvim-lspconfig",
-      config = require("config/nvim-lsp-installer"),
-    })
-
-    -- completions
-    -- nvim cmp
-
     -- other
     use({
       "mhartington/formatter.nvim",
-      disable = true,
       opt = true,
       cmd = { "FormatWrite" },
       config = require("config/formatter"),
@@ -111,16 +100,10 @@ return require("packer").startup({
     use({
       "numToStr/Comment.nvim",
       opt = true,
-      requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
       keys = { { "n", "gcc" }, { "n", "gcb" }, { "v", "gc" } },
-      config = require("config/Comment"),
-    })
-
-    use({
-      "folke/trouble.nvim",
-      opt = true,
-      cmd = { "Trouble", "TroubleToggle" },
-      config = require("config/trouble"),
+      config = function()
+        require("Comment").setup()
+      end,
     })
 
     -- Honorable mentions
@@ -128,10 +111,15 @@ return require("packer").startup({
     -- use({ "rbgrouleff/bclose.vim", disable = true })
     -- use({ "sheerun/vim-polyglot", disable = true })
     -- use({ "tpope/vim-commentary", disable = true })
+
+    -- Bootstrapping packer
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end,
   config = {
     -- display = { open_fn = require("packer.util").float },
     profile = { enable = true },
-    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
+    -- compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
   },
 })
