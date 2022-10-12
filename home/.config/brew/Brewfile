@@ -27,6 +27,8 @@ brew "asdf"
 brew "bat"
 # Fix common misspellings in source code and text files
 brew "codespell"
+# Fast and statically typed, compiled language with Ruby-like syntax
+brew "crystal"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Modern replacement for 'ls'
@@ -103,7 +105,9 @@ cask "calibre"
 cask "emacs-mac"
 # Web browser
 cask "firefox"
+# Developer targeted fonts with a high number of glyphs
 cask "font-fira-code-nerd-font"
+# Corporate typeface for IBM
 cask "font-ibm-plex"
 # Git interface focused on visual interaction
 cask "gitup"
@@ -129,7 +133,7 @@ cask "transmission"
 cask "visual-studio-code"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "1Password 7", id: 1333542190
+mas "1Password for Safari", id: 1569813296
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
 mas "Just Focus", id: 1142151959
@@ -140,4 +144,3 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Wipr", id: 1320666476
-mas "WireGuard", id: 1451685025
