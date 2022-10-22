@@ -8,12 +8,11 @@ function set_up_fish
     set_uvars
 
     # Setup fish completions
-    if command -sq brew && command -sq fzf
-        eval (brew --prefix)/opt/fzf/install \
+    if command -sq fzf
+        eval (dirname (which fzf))/../install \
             --no-completion \
             --no-update-rc \
             --key-bindings \
-            --no-bash \
             --no-zsh
     end
 end
