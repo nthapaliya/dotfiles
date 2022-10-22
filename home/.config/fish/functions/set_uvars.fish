@@ -7,15 +7,17 @@ function set_uvars
     set -e -g fish_greeting
     set -U fish_greeting
 
-    set -U fish_user_paths ~/.local/bin
+    fish_add_path ~/.local/bin
 
     if test Darwin = (uname)
         # TODO: Check if M1 or Intel
-        set -p fish_user_paths /opt/homebrew/bin
+        # -a so it's AFTER ~/.local/bin
+        fish_add_path -a /opt/homebrew/bin
     end
 
     if not command -sq fzf
-        set -a fish_user_paths ~/.local/share/vim/plugged/fzf/bin
+        # what is this?
+        fish_add_path ~/.local/share/vim/plugged/fzf/bin
     end
 
     set -Ux SHELL fish
@@ -31,9 +33,6 @@ function set_uvars
 
     if test (uname) = Darwin
         set -Ux XDG_CACHE_HOME ~/Library/Caches/xdg-cache
-    end
-
-    if command -sq brew
         set -Ux HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
     end
 
