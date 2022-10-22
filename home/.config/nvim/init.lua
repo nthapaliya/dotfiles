@@ -108,11 +108,6 @@ local autocmds = {
     },
   },
 
-  trimtrailingwhitespace = {
-    { event = "BufWritePre", pattern = "*", command = [[%s/\s\+$//e]] },
-    { event = "BufWritePre", pattern = "*", command = [[%s/\n\+\%$//e]] },
-  },
-
   terminal = {
     { event = "TermOpen", pattern = "term://*", command = "setlocal nonumber norelativenumber" },
     { event = "TermOpen", pattern = "term://*", command = "startinsert" },

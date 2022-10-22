@@ -27,6 +27,9 @@ return function()
           }
         end,
       },
+      ["*"] = {
+        require("formatter.filetypes.any").remove_trailing_whitespace,
+      },
     },
   })
 end
