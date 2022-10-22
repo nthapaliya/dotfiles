@@ -20,6 +20,14 @@ function set_uvars
         fish_add_path ~/.local/share/vim/plugged/fzf/bin
     end
 
+    # asdf pathing
+    # https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
+    # keep the .local/opt/asdf dir, but update the branch when installing
+    # git clone https://github.com/asdf-vm/asdf.git ~/.local/opt/asdf --branch v0.10.2
+    set -Ux ASDF_DIR ~/.local/opt/asdf
+    set -Ux ASDF_DATA_DIR ~/.local/opt/asdf
+    fish_add_path $ASDF_DIR/bin $ASDF_DIR/shims
+
     set -Ux SHELL fish
 
     if command -sq nvim
@@ -45,9 +53,5 @@ function set_uvars
             set -Ux FZF_DEFAULT_COMMAND 'rg --files --hidden --glob \'!.git\''
             set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
         end
-    end
-
-    if command -sq asdf
-        set -Ux ASDF_DATA_DIR ~/.local/opt/asdf
     end
 end
