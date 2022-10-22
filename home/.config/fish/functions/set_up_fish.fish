@@ -9,7 +9,7 @@ function set_up_fish
 
     # Setup fish completions
     if command -sq fzf
-        eval (dirname (which fzf))/../install \
+        eval (dirname (readlink -f (which fzf)))/../install \
             --no-completion \
             --no-update-rc \
             --key-bindings \
