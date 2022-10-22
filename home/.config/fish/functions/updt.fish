@@ -8,6 +8,10 @@ function updt
         brew bundle dump --force --describe --file=~/.config/brew/Brewfile
         brew update
         brew upgrade
+    else if test (uname) = Linux
+        echo "Updating and upgrading apt"
+        echo "sudo apt update && sudo apt upgrade"
+        sudo apt update && sudo apt upgrade
     end
 end
 
@@ -29,20 +33,20 @@ end
 function __updt_os_agnostic
     if not set -q SSH_CLIENT
         echo 'Updating `done.fish`'
+        cd ~/Projects/dotfiles/home/.config/fish/conf.d/
         curl --silent -L --remote-name \
-            --output-dir ~/Projects/dotfiles/home/.config/fish/conf.d/ \
             https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
+        cd ~/Projects/dotfiles/home/.vim/autoload/
         echo 'Updating `plug.vim`'
         curl --silent -L --remote-name \
-            --output-dir ~/Projects/dotfiles/home/.vim/autoload/ \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        cd -
     end
 
-    # if command -sq nvim
-    #     echo 'Updating neovim plugins'
-    #     nvim            -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-    #     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-    # end
+    if command -sq nvim
+        echo 'Updating neovim plugins'
+        nvim --headless -c 'autocmd User PackerComplete quitall' -c PackerSync
+    end
     if command -sq vim
         echo 'Updating vim plugins'
         vim +PlugUpdate +qall
