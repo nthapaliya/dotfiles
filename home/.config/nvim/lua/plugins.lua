@@ -66,16 +66,14 @@ return require("packer").startup({
           bufferline_settings = {
             separator = "",
           },
-          theme = "gruvbox",
         })
       end,
     })
 
     use({
-      "ellisonleao/gruvbox.nvim",
+      "rebelot/kanagawa.nvim",
       config = function()
-        vim.o.background = "dark"
-        vim.cmd([[colorscheme gruvbox]])
+        vim.cmd([[colorscheme kanagawa]])
       end,
     })
 
