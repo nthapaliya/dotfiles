@@ -79,13 +79,13 @@ vim.keymap.set("n", "<leader>b", ":FzfLua buffers<cr>")
 -- Autocmds
 local autocmds = {
   on_save = {
+    { event = "BufWritePost", pattern = "*", command = "FormatWrite" },
     { event = "BufWritePost", pattern = "*/nvim/init.lua", command = "source $MYVIMRC" },
     {
       event = "BufWritePost",
       pattern = { "*/nvim/lua/config/*.lua", "*/nvim/lua/plugins.lua" },
       command = "source <afile> | PackerCompile",
     },
-    { event = "BufWritePost", pattern = "*", command = "FormatWrite" },
   },
 
   filetype = {
