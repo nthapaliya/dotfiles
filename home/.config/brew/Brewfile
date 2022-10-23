@@ -43,6 +43,8 @@ brew "gh"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
 # GNU implementation of time utility
 brew "gnu-time"
 # GNU Pretty Good Privacy (PGP) package
@@ -57,8 +59,6 @@ brew "jq"
 brew "mas"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Tiny, lightning fast, feature-packed file manager
-brew "nnn"
 # Shell command parallelization utility
 brew "parallel"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
@@ -135,7 +135,6 @@ mas "Day One", id: 1055511498
 mas "Just Focus", id: 1142151959
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
-mas "NextDNS", id: 1464122853
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
