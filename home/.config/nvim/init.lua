@@ -1,23 +1,6 @@
 require("plugins")
 require("impatient")
 
--- Disable some built-in plugins we don't want
-local disabled_built_ins = {
-  "gzip",
-  "matchit",
-  "matchparen",
-  -- "shada_plugin",
-  "tarPlugin",
-  "tar",
-  "zipPlugin",
-  "zip",
-  "netrwPlugin",
-}
-
-for _, name in ipairs(disabled_built_ins) do
-  vim.g["loaded_" .. name] = 1
-end
-
 -- Settings
 vim.opt.breakindent = true
 vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
@@ -52,7 +35,6 @@ vim.opt.tabstop = 2
 -- Globals
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
-vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 
 -- Keymaps
 vim.keymap.set("n", "<leader>W", [[:%s/\s\+$<cr>]])

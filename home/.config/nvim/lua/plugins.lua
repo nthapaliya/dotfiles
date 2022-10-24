@@ -23,12 +23,30 @@ return require("packer").startup({
     use({ "airblade/vim-rooter" })
     use({ "aymericbeaumet/vim-symlink" })
     use({ "christoomey/vim-tmux-navigator" })
-    use({ "justinmk/vim-dirvish" })
+    use({
+      "elihunter173/dirbuf.nvim",
+      opt = true,
+      keys = { "-" },
+      config = function()
+        require("dirbuf").setup({ write_cmd = "DirbufSync -confirm" })
+      end,
+    })
     use({ "rstacruz/vim-closer" })
     use({ "tommcdo/vim-lion" })
-    use({ "unblevable/quick-scope" })
+    use({
+      "unblevable/quick-scope",
+      config = function()
+        vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
+      end,
+    })
     use({ "wincent/terminus" })
     use({ "ojroques/vim-oscyank" })
+    use({
+      "echasnovski/mini.nvim",
+      config = function()
+        require("mini.cursorword").setup({ delay = 500 })
+      end,
+    })
 
     -- tpope
     use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })
@@ -36,6 +54,7 @@ return require("packer").startup({
     use({ "tpope/vim-fugitive" })
     use({ "tpope/vim-repeat" })
     use({ "tpope/vim-rhubarb" })
+    use({ "tpope/vim-sleuth" })
     use({ "tpope/vim-surround" })
     use({ "tpope/vim-unimpaired" })
 
@@ -55,9 +74,13 @@ return require("packer").startup({
       config = require("config/gitsigns"),
     })
 
-    -- -- TODO: figure out how to use this one
-    -- use("ggandor/lightspeed.nvim")
-    --
+    use({
+      "ggandor/leap.nvim",
+      config = function()
+        require("leap").add_default_mappings()
+      end,
+    })
+
     use({
       "ojroques/nvim-hardline",
       config = function()
