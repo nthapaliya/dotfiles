@@ -7,7 +7,7 @@
 [core]
 	ignorecase = false
 	quotepath = false
-	pager = delta --diff-so-fancy
+	pager = delta
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	assume = update-index --assume-unchanged
@@ -40,7 +40,7 @@
 	decorate = short
 	abbrevCommit = true
 [interactive]
-	diffFilter = delta --color-only --diff-so-fancy
+	diffFilter = delta --color-only
 [delta]
 	navigate = true
 [merge]

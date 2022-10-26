@@ -3,12 +3,13 @@ function updt
 
     if test (uname) = Darwin
         echo 'Running brew commands...'
-        brew bundle dump --force --describe --file=~/.config/brew/Brewfile
+        brew bundle dump --force --describe
+        brew bundle check
+        git add ~/Projects/dotfiles/home/.config/brew/*
+        git commit -m "chore: Updated Brewfile and lockfile - "(date)
     end
 
-    topgrade-rs
-    # On Mac, use this
-    # topgrade
+    topgrade
 end
 
 function __checktime
