@@ -3,7 +3,6 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "mistertea/et"
 tap "railwaycat/emacsmacport"
 # Library for command-line editing
 brew "readline"
@@ -13,10 +12,6 @@ brew "aria2"
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
-# Clone of cat(1) with syntax highlighting and Git integration
-brew "bat"
-# Fix common misspellings in source code and text files
-brew "codespell"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # YAML Parser
@@ -25,18 +20,12 @@ brew "libyaml"
 brew "crystal"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
-# Modern replacement for 'ls'
-brew "exa"
-# Simple, fast and user-friendly alternative to find
-brew "fd"
 # Generic library support script
 brew "libtool"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# Command-line fuzzy finder written in Go
-brew "fzf"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
@@ -51,8 +40,6 @@ brew "gnu-time"
 brew "gnupg"
 # Improved top (interactive process viewer)
 brew "htop"
-# Command-line benchmarking tool
-brew "hyperfine"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Mac App Store command-line interface
@@ -63,20 +50,12 @@ brew "neovim"
 brew "parallel"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
-# File browser
-brew "ranger"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Displays the differences between SQLite databases
 brew "sqldiff"
-# Analyze how space is allocated inside an SQLite file
-brew "sqlite-analyzer"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
-# Opinionated Lua code formatter
-brew "stylua"
 # Send macOS User Notifications from the command-line
 brew "terminal-notifier"
 # Terminal multiplexer
@@ -85,16 +64,10 @@ brew "tmux"
 brew "tree"
 # Maintained ctags implementation
 brew "universal-ctags"
-# ODBC 3 connectivity for UNIX
-brew "unixodbc"
 # Internet file retriever
 brew "wget"
-# JavaScript package manager
-brew "yarn"
 # Fork of youtube-dl with additional features and fixes
 brew "yt-dlp"
-# Remote terminal with IP roaming
-brew "mistertea/et/et"
 # E-books management software
 cask "calibre"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
