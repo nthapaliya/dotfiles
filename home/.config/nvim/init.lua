@@ -142,6 +142,7 @@ end
 
 -- Commands
 vim.keymap.set("n", "gx", function()
+  -- test: "nthapaliya/dotfiles"
   local open = function(url)
     vim.cmd("silent! !open " .. vim.fn.shellescape(url, 1) .. ">&/dev/null")
   end
@@ -161,8 +162,6 @@ vim.keymap.set("n", "gx", function()
 
   open(vim.fn.expand("<cfile>"))
 end)
-
--- vim.g.oscyank_silent = true
 
 -- -- Rewrite these in lua
 -- vim.cmd([[

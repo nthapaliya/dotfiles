@@ -40,7 +40,12 @@ return require("packer").startup({
       end,
     })
     use({ "wincent/terminus" })
-    use({ "ojroques/vim-oscyank" })
+    use({
+      "ojroques/vim-oscyank",
+      config = function()
+        -- vim.g.oscyank_silent = true
+      end,
+    })
     use({
       "echasnovski/mini.nvim",
       config = function()
