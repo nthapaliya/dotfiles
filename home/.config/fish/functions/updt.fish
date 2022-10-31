@@ -5,8 +5,6 @@ function updt
         echo 'Running brew commands...'
         brew bundle dump --force --describe
         brew bundle check
-        git add ~/Projects/dotfiles/home/.config/brew/*
-        git commit -m "chore: Updated Brewfile and lockfile - "(date)
     end
 
     topgrade
