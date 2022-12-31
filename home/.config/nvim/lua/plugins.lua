@@ -95,6 +95,14 @@ return require("packer").startup({
       },
       config = require("config/lsp-zero"),
     })
+    use({
+      "mfussenegger/nvim-lint",
+      config = function()
+        require("lint").linters_by_ft = {
+          ruby = { "rubocop" },
+        }
+      end,
+    })
 
     -- visual niceties
     use({
