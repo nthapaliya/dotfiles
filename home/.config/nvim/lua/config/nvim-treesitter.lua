@@ -6,6 +6,7 @@ return function()
       "lua",
       "ruby",
       "rust",
+      "vim",
     },
     indent = { enable = true },
     highlight = { enable = true },
