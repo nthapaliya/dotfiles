@@ -63,6 +63,7 @@ return require("packer").startup({
     use({
       "junegunn/fzf.vim",
       requires = "junegunn/fzf",
+      opt = true,
       config = function()
         vim.keymap.set("n", "<C-t>", ":Files<cr>")
         vim.keymap.set("n", "<leader>g", ":GFiles?<cr>")
@@ -70,7 +71,21 @@ return require("packer").startup({
       end,
     })
 
-    use({ "nvim-telescope/telescope.nvim" })
+    use({
+      "nvim-telescope/telescope.nvim",
+      config = function()
+        require("telescope").setup({
+          pickers = {
+            find_files = {
+              find_command = { "fd", "-H", "--type", "file" },
+            },
+          },
+        })
+        vim.keymap.set("n", "<C-t>", require("telescope.builtin").find_files)
+        vim.keymap.set("n", "<leader>g", ":Telescope git_status<cr>")
+        vim.keymap.set("n", "<leader>b", ":Telescope buffers<cr>")
+      end,
+    })
 
     -- lsp
     -- TODO: slow, but don't make lazy yet
