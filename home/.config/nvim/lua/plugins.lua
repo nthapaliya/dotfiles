@@ -46,12 +46,6 @@ return require("packer").startup({
         -- vim.g.oscyank_silent = true
       end,
     })
-    use({
-      "echasnovski/mini.nvim",
-      config = function()
-        require("mini.cursorword").setup({ delay = 500 })
-      end,
-    })
 
     -- tpope
     use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })
@@ -73,35 +67,18 @@ return require("packer").startup({
 
     -- lsp
     use({
-      "VonHeikemen/lsp-zero.nvim",
-      after = "vim-tmux-navigator",
+      "neovim/nvim-lspconfig",
       requires = {
-        -- LSP Support
-        { "neovim/nvim-lspconfig" },
-        { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim" },
+        -- Automatically install LSPs to stdpath for neovim
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
 
-        -- Autocompletion
-        { "hrsh7th/nvim-cmp" },
-        { "hrsh7th/cmp-buffer" },
-        { "hrsh7th/cmp-path" },
-        { "saadparwaiz1/cmp_luasnip" },
-        { "hrsh7th/cmp-nvim-lsp" },
-        { "hrsh7th/cmp-nvim-lua" },
-
-        -- Snippets
-        { "L3MON4D3/LuaSnip" },
-        { "rafamadriz/friendly-snippets" },
+        -- Additional plugins
+        "folke/neodev.nvim",
+        "j-hui/fidget.nvim",
+        "lukas-reineke/lsp-format.nvim",
       },
-      config = require("config/lsp-zero"),
-    })
-    use({
-      "mfussenegger/nvim-lint",
-      config = function()
-        require("lint").linters_by_ft = {
-          ruby = { "rubocop" },
-        }
-      end,
+      config = require("config/nvim-lspconfig"),
     })
 
     -- visual niceties
@@ -145,7 +122,9 @@ return require("packer").startup({
       opt = true,
       event = "BufRead",
       requires = { "andymass/vim-matchup" },
-      run = ":TSUpdate",
+      run = function()
+        pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+      end,
       config = require("config/nvim-treesitter"),
     })
 
