@@ -1,4 +1,8 @@
-return function()
+M = {}
+
+M.lspconfig_init = function()
+  vim.g.coq_settings = { auto_start = "shut-up" }
+
   vim.diagnostic.config({
     virtual_text = false,
     signs = true,
@@ -23,7 +27,9 @@ return function()
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = filled, texthl = hl, numhl = hl })
   end
+end
 
+M.lspconfig_config = function()
   require("mason").setup()
 
   require("mason-lspconfig").setup({
@@ -65,8 +71,6 @@ return function()
   end
 
   local lspconfig = require("lspconfig")
-
-  vim.g.coq_settings = { auto_start = "shut-up" }
   local coq = require("coq")
 
   require("mason-lspconfig").setup_handlers({
@@ -75,3 +79,24 @@ return function()
     end,
   })
 end
+
+-- lsp
+-- TODO: slow
+return {
+  "neovim/nvim-lspconfig",
+  event = "VeryLazy",
+  dependencies = {
+    -- Automatically install LSPs to stdpath for neovim
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+
+    -- Additional plugins
+    "folke/neodev.nvim",
+    "j-hui/fidget.nvim",
+    "lukas-reineke/lsp-format.nvim",
+    { "ms-jpq/coq_nvim", branch = "coq" },
+    { "ms-jpq/coq.artifacts", branch = "artifacts" },
+  },
+  init = M.lspconfig_init,
+  config = M.lspconfig_config,
+}

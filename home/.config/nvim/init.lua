@@ -1,5 +1,15 @@
-require("plugins")
-require("impatient")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--single-branch",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  })
+end
+vim.opt.runtimepath:prepend(lazypath)
 
 -- Settings
 vim.opt.breakindent = true
@@ -33,6 +43,7 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 
 -- Globals
+vim.g.mapleader = " "
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 
@@ -51,17 +62,14 @@ vim.keymap.set("n", "<leader>q", ":Bdelete<cr>")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v" }, "q:", "<nop>")
 
+require("lazy").setup("plugins")
+
 -- Autocmds
 local autocmds = {
-  on_save = {
-    { event = "BufWritePost", pattern = "*", command = "FormatWrite" },
-    { event = "BufWritePost", pattern = "*/nvim/init.lua", command = "source $MYVIMRC" },
-    {
-      event = "BufWritePost",
-      pattern = { "*/nvim/lua/config/*.lua", "*/nvim/lua/plugins.lua" },
-      command = "source <afile> | PackerCompile",
-    },
-  },
+  -- on_save = {
+  --   -- redundant while we have Formatter plugin
+  --   { event = "BufWritePre", pattern = "", command = ":%s/\\s\\+$//e" },
+  -- },
 
   filetype = {
     { event = "FileType", pattern = "diff", command = [[setlocal commentstring=#\ %s]] },
@@ -81,6 +89,8 @@ local autocmds = {
         vim.highlight.on_yank()
       end,
     },
+    -- Don't auto comment new lines
+    { event = "BufEnter", pattern = "", command = "set fo-=c fo-=r fo-=o" },
   },
 
   terminal = {
@@ -102,6 +112,7 @@ local autocmds = {
       pattern = "term://*",
       command = "startinsert",
     },
+    { event = "BufLeave", pattern = "term://*", command = "stopinsert" },
   },
 
   oscyank = {
