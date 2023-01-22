@@ -138,7 +138,7 @@ let g:airline#extensions#tabline#show_buffers = 1
 
 " junegunn/fzf {{{
 nnoremap <C-t> :Files<cr>
-nnoremap <leader>g vGFiles?<cr>
+nnoremap <leader>g :GFiles?<cr>
 nnoremap <leader>b :Buffers<cr>
 " }}}
 
