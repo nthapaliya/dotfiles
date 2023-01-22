@@ -51,13 +51,6 @@ vim.keymap.set("n", "<leader>q", ":Bdelete<cr>")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v" }, "q:", "<nop>")
 
--- Plugins
--- Fzf.vim
-vim.keymap.set("n", "<c-t>", ":FzfLua files<cr>")
-vim.keymap.set("n", "<leader>g", ":FzfLua git_status<cr>")
-vim.keymap.set("n", "<leader>b", ":FzfLua buffers<cr>")
--- vim.keymap.set("n", "<leader>*", ":FzfLua files<cr>")
-
 -- Autocmds
 local autocmds = {
   on_save = {

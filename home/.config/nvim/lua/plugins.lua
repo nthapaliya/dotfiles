@@ -60,7 +60,16 @@ return require("packer").startup({
     use({ "vim-scripts/BufOnly.vim" })
 
     -- fuzzy finders
-    use({ "ibhagwan/fzf-lua", opt = true, cmd = { "FzfLua" }, requires = { "kyazdani42/nvim-web-devicons" } })
+    use({
+      "junegunn/fzf.vim",
+      requires = "junegunn/fzf",
+      config = function()
+        vim.keymap.set("n", "<C-t>", ":Files<cr>")
+        vim.keymap.set("n", "<leader>g", ":GFiles?<cr>")
+        vim.keymap.set("n", "<leader>b", ":Buffers<cr>")
+      end,
+    })
+
     use({ "nvim-telescope/telescope.nvim" })
 
     -- lsp
@@ -162,7 +171,6 @@ return require("packer").startup({
     })
 
     -- Honorable mentions
-    -- use({ "junegunn/fzf.vim", requires = "junegunn/fzf" })
     -- use({ "rbgrouleff/bclose.vim", disable = true })
     -- use({ "sheerun/vim-polyglot", disable = true })
     -- use({ "tpope/vim-commentary", disable = true })
