@@ -102,6 +102,16 @@ return require("packer").startup({
       end,
     })
 
+    use({
+      "ms-jpq/coq_nvim",
+      branch = "coq",
+    })
+
+    use({
+      "ms-jpq/coq.artifacts",
+      branch = "artifacts",
+    })
+
     -- visual niceties
     -- slow
     use({

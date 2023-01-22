@@ -66,11 +66,12 @@ return function()
 
   local lspconfig = require("lspconfig")
 
+  vim.g.coq_settings = { auto_start = "shut-up" }
+  local coq = require("coq")
+
   require("mason-lspconfig").setup_handlers({
     function(server_name)
-      lspconfig[server_name].setup({
-        on_attach = on_attach,
-      })
+      lspconfig[server_name].setup(coq.lsp_ensure_capabilities({ on_attach = on_attach }))
     end,
   })
 end
