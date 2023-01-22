@@ -19,14 +19,12 @@ return require("packer").startup({
     use({ "nvim-lua/plenary.nvim" })
 
     -- basic utils
-    use({ "AndrewRadev/splitjoin.vim", opt = true, keys = { { "n", "gS" }, { "n", "gJ" } } })
+    use({ "AndrewRadev/splitjoin.vim" })
     use({ "airblade/vim-rooter" })
     use({ "aymericbeaumet/vim-symlink" })
     use({ "christoomey/vim-tmux-navigator" })
     use({
       "elihunter173/dirbuf.nvim",
-      opt = true,
-      keys = { "-" },
       config = function()
         require("dirbuf").setup({ write_cmd = "DirbufSync -confirm" })
       end,
@@ -42,13 +40,13 @@ return require("packer").startup({
     use({ "wincent/terminus" })
     use({
       "ojroques/vim-oscyank",
-      config = function()
-        -- vim.g.oscyank_silent = true
-      end,
+      -- config = function()
+      --   vim.g.oscyank_silent = true
+      -- end,
     })
 
     -- tpope
-    use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })
+    use({ "tpope/vim-dispatch" })
     use({ "tpope/vim-endwise" })
     use({ "tpope/vim-fugitive" })
     use({ "tpope/vim-repeat" })
@@ -58,14 +56,15 @@ return require("packer").startup({
     use({ "tpope/vim-unimpaired" })
 
     -- buffers
-    use({ "moll/vim-bbye", opt = true, cmd = { "Bdelete" } })
-    use({ "vim-scripts/BufOnly.vim", opt = true, cmd = { "BufOnly" } })
+    use({ "moll/vim-bbye" })
+    use({ "vim-scripts/BufOnly.vim" })
 
     -- fuzzy finders
     use({ "ibhagwan/fzf-lua", opt = true, cmd = { "FzfLua" }, requires = { "kyazdani42/nvim-web-devicons" } })
     use({ "nvim-telescope/telescope.nvim" })
 
     -- lsp
+    -- TODO: slow, but don't make lazy yet
     use({
       "neovim/nvim-lspconfig",
       requires = {
@@ -81,12 +80,26 @@ return require("packer").startup({
       config = require("config/nvim-lspconfig"),
     })
 
+    -- slow
+    use({
+      "folke/trouble.nvim",
+      requires = "nvim-tree/nvim-web-devicons",
+      opt = true,
+      keys = { { "n", "<leader>tt" } },
+      config = function()
+        require("trouble").setup({})
+
+        vim.keymap.set("n", "<leader>tt", ":TroubleToggle<cr>")
+      end,
+    })
+
     -- visual niceties
+    -- slow
     use({
       "lewis6991/gitsigns.nvim",
       opt = true,
-      requires = { "nvim-lua/plenary.nvim" },
       event = "VimEnter",
+      requires = { "nvim-lua/plenary.nvim" },
       config = require("config/gitsigns"),
     })
 
@@ -117,6 +130,7 @@ return require("packer").startup({
     })
 
     -- treesitter
+    -- slow
     use({
       "nvim-treesitter/nvim-treesitter",
       opt = true,
@@ -129,6 +143,7 @@ return require("packer").startup({
     })
 
     -- other
+    -- slow
     use({
       "mhartington/formatter.nvim",
       opt = true,
@@ -136,6 +151,7 @@ return require("packer").startup({
       config = require("config/formatter"),
     })
 
+    -- slow
     use({
       "numToStr/Comment.nvim",
       opt = true,
