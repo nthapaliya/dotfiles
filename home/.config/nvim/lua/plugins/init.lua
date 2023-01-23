@@ -1,15 +1,29 @@
 return {
   -- basic utils
-  { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
   "airblade/vim-rooter",
   "aymericbeaumet/vim-symlink",
   "christoomey/vim-tmux-navigator",
+  "wincent/terminus",
+
+  {
+    "AndrewRadev/splitjoin.vim",
+    keys = { { "gS", desc = "splitjoin: Split line" }, { "gJ", desc = "Splitjoin: join line" } },
+  },
+
   {
     "elihunter173/dirbuf.nvim",
     keys = { "-" },
     opts = { write_cmd = "DirbufSync -confirm" },
   },
-  { "tommcdo/vim-lion", keys = { "gl", "gL" } },
+
+  {
+    "tommcdo/vim-lion",
+    keys = {
+      { "gl", desc = "vim-lion: align by adding spaces to the left" },
+      { "gL", desc = "vim-lion: align by adding spaces to the right" },
+    },
+  },
+
   {
     "unblevable/quick-scope",
     keys = { "f", "F", "t", "T" },
@@ -17,10 +31,12 @@ return {
       vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
     end,
   },
-  "wincent/terminus",
+
+  { "dstein64/vim-startuptime", cmd = "StartupTime" },
+
   {
     "ojroques/vim-oscyank",
-    keys = { "y" },
+    keys = { "y", { "y", mode = "v" } },
     -- init = function()
     --   vim.g.oscyank_silent = true
     -- end,
@@ -28,17 +44,15 @@ return {
 
   -- tpope
   { "tpope/vim-dispatch", enabled = false },
-  "tpope/vim-endwise",
+  { "tpope/vim-endwise", enabled = false },
   "tpope/vim-fugitive",
   "tpope/vim-repeat",
-  "tpope/vim-rhubarb",
+  { "tpope/vim-rhubarb", cmd = "GBrowse" },
   "tpope/vim-sleuth",
-  "tpope/vim-surround",
   { "tpope/vim-unimpaired", keys = { "[<space>", "]<space>" } },
 
   -- buffers
-  "moll/vim-bbye",
-  "vim-scripts/BufOnly.vim",
+  { "vim-scripts/BufOnly.vim", cmd = "BufOnly" },
 
   -- slow
   {
@@ -56,30 +70,12 @@ return {
     end,
   },
 
-  -- visual niceties
   {
-    "ojroques/nvim-hardline",
-    opts = {
-      bufferline = true,
-      bufferline_settings = {
-        separator = "",
-      },
-    },
-  },
-
-  -- Colorscheme
-  {
-    "folke/tokyonight.nvim",
-    config = function()
-      vim.cmd([[colorscheme tokyonight]])
+    "folke/which-key.nvim",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
     end,
-  },
-
-  -- other
-  -- slow
-  {
-    "numToStr/Comment.nvim",
-    keys = { "gcc", "gcb", "gc", { "gc", mode = "v" } },
     config = true,
   },
 }

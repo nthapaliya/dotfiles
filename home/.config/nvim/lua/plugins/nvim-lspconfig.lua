@@ -1,8 +1,4 @@
-M = {}
-
-M.lspconfig_init = function()
-  vim.g.coq_settings = { auto_start = "shut-up" }
-
+local init = function()
   vim.diagnostic.config({
     virtual_text = false,
     signs = true,
@@ -21,15 +17,19 @@ M.lspconfig_init = function()
 
   -- Ref:
   -- https://neovim.io/doc/user/diagnostic.html
-  local filled = ""
+  -- local filled_circle = ""
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-  for type, _icon in pairs(signs) do
+  for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = filled, texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, {
+      text = icon,
+      texthl = hl,
+      numhl = hl,
+    })
   end
 end
 
-M.lspconfig_config = function()
+local config = function()
   require("mason").setup()
 
   require("mason-lspconfig").setup({
@@ -44,7 +44,7 @@ M.lspconfig_config = function()
   require("lsp-format").setup()
   require("fidget").setup()
 
-  local on_attach = function(client, bufnr)
+  local lsp_attach = function(client, bufnr)
     require("lsp-format").on_attach(client)
 
     local nmap = function(keys, func, desc)
@@ -59,7 +59,7 @@ M.lspconfig_config = function()
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-    nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+    -- nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
     nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
     nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 
@@ -75,7 +75,7 @@ M.lspconfig_config = function()
 
   require("mason-lspconfig").setup_handlers({
     function(server_name)
-      lspconfig[server_name].setup(coq.lsp_ensure_capabilities({ on_attach = on_attach }))
+      lspconfig[server_name].setup(coq.lsp_ensure_capabilities({ on_attach = lsp_attach }))
     end,
   })
 end
@@ -83,20 +83,33 @@ end
 -- lsp
 -- TODO: slow
 return {
-  "neovim/nvim-lspconfig",
-  event = "VeryLazy",
-  dependencies = {
-    -- Automatically install LSPs to stdpath for neovim
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+  {
+    "neovim/nvim-lspconfig",
+    event = "BufRead",
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
 
-    -- Additional plugins
-    "folke/neodev.nvim",
-    "j-hui/fidget.nvim",
-    "lukas-reineke/lsp-format.nvim",
-    { "ms-jpq/coq_nvim", branch = "coq" },
-    { "ms-jpq/coq.artifacts", branch = "artifacts" },
+      -- Additional plugins
+      "folke/neodev.nvim",
+      "j-hui/fidget.nvim",
+      "lukas-reineke/lsp-format.nvim",
+    },
+    init = init,
+    config = config,
   },
-  init = M.lspconfig_init,
-  config = M.lspconfig_config,
+
+  {
+    "ms-jpq/coq_nvim",
+    branch = "coq",
+    dependencies = { "ms-jpq/coq.artifacts", branch = "artifacts" },
+    event = "InsertEnter",
+    init = function()
+      vim.g.coq_settings = {
+        ["keymap.jump_to_mark"] = "",
+        auto_start = "shut-up",
+      }
+    end,
+  },
 }

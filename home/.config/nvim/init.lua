@@ -45,23 +45,23 @@ vim.opt.tabstop = 2
 -- Globals
 vim.g.mapleader = " "
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.g.mapleader = " "
 
 -- Keymaps
 vim.keymap.set("n", "<leader>W", [[:%s/\s\+$<cr>]])
 vim.keymap.set("n", "<leader>ev", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
+-- vim.keymap.set("n", "<leader>ep", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
 vim.keymap.set("n", "<leader>d", ":cd ~/Projects/dotfiles<cr>")
-vim.keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>")
+-- vim.keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>")
 vim.keymap.set("n", "<Left>", ":bp<cr>")
 vim.keymap.set("n", "<Right>", ":bn<cr>")
 vim.keymap.set("c", "w!!", "w !sudo tee % >/dev/null")
 vim.keymap.set("i", "jk", "<esc>")
-vim.keymap.set("n", "<leader>q", ":Bdelete<cr>")
 
 -- Don't enter ex-mode and command history mode respectively
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v" }, "q:", "<nop>")
 
+-- require("lazy").setup("plugins", { defaults = { lazy = true } })
 require("lazy").setup("plugins")
 
 -- Autocmds
@@ -90,7 +90,7 @@ local autocmds = {
       end,
     },
     -- Don't auto comment new lines
-    { event = "BufEnter", pattern = "", command = "set fo-=c fo-=r fo-=o" },
+    -- { event = "BufEnter", pattern = "", command = "set fo-=c fo-=r fo-=o" },
   },
 
   terminal = {

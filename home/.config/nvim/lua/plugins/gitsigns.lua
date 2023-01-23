@@ -1,6 +1,4 @@
-M = {}
-
-M.gitsigns_opts = {
+local opts = {
   signs = {
     add = { text = "+" },
     change = { text = "~" },
@@ -49,5 +47,5 @@ return {
   "lewis6991/gitsigns.nvim",
   event = "VeryLazy",
   dependencies = { "nvim-lua/plenary.nvim" },
-  opts = M.gitsigns_opts,
+  opts = opts,
 }
