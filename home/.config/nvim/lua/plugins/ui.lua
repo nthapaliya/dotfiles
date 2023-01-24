@@ -5,7 +5,7 @@ return {
     priority = 1000,
     lazy = false,
     config = function()
-      vim.cmd([[colorscheme tokyonight]])
+      vim.cmd([[colorscheme tokyonight-night]])
     end,
   },
 
@@ -37,8 +37,8 @@ return {
     opts = {
       options = {
         -- icons_enabled = false,
-        section_separators = "",
-        component_separators = "",
+        section_separators = " ",
+        component_separators = " ",
       },
       tabline = {
         lualine_a = { "buffers" },
@@ -51,4 +51,7 @@ return {
       -- TODO: look up winbars
     },
   },
+
+  -- TODO: look up if this needs more configuration
+  -- { "stevearc/dressing.nvim", config = true },
 }

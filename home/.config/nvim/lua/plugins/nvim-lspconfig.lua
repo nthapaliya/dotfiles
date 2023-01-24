@@ -3,7 +3,7 @@ local init = function()
     virtual_text = false,
     signs = true,
     update_in_insert = false,
-    underline = false,
+    underline = true,
     severity_sort = true,
     float = {
       focusable = false,
@@ -17,12 +17,12 @@ local init = function()
 
   -- Ref:
   -- https://neovim.io/doc/user/diagnostic.html
-  -- local filled_circle = ""
+  local filled_circle = ""
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-  for type, icon in pairs(signs) do
+  for type, _icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, {
-      text = icon,
+      text = filled_circle,
       texthl = hl,
       numhl = hl,
     })
@@ -64,7 +64,7 @@ local config = function()
     nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-    nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+    -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
     nmap("<leader>j", vim.diagnostic.goto_next, "Jump to next diagnostic")
     nmap("<leader>k", vim.diagnostic.goto_prev, "Jump to prev diagnostic")

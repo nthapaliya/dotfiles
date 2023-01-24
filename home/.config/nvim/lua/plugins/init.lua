@@ -52,7 +52,7 @@ return {
   { "tpope/vim-unimpaired", keys = { "[<space>", "]<space>" } },
 
   -- buffers
-  { "vim-scripts/BufOnly.vim", cmd = "BufOnly" },
+  { "numToStr/BufOnly.nvim", cmd = "BufOnly" },
 
   -- slow
   {
