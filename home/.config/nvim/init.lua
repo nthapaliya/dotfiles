@@ -57,12 +57,31 @@ vim.keymap.set("n", "<Right>", ":bn<cr>")
 vim.keymap.set("c", "w!!", "w !sudo tee % >/dev/null")
 vim.keymap.set("i", "jk", "<esc>")
 
+-- Clear search with <esc>
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
 -- Don't enter ex-mode and command history mode respectively
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v" }, "q:", "<nop>")
 
--- require("lazy").setup("plugins", { defaults = { lazy = true } })
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  defaults = { lazy = false },
+  install = { colorscheme = { "tokyonight", "habamax" } },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+})
 
 -- Autocmds
 local autocmds = {
@@ -82,13 +101,6 @@ local autocmds = {
 
   general = {
     { event = "VimResized", pattern = "*", command = "wincmd =" },
-    {
-      event = "TextYankPost",
-      pattern = "*",
-      callback = function()
-        vim.highlight.on_yank()
-      end,
-    },
     -- Don't auto comment new lines
     -- { event = "BufEnter", pattern = "", command = "set fo-=c fo-=r fo-=o" },
   },
@@ -113,24 +125,6 @@ local autocmds = {
       command = "startinsert",
     },
     { event = "BufLeave", pattern = "term://*", command = "stopinsert" },
-  },
-
-  oscyank = {
-    {
-      event = "TextYankPost",
-      pattern = "*",
-      callback = function()
-        local is_ssh = string.len(vim.env.SSH_CLIENT or "") > 0
-        local event = vim.api.nvim_get_vvar("event")
-        if is_ssh and event.operator == "y" and event.regname == "" then
-          vim.cmd('OSCYankReg "')
-        end
-        -- print(vim.inspect(arguments))
-        -- [[if $SSH_CLIENT != '' && v:event.operator is 'y' && v:event.regname is '' | ]],
-        -- [[execute 'OSCYankReg "' | ]],
-        -- [[endif]],
-      end,
-    },
   },
 }
 

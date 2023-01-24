@@ -68,6 +68,7 @@ local config = function()
 
     nmap("<leader>j", vim.diagnostic.goto_next, "Jump to next diagnostic")
     nmap("<leader>k", vim.diagnostic.goto_prev, "Jump to prev diagnostic")
+    nmap("<leader>qf", vim.diagnostic.setqflist, "Set qflist")
   end
 
   local lspconfig = require("lspconfig")
@@ -108,8 +109,12 @@ return {
     init = function()
       vim.g.coq_settings = {
         ["keymap.jump_to_mark"] = "",
-        auto_start = "shut-up",
       }
+
+      vim.api.nvim_create_autocmd("InsertEnter", {
+        pattern = "*",
+        command = "COQnow --shut-up",
+      })
     end,
   },
 }

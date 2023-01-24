@@ -1,9 +1,14 @@
 return {
   -- basic utils
-  "airblade/vim-rooter",
-  "aymericbeaumet/vim-symlink",
-  "christoomey/vim-tmux-navigator",
-  "wincent/terminus",
+  "airblade/vim-rooter", -- TODO: lazy
+  "aymericbeaumet/vim-symlink", -- TODO: lazy
+  "christoomey/vim-tmux-navigator", -- TODO: lazy
+  "wincent/terminus", -- TODO: lazy
+  "tpope/vim-endwise", -- TODO: Lazy
+  "tpope/vim-fugitive", -- TODO: Lazy
+  "tpope/vim-repeat", -- TODO: Lazy
+  "tpope/vim-sleuth", -- TODO: Lazy
+  "tpope/vim-unimpaired", -- TODO: Lazy
 
   {
     "AndrewRadev/splitjoin.vim",
@@ -35,32 +40,13 @@ return {
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
 
   {
-    "ojroques/vim-oscyank",
-    keys = { "y", { "y", mode = "v" } },
-    -- init = function()
-    --   vim.g.oscyank_silent = true
-    -- end,
+    "ibhagwan/smartyank.nvim",
+    event = "TextYankPost",
+    opts = { highlight = { timeout = 200 } },
   },
-
-  -- tpope
-  { "tpope/vim-dispatch", enabled = false },
-  { "tpope/vim-endwise", enabled = false },
-  "tpope/vim-fugitive",
-  "tpope/vim-repeat",
-  { "tpope/vim-rhubarb", cmd = "GBrowse" },
-  "tpope/vim-sleuth",
-  { "tpope/vim-unimpaired", keys = { "[<space>", "]<space>" } },
 
   -- buffers
   { "numToStr/BufOnly.nvim", cmd = "BufOnly" },
-
-  -- slow
-  {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = { { "<leader>tt", "<cmd>TroubleToggle<cr>", desc = "TroubleToggle" } },
-    config = true,
-  },
 
   {
     "ggandor/leap.nvim",
@@ -72,9 +58,10 @@ return {
 
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
     init = function()
       vim.o.timeout = true
-      vim.o.timeoutlen = 300
+      vim.o.timeoutlen = 500
     end,
     config = true,
   },

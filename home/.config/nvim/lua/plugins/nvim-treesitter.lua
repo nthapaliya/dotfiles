@@ -31,5 +31,7 @@ return {
   dependencies = { "andymass/vim-matchup" },
   build = ":TSUpdate",
   init = init,
-  opts = opts,
+  config = function()
+    require("nvim-treesitter.configs").setup(opts)
+  end,
 }

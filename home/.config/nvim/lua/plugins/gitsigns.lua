@@ -21,7 +21,7 @@ local opts = {
         gs.next_hunk()
       end)
       return "<Ignore>"
-    end, { expr = true })
+    end, { expr = true, desc = "git: jump to next git hunk" })
 
     map("n", "[c", function()
       if vim.wo.diff then
@@ -31,14 +31,14 @@ local opts = {
         gs.prev_hunk()
       end)
       return "<Ignore>"
-    end, { expr = true })
+    end, { expr = true, desc = "git: jump to prev git hunk" })
 
     -- Actions
-    map("n", "<leader>hS", gs.stage_buffer)
-    map("n", "<leader>hU", gs.reset_buffer)
-    map({ "n", "v" }, "<leader>hs", gs.stage_hunk)
-    map({ "n", "v" }, "<leader>hu", gs.reset_hunk)
-    map({ "n", "v" }, "<leader>hr", gs.undo_stage_hunk)
+    map("n", "<leader>hS", gs.stage_buffer, { desc = "git: stage hunk" })
+    map("n", "<leader>hU", gs.reset_buffer, { desc = "git: reset buffer" })
+    map({ "n", "v" }, "<leader>hs", gs.stage_hunk, { desc = "git: stage hunk" })
+    map({ "n", "v" }, "<leader>hu", gs.reset_hunk, { desc = "git: reset hunk" })
+    map({ "n", "v" }, "<leader>hr", gs.undo_stage_hunk, { desc = "git: undo stage hunk" })
   end,
 }
 
