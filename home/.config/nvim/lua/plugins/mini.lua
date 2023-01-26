@@ -4,9 +4,23 @@ return {
   event = "VeryLazy",
   config = function()
     require("mini.ai").setup({})
-    require("mini.bufremove").setup({})
     require("mini.comment").setup({})
-    require("mini.pairs").setup({})
+
+    -- disable this for now, it's kind of annoying
+    -- require("mini.pairs").setup({})
+
+    -- mini.cursorword
+    -- unhighlight first two lines
+    -- require('mini.cursorword').setup({ delay = 300 })
+    -- vim.cmd([[highlight MiniCursorwordCurrent gui=nocombine guifg=NONE guibg=NONE]])
+    -- vim.cmd([[highlight MiniCursorword gui=nocombine guifg=NONE guibg=NONE]])
+
+    -- mini.bufremove
+    require("mini.bufremove").setup({})
+    vim.keymap.set("n", "<leader>bd", function() require("mini.bufremove").delete(0, false) end, {})
+    vim.keymap.set("n", "<leader>bD", function() require("mini.bufremove").delete(0, true) end, {})
+
+    -- mini.surround
     require("mini.surround").setup({
       mappings = {
         add = "ys",
@@ -26,7 +40,8 @@ return {
     vim.api.nvim_set_keymap("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { noremap = true })
     -- Make special mapping for "add surrounding for line"
     vim.api.nvim_set_keymap("n", "yss", "ys_", { noremap = false })
-    vim.cmd([[highlight MiniIndentscopeSymbol guifg=#3b4261]])
+
+    -- mini.indentscope
     require("mini.indentscope").setup({
       symbol = "│",
       draw = {
@@ -36,5 +51,6 @@ return {
         end,
       },
     })
+    vim.cmd([[highlight MiniIndentscopeSymbol guifg=#3b4261]])
   end,
 }
