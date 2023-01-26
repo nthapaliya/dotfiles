@@ -6,7 +6,7 @@ return {
   },
   keys = {
     {
-      "<leader>r",
+      "<leader>rf",
       function()
         require("refactoring").select_refactor()
       end,
@@ -14,6 +14,7 @@ return {
       noremap = true,
       silent = true,
       expr = false,
+      desc = "refactoring: Select refactor"
     },
   },
   config = true,

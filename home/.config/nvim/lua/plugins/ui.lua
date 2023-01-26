@@ -20,17 +20,6 @@ return {
   -- UI/cosmetic
 
   {
-    "ojroques/nvim-hardline",
-    enabled = false,
-    opts = {
-      bufferline = true,
-      bufferline_settings = {
-        separator = "",
-      },
-    },
-  },
-
-  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
