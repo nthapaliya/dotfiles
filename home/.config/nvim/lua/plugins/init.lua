@@ -8,7 +8,7 @@ return {
   "tpope/vim-fugitive", -- TODO: Lazy
   "tpope/vim-repeat", -- TODO: Lazy
   "tpope/vim-sleuth", -- TODO: Lazy
-  "tpope/vim-unimpaired", -- TODO: Lazy
+  -- "tpope/vim-unimpaired", -- TODO: Lazy
 
   {
     "AndrewRadev/splitjoin.vim",

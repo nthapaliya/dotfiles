@@ -44,18 +44,18 @@ vim.opt.tabstop = 2
 
 -- Globals
 vim.g.mapleader = " "
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- Keymaps
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "<leader>W", [[:%s/\s\+$<cr>]])
 vim.keymap.set("n", "<leader>ev", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
--- vim.keymap.set("n", "<leader>ep", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
 vim.keymap.set("n", "<leader>d", ":cd ~/Projects/dotfiles<cr>")
--- vim.keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>")
 vim.keymap.set("n", "<Left>", ":bp<cr>")
 vim.keymap.set("n", "<Right>", ":bn<cr>")
 vim.keymap.set("c", "w!!", "w !sudo tee % >/dev/null")
 vim.keymap.set("i", "jk", "<esc>")
+-- vim.keymap.set("n", "<leader>ep", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
+-- vim.keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>")
 
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -63,6 +63,21 @@ vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and 
 -- Don't enter ex-mode and command history mode respectively
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v" }, "q:", "<nop>")
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+
+-- https://github.com/mhinz/vim-galore#quickly-move-current-line
+-- https://github.com/mhinz/vim-galore#quickly-add-empty-lines
+vim.keymap.set("n", "[e", ":<c-u>execute 'move -1-'. v:count1<cr>", { silent = true })
+vim.keymap.set("n", "]e", ":<c-u>execute 'move +'. v:count1<cr>", { silent = true })
+vim.keymap.set("n", "[<space>", ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>", { silent = true })
+vim.keymap.set("n", "]<space>", ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { silent = true })
 
 require("lazy").setup("plugins", {
   defaults = { lazy = false },
