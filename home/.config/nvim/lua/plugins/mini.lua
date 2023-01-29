@@ -3,6 +3,10 @@ return {
   version = false,
   event = "VeryLazy",
   config = function()
+    require("mini.basics").setup({
+      options = { extra_ui = true, },
+      autocommands = { basic = false },
+    })
     require("mini.ai").setup({})
     require("mini.comment").setup({})
 
