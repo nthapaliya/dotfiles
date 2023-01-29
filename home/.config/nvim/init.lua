@@ -41,12 +41,12 @@ local autocmds = {
   },
 
   terminal = {
-    { event = "TermOpen", pattern = "term://*", command = "setlocal nonumber norelativenumber" },
-    { event = "TermOpen", pattern = "term://*", command = "startinsert" },
     {
       event = "TermOpen",
       pattern = "term://*",
       callback = function()
+        vim.cmd [[setlocal nonumber norelativenumber]]
+        vim.cmd [[startinsert]]
         vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
         vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
         vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]])
