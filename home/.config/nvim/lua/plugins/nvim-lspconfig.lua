@@ -29,6 +29,37 @@ local init = function()
   end
 end
 
+local lsp_attach = function(client, bufnr)
+  require("lsp-format").on_attach(client)
+
+  local nmap = function(keys, func, desc)
+    if desc then
+      desc = "LSP: " .. desc
+    end
+
+    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+  end
+  -- Most of this function is copied from
+  -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L291
+  nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+  nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+  nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+  -- nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+  nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+  nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
+
+  nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+  -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+
+  nmap("<leader>j", vim.diagnostic.goto_next, "Jump to next diagnostic")
+  nmap("<leader>k", vim.diagnostic.goto_prev, "Jump to prev diagnostic")
+  nmap("<leader>qf", vim.diagnostic.setqflist, "Set qflist")
+
+  if client.server_capabilities["documentSymbolProvider"] then
+    require("nvim-navic").attach(client, bufnr)
+  end
+end
+
 local config = function()
   require("mason").setup()
 
@@ -44,37 +75,6 @@ local config = function()
   require("lsp-format").setup()
   require("fidget").setup()
 
-  local lsp_attach = function(client, bufnr)
-    require("lsp-format").on_attach(client)
-
-    local nmap = function(keys, func, desc)
-      if desc then
-        desc = "LSP: " .. desc
-      end
-
-      vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-    end
-    -- Most of this function is copied from
-    -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L291
-    nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-    nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-    -- nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-    nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-    nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-
-    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-    -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
-    nmap("<leader>j", vim.diagnostic.goto_next, "Jump to next diagnostic")
-    nmap("<leader>k", vim.diagnostic.goto_prev, "Jump to prev diagnostic")
-    nmap("<leader>qf", vim.diagnostic.setqflist, "Set qflist")
-
-    if client.server_capabilities["documentSymbolProvider"] then
-      require("nvim-navic").attach(client, bufnr)
-    end
-  end
-
   local lspconfig = require("lspconfig")
 
   require("mason-lspconfig").setup_handlers({
@@ -89,13 +89,11 @@ local config = function()
 end
 
 -- lsp
--- TODO: slow
 return {
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
 
@@ -108,6 +106,7 @@ return {
     config = config,
   },
 
+  -- TODO: investigate why this causes everything to freeze
   {
     "ms-jpq/coq_nvim",
     branch = "coq",
@@ -123,19 +122,5 @@ return {
     config = function()
       vim.cmd("COQnow --shut-up")
     end,
-  },
-
-  {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    event = "VeryLazy",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      attach_navic = false,
-    },
   },
 }

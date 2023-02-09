@@ -74,4 +74,30 @@ return {
 
   -- TODO: look up if this needs more configuration
   -- { "stevearc/dressing.nvim", config = true },
+
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    -- event = "VeryLazy",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    config = function()
+      require("barbecue").setup({
+        create_autocmd = false,
+        attach_navic = false,
+      })
+      vim.api.nvim_create_autocmd({
+        "CursorHold",
+        "InsertLeave",
+      }, {
+        group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+        callback = function()
+          require("barbecue.ui").update()
+        end,
+      })
+    end,
+  },
 }
