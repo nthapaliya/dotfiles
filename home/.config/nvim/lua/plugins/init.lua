@@ -1,14 +1,12 @@
 return {
   -- basic utils
   "airblade/vim-rooter", -- TODO: lazy
-  "aymericbeaumet/vim-symlink", -- TODO: lazy
+  { "aymericbeaumet/vim-symlink", dependencies = { "moll/vim-bbye" } }, -- TODO: lazy
   "christoomey/vim-tmux-navigator", -- TODO: lazy
-  "wincent/terminus", -- TODO: lazy
-  "tpope/vim-endwise", -- TODO: Lazy
-  "tpope/vim-fugitive", -- TODO: Lazy
-  "tpope/vim-repeat", -- TODO: Lazy
   "tpope/vim-sleuth", -- TODO: Lazy
-  -- "tpope/vim-unimpaired", -- TODO: Lazy
+
+  { "tpope/vim-fugitive", event = "VeryLazy" },
+  { "tpope/vim-repeat", keys = { "." } },
 
   {
     "AndrewRadev/splitjoin.vim",
