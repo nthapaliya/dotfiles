@@ -14,7 +14,7 @@ return {
       noremap = true,
       silent = true,
       expr = false,
-      desc = "refactoring: Select refactor"
+      desc = "refactoring: Select refactor",
     },
   },
   config = true,

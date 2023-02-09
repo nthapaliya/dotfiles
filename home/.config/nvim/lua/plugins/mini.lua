@@ -5,7 +5,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("mini.ai").setup({})
-    end
+    end,
   },
 
   {
@@ -14,10 +14,10 @@ return {
     lazy = false,
     config = function()
       require("mini.basics").setup({
-        options = { extra_ui = true, },
+        options = { extra_ui = true },
         autocommands = { basic = false },
       })
-    end
+    end,
   },
 
   {
@@ -26,7 +26,7 @@ return {
     keys = { { "gc", mode = { "n", "v" } } },
     config = function()
       require("mini.comment").setup({})
-    end
+    end,
   },
 
   {
@@ -35,10 +35,10 @@ return {
     event = "VeryLazy",
     config = function()
       -- unhighlight first two lines
-      require('mini.cursorword').setup({ delay = 300 })
+      require("mini.cursorword").setup({ delay = 300 })
       vim.cmd([[highlight MiniCursorwordCurrent gui=nocombine guifg=NONE guibg=NONE]])
       -- vim.cmd([[highlight MiniCursorword gui=nocombine guifg=NONE guibg=NONE]])
-    end
+    end,
   },
 
   {
@@ -56,7 +56,7 @@ return {
         },
       })
       vim.cmd([[highlight MiniIndentscopeSymbol guifg=#3b4261]])
-    end
+    end,
   },
 
   {
@@ -66,7 +66,7 @@ return {
     -- event = "VeryLazy",
     config = function()
       require("mini.pairs").setup({})
-    end
+    end,
   },
 
   {
@@ -94,6 +94,6 @@ return {
       vim.api.nvim_set_keymap("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { noremap = true })
       -- Make special mapping for "add surrounding for line"
       vim.api.nvim_set_keymap("n", "yss", "ys_", { noremap = false })
-    end
+    end,
   },
 }

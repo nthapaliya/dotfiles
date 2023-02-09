@@ -20,7 +20,7 @@ require("opts")
 require("autocmds")
 
 -- Commands
-vim.cmd [[nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>]]
+vim.cmd([[nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>]])
 
 -- -- Rewrite these in lua
 -- vim.cmd([[
