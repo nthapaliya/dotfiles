@@ -69,14 +69,21 @@ local config = function()
     nmap("<leader>j", vim.diagnostic.goto_next, "Jump to next diagnostic")
     nmap("<leader>k", vim.diagnostic.goto_prev, "Jump to prev diagnostic")
     nmap("<leader>qf", vim.diagnostic.setqflist, "Set qflist")
+
+    if client.server_capabilities["documentSymbolProvider"] then
+      require("nvim-navic").attach(client, bufnr)
+    end
   end
 
   local lspconfig = require("lspconfig")
-  local coq = require("coq")
 
   require("mason-lspconfig").setup_handlers({
     function(server_name)
-      lspconfig[server_name].setup(coq.lsp_ensure_capabilities({ on_attach = lsp_attach }))
+      -- Coq
+      lspconfig[server_name].setup(require("coq").lsp_ensure_capabilities({ on_attach = lsp_attach }))
+
+      -- Basic
+      -- lspconfig[server_name].setup({ on_attach = lsp_attach })
     end,
   })
 end
@@ -108,13 +115,27 @@ return {
     event = "InsertEnter",
     init = function()
       vim.g.coq_settings = {
-        ["keymap.jump_to_mark"] = "",
+        ["keymap.jump_to_mark"] = nil,
+        -- ["keymap.manual_complete"] = "<c-n>",
+        -- ["completion.always"] = false,
       }
-
-      vim.api.nvim_create_autocmd("InsertEnter", {
-        pattern = "*",
-        command = "COQnow --shut-up",
-      })
     end,
+    config = function()
+      vim.cmd("COQnow --shut-up")
+    end,
+  },
+
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    event = "VeryLazy",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      attach_navic = false,
+    },
   },
 }
