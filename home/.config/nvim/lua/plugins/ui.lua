@@ -68,8 +68,46 @@ return {
         -- lualine_y = {},
         -- lualine_z = { { "filename", path = 1 } },
       },
-      -- TODO: look up winbars
+      -- winbar = {
+      --   lualine_a = {
+      --     {
+      --       function()
+      --         return " "
+      --       end,
+      --       color = { bg = "NONE" },
+      --     },
+      --     {
+      --       function()
+      --         return require("nvim-navic").get_location()
+      --       end,
+      --       cond = function()
+      --         return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+      --       end,
+      --       color = { bg = "NONE" },
+      --     },
+      --   },
+      -- },
     },
+  },
+
+  {
+    "SmiteshP/nvim-navic",
+    lazy = true,
+    init = function()
+      -- vim.g.navic_silence = true
+      M.on_attach(function(client, buffer)
+        if client.server_capabilities.documentSymbolProvider then
+          require("nvim-navic").attach(client, buffer)
+        end
+      end)
+    end,
+    opts = function()
+      return {
+        separator = " ❯ ",
+        highlight = true,
+        depth_limit = 5,
+      }
+    end,
   },
 
   -- TODO: look up if this needs more configuration
@@ -85,17 +123,11 @@ return {
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons", -- optional dependency
     },
-    init = function()
-      M.on_attach(function(client, bufnr)
-        if client.server_capabilities["documentSymbolProvider"] then
-          require("nvim-navic").attach(client, bufnr)
-        end
-      end)
-    end,
     config = function()
       require("barbecue").setup({
-        create_autocmd = false,
         attach_navic = false,
+        create_autocmd = false,
+        -- show_dirname = false,
       })
 
       vim.api.nvim_create_autocmd({
