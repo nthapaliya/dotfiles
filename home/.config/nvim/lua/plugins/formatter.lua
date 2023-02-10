@@ -1,13 +1,34 @@
 -- slow
+
+M.on_attach(function(client, bufnr)
+  if client.server_capabilities["documentFormattingProvider"] then
+    local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
+    local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
+
+    autocmd("BufWritePre", {
+      group = augroup("setFormatWrite2", { clear = true }),
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({
+          async = false,
+          filter = function(clnt)
+            return clnt.name ~= "sumneko_lua"
+          end,
+        })
+      end,
+    })
+  end
+end)
+
 return {
   "mhartington/formatter.nvim",
   cmd = { "FormatWrite" },
   init = function()
     local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
     local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
-    augroup("setFormatWrite", { clear = true })
+
     autocmd("BufWritePost", {
-      group = "setFormatWrite",
+      group = augroup("setFormatWrite", { clear = true }),
       pattern = "*",
       command = "FormatWrite",
     })

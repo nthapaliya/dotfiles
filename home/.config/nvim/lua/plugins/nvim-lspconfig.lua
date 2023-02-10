@@ -29,9 +29,8 @@ local init = function()
   end
 end
 
-local lsp_attach = function(client, bufnr)
-  require("lsp-format").on_attach(client)
-
+-- Keymaps
+M.on_attach(function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
       desc = "LSP: " .. desc
@@ -54,11 +53,7 @@ local lsp_attach = function(client, bufnr)
   nmap("<leader>j", vim.diagnostic.goto_next, "Jump to next diagnostic")
   nmap("<leader>k", vim.diagnostic.goto_prev, "Jump to prev diagnostic")
   nmap("<leader>qf", vim.diagnostic.setqflist, "Set qflist")
-
-  if client.server_capabilities["documentSymbolProvider"] then
-    require("nvim-navic").attach(client, bufnr)
-  end
-end
+end)
 
 local config = function()
   require("mason").setup()
@@ -72,55 +67,26 @@ local config = function()
   })
 
   require("neodev").setup()
-  require("lsp-format").setup()
-  require("fidget").setup()
 
   local lspconfig = require("lspconfig")
 
   require("mason-lspconfig").setup_handlers({
     function(server_name)
-      -- Coq
-      lspconfig[server_name].setup(require("coq").lsp_ensure_capabilities({ on_attach = lsp_attach }))
-
-      -- Basic
-      -- lspconfig[server_name].setup({ on_attach = lsp_attach })
+      lspconfig[server_name].setup({ capabilities = M.lsp_ensure_capabilities() })
     end,
   })
 end
 
 -- lsp
 return {
-  {
-    "neovim/nvim-lspconfig",
-    event = "BufRead",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-
-      -- Additional plugins
-      "folke/neodev.nvim",
-      "j-hui/fidget.nvim",
-      "lukas-reineke/lsp-format.nvim",
-    },
-    init = init,
-    config = config,
+  "neovim/nvim-lspconfig",
+  event = "BufRead",
+  dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    -- Additional plugins
+    "folke/neodev.nvim",
   },
-
-  -- TODO: investigate why this causes everything to freeze
-  {
-    "ms-jpq/coq_nvim",
-    branch = "coq",
-    dependencies = { "ms-jpq/coq.artifacts", branch = "artifacts" },
-    event = "InsertEnter",
-    init = function()
-      vim.g.coq_settings = {
-        ["keymap.jump_to_mark"] = nil,
-        -- ["keymap.manual_complete"] = "<c-n>",
-        -- ["completion.always"] = false,
-      }
-    end,
-    config = function()
-      vim.cmd("COQnow --shut-up")
-    end,
-  },
+  init = init,
+  config = config,
 }

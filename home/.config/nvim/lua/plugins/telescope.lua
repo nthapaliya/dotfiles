@@ -33,6 +33,7 @@ return {
     },
     cmd = { "Telescope" },
     keys = {
+      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Telescope grep_string" },
       { "<C-t>", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
       { "<leader>fg", "<cmd>Telescope git_status<cr>", desc = "Telescope git status" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },

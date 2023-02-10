@@ -75,20 +75,29 @@ return {
   -- TODO: look up if this needs more configuration
   -- { "stevearc/dressing.nvim", config = true },
 
+  -- TODO, simplify this by only using navic?
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     version = "*",
     dependencies = {
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons", -- optional dependency
     },
+    init = function()
+      M.on_attach(function(client, bufnr)
+        if client.server_capabilities["documentSymbolProvider"] then
+          require("nvim-navic").attach(client, bufnr)
+        end
+      end)
+    end,
     config = function()
       require("barbecue").setup({
         create_autocmd = false,
         attach_navic = false,
       })
+
       vim.api.nvim_create_autocmd({
         "CursorHold",
         "InsertLeave",
@@ -100,4 +109,5 @@ return {
       })
     end,
   },
+  { "j-hui/fidget.nvim", event = "VeryLazy", config = true },
 }
