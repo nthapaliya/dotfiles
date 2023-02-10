@@ -10,7 +10,6 @@ function set_uvars
     fish_add_path ~/.local/bin
 
     if test Darwin = (uname)
-        # TODO: Check if M1 or Intel
         # -a so it's AFTER ~/.local/bin
         fish_add_path -a /opt/homebrew/bin
         fish_add_path -a /opt/homebrew/opt/{coreutils,gnu-sed,gnu-time}/libexec/gnubin
