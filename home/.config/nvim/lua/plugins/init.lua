@@ -1,6 +1,6 @@
 return {
   -- basic utils
-  "airblade/vim-rooter", -- TODO: lazy
+  { "airblade/vim-rooter", enabled = false },
   { "aymericbeaumet/vim-symlink", dependencies = { "moll/vim-bbye" } }, -- TODO: lazy
   "christoomey/vim-tmux-navigator", -- TODO: lazy
   "tpope/vim-sleuth", -- TODO: Lazy

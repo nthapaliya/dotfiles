@@ -2,6 +2,7 @@
 function rg
     command rg \
         --smart-case \
+        --hidden \
         --colors line:fg:yellow \
         --colors line:style:bold \
         --colors path:fg:green \

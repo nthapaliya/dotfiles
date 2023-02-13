@@ -24,8 +24,16 @@ return {
     "echasnovski/mini.comment",
     version = false,
     keys = { { "gc", mode = { "n", "v" } } },
-    config = function()
-      require("mini.comment").setup({})
+    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+    opts = {
+      hooks = {
+        pre = function()
+          require("ts_context_commentstring.internal").update_commentstring({})
+        end,
+      },
+    },
+    config = function(_, opts)
+      require("mini.comment").setup(opts)
     end,
   },
 
@@ -57,6 +65,12 @@ return {
       })
       vim.cmd([[highlight MiniIndentscopeSymbol guifg=#3b4261]])
     end,
+  },
+
+  {
+    "echasnovski/mini.misc",
+    version = false,
+    lazy = true,
   },
 
   {
