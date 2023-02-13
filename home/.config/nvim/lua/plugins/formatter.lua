@@ -12,7 +12,7 @@ M.on_attach(function(client, bufnr)
         vim.lsp.buf.format({
           async = false,
           filter = function(clnt)
-            return clnt.name ~= "sumneko_lua"
+            return clnt.name ~= "lua_ls"
           end,
         })
       end,

@@ -2,8 +2,8 @@ return {
   -- colorschemes
   {
     "folke/tokyonight.nvim",
-    priority = 1000,
-    lazy = false,
+    -- priority = 1000,
+    lazy = true,
     config = function()
       require("tokyonight").setup({
         style = "night",
@@ -21,6 +21,41 @@ return {
     lazy = true,
     config = function()
       vim.cmd([[colorscheme kanagawa]])
+    end,
+  },
+
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        no_italic = false, -- Force no italic
+        no_bold = false, -- Force no bold
+        styles = {
+          comments = { "italic" }, -- TODO Look this up
+          conditionals = { "italic" },
+          loops = {},
+          functions = { "bold" },
+          keywords = {},
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = {},
+          operators = {},
+        },
+        integrations = {
+          gitsigns = true,
+          treesitter = true,
+          -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+        },
+      })
+
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
 

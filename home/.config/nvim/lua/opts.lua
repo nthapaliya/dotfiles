@@ -18,6 +18,7 @@ vim.opt.visualbell = true
 vim.opt.cursorline = false
 vim.opt.undofile = false -- I'm not sure I like unlimited undo.
 vim.opt.wrap = true -- Wrap = false causes the trackpad to scroll horizontally on my laptop
+vim.opt.number = true
 
 -- Commented out while testing mini.basic
 -- vim.opt.breakindent = true
@@ -27,7 +28,6 @@ vim.opt.wrap = true -- Wrap = false causes the trackpad to scroll horizontally o
 -- vim.opt.list = true
 -- vim.opt.listchars = { extends = "#", nbsp = "·", tab = "▸·", trail = "·" }
 -- vim.opt.mouse = "a"
--- vim.opt.number = true
 -- vim.opt.shortmess:append("c")
 -- vim.opt.showmode = false
 -- vim.opt.signcolumn = "yes"
