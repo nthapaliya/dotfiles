@@ -2,6 +2,7 @@ return {
   {
     "echasnovski/mini.ai",
     version = false,
+    enabled = false,
     event = "VeryLazy",
     config = function()
       require("mini.ai").setup({})
@@ -40,6 +41,7 @@ return {
   {
     "echasnovski/mini.cursorword",
     version = false,
+    enabled = false,
     event = "VeryLazy",
     config = function()
       -- unhighlight first two lines
