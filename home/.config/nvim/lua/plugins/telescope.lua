@@ -52,25 +52,33 @@ return {
         telescope("grep_string", { search = opts.args })()
       end, { nargs = "*" })
     end,
-    opts = {
-      defaults = {
-        vimgrep_arguments = {
-          "rg",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--hidden",
+    opts = function()
+      local find_command
+      if vim.env.FZF_DEFAULT_COMMAND then
+        find_command = vim.split(vim.env.FZF_DEFAULT_COMMAND, " ", { plain = true })
+      end
+
+      require("telescope")
+      local vimgrep_arguments = { unpack(require("telescope.config").values.vimgrep_arguments) }
+      table.insert(vimgrep_arguments, "--hidden")
+
+      return {
+        defaults = {
+          mappings = {
+            i = {
+              ["<esc>"] = require("telescope.actions").close,
+              ["<C-u>"] = false,
+            },
+          },
+          vimgrep_arguments = vimgrep_arguments,
         },
-      },
-      pickers = {
-        find_files = {
-          find_command = vim.split(vim.env.FZF_CTRL_T_COMMAND, " ", { plain = true }),
+        pickers = {
+          find_files = {
+            find_command = find_command,
+          },
         },
-      },
-    },
+      }
+    end,
     cmd = { "Telescope" },
     keys = {
       { "<leader>*", telescope("grep_string"), desc = "Telescope grep_string" },
