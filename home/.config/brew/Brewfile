@@ -38,12 +38,20 @@ brew "gnu-sed"
 brew "gnu-time"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# Command-line interface to libgphoto2
+brew "gphoto2"
 # Improved top (interactive process viewer)
 brew "htop"
+# Command-line benchmarking tool
+brew "hyperfine"
+# Tool to capture still images from an iSight or other video source
+brew "imagesnap"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Mac App Store command-line interface
 brew "mas"
+# Remote terminal application
+brew "mosh"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Shell command parallelization utility
@@ -75,9 +83,13 @@ cask "emacs-mac"
 # Web browser
 cask "firefox"
 # Developer targeted fonts with a high number of glyphs
+cask "font-blex-mono-nerd-font"
+# Developer targeted fonts with a high number of glyphs
 cask "font-fira-code-nerd-font"
 # Corporate typeface for IBM
 cask "font-ibm-plex"
+# Developer targeted fonts with a high number of glyphs
+cask "font-jetbrains-mono-nerd-font"
 # Git interface focused on visual interaction
 cask "gitup"
 # Web browser
@@ -96,18 +108,19 @@ cask "kitty"
 cask "monitorcontrol"
 # Git client
 cask "sublime-merge"
+# Text editor for code, markup and prose
+cask "sublime-text"
 # Open-source BitTorrent client
 cask "transmission"
 # Open-source code editor
 cask "visual-studio-code"
-# Video communication and virtual meeting platform
-cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
 mas "Just Focus", id: 1142151959
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
+mas "NextDNS", id: 1464122853
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
