@@ -80,5 +80,5 @@ return {
     },
   },
 
-  { "j-hui/fidget.nvim", event = "VeryLazy", config = true },
+  { "j-hui/fidget.nvim", lazy = true },
 }

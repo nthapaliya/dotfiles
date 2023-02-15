@@ -67,6 +67,7 @@ local config = function()
   })
 
   require("neodev").setup()
+  require("fidget").setup()
 
   local lspconfig = require("lspconfig")
 
