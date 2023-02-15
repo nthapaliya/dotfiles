@@ -19,7 +19,9 @@ function __checktime
         return 0
     end
 
-    test (math (date +%s) - (date -r $hfile +%s)) -lt (math 8 \* 60 \* 60); and return 1
+    set limit (math 8 \* 60 \* 60)
+
+    test (path mtime --relative $hfile) -lt $limit; and return 1
 
     touch $hfile
     return 0

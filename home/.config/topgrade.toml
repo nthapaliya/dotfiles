@@ -2,7 +2,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["emacs", "vim", "node", "system"]
+disable = [ "emacs", "node", "pnpm", "system", "vim" ]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
