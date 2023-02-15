@@ -43,15 +43,15 @@ return {
       },
       lualine_c = {
         { "filename", path = 1 },
-        -- {
-        --   function()
-        --     return require("nvim-navic").get_location()
-        --   end,
-        --   cond = function()
-        --     return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-        --   end,
-        --   color = { bg = "NONE" },
-        -- },
+        {
+          function()
+            return require("nvim-navic").get_location()
+          end,
+          cond = function()
+            return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+          end,
+          color = { bg = "NONE" },
+        },
       },
       lualine_x = { "filetype" },
       lualine_y = {

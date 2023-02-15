@@ -19,6 +19,7 @@ vim.opt.cursorline = false
 vim.opt.undofile = false -- I'm not sure I like unlimited undo.
 vim.opt.wrap = true -- Wrap = false causes the trackpad to scroll horizontally on my laptop
 vim.opt.number = true
+vim.opt.commentstring = "# %s"
 
 -- Commented out while testing mini.basic
 -- vim.opt.breakindent = true
