@@ -8,9 +8,9 @@ local telescope = function(builtin, opts)
     builtin = params.builtin
     opts = params.opts
 
-    opts = vim.tbl_deep_extend("force", { cwd = require("mini.misc").find_root() }, opts or {})
+    opts = vim.tbl_deep_extend("force", { cwd = require("mini.misc").find_root() or vim.loop.cwd() }, opts or {})
     if builtin == "files" then
-      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
+      if vim.loop.fs_stat(opts.cwd .. "/.git") then
         opts.show_untracked = true
         builtin = "git_files"
       else
