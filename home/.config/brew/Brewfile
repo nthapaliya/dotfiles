@@ -1,7 +1,5 @@
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
 tap "homebrew/services"
 tap "railwaycat/emacsmacport"
 # Library for command-line editing
@@ -20,6 +18,8 @@ brew "libyaml"
 brew "crystal"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Open source multi-tool for exploring and publishing data
+brew "datasette"
 # Generic library support script
 brew "libtool"
 # Play, record, convert, and stream audio and video
@@ -30,8 +30,6 @@ brew "fish"
 brew "gh"
 # Distributed revision control system
 brew "git"
-# Syntax-highlighting pager for git and diff output
-brew "git-delta"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU implementation of time utility
