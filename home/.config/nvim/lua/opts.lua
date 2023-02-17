@@ -27,7 +27,7 @@ vim.opt.commentstring = "# %s"
 -- vim.opt.ignorecase = true
 -- vim.opt.infercase = true
 -- vim.opt.list = true
--- vim.opt.listchars = { extends = "#", nbsp = "·", tab = "▸·", trail = "·" }
+vim.opt.listchars = { extends = "#", nbsp = "·", tab = "▸·", trail = "·" }
 -- vim.opt.mouse = "a"
 -- vim.opt.shortmess:append("c")
 -- vim.opt.showmode = false

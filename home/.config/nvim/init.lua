@@ -29,8 +29,10 @@ vim.cmd([[nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. strin
 -- ]])
 
 require("lazy").setup("plugins", {
-  defaults = { lazy = false },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  defaults = { lazy = false, version = false },
+  install = { colorscheme = { "catppuccin", "habamax" } },
+  checker = { enabled = true, notify = false },
+  change_detection = { enabled = false, notify = false },
   performance = {
     rtp = {
       disabled_plugins = {

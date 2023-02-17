@@ -1,7 +1,6 @@
 return {
   {
     "echasnovski/mini.ai",
-    version = false,
     enabled = false,
     event = "VeryLazy",
     config = function()
@@ -11,7 +10,6 @@ return {
 
   {
     "echasnovski/mini.basics",
-    version = false,
     lazy = false,
     config = function()
       require("mini.basics").setup({
@@ -23,7 +21,6 @@ return {
 
   {
     "echasnovski/mini.comment",
-    version = false,
     keys = { { "gc", mode = { "n", "v" } } },
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
     opts = {
@@ -46,7 +43,6 @@ return {
 
   {
     "echasnovski/mini.cursorword",
-    version = false,
     enabled = false,
     event = "VeryLazy",
     config = function()
@@ -59,7 +55,6 @@ return {
 
   {
     "echasnovski/mini.indentscope",
-    version = false,
     event = "VeryLazy",
     config = function()
       require("mini.indentscope").setup({
@@ -75,17 +70,12 @@ return {
     end,
   },
 
-  {
-    "echasnovski/mini.misc",
-    version = false,
-    lazy = true,
-  },
+  { "echasnovski/mini.misc", lazy = true },
 
   {
     "echasnovski/mini.pairs",
-    version = false,
-    lazy = true,
-    -- event = "VeryLazy",
+    enabled = false,
+    event = "VeryLazy",
     config = function()
       require("mini.pairs").setup({})
     end,
@@ -95,7 +85,6 @@ return {
     "echasnovski/mini.surround",
     -- maybe keys, but VeryLazy is fine
     event = "VeryLazy",
-    version = false,
     config = function()
       require("mini.surround").setup({
         mappings = {
