@@ -5,9 +5,8 @@
 # Refer to fish_config and init.lua for examples of how
 # to guard against fish_variables and
 # packer_compiled.lua not existing.
-
-fish_user_key_bindings.fish
-fzf_key_bindings.fish
-fish_variables
 Brewfile.lock.json
+fish_user_key_bindings.fish
+fish_variables
+fzf_key_bindings.fish
 lazy-lock.json

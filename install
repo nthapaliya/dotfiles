@@ -10,12 +10,20 @@ hash stow 2>/dev/null || {
   exit 1
 }
 
+stow_arguments=""
+while read -r arg; do
+  a="--ignore=$arg"
+  stow_arguments="$stow_arguments$a"
+done < <(grep -v '^\# ' .gitignore | grep -v -e '^$')
+
 case $1 in
   '')
-    stow -R --target="$HOME" home
+    # shellcheck disable=SC2086
+    stow $stow_arguments -R --target="$HOME" home
     ;;
   --uninstall|-u)
-    stow -D --target="$HOME" home
+    # shellcheck disable=SC2086
+    stow -D $stow_arguments --target="$HOME" home
     ;;
   *)
     echo $"Usage: $0 [-u|--uninstall]"
