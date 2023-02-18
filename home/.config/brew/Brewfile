@@ -46,6 +46,8 @@ brew "hyperfine"
 brew "imagesnap"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Mac App Store command-line interface
 brew "mas"
 # Remote terminal application
@@ -80,14 +82,12 @@ cask "calibre"
 cask "emacs-mac"
 # Web browser
 cask "firefox"
-# Developer targeted fonts with a high number of glyphs
-cask "font-blex-mono-nerd-font"
-# Developer targeted fonts with a high number of glyphs
-cask "font-fira-code-nerd-font"
 # Corporate typeface for IBM
 cask "font-ibm-plex"
+# Typeface made for developers
+cask "font-jetbrains-mono"
 # Developer targeted fonts with a high number of glyphs
-cask "font-jetbrains-mono-nerd-font"
+cask "font-symbols-only-nerd-font"
 # Git interface focused on visual interaction
 cask "gitup"
 # Web browser

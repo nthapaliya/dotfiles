@@ -9,4 +9,5 @@
 fish_user_key_bindings.fish
 fzf_key_bindings.fish
 fish_variables
-packer_compiled.lua
+Brewfile.lock.json
+lazy-lock.json
