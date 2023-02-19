@@ -1,25 +1,5 @@
 return {
   {
-    "echasnovski/mini.ai",
-    enabled = false,
-    event = "VeryLazy",
-    config = function()
-      require("mini.ai").setup({})
-    end,
-  },
-
-  {
-    "echasnovski/mini.basics",
-    lazy = false,
-    config = function()
-      require("mini.basics").setup({
-        options = { extra_ui = true },
-        autocommands = { basic = false },
-      })
-    end,
-  },
-
-  {
     "echasnovski/mini.comment",
     keys = { { "gc", mode = { "n", "v" } } },
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
@@ -42,18 +22,6 @@ return {
   },
 
   {
-    "echasnovski/mini.cursorword",
-    enabled = false,
-    event = "VeryLazy",
-    config = function()
-      -- unhighlight first two lines
-      require("mini.cursorword").setup({ delay = 300 })
-      vim.cmd([[highlight MiniCursorwordCurrent gui=nocombine guifg=NONE guibg=NONE]])
-      -- vim.cmd([[highlight MiniCursorword gui=nocombine guifg=NONE guibg=NONE]])
-    end,
-  },
-
-  {
     "echasnovski/mini.indentscope",
     event = "VeryLazy",
     config = function()
@@ -71,15 +39,6 @@ return {
   },
 
   { "echasnovski/mini.misc", lazy = true },
-
-  {
-    "echasnovski/mini.pairs",
-    enabled = false,
-    event = "VeryLazy",
-    config = function()
-      require("mini.pairs").setup({})
-    end,
-  },
 
   {
     "echasnovski/mini.surround",
