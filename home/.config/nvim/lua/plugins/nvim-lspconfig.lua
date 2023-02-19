@@ -17,12 +17,12 @@ local init = function()
 
   -- Ref:
   -- https://neovim.io/doc/user/diagnostic.html
-  local filled_circle = ""
+  -- local filled_circle = ""
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-  for type, _icon in pairs(signs) do
+  for type, _ in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, {
-      text = filled_circle,
+      text = "",
       texthl = hl,
       numhl = hl,
     })
@@ -88,6 +88,7 @@ return {
     -- Additional plugins
     "folke/neodev.nvim",
   },
+  cmd = { "Mason" },
   init = init,
   config = config,
 }

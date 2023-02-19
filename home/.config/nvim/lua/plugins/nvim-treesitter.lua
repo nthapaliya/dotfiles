@@ -21,10 +21,29 @@ return {
         },
         indent = { enable = true },
         highlight = { enable = true },
+        -- TODO: check this out, remove if I don't end up using it much
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn", -- set to `false` to disable one of the mappings
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+          },
+        },
 
         -- Third party mods
         matchup = { enable = true },
       })
+    end,
+  },
+
+  -- TODO: style this so the popup is visually distinct
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "BufRead",
+    config = function()
+      require("treesitter-context").setup()
     end,
   },
 
@@ -41,7 +60,8 @@ return {
     end,
     config = function()
       require("ufo").setup({
-        provider_selector = function(bufnr, filetype, buftype)
+        --                  function(bufnr, filetype, buftype)
+        provider_selector = function(_, _, _)
           return { "treesitter", "indent" }
         end,
       })
