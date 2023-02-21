@@ -3,9 +3,13 @@ function set_up_fish
 
     set -U fish_vars_set 1
 
-    set_abbrs
-    set_colors
     set_uvars
+
+    fish_config theme choose coolbeans
+
+    if command -sq kitty
+        kitty +kitten themes --config-file-name=theme.conf Catppuccin-Macchiato
+    end
 
     # Setup fish completions
     if command -sq fzf

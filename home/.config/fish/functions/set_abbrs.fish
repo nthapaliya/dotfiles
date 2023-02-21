@@ -1,8 +1,4 @@
 function set_abbrs
-    abbr --list | while read abbreviation
-        abbr -e $abbreviation
-    end
-
     # git
     abbr -a -- g git
     abbr -a -- gb 'git branch'
