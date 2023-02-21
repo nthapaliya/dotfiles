@@ -14,7 +14,7 @@ vim.opt.listchars = { extends = "#", nbsp = "·", tab = "▸·", trail = "·" }
 vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.scrolloff = 8
-vim.opt.shell = "bash"
+vim.opt.shell = vim.env.SHELL
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")
 vim.opt.showbreak = [[\\\\\]]

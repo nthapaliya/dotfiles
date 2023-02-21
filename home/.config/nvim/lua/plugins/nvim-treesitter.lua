@@ -15,10 +15,12 @@ return {
           "bash",
           "fish",
           "lua",
+          "python",
           "ruby",
           "rust",
           "vim",
         },
+        auto_install = true,
         indent = { enable = true },
         highlight = { enable = true },
         -- TODO: check this out, remove if I don't end up using it much
