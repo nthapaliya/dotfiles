@@ -27,22 +27,25 @@ end
 
 require 'tempfile'
 
-def fzf_history(line = '')
-  hist = ''
-  hist_array = Reline::HISTORY
-               .reject { |s| s == 'exit' }
-               .reject { |s| s.chomp == '' }
-               .reverse
-               .uniq
+def filtered_history
+  Reline::HISTORY.reject { |s| ['exit', ''].include?(s) }
+                 .reverse
+                 .uniq
+end
 
+def fzf_history(line = '')
   Tempfile.open('histfile') do |tempfile|
-    tempfile.write(hist_array.join(0.chr))
+    tempfile.write(filtered_history.join(0.chr))
     tempfile.close
 
-    hist = `< #{tempfile.path} fzf --query="#{line}" --read0 --no-hscroll --preview 'echo {}' --preview-window up:3:hidden:wrap --bind '?:toggle-preview'`
-  end
+    query = ['<', tempfile.path, 'fzf', "--query='#{line}'",
+             '--read0', '--no-hscroll', '--preview', "'echo {}'",
+             '--preview-window', 'up:3:hidden:wrap',
+             '--bind', '?:toggle-preview'].join(' ')
 
-  hist
+    hist = `#{query}`
+    return hist.empty? ? line : hist
+  end
 end
 
 module Reline
