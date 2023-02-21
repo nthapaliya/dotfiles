@@ -39,3 +39,5 @@ cargo install \
     topgrade \
     vim-profiler
 ```
+
+THIS IS OUTDATED^^, use the script `install_asdf.fish` instead

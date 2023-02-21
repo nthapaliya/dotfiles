@@ -27,8 +27,8 @@ function set_uvars
     # keep the .local/opt/asdf dir, but update the branch when installing
     # git clone https://github.com/asdf-vm/asdf.git ~/.local/opt/asdf --branch v0.10.2
     set -Ux ASDF_DIR ~/.local/opt/asdf
-    set -Ux ASDF_DATA_DIR ~/.local/opt/asdf
-    fish_add_path $ASDF_DIR/bin $ASDF_DIR/shims
+    set -Ux ASDF_DATA_DIR ~/.local/opt/asdf_installs
+    fish_add_path $ASDF_DIR/bin $ASDF_DATA_DIR/shims
 
     set -Ux SHELL fish
 
