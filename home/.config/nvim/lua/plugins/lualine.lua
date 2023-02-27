@@ -55,7 +55,13 @@ return {
       },
       lualine_x = {
         { "filetype" },
-        { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+        {
+          require("lazy.status").updates,
+          cond = require("lazy.status").has_updates,
+          on_click = function()
+            require("lazy").home()
+          end,
+        },
       },
       lualine_y = {
         { "encoding", padding = { left = 1, right = 0 } },
