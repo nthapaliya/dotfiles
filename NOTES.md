@@ -34,10 +34,40 @@ cargo install \
     cargo-update \
     fd-find \
     git-delta \
+    hyperfine \
     ripgrep \
     stylua \
     topgrade \
     vim-profiler
 ```
+### In case you can't install rust and cargo:
+
+Install fd, rg and delta via asdf
+
+```
+asdf plugin add delta https://github.com/andweeb/asdf-delta.git
+asdf install delta latest
+asdf global delta latest  # Set a version globally (on your ~/.tool-versions file)
+
+asdf plugin add fd https://gitlab.com/wt0f/asdf-fd
+asdf install fd latest
+asdf global fd latest
+
+asdf plugin add ripgrep https://gitlab.com/wt0f/asdf-ripgrep
+asdf install ripgrep latest
+asdf global ripgrep latest
+```
 
 THIS IS OUTDATED^^, use the script `install_asdf.fish` instead
+
+### Setting up fish:
+
+Assuming running bash:
+
+```bash
+# add $(which fish) to `/etc/shells` if it doesn't exist
+$ cat /etc/shells # to check if fish is already listed
+$ echo $(which fish) | sudo tee -a /etc/shells
+$ sudo chsh -s $(which fish) $(whoami)
+$ sudo reboot now # not sure if really needed
+```

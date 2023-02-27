@@ -20,6 +20,7 @@ cargo install \
     cargo-update \
     fd-find \
     git-delta \
+    hyperfine \
     ripgrep \
     stylua \
     topgrade \
