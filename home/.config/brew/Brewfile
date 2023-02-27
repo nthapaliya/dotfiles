@@ -12,36 +12,30 @@ brew "autoconf"
 brew "automake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# YAML Parser
-brew "libyaml"
-# Fast and statically typed, compiled language with Ruby-like syntax
-brew "crystal"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# YAML Parser
+brew "libyaml"
 # Open source multi-tool for exploring and publishing data
 brew "datasette"
-# Generic library support script
-brew "libtool"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# GitHub command-line tool
-brew "gh"
 # Distributed revision control system
 brew "git"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU implementation of time utility
 brew "gnu-time"
+# Generic library support script
+brew "libtool"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Command-line interface to libgphoto2
 brew "gphoto2"
 # Improved top (interactive process viewer)
 brew "htop"
-# Command-line benchmarking tool
-brew "hyperfine"
 # Tool to capture still images from an iSight or other video source
 brew "imagesnap"
 # Lightweight and flexible command-line JSON processor
@@ -50,16 +44,10 @@ brew "jq"
 brew "lazygit"
 # Mac App Store command-line interface
 brew "mas"
-# Remote terminal application
-brew "mosh"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Shell command parallelization utility
 brew "parallel"
-# Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
-brew "prettier"
-# Static analysis and lint tool, for (ba)sh scripts
-brew "shellcheck"
 # Displays the differences between SQLite databases
 brew "sqldiff"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -76,6 +64,8 @@ brew "universal-ctags"
 brew "wget"
 # Fork of youtube-dl with additional features and fixes
 brew "yt-dlp"
+# Application uninstaller
+cask "appcleaner"
 # E-books management software
 cask "calibre"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
@@ -102,16 +92,12 @@ cask "iterm2"
 cask "keepingyouawake"
 # GPU-based terminal emulator
 cask "kitty"
-# Tool to control external monitor brightness & volume
-cask "monitorcontrol"
 # Git client
 cask "sublime-merge"
-# Text editor for code, markup and prose
-cask "sublime-text"
+# Mesh VPN based on Wireguard
+cask "tailscale"
 # Open-source BitTorrent client
 cask "transmission"
-# Open-source code editor
-cask "visual-studio-code"
 mas "1Password for Safari", id: 1569813296
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
@@ -122,5 +108,4 @@ mas "NextDNS", id: 1464122853
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
-mas "Tailscale", id: 1475387142
 mas "Wipr", id: 1320666476
