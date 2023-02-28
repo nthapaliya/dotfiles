@@ -71,3 +71,11 @@ $ echo $(which fish) | sudo tee -a /etc/shells
 $ sudo chsh -s $(which fish) $(whoami)
 $ sudo reboot now # not sure if really needed
 ```
+
+
+### Dependencies
+
+Asdf ruby:
+```bash
+sudo apt-get install autoconf bison patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev pkg-config uuid-dev
+```

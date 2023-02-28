@@ -45,7 +45,7 @@ map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 map("n", "gx", function()
   -- test: "nthapaliya/dotfiles"
   local open = function(url)
-    vim.cmd("silent! !open " .. vim.fn.shellescape(url, 1) .. ">&/dev/null")
+    vim.cmd("silent! !open " .. vim.fn.shellescape(url, 1))
   end
 
   -- try for Plug/Packer style 'urls': aka "username/repo"
