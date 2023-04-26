@@ -4,31 +4,40 @@
 
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = File.join(Dir.home, '.local', 'share', 'irb', 'history')
+IRB.conf[:USE_AUTOCOMPLETE] = false
 
 def pbcopy(input)
   str = input.to_s
   IO.popen('pbcopy', 'w') { |f| f << str }
 end
 
+def clear
+  printf "\e[2J"
+  printf "\e[1;1H"
+end
+
+def cls
+  clear
+  # `if [ -z ${TMUX+x} ]; then tmux clear-history; fi`
+  `tmux clear-history`
+  # clear
+end
+
 def reload
-  # puts "reloading #{__FILE__}"
-
-  warn_level = $VERBOSE
-
-  # This is to suppress the annoying already initialized constant warnings
-  $VERBOSE = nil
-
+  puts "reloading #{__FILE__}"
   load __FILE__
-
-  $VERBOSE = warn_level
-
   true
 end
 
 require 'tempfile'
 
+REJECTED_KEYWORDS = [
+  '',
+  'exit'
+].freeze
+
 def filtered_history
-  Reline::HISTORY.reject { |s| ['exit', ''].include?(s) }
+  Reline::HISTORY.reject { |s| REJECTED_KEYWORDS.include?(s) }
                  .reverse
                  .uniq
 end

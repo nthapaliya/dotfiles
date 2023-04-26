@@ -4,5 +4,5 @@ set -eo pipefail
 
 git status --porcelain | cut -c4- | while read -r file ; do
   git add "$file"
-  git commit -m "$((++index))"
+  git commit -m "$((++index)) $file"
 done
