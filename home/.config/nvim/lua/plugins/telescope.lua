@@ -25,13 +25,13 @@ end
 return {
   -- fuzzy finders
   {
-    "junegunn/fzf.vim",
-    dependencies = { "junegunn/fzf" },
+    "junegunn/fzf",
+    dependencies = { "junegunn/fzf.vim" },
     enabled = false,
     keys = {
       { "<C-t>", "<cmd>Files<cr>" },
-      { "<leader>g", "<cmd>GFiles?<cr>" },
-      { "<leader>b", "<cmd>Buffers<cr>" },
+      { "<leader>fb", "<cmd>Buffers<cr>" },
+      { "<leader>fg", "<cmd>GFiles?<cr>" },
     },
   },
 
@@ -81,10 +81,10 @@ return {
     end,
     cmd = { "Telescope" },
     keys = {
-      { "<leader>*", telescope("grep_string"), desc = "Telescope grep_string" },
       { "<C-t>", telescope("files"), desc = "Telescope find files" },
-      { "<leader>fg", telescope("git_status"), desc = "Telescope git status" },
+      { "<leader>*", telescope("grep_string"), desc = "Telescope grep_string" },
       { "<leader>fb", telescope("buffers"), desc = "Telescope buffers" },
+      { "<leader>fg", telescope("git_status"), desc = "Telescope git status" },
     },
   },
 }

@@ -54,7 +54,7 @@ return {
     dependencies = "kevinhwang91/promise-async",
     event = "BufRead",
     init = function()
-      vim.o.foldcolumn = "0" -- TODO: Set to "1" with nvim 0.9
+      vim.o.foldcolumn = "0"
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true

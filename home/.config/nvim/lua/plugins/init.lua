@@ -14,11 +14,6 @@ return {
   }, -- TODO: lazy
 
   {
-    "AndrewRadev/splitjoin.vim",
-    keys = { { "gS", desc = "splitjoin: Split line" }, { "gJ", desc = "Splitjoin: join line" } },
-  },
-
-  {
     "elihunter173/dirbuf.nvim",
     keys = { "-" },
     opts = { write_cmd = "DirbufSync -confirm" },

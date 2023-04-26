@@ -73,7 +73,7 @@ local config = function()
 
   require("mason-lspconfig").setup_handlers({
     function(server_name)
-      lspconfig[server_name].setup({ capabilities = M.lsp_ensure_capabilities() })
+      lspconfig[server_name].setup({})
     end,
   })
 end
