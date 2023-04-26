@@ -28,10 +28,10 @@ brew "git"
 brew "gnu-sed"
 # GNU implementation of time utility
 brew "gnu-time"
-# Generic library support script
-brew "libtool"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# Generic library support script
+brew "libtool"
 # Command-line interface to libgphoto2
 brew "gphoto2"
 # Improved top (interactive process viewer)
@@ -64,6 +64,8 @@ brew "universal-ctags"
 brew "wget"
 # Fork of youtube-dl with additional features and fixes
 brew "yt-dlp"
+# YAMAMOTO Mitsuharu's Mac port of GNU Emacs
+brew "railwaycat/emacsmacport/emacs-mac"
 # Application uninstaller
 cask "appcleaner"
 # E-books management software
@@ -98,6 +100,8 @@ cask "sublime-merge"
 cask "tailscale"
 # Open-source BitTorrent client
 cask "transmission"
+# Video communication and virtual meeting platform
+cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498

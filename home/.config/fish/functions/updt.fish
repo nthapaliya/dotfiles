@@ -4,7 +4,6 @@ function updt
     if test (uname) = Darwin
         echo 'Running brew commands...'
         brew bundle dump --force --describe
-        brew bundle check
     end
 
     topgrade
