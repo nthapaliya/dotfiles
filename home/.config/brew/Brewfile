@@ -1,7 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
-tap "railwaycat/emacsmacport"
 # Library for command-line editing
 brew "readline"
 # Download with resuming and segmented downloading
@@ -22,6 +21,8 @@ brew "datasette"
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Monitor a directory for changes and run a shell command
+brew "fswatch"
 # Distributed revision control system
 brew "git"
 # GNU implementation of the famous stream editor
@@ -46,6 +47,8 @@ brew "lazygit"
 brew "mas"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Port scanning utility for large networks
+brew "nmap"
 # Shell command parallelization utility
 brew "parallel"
 # Displays the differences between SQLite databases
@@ -64,14 +67,10 @@ brew "universal-ctags"
 brew "wget"
 # Fork of youtube-dl with additional features and fixes
 brew "yt-dlp"
-# YAMAMOTO Mitsuharu's Mac port of GNU Emacs
-brew "railwaycat/emacsmacport/emacs-mac"
 # Application uninstaller
 cask "appcleaner"
 # E-books management software
 cask "calibre"
-# YAMAMOTO Mitsuharu's Mac port of GNU Emacs
-cask "emacs-mac"
 # Web browser
 cask "firefox"
 # Corporate typeface for IBM
@@ -94,21 +93,31 @@ cask "iterm2"
 cask "keepingyouawake"
 # GPU-based terminal emulator
 cask "kitty"
+# Adaptive brightness for external displays
+cask "lunar"
 # Git client
 cask "sublime-merge"
 # Mesh VPN based on Wireguard
 cask "tailscale"
 # Open-source BitTorrent client
 cask "transmission"
+# Open-source code editor
+cask "visual-studio-code"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
+mas "Hidden Bar", id: 1452453066
+mas "Home Assistant", id: 1099568401
 mas "Keynote", id: 409183694
+mas "Lunatask", id: 1583719331
 mas "Magnet", id: 441258766
+mas "Microsoft Remote Desktop", id: 1295203466
 mas "NextDNS", id: 1464122853
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
+mas "Stecker", id: 6447288587
 mas "Wipr", id: 1320666476
+vscode "skyapps.fish-vscode"

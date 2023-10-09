@@ -30,6 +30,7 @@ def reload
 end
 
 require 'tempfile'
+require 'prime'
 
 REJECTED_KEYWORDS = [
   '',
