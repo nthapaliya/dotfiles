@@ -120,4 +120,5 @@ mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Stecker", id: 6447288587
 mas "Wipr", id: 1320666476
+vscode "eamodio.gitlens"
 vscode "skyapps.fish-vscode"
