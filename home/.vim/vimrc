@@ -124,7 +124,7 @@ augroup END
 augroup general_autocommands
   autocmd!
   autocmd VimResized * wincmd =
-  autocmd TextYankPost * if $SSH_CLIENT != '' && v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+  autocmd TextYankPost * if $SSH_CLIENT != '' && v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
 augroup END
 " }}}
 
