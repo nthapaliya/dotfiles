@@ -10,6 +10,8 @@ hash stow 2>/dev/null || {
   exit 1
 }
 
+[ -f ~/.bashrc  ] && mv ~/.bashrc ~/.bashrc-default
+
 stow_arguments=""
 while read -r arg; do
   a="--ignore=$arg"
