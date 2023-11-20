@@ -12,5 +12,5 @@ if [ -d /opt/homebrew/bin ] ; then export PATH=/opt/homebrew/bin:$PATH; fi
 export HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
 
-[ -f ~/.bashrc-default ] && source ~/.bashrc-default
+# [ -f ~/.bashrc-old ] && source ~/.bashrc-old
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
