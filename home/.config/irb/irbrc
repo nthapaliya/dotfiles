@@ -5,6 +5,7 @@
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = File.join(Dir.home, '.local', 'share', 'irb', 'history')
 IRB.conf[:USE_AUTOCOMPLETE] = false
+IRB.conf[:COMPLETOR] = :type # default is :regexp
 
 def pbcopy(input)
   str = input.to_s
