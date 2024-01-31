@@ -1,8 +1,15 @@
+tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
+# YAML Parser
+brew "libyaml"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
 # Library for command-line editing
 brew "readline"
+# Automate deployment, configuration, and upgrading
+brew "ansible"
 # Download with resuming and segmented downloading
 brew "aria2"
 # Automatic configure script builder
@@ -13,8 +20,6 @@ brew "automake"
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
-# YAML Parser
-brew "libyaml"
 # Open source multi-tool for exploring and publishing data
 brew "datasette"
 # Play, record, convert, and stream audio and video
@@ -51,6 +56,10 @@ brew "neovim"
 brew "nmap"
 # Shell command parallelization utility
 brew "parallel"
+# Parallel versions of OpenSSH and related tools
+brew "pssh"
+# Monitor data's progress through a pipe
+brew "pv"
 # Displays the differences between SQLite databases
 brew "sqldiff"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -67,6 +76,8 @@ brew "universal-ctags"
 brew "wget"
 # Fork of youtube-dl with additional features and fixes
 brew "yt-dlp"
+# Terraform
+brew "hashicorp/tap/terraform"
 # Application uninstaller
 cask "appcleaner"
 # E-books management software
@@ -117,6 +128,7 @@ mas "Microsoft Remote Desktop", id: 1295203466
 mas "NextDNS", id: 1464122853
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Photomator", id: 1444636541
 mas "Pixelmator Pro", id: 1289583905
 mas "Stecker", id: 6447288587
 mas "Wipr", id: 1320666476
