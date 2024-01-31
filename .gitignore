@@ -13,3 +13,4 @@ lazy-lock.json
 theme.conf
 theme.conf.bak
 current-theme.conf
+.luarc.json
