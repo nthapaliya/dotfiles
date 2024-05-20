@@ -13,7 +13,7 @@ function set_uvars
     if test Darwin = (uname)
         # -a so it's AFTER ~/.local/bin
         fish_add_path -a /opt/homebrew/bin
-        fish_add_path -a /opt/homebrew/opt/{coreutils,gnu-sed,gnu-time}/libexec/gnubin
+        # fish_add_path -a /opt/homebrew/opt/{coreutils,gnu-sed,gnu-time}/libexec/gnubin
 
         set -Ux XDG_CACHE_HOME ~/Library/Caches/xdg-cache
         set -Ux HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
