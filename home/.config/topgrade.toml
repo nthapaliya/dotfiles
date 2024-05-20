@@ -1,5 +1,13 @@
 [misc]
-disable = [ "emacs", "mas", "node", "pnpm", "system", "vim" ]
+disable = [
+  "emacs",
+  "git_repos",
+  "mas",
+  "node",
+  "pnpm",
+  "system",
+  "vim",
+]
 assume_yes = true
 no_retry = true
 cleanup = true

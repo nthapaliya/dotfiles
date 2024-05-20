@@ -2,16 +2,18 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
-# YAML Parser
-brew "libyaml"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# YAML Parser
+brew "libyaml"
 # Library for command-line editing
 brew "readline"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
 # Download with resuming and segmented downloading
 brew "aria2"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin"
 # Automatic configure script builder
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -40,6 +42,8 @@ brew "gnupg"
 brew "libtool"
 # Command-line interface to libgphoto2
 brew "gphoto2"
+# Graph visualization software from AT&T and Bell Labs
+brew "graphviz"
 # Improved top (interactive process viewer)
 brew "htop"
 # Tool to capture still images from an iSight or other video source
@@ -56,6 +60,8 @@ brew "neovim"
 brew "nmap"
 # Shell command parallelization utility
 brew "parallel"
+# Fast C/C++ prime number generator
+brew "primesieve"
 # Parallel versions of OpenSSH and related tools
 brew "pssh"
 # Monitor data's progress through a pipe
@@ -74,7 +80,7 @@ brew "tree"
 brew "universal-ctags"
 # Internet file retriever
 brew "wget"
-# Fork of youtube-dl with additional features and fixes
+# Feature-rich command-line audio/video downloader
 brew "yt-dlp"
 # Terraform
 brew "hashicorp/tap/terraform"

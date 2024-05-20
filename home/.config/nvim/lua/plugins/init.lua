@@ -14,9 +14,13 @@ return {
   }, -- TODO: lazy
 
   {
-    "elihunter173/dirbuf.nvim",
-    keys = { "-" },
-    opts = { write_cmd = "DirbufSync -confirm" },
+    "stevearc/oil.nvim",
+    config = true,
+    keys = { {
+      "-",
+      "<cmd>Oil --float<cr>",
+      desc = "oil.nvim: Open parent directory",
+    } },
   },
 
   {
