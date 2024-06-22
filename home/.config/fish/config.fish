@@ -5,7 +5,9 @@ if not set -q fish_vars_set
 end
 set_abbrs
 
-# atuin init fish --disable-up-arrow --disable-ctrl-r | source
-atuin init fish --disable-up-arrow | source
+if command -sq atuin
+    # atuin init fish --disable-up-arrow --disable-ctrl-r | source
+    atuin init fish --disable-up-arrow | source
+end
 
 # set -gx NODE_OPTIONS --openssl-legacy-provider
