@@ -2,34 +2,22 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
-# YAML Parser
-brew "libyaml"
-# Library for command-line editing
-brew "readline"
-# Automate deployment, configuration, and upgrading
-brew "ansible"
-# Download with resuming and segmented downloading
-brew "aria2"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
-# Automatic configure script builder
-brew "autoconf"
-# Tool for generating GNU Standards-compliant Makefiles
-brew "automake"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Library for command-line editing
+brew "readline"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
-# Open source multi-tool for exploring and publishing data
-brew "datasette"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# Monitor a directory for changes and run a shell command
-brew "fswatch"
 # Distributed revision control system
 brew "git"
 # GNU implementation of the famous stream editor
@@ -40,18 +28,14 @@ brew "gnu-time"
 brew "gnupg"
 # Generic library support script
 brew "libtool"
-# Command-line interface to libgphoto2
-brew "gphoto2"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # Improved top (interactive process viewer)
 brew "htop"
-# Tool to capture still images from an iSight or other video source
-brew "imagesnap"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Simple terminal UI for git commands
-brew "lazygit"
+# YAML Parser
+brew "libyaml"
 # Mac App Store command-line interface
 brew "mas"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -62,12 +46,8 @@ brew "nmap"
 brew "parallel"
 # Fast C/C++ prime number generator
 brew "primesieve"
-# Parallel versions of OpenSSH and related tools
-brew "pssh"
 # Monitor data's progress through a pipe
 brew "pv"
-# Displays the differences between SQLite databases
-brew "sqldiff"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
 # Send macOS User Notifications from the command-line
@@ -82,42 +62,33 @@ brew "universal-ctags"
 brew "wget"
 # Feature-rich command-line audio/video downloader
 brew "yt-dlp"
-# Terraform
-brew "hashicorp/tap/terraform"
 # Application uninstaller
 cask "appcleaner"
 # E-books management software
 cask "calibre"
 # Web browser
 cask "firefox"
-# Corporate typeface for IBM
 cask "font-ibm-plex"
-# Typeface made for developers
 cask "font-jetbrains-mono"
-# Developer targeted fonts with a high number of glyphs
 cask "font-symbols-only-nerd-font"
 # Git interface focused on visual interaction
 cask "gitup"
 # Web browser
 cask "google-chrome"
-# Open-source video transcoder
-cask "handbrake"
 # Free and open-source media player
 cask "iina"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Jellyfin desktop client
+cask "jellyfin-media-player"
 # Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
 # GPU-based terminal emulator
 cask "kitty"
 # Adaptive brightness for external displays
 cask "lunar"
-# Git client
-cask "sublime-merge"
 # Mesh VPN based on Wireguard
 cask "tailscale"
-# Open-source BitTorrent client
-cask "transmission"
 # Open-source code editor
 cask "visual-studio-code"
 # Video communication and virtual meeting platform
@@ -131,7 +102,6 @@ mas "Keynote", id: 409183694
 mas "Lunatask", id: 1583719331
 mas "Magnet", id: 441258766
 mas "Microsoft Remote Desktop", id: 1295203466
-mas "NextDNS", id: 1464122853
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Photomator", id: 1444636541
