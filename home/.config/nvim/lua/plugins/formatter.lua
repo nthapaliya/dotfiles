@@ -41,6 +41,17 @@ return {
         lua = { require("formatter.filetypes.lua").stylua },
         javascript = { require("formatter.filetypes.javascript").prettier },
         rust = { require("formatter.filetypes.rust").rustfmt },
+        ruby = { require("formatter.filetypes.ruby").rubocop },
+        java = {
+          function()
+            return {
+              exe = "java",
+              args = { "-jar", os.getenv("HOME") .. "/.local/jar/google-java-format-1.22.0-all-deps.jar", "-" },
+              stdin = true,
+            }
+          end,
+        },
+        go = { require("formatter.filetypes.go").gofmt },
         ["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },
       },
     })

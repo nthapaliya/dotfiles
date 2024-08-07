@@ -23,10 +23,10 @@ require("autocmds")
 vim.cmd([[nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>]])
 
 -- -- Rewrite these in lua
--- vim.cmd([[
--- command! Today execute 'normal Go<esc>'    | r!date "+\%F (\%a \%b \%d)"
--- command! -nargs=* Now execute 'normal G'   | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
--- ]])
+vim.cmd([[
+command! Today execute 'normal Go<esc>'    | r!date "+\%F (\%a \%b \%d)"
+command! -nargs=* Now execute 'normal G'   | execute 'r!date "+- \%R - "' | execute 'normal! A' . <q-args> . '<esc>'
+]])
 
 require("lazy").setup("plugins", {
   defaults = { lazy = false, version = false },
@@ -39,8 +39,8 @@ require("lazy").setup("plugins", {
         "gzip",
         "matchit",
         "matchparen",
-        "netrw",
-        "netrwPlugin",
+        -- "netrw",
+        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",

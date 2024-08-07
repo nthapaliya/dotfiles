@@ -2,7 +2,6 @@ return {
   -- basic utils
   "tpope/vim-sleuth", -- TODO: Lazy
 
-  { "aymericbeaumet/vim-symlink", dependencies = { "moll/vim-bbye" }, event = "BufRead" },
   { "tpope/vim-fugitive", event = "VeryLazy" },
   { "tpope/vim-repeat", keys = { "." } },
 
@@ -66,5 +65,19 @@ return {
       vim.o.timeoutlen = 500
     end,
     config = true,
+  },
+
+  {
+    "ray-x/go.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 }

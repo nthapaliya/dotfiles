@@ -14,6 +14,8 @@ local autocmds = {
     { event = "FileType", pattern = "markdown", command = "setlocal tabstop=4 sts=4 sw=4 expandtab" },
     { event = "FileType", pattern = "ruby", command = "nnoremap <F5> :!time ruby %<cr>" },
     { event = "FileType", pattern = "rust", command = "nnoremap <F5> :!cargo run<cr>" },
+    { event = "FileType", pattern = "java", command = "nnoremap <F5> :!java %<cr>" },
+    { event = "FileType", pattern = "go", command = "nnoremap <F5> :!go run ." },
     { event = "FileType", pattern = "text", command = [[setlocal spell commentstring=#\ %s textwidth=80]] },
   },
 

@@ -9,7 +9,7 @@ local init = function()
       focusable = false,
       style = "minimal",
       border = "rounded",
-      source = "always",
+      source = true,
       header = "",
       prefix = "",
     },
@@ -55,29 +55,6 @@ M.on_attach(function(_, bufnr)
   nmap("<leader>qf", vim.diagnostic.setqflist, "Set qflist")
 end)
 
-local config = function()
-  require("mason").setup()
-
-  require("mason-lspconfig").setup({
-    ensure_installed = {
-      "lua_ls",
-      "rust_analyzer",
-      "solargraph",
-    },
-  })
-
-  require("neodev").setup()
-  require("fidget").setup()
-
-  local lspconfig = require("lspconfig")
-
-  require("mason-lspconfig").setup_handlers({
-    function(server_name)
-      lspconfig[server_name].setup({})
-    end,
-  })
-end
-
 -- lsp
 return {
   "neovim/nvim-lspconfig",
@@ -90,5 +67,27 @@ return {
   },
   cmd = { "Mason" },
   init = init,
-  config = config,
+  config = function()
+    require("mason").setup()
+
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "lua_ls",
+        "rust_analyzer",
+        "ruby_lsp",
+        -- "shellcheck",
+      },
+    })
+
+    require("neodev").setup()
+    require("fidget").setup()
+
+    local lspconfig = require("lspconfig")
+
+    require("mason-lspconfig").setup_handlers({
+      function(server_name)
+        lspconfig[server_name].setup({})
+      end,
+    })
+  end,
 }
