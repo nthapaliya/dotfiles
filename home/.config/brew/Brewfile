@@ -2,22 +2,30 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# YAML Parser
+brew "libyaml"
+# Library for command-line editing
+brew "readline"
+# Automate deployment, configuration, and upgrading
+brew "ansible"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
-# Library for command-line editing
-brew "readline"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Get, unpack, build, and install modules from CPAN
+brew "cpanminus"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Monitor a directory for changes and run a shell command
+brew "fswatch"
 # Distributed revision control system
 brew "git"
 # GNU implementation of the famous stream editor
@@ -26,6 +34,10 @@ brew "gnu-sed"
 brew "gnu-time"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
+brew "gradle"
 # Generic library support script
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
@@ -34,14 +46,14 @@ brew "graphviz"
 brew "htop"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# YAML Parser
-brew "libyaml"
 # Mac App Store command-line interface
 brew "mas"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
+# Tool for creating identical machine images for multiple platforms
+brew "packer"
 # Shell command parallelization utility
 brew "parallel"
 # Fast C/C++ prime number generator
@@ -66,6 +78,8 @@ brew "yt-dlp"
 cask "appcleaner"
 # E-books management software
 cask "calibre"
+# Voice and text chat software
+cask "discord"
 # Web browser
 cask "firefox"
 cask "font-ibm-plex"
@@ -87,7 +101,7 @@ cask "keepingyouawake"
 cask "kitty"
 # Adaptive brightness for external displays
 cask "lunar"
-# Mesh VPN based on Wireguard
+# Mesh VPN based on WireGuard
 cask "tailscale"
 # Open-source code editor
 cask "visual-studio-code"
@@ -101,7 +115,6 @@ mas "Home Assistant", id: 1099568401
 mas "Keynote", id: 409183694
 mas "Lunatask", id: 1583719331
 mas "Magnet", id: 441258766
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Photomator", id: 1444636541
@@ -109,4 +122,12 @@ mas "Pixelmator Pro", id: 1289583905
 mas "Stecker", id: 6447288587
 mas "Wipr", id: 1320666476
 vscode "eamodio.gitlens"
+vscode "redhat.java"
 vscode "skyapps.fish-vscode"
+vscode "tomoki1207.pdf"
+vscode "visualstudioexptteam.intellicode-api-usage-examples"
+vscode "vscjava.vscode-java-debug"
+vscode "vscjava.vscode-java-dependency"
+vscode "vscjava.vscode-java-pack"
+vscode "vscjava.vscode-java-test"
+vscode "vscjava.vscode-maven"
