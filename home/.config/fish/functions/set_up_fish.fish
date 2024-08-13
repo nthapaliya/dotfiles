@@ -7,10 +7,6 @@ function set_up_fish
 
     fish_config theme choose coolbeans
 
-    if command -sq kitty
-        kitty +kitten themes --config-file-name=theme.conf Catppuccin-Macchiato
-    end
-
     # Setup fish completions
     if command -sq fzf
         eval (dirname (readlink -f (which fzf)))/../install \

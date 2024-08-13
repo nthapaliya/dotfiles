@@ -97,8 +97,6 @@ cask "iterm2"
 cask "jellyfin-media-player"
 # Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
-# GPU-based terminal emulator
-cask "kitty"
 # Adaptive brightness for external displays
 cask "lunar"
 # Mesh VPN based on WireGuard

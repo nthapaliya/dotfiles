@@ -10,7 +10,4 @@ fish_user_key_bindings.fish
 fish_variables
 fzf_key_bindings.fish
 lazy-lock.json
-theme.conf
-theme.conf.bak
-current-theme.conf
 .luarc.json
