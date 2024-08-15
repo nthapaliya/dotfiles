@@ -1,30 +1,6 @@
 return {
   -- colorschemes
   {
-    "folke/tokyonight.nvim",
-    -- priority = 1000,
-    lazy = true,
-    config = function()
-      require("tokyonight").setup({
-        style = "night",
-        styles = {
-          comments = { italic = false },
-          keywords = { italic = false },
-        },
-      })
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
-
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = true,
-    config = function()
-      vim.cmd([[colorscheme kanagawa]])
-    end,
-  },
-
-  {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
@@ -34,6 +10,7 @@ return {
         flavour = "mocha", -- latte, frappe, macchiato, mocha
         no_italic = false, -- Force no italic
         no_bold = false, -- Force no bold
+        -- transparent_background = true,
         styles = {
           comments = { "italic" }, -- TODO Look this up
           conditionals = { "italic" },
@@ -53,6 +30,10 @@ return {
           treesitter = true,
           navic = { enabled = true },
           native_lsp = { enabled = true },
+          mini = {
+            enabled = true,
+            indentscope_color = "",
+          },
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       })

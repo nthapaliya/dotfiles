@@ -82,9 +82,6 @@ cask "calibre"
 cask "discord"
 # Web browser
 cask "firefox"
-cask "font-ibm-plex"
-cask "font-jetbrains-mono"
-cask "font-symbols-only-nerd-font"
 # Git interface focused on visual interaction
 cask "gitup"
 # Web browser
@@ -103,6 +100,8 @@ cask "lunar"
 cask "tailscale"
 # Open-source code editor
 cask "visual-studio-code"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
