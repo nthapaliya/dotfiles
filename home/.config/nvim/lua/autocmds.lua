@@ -3,11 +3,6 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand-- Globals
 
 -- Autocmds
 local autocmds = {
-  -- on_save = {
-  --   -- redundant while we have Formatter plugin
-  --   { event = "BufWritePre", pattern = "", command = ":%s/\\s\\+$//e" },
-  -- },
-
   filetype = {
     { event = "FileType", pattern = "diff", command = [[setlocal commentstring=#\ %s]] },
     { event = "FileType", pattern = "gitcommit", command = [[setlocal spell commentstring=#\ %s textwidth=80]] },
@@ -15,7 +10,7 @@ local autocmds = {
     { event = "FileType", pattern = "ruby", command = "nnoremap <F5> :!time ruby %<cr>" },
     { event = "FileType", pattern = "rust", command = "nnoremap <F5> :!cargo run<cr>" },
     { event = "FileType", pattern = "java", command = "nnoremap <F5> :!java %<cr>" },
-    { event = "FileType", pattern = "go", command = "nnoremap <F5> :!go run ." },
+    { event = "FileType", pattern = "go", command = "nnoremap <F5> :!go run .<cr>" },
     { event = "FileType", pattern = "text", command = [[setlocal spell commentstring=#\ %s textwidth=80]] },
   },
 

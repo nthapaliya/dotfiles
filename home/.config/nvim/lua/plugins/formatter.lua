@@ -1,25 +1,5 @@
 -- slow
 
-M.on_attach(function(client, bufnr)
-  if client.server_capabilities["documentFormattingProvider"] then
-    local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
-    local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
-
-    autocmd("BufWritePre", {
-      group = augroup("setFormatWrite2", { clear = true }),
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({
-          async = false,
-          filter = function(clnt)
-            return clnt.name ~= "lua_ls"
-          end,
-        })
-      end,
-    })
-  end
-end)
-
 return {
   "mhartington/formatter.nvim",
   cmd = { "FormatWrite" },
@@ -28,7 +8,7 @@ return {
     local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
     autocmd("BufWritePost", {
-      group = augroup("setFormatWrite", { clear = true }),
+      group = augroup("SetFormatWrite", { clear = true }),
       pattern = "*",
       command = "FormatWrite",
     })
@@ -39,8 +19,6 @@ return {
         fish = { require("formatter.filetypes.fish").fishindent },
         json = { require("formatter.filetypes.json").jq },
         lua = { require("formatter.filetypes.lua").stylua },
-        javascript = { require("formatter.filetypes.javascript").prettier },
-        rust = { require("formatter.filetypes.rust").rustfmt },
         ruby = { require("formatter.filetypes.ruby").rubocop },
         java = {
           function()
@@ -51,7 +29,7 @@ return {
             }
           end,
         },
-        go = { require("formatter.filetypes.go").gofmt },
+        go = { require("go.format").goimports },
         ["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },
       },
     })
