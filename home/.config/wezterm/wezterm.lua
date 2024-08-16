@@ -113,4 +113,12 @@ wez.on("format-tab-title", function(tab, _, _, localconfig, hover)
 	return helpers.segment(segment)
 end)
 
+config.ssh_domains = {
+	{
+		name = "pi",
+		remote_address = "192.168.1.10",
+		username = "ndthp",
+	},
+}
+
 return config

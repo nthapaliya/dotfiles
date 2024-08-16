@@ -44,7 +44,7 @@ function module.tab_title(tab)
 	local name = tab.active_pane.foreground_process_name
 	local name_clean
 	if #name == 0 then
-		name_clean = string.gsub(tab.active_pane.title, "(%w)( .+)", "%1")
+		name_clean = string.gsub(tab.active_pane.title, "([^%s]+) .+", "%1")
 	else
 		name_clean = module.basename(name)
 	end
@@ -55,9 +55,9 @@ end
 function module.segment(segment)
 	local s = {}
 
-	insert_lsep(s, segment)
+	-- insert_lsep(s, segment)
 	insert_text(s, segment)
-	insert_rsep(s, segment)
+	-- insert_rsep(s, segment)
 
 	return wez.format(s)
 end
@@ -66,15 +66,15 @@ function module.segments(segments)
 	local s = {}
 
 	for i, segment in ipairs(segments) do
-		if i == 1 then
-			insert_lsep(s, segment)
-		end
+		-- if i == 1 then
+		-- 	insert_lsep(s, segment)
+		-- end
 
 		insert_text(s, segment)
 
-		if i == #segments then
-			insert_rsep(s, segment)
-		end
+		-- if i == #segments then
+		-- 	insert_rsep(s, segment)
+		-- end
 	end
 
 	return wez.format(s)
