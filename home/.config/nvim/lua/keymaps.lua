@@ -20,26 +20,8 @@ map("n", "Q", "<nop>")
 map({ "n", "v" }, "q:", "<nop>")
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-
--- https://github.com/mhinz/vim-galore#quickly-move-current-line
--- https://github.com/mhinz/vim-galore#quickly-add-empty-lines
-map("n", "[e", ":<c-u>execute 'move -1-'. v:count1<cr>", { silent = true })
-map("n", "]e", ":<c-u>execute 'move +'. v:count1<cr>", { silent = true })
-map("n", "[<space>", ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>", { silent = true })
-map("n", "]<space>", ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { silent = true })
-
--- map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
--- map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
--- map("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
--- map("n", "<A-k>", ":m .-2<cr>==", { desc = "Move up" })
--- map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
--- map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+map({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 map("n", "gx", function()

@@ -9,26 +9,24 @@ return {
     init = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        auto_install = true,
-        indent = { enable = true },
-        highlight = { enable = true },
-        -- TODO: check this out, remove if I don't end up using it much
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn", -- set to `false` to disable one of the mappings
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-          },
+    opts = {
+      auto_install = true,
+      indent = { enable = true },
+      highlight = { enable = true },
+      -- TODO: check this out, remove if I don't end up using it much
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn", -- set to `false` to disable one of the mappings
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
         },
+      },
 
-        -- Third party mods
-        matchup = { enable = true },
-      })
-    end,
+      -- Third party mods
+      matchup = { enable = true },
+    },
   },
 
   -- TODO: style this so the popup is visually distinct
@@ -51,13 +49,14 @@ return {
       vim.o.foldenable = true
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
     end,
-    config = function()
-      require("ufo").setup({
-        --                  function(bufnr, filetype, buftype)
-        provider_selector = function(_, _, _)
-          return { "treesitter", "indent" }
-        end,
-      })
+    opts = {
+      --                  function(bufnr, filetype, buftype)
+      provider_selector = function(_, _, _)
+        return { "treesitter", "indent" }
+      end,
+    },
+    config = function(opts)
+      require("ufo").setup(opts)
 
       vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "UFO: Open all Folds" })
       vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "UFO: Close all Folds" })

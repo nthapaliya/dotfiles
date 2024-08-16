@@ -42,12 +42,13 @@ function set_uvars
         set -Ux VISUAL $EDITOR
     end
 
+    if command -sq rg
+        set -Ux RIPGREP_CONFIG_PATH "$HOME/.config/rg/config"
+        set -Ux FZF_DEFAULT_COMMAND 'rg --files'
+        set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+    end
+
     if command -sq fd
-        set -Ux FZF_DEFAULT_COMMAND 'fd -H --type file'
-        set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
         set -Ux FZF_ALT_C_COMMAND 'fd -H --type directory'
-    else if command -sq rg
-        set -Ux FZF_DEFAULT_COMMAND 'rg --files --hidden --glob \'!.git\''
-        set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
     end
 end
