@@ -39,6 +39,8 @@ config.show_new_tab_button_in_tab_bar = false -- keep
 config.tab_bar_at_bottom = true
 -- config.show_close_tab_button_in_tabs = false -- not valid yet
 config.use_fancy_tab_bar = false
+-- config.window_background_opacity = 0.9
+-- config.macos_window_background_blur = 30
 
 local darker_grey = "#2e2e2e" -- tab bar background
 local lighter_grey = "#575757" -- inactive tab bar color
@@ -76,19 +78,28 @@ wez.on("update-status", function(window, pane)
 
 	if cwd then
 		local path = helpers.short_cwd(cwd.file_path)
-		table.insert(segments, { text = path, bg_color = lighter_grey, fg_color = white, bar_bg = darker_grey })
+		table.insert(
+			segments,
+			{ intensity = "Bold", text = path, bg_color = lighter_grey, fg_color = white, bar_bg = darker_grey }
+		)
 	end
 
-	table.insert(segments, { text = time, bg_color = lighter_grey, fg_color = offwhite, bar_bg = darker_grey })
+	table.insert(
+		segments,
+		{ intensity = "Normal", text = time, bg_color = lighter_grey, fg_color = offwhite, bar_bg = darker_grey }
+	)
 
 	if cwd and cwd.host and #cwd.host > 0 then
-		table.insert(segments, { text = cwd.host, bg_color = offwhite, fg_color = black, bar_bg = darker_grey })
+		table.insert(
+			segments,
+			{ intensity = "Normal", text = cwd.host, bg_color = offwhite, fg_color = black, bar_bg = darker_grey }
+		)
 	end
 
 	window:set_right_status(helpers.segments(segments))
 end)
 
-wez.on("format-tab-title", function(tab, _, _, localconfig, hover)
+wez.on("format-tab-title", function(tab, _, _, _, hover)
 	local segment = {
 		text = helpers.tab_title(tab),
 		bg_color = lighter_grey,
@@ -96,11 +107,6 @@ wez.on("format-tab-title", function(tab, _, _, localconfig, hover)
 		intensity = "Half",
 		bar_bg = darker_grey,
 	}
-
-	if localconfig.use_fancy_tab_bar then
-		segment.lsep = ""
-		segment.rsep = ""
-	end
 
 	if tab.is_active then
 		segment.bg_color = blue
