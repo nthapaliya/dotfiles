@@ -17,7 +17,7 @@ local init = function()
 
   -- Ref:
   -- https://neovim.io/doc/user/diagnostic.html
-  -- local filled_circle = ""
+  -- local filled_circle = " "
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
   for type, _ in pairs(signs) do
     local hl = "DiagnosticSign" .. type
@@ -57,37 +57,44 @@ end)
 
 -- lsp
 return {
-  "neovim/nvim-lspconfig",
-  event = "BufRead",
-  dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    -- Additional plugins
-    "folke/neodev.nvim",
+  {
+    "neovim/nvim-lspconfig",
+    event = "BufRead",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
+    cmd = { "Mason" },
+    init = init,
+    config = function()
+      require("mason").setup()
+
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls",
+          "rust_analyzer",
+          "ruby_lsp",
+          -- "shellcheck",
+        },
+      })
+
+      local lspconfig = require("lspconfig")
+
+      require("mason-lspconfig").setup_handlers({
+        function(server_name)
+          lspconfig[server_name].setup({})
+        end,
+      })
+    end,
   },
-  cmd = { "Mason" },
-  init = init,
-  config = function()
-    require("mason").setup()
-
-    require("mason-lspconfig").setup({
-      ensure_installed = {
-        "lua_ls",
-        "rust_analyzer",
-        "ruby_lsp",
-        -- "shellcheck",
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
       },
-    })
-
-    require("neodev").setup()
-    require("fidget").setup()
-
-    local lspconfig = require("lspconfig")
-
-    require("mason-lspconfig").setup_handlers({
-      function(server_name)
-        lspconfig[server_name].setup({})
-      end,
-    })
-  end,
+    },
+  },
+  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 }

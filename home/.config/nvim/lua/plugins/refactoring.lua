@@ -8,7 +8,7 @@ return {
     {
       "<leader>rf",
       function()
-        require("refactoring").select_refactor()
+        require("refactoring").select_refactor({})
       end,
       mode = "v",
       noremap = true,
@@ -17,5 +17,5 @@ return {
       desc = "refactoring: Select refactor",
     },
   },
-  config = true,
+  opts = {},
 }
