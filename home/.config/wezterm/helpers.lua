@@ -67,9 +67,9 @@ end
 function module.segment(segment)
 	local s = {}
 
-	-- insert_lsep(s, segment)
+	insert_lsep(s, segment)
 	insert_text(s, segment)
-	-- insert_rsep(s, segment)
+	insert_rsep(s, segment)
 
 	return wez.format(s)
 end
@@ -78,15 +78,15 @@ function module.segments(segments)
 	local s = {}
 
 	for i, segment in ipairs(segments) do
-		-- if i == 1 then
-		-- 	insert_lsep(s, segment)
-		-- end
+		if i == 1 then
+			insert_lsep(s, segment)
+		end
 
 		insert_text(s, segment)
 
-		-- if i == #segments then
-		-- 	insert_rsep(s, segment)
-		-- end
+		if i == #segments then
+			insert_rsep(s, segment)
+		end
 	end
 
 	return wez.format(s)
