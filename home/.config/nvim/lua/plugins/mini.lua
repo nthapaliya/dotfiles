@@ -90,7 +90,6 @@ return {
     "echasnovski/mini.misc",
     config = function()
       require("mini.misc").setup()
-      MiniMisc.setup_termbg_sync()
       MiniMisc.setup_restore_cursor()
     end,
   },
