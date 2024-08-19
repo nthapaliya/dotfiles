@@ -3,18 +3,19 @@
 # vim: set ft=ruby:
 
 IRB.conf[:SAVE_HISTORY] = 1000
-IRB.conf[:HISTORY_FILE] = File.join(Dir.home, '.local', 'share', 'irb', 'history')
+IRB.conf[:HISTORY_FILE] = File.join(Dir.home, ".local", "share", "irb", "history")
 IRB.conf[:USE_AUTOCOMPLETE] = false
-IRB.conf[:COMPLETOR] = :type # default is :regexp
+# default is :regexp
+IRB.conf[:COMPLETOR] = :type
 
 def pbcopy(input)
   str = input.to_s
-  IO.popen('pbcopy', 'w') { |f| f << str }
+  IO.popen("pbcopy", "w") { |f| f << str }
 end
 
 def clear
-  printf "\e[2J"
-  printf "\e[1;1H"
+  printf("\e[2J")
+  printf("\e[1;1H")
 end
 
 def cls
@@ -25,34 +26,45 @@ def cls
 end
 
 def reload
-  puts "reloading #{__FILE__}"
-  load __FILE__
+  puts("reloading #{__FILE__}")
+  load(__FILE__)
   true
 end
 
-require 'tempfile'
-require 'prime'
+require "tempfile"
+require "prime"
 
 REJECTED_KEYWORDS = [
-  '',
-  'exit'
+  "",
+  "exit"
 ].freeze
 
 def filtered_history
-  Reline::HISTORY.reject { |s| REJECTED_KEYWORDS.include?(s) }
-                 .reverse
-                 .uniq
+  Reline::HISTORY
+    .reject { |s| REJECTED_KEYWORDS.include?(s) }
+    .reverse
+    .uniq
 end
 
-def fzf_history(line = '')
-  Tempfile.open('histfile') do |tempfile|
+def fzf_history(line = "")
+  Tempfile.open("histfile") do |tempfile|
     tempfile.write(filtered_history.join(0.chr))
     tempfile.close
 
-    query = ['<', tempfile.path, 'fzf', "--query='#{line}'",
-             '--read0', '--no-hscroll', '--preview', "'echo {}'",
-             '--preview-window', 'up:3:hidden:wrap',
-             '--bind', '?:toggle-preview'].join(' ')
+    query = [
+      "<",
+      tempfile.path,
+      "fzf",
+      "--query='#{line}'",
+      "--read0",
+      "--no-hscroll",
+      "--preview",
+      "'echo {}'",
+      "--preview-window",
+      "up:3:hidden:wrap",
+      "--bind",
+      "?:toggle-preview"
+    ].join(" ")
 
     hist = `#{query}`
     return hist.empty? ? line : hist
