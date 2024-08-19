@@ -19,28 +19,6 @@ local autocmds = {
     -- Don't auto comment new lines
     -- { event = "BufEnter", pattern = "", command = "set fo-=c fo-=r fo-=o" },
   },
-
-  terminal = {
-    {
-      event = "TermOpen",
-      pattern = "term://*",
-      callback = function()
-        vim.cmd([[setlocal nonumber norelativenumber]])
-        vim.cmd([[startinsert]])
-        vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
-        vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
-        vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]])
-        vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]])
-        vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
-      end,
-    },
-    {
-      event = { "BufWinEnter", "WinEnter" },
-      pattern = "term://*",
-      command = "startinsert",
-    },
-    { event = "BufLeave", pattern = "term://*", command = "stopinsert" },
-  },
 }
 
 for group_name, definitions in pairs(autocmds) do

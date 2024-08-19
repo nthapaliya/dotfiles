@@ -57,44 +57,32 @@ end)
 
 -- lsp
 return {
-  {
-    "neovim/nvim-lspconfig",
-    event = "BufRead",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
-    cmd = { "Mason" },
-    init = init,
-    config = function()
-      require("mason").setup()
-
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "rust_analyzer",
-          "ruby_lsp",
-          -- "shellcheck",
-        },
-      })
-
-      local lspconfig = require("lspconfig")
-
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          lspconfig[server_name].setup({})
-        end,
-      })
-    end,
+  "neovim/nvim-lspconfig",
+  event = "BufRead",
+  dependencies = {
+    { "williamboman/mason.nvim", opts = {} },
+    "williamboman/mason-lspconfig.nvim",
   },
-  {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    opts = {
-      library = {
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
+  cmd = { "Mason" },
+  init = init,
+  config = function()
+    -- require("mason").setup()
+
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "lua_ls",
+        "rust_analyzer",
+        "ruby_lsp",
+        -- "shellcheck",
       },
-    },
-  },
-  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+    })
+
+    local lspconfig = require("lspconfig")
+
+    require("mason-lspconfig").setup_handlers({
+      function(server_name)
+        lspconfig[server_name].setup({})
+      end,
+    })
+  end,
 }

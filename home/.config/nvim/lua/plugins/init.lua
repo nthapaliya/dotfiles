@@ -7,9 +7,7 @@ return {
 
   {
     "mrjones2014/smart-splits.nvim",
-    keys = { "<A-h>", "<A-j>", "<A-k>", "<A-l>", "<C-h>", "<C-j>", "<C-k>", "<C-l>" },
-    config = function()
-      require("smart-splits").setup()
+    init = function()
       vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
       vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
       vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
@@ -19,16 +17,7 @@ return {
       vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
       vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
     end,
-  },
-
-  {
-    "stevearc/oil.nvim",
     opts = {},
-    keys = { {
-      "-",
-      "<cmd>Oil --float<cr>",
-      desc = "oil.nvim: Open parent directory",
-    } },
   },
 
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
@@ -64,4 +53,14 @@ return {
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 }

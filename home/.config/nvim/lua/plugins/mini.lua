@@ -71,13 +71,20 @@ return {
   },
   {
     "echasnovski/mini.notify",
-    opts = { window = { config = { anchor = "SE", row = vim.o.lines - 2 } } },
     event = "VeryLazy",
+    config = function()
+      local opts = { window = { config = { anchor = "SE", row = vim.o.lines - 2 } } }
+      require("mini.notify").setup(opts)
+      vim.notify = require("mini.notify").make_notify()
+    end,
   },
   {
     "echasnovski/mini.align",
     opts = { mappings = { start = "gl", start_with_preview = "gL" } },
-    keys = { "gl", "gL" },
+    keys = {
+      { mode = { "n", "v" }, "gl" },
+      { mode = { "n", "v" }, "gL" },
+    },
   },
   {
     "echasnovski/mini.misc",
@@ -90,7 +97,7 @@ return {
   {
     "echasnovski/mini.pick",
     cmd = { "Rg" },
-    keys = { "<C-t>" },
+    keys = { "<C-t>", "<leader>t" },
     config = function()
       require("mini.pick").setup({
         window = {
@@ -109,6 +116,11 @@ return {
       })
 
       vim.keymap.set("n", "<C-t>", MiniPick.builtin.files, { silent = true })
+      vim.keymap.set("n", "<leader>td", MiniExtra.pickers.diagnostic, { silent = true })
+      vim.keymap.set("n", "<leader>tg", function()
+        MiniExtra.pickers.git_files({ scope = "modified" })
+      end, { silent = true })
+
       vim.api.nvim_create_user_command("Rg", function(o)
         MiniPick.builtin.grep({ pattern = o.args })
       end, { nargs = "*" })
@@ -139,4 +151,13 @@ return {
     --   vim.keymap.set("n", "yss", "ys_", { remap = true })
     -- end,
   },
+  {
+    "echasnovski/mini.files",
+    config = function()
+      require("mini.files").setup()
+      vim.keymap.set("n", "-", MiniFiles.open)
+      -- pass
+    end,
+  },
+  { "echasnovski/mini.nvim", lazy = true },
 }
