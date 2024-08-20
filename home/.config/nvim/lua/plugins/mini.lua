@@ -35,28 +35,12 @@ return {
   {
     "echasnovski/mini.tabline",
     event = "VeryLazy",
-    config = function()
-      require("mini.tabline").setup({
-        format = function(buf_id, label)
-          local suffix = vim.bo[buf_id].modified and " " or ""
-          return MiniTabline.default_format(buf_id, label) .. suffix
-        end,
-      })
-
-      local colors = require("catppuccin.palettes").get_palette("mocha")
-      local active = { bg = colors.blue, fg = colors.crust, bold = true }
-      local inactive = { bg = colors.surface1, fg = colors.subtext2 }
-
-      vim.api.nvim_set_hl(0, "MiniTablineCurrent", active)
-      vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", active)
-
-      vim.api.nvim_set_hl(0, "MiniTablineHidden", inactive)
-      vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", inactive)
-      vim.api.nvim_set_hl(0, "MiniTablineModifiedVisible", inactive)
-      vim.api.nvim_set_hl(0, "MiniTablineVisible", inactive)
-
-      vim.api.nvim_set_hl(0, "MiniTablineFill", { bg = colors.mantle, fg = colors.mantle })
-    end,
+    opts = {
+      format = function(buf_id, label)
+        local suffix = vim.bo[buf_id].modified and " " or ""
+        return MiniTabline.default_format(buf_id, label) .. suffix
+      end,
+    },
   },
   {
     "echasnovski/mini.notify",
