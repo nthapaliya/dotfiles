@@ -60,13 +60,6 @@ return {
     },
   },
   {
-    "echasnovski/mini.misc",
-    config = function()
-      require("mini.misc").setup()
-      MiniMisc.setup_restore_cursor()
-    end,
-  },
-  {
     "echasnovski/mini.pick",
     cmd = { "Rg" },
     keys = {
@@ -129,13 +122,19 @@ return {
   },
   {
     "echasnovski/mini.files",
-    config = function()
-      require("mini.files").setup()
+    opts = {},
+    init = function()
       vim.keymap.set("n", "-", function()
-        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-      end)
-      -- pass
+        require("mini.files").open(vim.api.nvim_buf_get_name(0), false)
+      end, { desc = "MiniFiles: explore current directory" })
     end,
   },
+
+  {
+    "echasnovski/mini.misc",
+    lazy = true,
+    opts = {},
+  },
+
   { "echasnovski/mini.nvim", lazy = true },
 }
