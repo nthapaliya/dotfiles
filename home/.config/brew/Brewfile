@@ -14,6 +14,8 @@ brew "ansible"
 brew "atuin"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
+# Cross-platform make
+brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get, unpack, build, and install modules from CPAN
@@ -74,6 +76,8 @@ brew "universal-ctags"
 brew "wget"
 # Feature-rich command-line audio/video downloader
 brew "yt-dlp"
+# Programming language designed for robustness, optimality, and clarity
+brew "zig"
 # Application uninstaller
 cask "appcleaner"
 # E-books management software
@@ -123,6 +127,7 @@ vscode "redhat.java"
 vscode "skyapps.fish-vscode"
 vscode "tomoki1207.pdf"
 vscode "visualstudioexptteam.intellicode-api-usage-examples"
+vscode "vscjava.vscode-gradle"
 vscode "vscjava.vscode-java-debug"
 vscode "vscjava.vscode-java-dependency"
 vscode "vscjava.vscode-java-pack"
