@@ -26,7 +26,6 @@ return {
         treesitter = true,
         treesitter_context = true,
         which_key = true,
-        ufo = true,
         native_lsp = {
           enabled = true,
           virtual_text = {
@@ -111,29 +110,6 @@ return {
     },
   },
   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
-    event = "BufRead",
-    init = function()
-      vim.o.foldcolumn = "0"
-      vim.o.foldlevel = 99
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-    end,
-    config = function()
-      require("ufo").setup({
-        --                  function(bufnr, filetype, buftype)
-        provider_selector = function(_, _, _)
-          return { "treesitter", "indent" }
-        end,
-      })
-
-      vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "UFO: Open all Folds" })
-      vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "UFO: Close all Folds" })
-    end,
-  },
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufRead",

@@ -113,12 +113,6 @@ return {
       },
       search_method = "cover_or_next",
     },
-    -- config = function(opts)
-    --   require("mini.surround").setup(opts)
-    --   vim.keymap.del("x", "ys")
-    --   vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
-    --   vim.keymap.set("n", "yss", "ys_", { remap = true })
-    -- end,
   },
   {
     "echasnovski/mini.files",

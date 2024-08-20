@@ -28,3 +28,15 @@ vim.opt.tabstop = 2
 -- vim.opt.updatetime = 100
 -- vim.opt.visualbell = true
 vim.opt.wrap = true -- Wrap = false causes the trackpad to scroll horizontally on my laptop
+
+vim.o.foldenable = true
+
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+vim.o.foldcolumn = "0"
+vim.o.foldlevelstart = 99
+vim.o.foldlevel = 99
+
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.foldtext = ""
