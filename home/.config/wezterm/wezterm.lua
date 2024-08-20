@@ -27,6 +27,9 @@ config.scrollback_lines = 10000
 config.native_macos_fullscreen_mode = true
 config.window_close_confirmation = "AlwaysPrompt"
 config.window_decorations = "RESIZE"
+-- config.integrated_title_button_style = "Windows"
+-- config.integrated_title_button_alignment = "Left"
+-- config.integrated_title_button_color = "Auto"
 
 config.set_environment_variables = {
 	PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
@@ -41,6 +44,7 @@ config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 -- config.window_background_opacity = 0.9
 -- config.macos_window_background_blur = 30
+config.swallow_mouse_click_on_pane_focus = true
 
 local darker_grey = "#2e2e2e" -- tab bar background
 local lighter_grey = "#575757" -- inactive tab bar color
@@ -56,7 +60,6 @@ tab_bar.setup({
 
 config.window_frame = {
 	font = wez.font(font),
-	font_size = 12.0,
 	active_titlebar_bg = darker_grey,
 	inactive_titlebar_bg = darker_grey,
 }

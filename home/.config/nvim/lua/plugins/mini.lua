@@ -7,6 +7,7 @@ return {
   { "echasnovski/mini.icons", opts = {}, event = "VeryLazy" },
   { "echasnovski/mini.splitjoin", opts = {}, keys = { "gS" } },
   { "echasnovski/mini.statusline", opts = {}, event = "VeryLazy" },
+  { "echasnovski/mini.ai", opts = {}, event = "VeryLazy" },
   {
     "echasnovski/mini.diff",
     event = "VeryLazy",
@@ -18,29 +19,18 @@ return {
       mappings = {
         apply = "<leader>hs",
         reset = "<leader>hu",
-        textobject = "gh",
+        -- textobject = "gh",
+        goto_first = "[C",
         goto_prev = "[c",
         goto_next = "]c",
+        goto_last = "]C",
       },
     },
   },
   {
     "echasnovski/mini.indentscope",
     event = "VeryLazy",
-    config = function()
-      require("mini.indentscope").setup({
-        symbol = "│",
-        draw = {
-          delay = 100,
-          animation = function()
-            return 10
-          end,
-        },
-      })
-
-      local colors = require("catppuccin.palettes").get_palette("mocha")
-      vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = colors.surface1 })
-    end,
+    opts = { symbol = "│" },
   },
   {
     "echasnovski/mini.tabline",
@@ -54,7 +44,6 @@ return {
       })
 
       local colors = require("catppuccin.palettes").get_palette("mocha")
-      -- mini.tabline
       local active = { bg = colors.blue, fg = colors.crust, bold = true }
       local inactive = { bg = colors.surface1, fg = colors.subtext2 }
 
@@ -96,7 +85,11 @@ return {
   {
     "echasnovski/mini.pick",
     cmd = { "Rg" },
-    keys = { "<C-t>", "<leader>t" },
+    keys = {
+      { "<C-t>", desc = "Open file picker" },
+      { "<leader>td", desc = "Open diagnostic picker" },
+      { "<leader>tg", desc = "Open git_files (modified) picker" },
+    },
     config = function()
       require("mini.pick").setup({
         window = {
@@ -154,7 +147,9 @@ return {
     "echasnovski/mini.files",
     config = function()
       require("mini.files").setup()
-      vim.keymap.set("n", "-", MiniFiles.open)
+      vim.keymap.set("n", "-", function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+      end)
       -- pass
     end,
   },

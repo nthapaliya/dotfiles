@@ -5,12 +5,10 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 map("n", "<leader>W", [[:%s/\s\+$<cr>]])
 map("n", "<leader>ev", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
 map("n", "<leader>d", ":cd ~/Projects/dotfiles<cr>")
-map("n", "<leader>p", ":bp<cr>")
-map("n", "<leader>n", ":bn<cr>")
+map("n", "<C-p>", ":bp<cr>", { desc = "Prev buffer" })
+map("n", "<C-n>", ":bn<cr>", { desc = "Next buffer" })
 map("c", "w!!", "w !sudo tee % >/dev/null")
 map("i", "jk", "<esc>")
--- map("n", "<leader>ep", ":execute 'e ' . resolve(expand($MYVIMRC))<cr>")
--- map("n", "<leader>sv", ":source $MYVIMRC<cr>")
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -56,4 +54,4 @@ map("n", "gx", function()
   end
 
   open(vim.fn.expand("<cfile>"))
-end)
+end, { desc = "Open short style urls in Github" })
