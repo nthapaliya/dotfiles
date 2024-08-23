@@ -45,10 +45,9 @@ local init = function()
       nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
       nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 
-      -- These three seem to be default?
-      -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-      -- nmap("]d", vim.diagnostic.goto_next, "Jump to next diagnostic")
-      -- nmap("[d", vim.diagnostic.goto_prev, "Jump to prev diagnostic")
+      nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+      nmap("]d", vim.diagnostic.goto_next, "Jump to next diagnostic")
+      nmap("[d", vim.diagnostic.goto_prev, "Jump to prev diagnostic")
       nmap("<leader>qf", vim.diagnostic.setqflist, "Set qflist")
     end,
   })
@@ -62,7 +61,6 @@ return {
     config = function()
       require("mason")
       local mason_lspconfig = require("mason-lspconfig")
-
       local lspconfig = require("lspconfig")
 
       mason_lspconfig.setup_handlers({
