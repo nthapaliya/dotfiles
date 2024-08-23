@@ -1,12 +1,9 @@
 [misc]
 disable = [
-  "emacs",
   "git_repos",
-  "mas",
   "node",
   "pnpm",
   "system",
-  "vim",
 ]
 assume_yes = true
 no_retry = true
@@ -14,7 +11,6 @@ cleanup = true
 
 [commands]
 "done.fish" = "cd ~/Projects/dotfiles/home/.config/fish/conf.d/; curl --silent -L --remote-name https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish"
-"plug.vim" = "cd ~/Projects/dotfiles/home/.vim/autoload/; curl --silent -L --remote-name https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
 [brew]
 autoremove = true
