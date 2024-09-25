@@ -1,7 +1,6 @@
 [user]
 	name = Niraj Thapaliya
 	email = nthapaliya@users.noreply.github.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOkdkJmlbjO5eidzND0RjD19xO2qRpdW8iZYh3MBQMVZ
 [push]
 	default = simple
 	followTags = true
@@ -34,7 +33,6 @@
 	colormoved = default
 [commit]
 	verbose = true
-	gpgsign = true
 [rebase]
 	autosquash = true
 [protocol]
@@ -52,7 +50,3 @@
 	defaultBranch = main
 [advice]
 	addEmptyPathspec = false
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
