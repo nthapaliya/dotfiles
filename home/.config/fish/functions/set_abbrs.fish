@@ -15,4 +15,8 @@ function set_abbrs
     abbr -a -- htree 'tree -a -I plugged\|\.git'
     abbr -a -- lsd 'ls -d .*'
     abbr -a -- p 'cd ~/Projects'
+    abbr -a -- e 'cd ~/Projects/euler'
+
+    abbr -a -- mm micromamba
+    abbr -a -- dl 'cd ~/Projects/courses/csci-e89'
 end
