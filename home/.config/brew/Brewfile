@@ -22,6 +22,8 @@ brew "coreutils"
 brew "cpanminus"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Load/unload environment variables based on $PWD
+brew "direnv"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
@@ -48,8 +50,8 @@ brew "graphviz"
 brew "htop"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Mac App Store command-line interface
-brew "mas"
+# Fast Cross-Platform Package Manager
+brew "micromamba"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
@@ -108,21 +110,15 @@ cask "visual-studio-code"
 cask "wezterm"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "1Password for Safari", id: 1569813296
-mas "DaisyDisk", id: 411643860
-mas "Day One", id: 1055511498
-mas "Hidden Bar", id: 1452453066
-mas "Home Assistant", id: 1099568401
-mas "Keynote", id: 409183694
-mas "Lunatask", id: 1583719331
-mas "Magnet", id: 441258766
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Photomator", id: 1444636541
-mas "Pixelmator Pro", id: 1289583905
-mas "Stecker", id: 6447288587
-mas "Wipr", id: 1320666476
 vscode "eamodio.gitlens"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
 vscode "redhat.java"
 vscode "skyapps.fish-vscode"
 vscode "tomoki1207.pdf"
