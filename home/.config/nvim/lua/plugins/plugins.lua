@@ -8,4 +8,5 @@ return {
 
   -- buffers
   { "numToStr/BufOnly.nvim", cmd = "BufOnly" },
+  { "GCBallesteros/jupytext.nvim", config = true },
 }

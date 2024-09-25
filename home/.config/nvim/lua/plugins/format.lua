@@ -24,6 +24,7 @@ return {
       lua = { "stylua" },
       ruby = { "rubyfmt" },
       rust = { "rustfmt" },
+      -- python = { "black" },
       ["*"] = { "trim_newlines", "trim_whitespace" },
     },
     default_format_opts = { lsp_format = "fallback" },
