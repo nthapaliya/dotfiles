@@ -56,6 +56,8 @@ brew "micromamba"
 brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
+# Platform built on V8 to build network applications
+brew "node"
 # Tool for creating identical machine images for multiple platforms
 brew "packer"
 # Shell command parallelization utility
