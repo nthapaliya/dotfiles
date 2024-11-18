@@ -18,8 +18,6 @@ return {
   opts = {
     formatters_by_ft = {
       fish = { "fish_indent", "shellcheck" },
-      go = { "goimports" },
-      java = { "google-java-format" },
       json = { "jq" },
       lua = { "stylua" },
       ruby = { "rubyfmt" },

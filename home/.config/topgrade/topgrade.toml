@@ -4,6 +4,7 @@ disable = [
   "node",
   "pnpm",
   "system",
+  "tlmgr",
 ]
 assume_yes = true
 no_retry = true
