@@ -1,0 +1,6 @@
+theme = catppuccin-mocha
+
+window-padding-x=5
+window-padding-y=0,2
+
+command=/opt/homebrew/bin/tmux new-session -A -s 0
