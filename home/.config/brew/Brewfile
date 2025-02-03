@@ -2,18 +2,14 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
-# YAML Parser
-brew "libyaml"
-# Library for command-line editing
-brew "readline"
-# Automate deployment, configuration, and upgrading
-brew "ansible"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Library for command-line editing
+brew "readline"
 # Cross-platform make
 brew "cmake"
 # GNU File, Shell, and Text utilities
@@ -38,10 +34,6 @@ brew "gnu-sed"
 brew "gnu-time"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
-# Open source programming language to build simple/reliable/efficient software
-brew "go"
-# Open-source build automation tool based on the Groovy and Kotlin DSL
-brew "gradle"
 # Generic library support script
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
@@ -50,6 +42,8 @@ brew "graphviz"
 brew "htop"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# YAML Parser
+brew "libyaml"
 # Fast Cross-Platform Package Manager
 brew "micromamba"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -58,8 +52,8 @@ brew "neovim"
 brew "nmap"
 # Platform built on V8 to build network applications
 brew "node"
-# Tool for creating identical machine images for multiple platforms
-brew "packer"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
 # Fast C/C++ prime number generator
@@ -90,6 +84,8 @@ cask "calibre"
 cask "discord"
 # Web browser
 cask "firefox"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Git interface focused on visual interaction
 cask "gitup"
 # Web browser
@@ -108,26 +104,5 @@ cask "lunar"
 cask "tailscale"
 # Open-source code editor
 cask "visual-studio-code"
-# GPU-accelerated cross-platform terminal emulator and multiplexer
-cask "wezterm"
 # Video communication and virtual meeting platform
 cask "zoom"
-vscode "eamodio.gitlens"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "redhat.java"
-vscode "skyapps.fish-vscode"
-vscode "tomoki1207.pdf"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "vscjava.vscode-gradle"
-vscode "vscjava.vscode-java-debug"
-vscode "vscjava.vscode-java-dependency"
-vscode "vscjava.vscode-java-pack"
-vscode "vscjava.vscode-java-test"
-vscode "vscjava.vscode-maven"

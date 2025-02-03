@@ -2,7 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   event = "BufRead",
   dependencies = {
-    { "nvim-treesitter/nvim-treesitter-context", opts = {} },
+    -- { "nvim-treesitter/nvim-treesitter-context", opts = {} },
     {
       "andymass/vim-matchup",
       init = function()
