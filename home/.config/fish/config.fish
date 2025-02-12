@@ -12,6 +12,10 @@ end
 
 # set -gx NODE_OPTIONS --openssl-legacy-provider
 
+if command -sq fzf
+    fzf --fish | source
+end
+
 if command -sq direnv
     direnv hook fish | source
 end

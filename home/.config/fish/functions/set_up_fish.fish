@@ -6,13 +6,4 @@ function set_up_fish
     set_uvars
 
     fish_config theme choose coolbeans
-
-    # Setup fish completions
-    if command -sq fzf
-        eval (dirname (readlink -f (which fzf)))/../install \
-            --no-completion \
-            --no-update-rc \
-            --key-bindings \
-            --no-zsh
-    end
 end

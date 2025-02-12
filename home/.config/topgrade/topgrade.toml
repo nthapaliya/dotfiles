@@ -10,8 +10,5 @@ assume_yes = true
 no_retry = true
 cleanup = true
 
-[commands]
-"done.fish" = "cd ~/Projects/dotfiles/home/.config/fish/conf.d/; curl --silent -L --remote-name https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish"
-
 [brew]
 autoremove = true
