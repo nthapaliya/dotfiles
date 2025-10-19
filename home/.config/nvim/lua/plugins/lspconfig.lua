@@ -58,18 +58,13 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufRead",
     init = init,
-    config = function()
-      require("mason")
-      local mason_lspconfig = require("mason-lspconfig")
-      local lspconfig = require("lspconfig")
-
-      mason_lspconfig.setup_handlers({
-        function(server_name)
-          lspconfig[server_name].setup({})
-        end,
-      })
-    end,
   },
-  { "williamboman/mason.nvim", opts = {}, lazy = true, cmd = { "Mason" } },
-  { "williamboman/mason-lspconfig.nvim", opts = {}, lazy = true },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
+  },
 }

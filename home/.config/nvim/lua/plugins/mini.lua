@@ -119,11 +119,10 @@ return {
     opts = {},
     init = function()
       vim.keymap.set("n", "-", function()
-        require("mini.files").open(vim.api.nvim_buf_get_name(0), false)
+        MiniFiles.open()
       end, { desc = "MiniFiles: explore current directory" })
     end,
   },
-
   {
     "echasnovski/mini.misc",
     lazy = true,

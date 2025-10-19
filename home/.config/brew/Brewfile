@@ -1,21 +1,20 @@
 tap "hashicorp/tap"
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 tap "homebrew/services"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
-# Bourne-Again SHell, a UNIX command interpreter
-brew "bash"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
 # Library for command-line editing
 brew "readline"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
 # Cross-platform make
 brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get, unpack, build, and install modules from CPAN
 brew "cpanminus"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Load/unload environment variables based on $PWD
@@ -26,6 +25,8 @@ brew "ffmpeg"
 brew "fish"
 # Monitor a directory for changes and run a shell command
 brew "fswatch"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # GNU implementation of the famous stream editor
@@ -46,6 +47,8 @@ brew "jq"
 brew "libyaml"
 # Fast Cross-Platform Package Manager
 brew "micromamba"
+# Open source relational database management system
+brew "mysql"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
@@ -56,6 +59,8 @@ brew "node"
 brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
 # Fast C/C++ prime number generator
 brew "primesieve"
 # Monitor data's progress through a pipe
@@ -87,22 +92,22 @@ cask "firefox"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Git interface focused on visual interaction
-cask "gitup"
+cask "gitup-app"
 # Web browser
 cask "google-chrome"
 # Free and open-source media player
 cask "iina"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
 # Jellyfin desktop client
 cask "jellyfin-media-player"
 # Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
-# Adaptive brightness for external displays
-cask "lunar"
 # Mesh VPN based on WireGuard
-cask "tailscale"
+cask "tailscale-app"
 # Open-source code editor
 cask "visual-studio-code"
 # Video communication and virtual meeting platform
 cask "zoom"
+vscode "mechatroner.rainbow-csv"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
