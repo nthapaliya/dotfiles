@@ -1,6 +1,8 @@
 [misc]
 disable = [
+  "asdf",
   "git_repos",
+  "mamba",
   "node",
   "pnpm",
   "system",

@@ -14,7 +14,7 @@ hash stow 2>/dev/null || {
 
 stow_arguments=""
 while read -r arg; do
-  a="--ignore=$arg"
+  a="--ignore=$arg "
   stow_arguments="$stow_arguments$a"
 done < <(grep -v '^\# ' .gitignore | grep -v -e '^$')
 
