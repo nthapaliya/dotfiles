@@ -1,1 +1,0 @@
-path+=("/opt/homebrew/bin")

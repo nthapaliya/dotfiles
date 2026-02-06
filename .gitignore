@@ -11,3 +11,6 @@ fish_variables
 fzf_key_bindings.fish
 lazy-lock.json
 .luarc.json
+home/.local/*
+home/.vim/plugged
+home/.vim/autoload
