@@ -1,8 +1,10 @@
 if not set -q fish_vars_set
-    echo It looks like fish has not been set up yet, run:
-    echo \$ set_up_fish
-    echo to finish up initializing colors and universal vars.
+    echo Setting up for the first time!
+    set -U fish_vars_set 1
+    set_uvars
+    fish_config theme choose coolbeans
 end
+
 set_abbrs
 
 if command -sq atuin

@@ -9,7 +9,7 @@ function set_uvars
 
     set -e fish_user_paths
     fish_add_path ~/.local/bin
-    fish_add_path ~/go/bin # TODO: add this to .local
+    # fish_add_path ~/go/bin # TODO: add this to .local
 
     if test Darwin = (uname)
         # -a so it's AFTER ~/.local/bin
