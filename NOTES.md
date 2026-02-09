@@ -16,3 +16,4 @@ $ cat /etc/shells # to check if fish is already listed
 $ echo $(which fish) | sudo tee -a /etc/shells
 $ sudo chsh -s $(which fish) $(whoami)
 $ sudo reboot now # not sure if really needed
+```
