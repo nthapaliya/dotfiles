@@ -17,6 +17,5 @@ function set_abbrs
     abbr -a -- p 'cd ~/Projects'
     abbr -a -- e 'cd ~/Projects/euler'
 
-    abbr -a -- mm micromamba
-    abbr -a -- dl 'cd ~/Projects/courses/csci-e89'
+    abbr -a -- open xdg-open
 end

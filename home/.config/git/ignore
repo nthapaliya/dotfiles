@@ -45,3 +45,5 @@ fishd.*
 tags
 tags.lock
 tags.temp
+
+.ipynb_checkpoints
