@@ -1,18 +1,15 @@
-# set_uvars
+# Essentials:
+
 # fish_config theme choose coolbeans
+fish_add_path ~/.local/bin
+set -U fish_greeting
+set -gx SHELL fish
 set_abbrs
 
+# Command specific:
 if command -sq atuin
     # atuin init fish --disable-up-arrow --disable-ctrl-r | source
     atuin init fish --disable-up-arrow | source
-end
-
-if command -sq fzf
-    fzf --fish | source
-end
-
-if command -sq direnv
-    direnv hook fish | source
 end
 
 if command -sq zoxide
@@ -38,6 +35,11 @@ if command -sq fd
     set -gx FZF_ALT_C_COMMAND 'fd -H --type directory'
 end
 
+if command -sq fzf
+    fzf --fish | source
+end
+
+# OS Specific
 if test Darwin = (uname)
     fish_add_path -a /opt/homebrew/bin
 
@@ -45,7 +47,4 @@ if test Darwin = (uname)
     set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 end
 
-fish_add_path ~/.local/bin
-set -e fish_greeting
-set -gx SHELL fish
 # set -gx NODE_OPTIONS --openssl-legacy-provider
