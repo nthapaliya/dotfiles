@@ -5,5 +5,5 @@ function set_up_fish
 
     set_uvars
 
-    fish_config theme choose coolbeans
+    # fish_config theme choose coolbeans
 end
