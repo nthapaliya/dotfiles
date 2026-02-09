@@ -20,7 +20,7 @@ if command -sq zoxide
     eval "$(zoxide init fish --cmd cd)"
 end
 
-fish_config theme choose dracula
+fish_config theme choose coolbeans
 
 set -gx SHELL fish
 
