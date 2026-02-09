@@ -3,15 +3,13 @@ function dns
     set -l adguard '192.168.1.10'
 
     switch $argv[1]
-        case open
-            sudo networksetup -setdnsservers Wi-Fi $cloudfare
-        case adguard
-            sudo networksetup -setdnsservers Wi-Fi $adguard
+        case opnsense
+            sudo networksetup -setdnsservers Wi-Fi 192.168.19.1
         case clear
             sudo networksetup -setdnsservers Wi-Fi empty
     end
 
     echo 'dns set to:'
     networksetup -getdnsservers Wi-Fi
-    echo options are `open`, `adguard` and `clear`
+    echo options are `opnsense` and `clear`
 end

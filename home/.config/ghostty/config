@@ -6,3 +6,4 @@ window-padding-y=0,2
 command=/opt/homebrew/bin/tmux new-session -A -s 0
 
 confirm-close-surface = false
+shell-integration-features = ssh-terminfo,ssh-env
