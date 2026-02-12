@@ -17,5 +17,7 @@ function set_abbrs
     abbr -a -- p 'cd ~/Projects'
     abbr -a -- e 'cd ~/Projects/euler'
 
-    abbr -a -- open xdg-open
+    if test (uname) = Linux
+        abbr -a -- open xdg-open
+    end
 end
