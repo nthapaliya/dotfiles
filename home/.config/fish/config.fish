@@ -12,10 +12,6 @@ if command -sq atuin
     atuin init fish --disable-up-arrow | source
 end
 
-if command -sq zoxide
-    eval "$(zoxide init fish --cmd cd)"
-end
-
 if command -sq nvim
     set -gx EDITOR (which nvim)
     set -gx VISUAL $EDITOR

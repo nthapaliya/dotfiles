@@ -44,8 +44,10 @@
 	diffFilter = delta --color-only
 [delta]
 	navigate = true
+	; line-numbers = true
+	; hyperlinks = true
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [init]
 	defaultBranch = main
 [advice]
