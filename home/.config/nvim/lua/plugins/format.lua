@@ -22,11 +22,15 @@ return {
       lua = { "stylua" },
       ruby = { "rubyfmt" },
       rust = { "rustfmt" },
-      python = { "black" },
+      python = { "ruff_format" },
+      markdown = { "injected" },
       ["*"] = { "trim_newlines", "trim_whitespace" },
     },
     default_format_opts = { lsp_format = "fallback" },
     format_on_save = { timeout_ms = 500 },
+    formatters = {
+      injected = { options = { ignore_errors = true } },
+    },
   },
   init = function()
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

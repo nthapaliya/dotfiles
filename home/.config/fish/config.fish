@@ -21,17 +21,24 @@ else
     set -gx VISUAL $EDITOR
 end
 
-if command -sq rg
-    set -gx RIPGREP_CONFIG_PATH "$HOME/.config/rg/config"
-    set -gx FZF_DEFAULT_COMMAND 'rg --files'
-    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
-end
-
-if command -sq fd
-    set -gx FZF_ALT_C_COMMAND 'fd -H --type directory'
-end
-
 if command -sq fzf
+    if command -sq rg
+        set -gx FZF_DEFAULT_COMMAND 'rg --files'
+    end
+
+    if command -sq fd
+        set -gx FZF_ALT_C_COMMAND 'fd -H --type directory'
+        set -gx FZF_DEFAULT_COMMAND 'fd -H --type f'
+    end
+
+    set -gx FZF_CTRL_T_OPTS "
+        --tmux \
+        --preview 'bat -n --color=always {}' \
+        --bind 'ctrl-/:change-preview-window(down|hidden|)' "
+
+    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+    # set -gx FZF_DEFAULT_OPTS --tmux
+
     fzf --fish | source
 end
 
