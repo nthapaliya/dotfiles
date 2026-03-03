@@ -1,15 +1,15 @@
 return {
-  { "echasnovski/mini-git", opts = {}, name = "mini.git", event = "VeryLazy" },
-  { "echasnovski/mini.basics", opts = { options = { extra_ui = true } } },
-  { "echasnovski/mini.comment", opts = {}, keys = { "gcc" } },
-  { "echasnovski/mini.completion", opts = {}, event = "InsertEnter" },
-  { "echasnovski/mini.extra", opts = {} },
-  { "echasnovski/mini.icons", opts = {}, event = "VeryLazy" },
-  { "echasnovski/mini.splitjoin", opts = {}, keys = { "gS" } },
-  { "echasnovski/mini.statusline", opts = {}, event = "VeryLazy" },
-  { "echasnovski/mini.ai", opts = {}, event = "VeryLazy" },
+  { "nvim-mini/mini-git", opts = {}, name = "mini.git", event = "VeryLazy" },
+  { "nvim-mini/mini.basics", opts = { options = { extra_ui = true } } },
+  { "nvim-mini/mini.comment", opts = {}, keys = { "gcc" } },
+  { "nvim-mini/mini.completion", opts = {}, event = "InsertEnter" },
+  { "nvim-mini/mini.extra", opts = {} },
+  { "nvim-mini/mini.icons", opts = {}, event = "VeryLazy" },
+  { "nvim-mini/mini.splitjoin", opts = {}, keys = { "gS" } },
+  { "nvim-mini/mini.statusline", opts = {}, event = "VeryLazy" },
+  { "nvim-mini/mini.ai", opts = {}, event = "VeryLazy" },
   {
-    "echasnovski/mini.diff",
+    "nvim-mini/mini.diff",
     event = "VeryLazy",
     opts = {
       view = {
@@ -28,12 +28,12 @@ return {
     },
   },
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     event = "VeryLazy",
     opts = { symbol = "│" },
   },
   {
-    "echasnovski/mini.tabline",
+    "nvim-mini/mini.tabline",
     event = "VeryLazy",
     opts = {
       format = function(buf_id, label)
@@ -43,7 +43,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.notify",
+    "nvim-mini/mini.notify",
     event = "VeryLazy",
     config = function()
       local opts = { window = { config = { anchor = "SE", row = vim.o.lines - 2 } } }
@@ -52,7 +52,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.align",
+    "nvim-mini/mini.align",
     opts = { mappings = { start = "gl", start_with_preview = "gL" } },
     keys = {
       { mode = { "n", "v" }, "gl" },
@@ -60,7 +60,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.pick",
+    "nvim-mini/mini.pick",
     cmd = { "Rg" },
     keys = {
       { "<C-t>", desc = "Open file picker" },
@@ -97,7 +97,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     keys = { "ys", "ds", "cs" },
     opts = {
       mappings = {
@@ -115,7 +115,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     opts = {},
     init = function()
       vim.keymap.set("n", "-", function()
@@ -124,10 +124,10 @@ return {
     end,
   },
   {
-    "echasnovski/mini.misc",
+    "nvim-mini/mini.misc",
     lazy = true,
     opts = {},
   },
 
-  { "echasnovski/mini.nvim", lazy = true },
+  { "nvim-mini/mini.nvim", lazy = true },
 }
