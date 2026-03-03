@@ -3,10 +3,10 @@ function updt
 
     if test (uname) = Darwin
         echo 'Running brew commands...'
+        brew update
+        brew upgrade
         brew bundle dump --force --describe
     end
-
-    topgrade
 end
 
 function __checktime
