@@ -1,8 +1,9 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = "BufRead",
+  lazy = false,
+  -- event = "BufRead",
   dependencies = {
-    -- { "nvim-treesitter/nvim-treesitter-context", opts = {} },
+    { "nvim-treesitter/nvim-treesitter-context", opts = {} },
     {
       "andymass/vim-matchup",
       init = function()
@@ -10,12 +11,28 @@ return {
       end,
     },
   },
+  init = function()
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
+        "fish",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "ruby",
+        "shell",
+      },
+      callback = function()
+        -- syntax highlighting, provided by Neovim
+        vim.treesitter.start()
+        -- folds, provided by Neovim
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo.foldmethod = "expr"
+        -- indentation, provided by nvim-treesitter
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
+  end,
   build = ":TSUpdate",
-  opts = {
-    auto_install = true,
-    indent = { enable = true },
-    highlight = { enable = true, additional_vim_regex_highlighting = false },
-    -- Third party mods
-    matchup = { enable = true },
-  },
+  opts = {},
 }
