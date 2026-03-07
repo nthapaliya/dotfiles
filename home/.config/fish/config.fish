@@ -32,7 +32,7 @@ if command -sq fzf
     end
 
     set -gx FZF_CTRL_T_OPTS "
-        --tmux \
+        --tmux 90%,50% \
         --preview 'bat -n --color=always {}' \
         --bind 'ctrl-/:change-preview-window(down|hidden|)' "
 
@@ -49,5 +49,3 @@ if test Darwin = (uname)
     set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
     set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 end
-
-# set -gx NODE_OPTIONS --openssl-legacy-provider
