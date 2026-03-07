@@ -55,16 +55,11 @@ end
 
 return {
   {
-    "neovim/nvim-lspconfig",
-    event = "BufRead",
-    init = init,
-  },
-  {
     "mason-org/mason-lspconfig.nvim",
     opts = {},
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
-      "neovim/nvim-lspconfig",
+      { "neovim/nvim-lspconfig", init = init },
     },
   },
 }
