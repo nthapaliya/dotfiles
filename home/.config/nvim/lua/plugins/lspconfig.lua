@@ -1,7 +1,18 @@
 local init = function()
   vim.diagnostic.config({
     virtual_text = false,
-    signs = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+      },
+      linehl = {
+        [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+      },
+      numhl = {
+        [vim.diagnostic.severity.WARN] = "WarningMsg",
+      },
+    },
     update_in_insert = false,
     underline = true,
     severity_sort = true,
@@ -14,17 +25,6 @@ local init = function()
       prefix = "",
     },
   })
-
-  -- Ref:
-  -- https://neovim.io/doc/user/diagnostic.html
-  for _, type in ipairs({ "Error", "Warn", "Hint", "Info" }) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, {
-      text = "",
-      texthl = hl,
-      numhl = hl,
-    })
-  end
 
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
