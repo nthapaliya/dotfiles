@@ -1,10 +1,14 @@
-Config.now(function() vim.pack.add({ 'https://github.com/tpope/vim-sleuth' }) end)
 
--- smart-splits.nvim
--- keymaps in 20_keymaps.lua
-Config.now(
-  function() vim.pack.add({ 'https://github.com/mrjones2014/smart-splits.nvim' }) end
-)
+
+Config.now(function()
+  -- guess-indent, alternative to tpope/sleuth
+  vim.pack.add({ 'https://github.com/NMAC427/guess-indent.nvim' })
+  require('guess-indent').setup()
+
+  -- smart-splits.nvim
+  -- keymaps in 20_keymaps.lua
+  vim.pack.add({ 'https://github.com/mrjones2014/smart-splits.nvim' })
+end)
 
 -- jupytext.nvim
 Config.now_if_args(function()
