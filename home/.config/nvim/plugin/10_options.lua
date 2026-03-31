@@ -13,6 +13,7 @@ vim.o.winborder = 'single' -- Use border in floating windows
 vim.o.cursorlineopt = 'screenline,number' -- Show cursor line per screen line
 vim.o.cursorline = false
 vim.o.wrap = true
+vim.o.termguicolors = true
 
 -- Folds (see `:h fold-commands`, `:h zM`, `:h zR`, `:h zA`, `:h zj`)
 vim.o.foldcolumn = '0'

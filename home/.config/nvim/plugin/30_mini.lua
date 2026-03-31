@@ -1,7 +1,7 @@
 -- load first
 Config.now(function()
   -- basics
-  require('mini.basics').setup()
+  require('mini.basics').setup({ options = { extra_ui = true } })
 
   -- icons
   require('mini.icons').setup()
@@ -134,11 +134,6 @@ Config.later(function()
     },
   })
 end)
-
--- TODO: I might not want this
-Config.later(
-  function() require('mini.cmdline').setup({ autocomplete = { delay = 500 } }) end
-)
 
 -- TODO: maybe change mappings
 Config.later(
