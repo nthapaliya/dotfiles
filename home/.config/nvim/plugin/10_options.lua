@@ -23,9 +23,9 @@ vim.o.foldnestmax = 10 -- Limit number of fold levels
 vim.o.foldtext = '' -- Show text under fold with its highlighting
 
 -- Editing ====================================================================
-vim.o.expandtab = true -- Convert tabs to spaces
-vim.o.shiftwidth = 2 -- Use this number of spaces for indentation
-vim.o.tabstop = 2 -- Show tab as this number of spaces
+-- vim.o.expandtab = true -- Convert tabs to spaces
+-- vim.o.shiftwidth = 2 -- Use this number of spaces for indentation
+-- vim.o.tabstop = 2 -- Show tab as this number of spaces
 vim.o.softtabstop = 2
 vim.o.scrolloff = 8
 
