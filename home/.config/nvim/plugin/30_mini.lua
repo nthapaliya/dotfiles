@@ -1,5 +1,4 @@
 -- load first
-Config.now(function() vim.cmd.colorscheme('miniwinter') end)
 Config.now(function()
   -- basics
   require('mini.basics').setup()

@@ -1,4 +1,11 @@
+Config.now(function()
+  vim.pack.add({
+    { src = 'https://codeberg.org/evergarden/nvim.git', name = 'evergarden' },
+  })
 
+  require('evergarden').setup()
+  vim.cmd.colorscheme('evergarden')
+end)
 
 Config.now(function()
   -- guess-indent, alternative to tpope/sleuth
