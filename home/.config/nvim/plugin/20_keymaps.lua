@@ -10,17 +10,10 @@ nmap(']p', '<Cmd>exe "iput "  . v:register<CR>', 'Paste Below')
 Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>e', desc = '+Explore/Edit' },
   { mode = 'n', keys = '<Leader>f', desc = '+Find' },
-  { mode = 'n', keys = '<Leader>g', desc = '+Git' },
   { mode = 'n', keys = '<Leader>h', desc = '+Hunk' },
   { mode = 'n', keys = '<Leader>l', desc = '+Language' },
   { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
-  { mode = 'x', keys = '<Leader>g', desc = '+Git' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },
-  -- { mode = 'n', keys = '<Leader>v', desc = '+Visits' },
-  -- { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
-  -- { mode = 'n', keys = '<Leader>m', desc = '+Map' },
-  -- { mode = 'n', keys = '<Leader>o', desc = '+Other' },
-  -- { mode = 'n', keys = '<Leader>s', desc = '+Session' },
 }
 
 local nmap_leader = function(suffix, rhs, desc) nmap('<Leader>' .. suffix, rhs, desc) end
@@ -49,26 +42,8 @@ nmap_leader('ep', edit_plugin_file('40_plugins.lua'), 'Plugins config')
 nmap_leader('eq', explore_quickfix, 'Quickfix list')
 nmap_leader('eQ', explore_locations, 'Location list')
 
--- g is for 'Git'
-local git_log_cmd = [[Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order]]
-local git_log_buf_cmd = git_log_cmd .. ' --follow -- %'
-
-nmap_leader('ga', '<Cmd>Git diff --cached<CR>', 'Added diff')
-nmap_leader('gA', '<Cmd>Git diff --cached -- %<CR>', 'Added diff buffer')
-nmap_leader('gc', '<Cmd>Git commit<CR>', 'Commit')
-nmap_leader('gC', '<Cmd>Git commit --amend<CR>', 'Commit amend')
-nmap_leader('gd', '<Cmd>Git diff<CR>', 'Diff')
-nmap_leader('gD', '<Cmd>Git diff -- %<CR>', 'Diff buffer')
-nmap_leader('gl', '<Cmd>' .. git_log_cmd .. '<CR>', 'Log')
-nmap_leader('gL', '<Cmd>' .. git_log_buf_cmd .. '<CR>', 'Log buffer')
-nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', 'Toggle overlay')
-nmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at cursor')
-
-xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')
-
 -- f is for 'Find' (using fzf-lua)
-nmap_leader('<C-t>', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')
-nmap_leader('ff', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')
+nmap('<C-t>', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')
 nmap_leader('fb', "<Cmd>lua require('fzf-lua').buffers()<CR>", 'Find buffers')
 nmap_leader(
   'f?',
@@ -88,11 +63,7 @@ nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>', 'References')
 nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>', 'Source definition')
 nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition')
 
--- xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')
-
--- t is for 'Terminal'
-nmap_leader('tT', '<Cmd>horizontal term<CR>', 'Terminal (horizontal)')
-nmap_leader('tt', '<Cmd>vertical term<CR>', 'Terminal (vertical)')
+xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')
 
 -- MISC FROM OLD DOTFILES
 -- jk forever
@@ -152,4 +123,4 @@ end
 map_hunk_operations('<leader>hs', 'apply')
 map_hunk_operations('<leader>hu', 'reset')
 map_hunk_operations('<leader>hy', 'yank')
-usrcmd('Gwrite', function() require('mini.diff').do_hunks(0, 'apply', {}) end)
+usrcmd('Gwrite', 'Git add %')

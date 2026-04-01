@@ -29,6 +29,9 @@ Config.now_if_args(function()
   require('jupytext').setup({ format = 'markdown' })
 end)
 
+-- experimental: activate neovim builtin undotree plugin
+Config.now_if_args(function() vim.cmd('packadd nvim.undotree') end)
+
 -- nvim-treesitter
 Config.now_if_args(function()
   local ts_update = function() vim.cmd('TSUpdate') end
