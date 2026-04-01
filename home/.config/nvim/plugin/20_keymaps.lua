@@ -105,6 +105,9 @@ nmap('<esc>', '<cmd>noh<cr><esc>', 'Escape and clear hlsearch')
 nmap('Q', '<nop>')
 nmap('q:', '<nop>')
 
+-- FzfLua
+nmap('<C-t>', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')
+
 -- configure smart-splits.nvim
 local mmap = function(lhs, dir)
   local cmd = "<Cmd>lua require('smart-splits').move_cursor_" .. dir .. '()<CR>'
