@@ -9,13 +9,14 @@ nmap(']p', '<Cmd>exe "iput "  . v:register<CR>', 'Paste Below')
 
 Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>e', desc = '+Explore/Edit' },
+  { mode = 'n', keys = '<Leader>f', desc = '+Find' },
   { mode = 'n', keys = '<Leader>g', desc = '+Git' },
+  { mode = 'n', keys = '<Leader>h', desc = '+Hunk' },
   { mode = 'n', keys = '<Leader>l', desc = '+Language' },
   { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
   { mode = 'x', keys = '<Leader>g', desc = '+Git' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },
   -- { mode = 'n', keys = '<Leader>v', desc = '+Visits' },
-  -- { mode = 'n', keys = '<Leader>f', desc = '+Find' },
   -- { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
   -- { mode = 'n', keys = '<Leader>m', desc = '+Map' },
   -- { mode = 'n', keys = '<Leader>o', desc = '+Other' },
@@ -65,6 +66,16 @@ nmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at cursor')
 
 xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')
 
+-- f is for 'Find' (using fzf-lua)
+nmap_leader('<C-t>', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')
+nmap_leader('ff', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')
+nmap_leader('fb', "<Cmd>lua require('fzf-lua').buffers()<CR>", 'Find buffers')
+nmap_leader(
+  'f?',
+  "<Cmd>lua require('fzf-lua').builtin()<CR>",
+  'Display builtin fzf-lua pickers'
+)
+
 -- l is for 'Language'
 nmap_leader('la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', 'Actions')
 nmap_leader('ld', '<Cmd>lua vim.diagnostic.open_float()<CR>', 'Diagnostic popup')
@@ -105,9 +116,6 @@ mmap('<C-j>', 'down')
 mmap('<C-k>', 'up')
 mmap('<C-l>', 'right')
 
--- Configure fzf-lua
-nmap('<C-t>', "<Cmd>lua require('fzf-lua').files()<CR>", 'Open files')
-
 usrcmd('PackUpdate', function() vim.pack.update() end)
 usrcmd('PackSync', function() vim.pack.update(nil, { target = 'lockfile' }) end)
 usrcmd('PackClean', function()
@@ -135,3 +143,13 @@ usrcmd('BufOnly', function()
   end
   print('BufOnly: deleted ' .. deleted .. ' buffers.')
 end)
+
+local map_hunk_operations = function(lhs, operator)
+  local texobj = '<Cmd>lua MiniDiff.textobject()<CR>'
+  local rhs = function() return require('mini.diff').operator(operator) .. texobj end
+  vim.keymap.set('n', lhs, rhs, { desc = 'Hunk ' .. operator, expr = true, remap = true })
+end
+map_hunk_operations('<leader>hs', 'apply')
+map_hunk_operations('<leader>hu', 'reset')
+map_hunk_operations('<leader>hy', 'yank')
+usrcmd('Gwrite', function() require('mini.diff').do_hunks(0, 'apply', {}) end)

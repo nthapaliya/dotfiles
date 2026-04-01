@@ -45,16 +45,17 @@ local diagnostic_opts = {
   -- Show signs on top of any other sign, but only for warnings and errors
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.ERROR] = '!!',
       [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
     },
     numhl = {
-      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-      [vim.diagnostic.severity.WARN] = 'WarningMsg',
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
     },
     severity = {
-      min = vim.diagnostic.severity.WARN,
-      max = vim.diagnostic.severity.ERROR,
+      min = vim.diagnostic.severity.INFO,
     },
     priority = 9999,
   },
@@ -62,7 +63,6 @@ local diagnostic_opts = {
   underline = {
     severity = {
       min = vim.diagnostic.severity.WARN,
-      max = vim.diagnostic.severity.ERROR,
     },
   },
 

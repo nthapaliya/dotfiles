@@ -1,7 +1,7 @@
 -- load first
 Config.now(function()
   -- basics
-  require('mini.basics').setup({ options = { extra_ui = true } })
+  require('mini.basics').setup()
 
   -- icons
   require('mini.icons').setup()
@@ -81,8 +81,8 @@ Config.later(
   end
 )
 
--- TODO: lookup
-Config.later(function() require('mini.bracketed').setup() end)
+-- TODO: check if I need this...
+-- Config.later(function() require('mini.bracketed').setup() end)
 
 -- Show next key clues in a bottom right window. Requires explicit opt-in for
 -- keys that act as clue trigger. Example usage:
@@ -135,7 +135,6 @@ Config.later(function()
   })
 end)
 
--- TODO: maybe change mappings
 Config.later(
   function()
     require('mini.diff').setup({
@@ -144,6 +143,13 @@ Config.later(
         signs = { add = '+', change = '~', delete = '-' },
       },
       options = { wrap_goto = true },
+      mappings = {
+        apply = '',
+        reset = '',
+        textoperator = '',
+        goto_next = ']c',
+        goto_prev = '[c',
+      },
     })
   end
 )
