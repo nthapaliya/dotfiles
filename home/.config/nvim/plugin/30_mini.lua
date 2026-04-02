@@ -71,6 +71,7 @@ Config.later(function() require('mini.comment').setup() end)
 Config.later(function() require('mini.git').setup() end)
 Config.later(function() require('mini.splitjoin').setup() end)
 Config.later(function() require('mini.surround').setup() end)
+Config.later(function() require('mini.pick').setup() end)
 
 Config.later(
   function()
