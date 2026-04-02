@@ -56,7 +56,7 @@ end)
 -- use default of <leader>ef and <leader>ed
 Config.now_if_args(function() require('mini.files').setup() end)
 
--- Miscellaneous small but useful functions. Example usage:
+-- Miscellaneous small but useful functions
 Config.now_if_args(function()
   -- Makes `:h MiniMisc.put()` and `:h MiniMisc.put_text()` public
   require('mini.misc').setup()
