@@ -23,6 +23,7 @@ end
 
 if command -sq fzf
     if command -sq rg
+        set -gx RIPGREP_CONFIG_PATH ~/.config/rg/config
         set -gx FZF_DEFAULT_COMMAND 'rg --files'
     end
 
