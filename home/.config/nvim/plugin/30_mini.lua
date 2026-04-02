@@ -87,11 +87,7 @@ Config.later(function()
       col = math.floor(0.5 * (vim.o.columns - width)),
     }
   end
-  require('mini.pick').setup({
-    window = {
-      config = win_config,
-    },
-  })
+  require('mini.pick').setup({ window = { config = win_config } })
 end)
 
 Config.later(
