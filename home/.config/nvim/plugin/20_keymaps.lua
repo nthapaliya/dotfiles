@@ -42,7 +42,7 @@ nmap_leader('eo', edit_plugin_file('10_options.lua'), 'Options config')
 nmap_leader('ep', edit_plugin_file('40_plugins.lua'), 'Plugins config')
 nmap_leader('eq', explore_quickfix, 'Quickfix list')
 nmap_leader('eQ', explore_locations, 'Location list')
-nmap('-', '<CMD>Oil<CR>', 'Open parent directory')
+nmap('-', "<Cmd>lua require('mini.files').open()<CR>", 'Directory')
 
 -- f is for 'Find' (using fzf-lua)
 nmap('<C-t>', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')

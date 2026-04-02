@@ -54,11 +54,7 @@ Config.now_if_args(function()
 end)
 
 -- use default of <leader>ef and <leader>ed
-Config.now_if_args(
-  function()
-    require('mini.files').setup({ options = { use_as_default_explorer = false } })
-  end
-)
+Config.now_if_args(function() require('mini.files').setup() end)
 
 -- Miscellaneous small but useful functions. Example usage:
 Config.now_if_args(function()
@@ -73,7 +69,6 @@ Config.later(function() require('mini.extra').setup() end)
 Config.later(function() require('mini.ai').setup() end)
 Config.later(function() require('mini.comment').setup() end)
 Config.later(function() require('mini.git').setup() end)
-Config.later(function() require('mini.jump').setup() end)
 Config.later(function() require('mini.splitjoin').setup() end)
 Config.later(function() require('mini.surround').setup() end)
 
