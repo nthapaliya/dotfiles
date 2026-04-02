@@ -47,6 +47,7 @@ Config.now_if_args(function()
     'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
   })
   local languages = {
+    'bash',
     'fish',
     'lua',
     'markdown',
