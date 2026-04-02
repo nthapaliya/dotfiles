@@ -8,10 +8,6 @@
       "rev": "f74fc61a5345818caf7c56bd4c6dcd16f17a1fdd",
       "src": "https://codeberg.org/evergarden/nvim.git"
     },
-    "fzf-lua": {
-      "rev": "c9e7b7bfbd01f949164988ee1684035468e1995c",
-      "src": "https://github.com/ibhagwan/fzf-lua"
-    },
     "jupytext.nvim": {
       "rev": "2e86acfa4345f611c86f57116db0c06ffecb721d",
       "src": "https://github.com/goerz/jupytext.nvim",

@@ -71,7 +71,24 @@ Config.later(function() require('mini.comment').setup() end)
 Config.later(function() require('mini.git').setup() end)
 Config.later(function() require('mini.splitjoin').setup() end)
 Config.later(function() require('mini.surround').setup() end)
-Config.later(function() require('mini.pick').setup() end)
+Config.later(function()
+  local win_config = function()
+    local height = math.floor(0.618 * vim.o.lines)
+    local width = math.floor(0.618 * vim.o.columns)
+    return {
+      anchor = 'NW',
+      height = height,
+      width = width,
+      row = math.floor(0.5 * (vim.o.lines - height)),
+      col = math.floor(0.5 * (vim.o.columns - width)),
+    }
+  end
+  require('mini.pick').setup({
+    window = {
+      config = win_config,
+    },
+  })
+end)
 
 Config.later(
   function()
@@ -201,15 +218,15 @@ end)
 -- - To end a snippet session when at final tabstop, keep typing or go into
 --   Normal mode. To force end snippet session, press `<C-c>`.
 --
-Config.later(function()
-  local snippets = require('mini.snippets')
-  local config_path = vim.fn.stdpath('config')
-  snippets.setup({
-    snippets = {
-      snippets.gen_loader.from_file(config_path .. '/snippets/global.json'),
-      snippets.gen_loader.from_lang(),
-    },
-  })
-
-  MiniSnippets.start_lsp_server()
-end)
+-- Config.later(function()
+--   local snippets = require('mini.snippets')
+--   local config_path = vim.fn.stdpath('config')
+--   snippets.setup({
+--     snippets = {
+--       snippets.gen_loader.from_file(config_path .. '/snippets/global.json'),
+--       snippets.gen_loader.from_lang(),
+--     },
+--   })
+--
+--   MiniSnippets.start_lsp_server()
+-- end)
