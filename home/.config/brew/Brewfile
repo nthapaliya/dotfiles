@@ -8,22 +8,18 @@ brew "bash"
 brew "openssl@3"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Cross-platform make
-brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# Get, unpack, build, and install modules from CPAN
-brew "cpanminus"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Speech synthesizer that supports more than hundred languages and accents
+brew "espeak-ng"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# Monitor a directory for changes and run a shell command
-brew "fswatch"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Interpreter for PostScript and PDF
@@ -36,8 +32,6 @@ brew "git-delta"
 brew "gnu-sed"
 # GNU implementation of time utility
 brew "gnu-time"
-# GNU Privacy Guard (OpenPGP)
-brew "gnupg"
 # Generic library support script
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
@@ -48,52 +42,34 @@ brew "htop"
 brew "icloudpd"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# YAML Parser
-brew "libyaml"
-# Mac App Store command-line interface
-brew "mas"
+# Language Server for the Lua language
+brew "lua-language-server"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
-# Package compiler and linker metadata toolkit
-brew "pkgconf"
-# Fast C/C++ prime number generator
-brew "primesieve"
-# Monitor data's progress through a pipe
-brew "pv"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Extremely fast Python linter, written in Rust
 brew "ruff"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
-# Send macOS User Notifications from the command-line
-brew "terminal-notifier"
+# Opinionated Lua code formatter
+brew "stylua"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Parser generator tool
 brew "tree-sitter-cli"
-# Maintained ctags implementation
-brew "universal-ctags"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Internet file retriever
 brew "wget"
-# Extensible command-line tool to format YAML files
-brew "yamlfmt"
-# Feature-rich command-line audio/video downloader
-brew "yt-dlp"
-# Programming language designed for robustness, optimality, and clarity
-brew "zig"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Application uninstaller
@@ -126,14 +102,10 @@ cask "syncthing-app"
 cask "visual-studio-code"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "DaisyDisk", id: 411643860
-mas "Day One", id: 1055511498
-mas "Magnet", id: 441258766
-mas "PDFCombo", id: 1030461463
-mas "Photomator", id: 1444636541
-mas "Pixelmator Pro", id: 1289583905
 vscode "mechatroner.rainbow-csv"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 vscode "redhat.vscode-yaml"
+uv "jupytext"
+uv "ruff"
