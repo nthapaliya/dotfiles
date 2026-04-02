@@ -22,7 +22,8 @@ local xmap_leader = function(suffix, rhs, desc) xmap('<Leader>' .. suffix, rhs, 
 local edit_plugin_file = function(filename)
   return string.format('<Cmd>edit %s/plugin/%s<CR>', vim.fn.stdpath('config'), filename)
 end
-local explore_at_file = '<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>'
+local explore_at_file =
+  "<Cmd>lua require('mini.files').open(vim.api.nvim_buf_get_name(0))<CR>"
 local explore_quickfix = function()
   vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and 'cclose' or 'copen')
 end
@@ -31,7 +32,7 @@ local explore_locations = function()
 end
 
 -- e is for 'Explore'
-nmap_leader('ed', '<Cmd>lua MiniFiles.open()<CR>', 'Directory')
+nmap_leader('ed', "<Cmd>lua require('mini.files').open()<CR>", 'Directory')
 nmap_leader('ef', explore_at_file, 'File directory')
 nmap_leader('ei', '<Cmd>edit $MYVIMRC<CR>', 'init.lua')
 nmap_leader('ek', edit_plugin_file('20_keymaps.lua'), 'Keymaps config')
@@ -41,6 +42,7 @@ nmap_leader('eo', edit_plugin_file('10_options.lua'), 'Options config')
 nmap_leader('ep', edit_plugin_file('40_plugins.lua'), 'Plugins config')
 nmap_leader('eq', explore_quickfix, 'Quickfix list')
 nmap_leader('eQ', explore_locations, 'Location list')
+nmap('-', '<CMD>Oil<CR>', 'Open parent directory')
 
 -- f is for 'Find' (using fzf-lua)
 nmap('<C-t>', "<Cmd>lua require('fzf-lua').files()<CR>", 'Find files')
@@ -54,7 +56,7 @@ nmap_leader(
 -- l is for 'Language'
 nmap_leader('la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', 'Actions')
 nmap_leader('ld', '<Cmd>lua vim.diagnostic.open_float()<CR>', 'Diagnostic popup')
-nmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format')
+nmap_leader('lf', '<Cmd>lua vim.lsp.buf.format()<CR>', 'Format')
 nmap_leader('li', '<Cmd>lua vim.lsp.buf.implementation()<CR>', 'Implementation')
 nmap_leader('lh', '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover')
 nmap_leader('ll', '<Cmd>lua vim.lsp.codelens.run()<CR>', 'Lens')
@@ -63,7 +65,7 @@ nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>', 'References')
 nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>', 'Source definition')
 nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition')
 
-xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')
+xmap_leader('lf', '<Cmd>lua vim.lsp.buf.format()<CR>', 'Format')
 
 -- MISC FROM OLD DOTFILES
 -- jk forever
