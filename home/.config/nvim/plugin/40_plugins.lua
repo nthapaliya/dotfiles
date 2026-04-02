@@ -103,6 +103,3 @@ Config.now_if_args(function()
   })
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 end)
-
--- keymap defined in 20_keymaps.lua
-Config.later(function() vim.pack.add({ 'https://github.com/ibhagwan/fzf-lua' }) end)

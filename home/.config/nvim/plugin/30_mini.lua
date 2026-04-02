@@ -1,3 +1,7 @@
+-- Notes: maybe add back in the future:
+-- - mini.snippets
+-- - mini.hipatterns
+
 -- load first
 Config.now(function()
   -- basics
@@ -171,62 +175,9 @@ Config.later(
   end
 )
 
--- TODO: tweak hlpatterns
 Config.later(function()
-  local hipatterns = require('mini.hipatterns')
-  local hi_words = MiniExtra.gen_highlighter.words
-  hipatterns.setup({
-    highlighters = {
-      -- Highlight a fixed set of common words. Will be highlighted in any place,
-      -- not like "only in comments".
-      fixme = hi_words({ 'FIXME', 'Fixme', 'fixme' }, 'MiniHipatternsFixme'),
-      hack = hi_words({ 'HACK', 'Hack', 'hack' }, 'MiniHipatternsHack'),
-      todo = hi_words({ 'TODO', 'Todo', 'todo' }, 'MiniHipatternsTodo'),
-      note = hi_words({ 'NOTE', 'Note', 'note' }, 'MiniHipatternsNote'),
-
-      -- Highlight hex color string (#aabbcc) with that color as a background
-      hex_color = hipatterns.gen_highlighter.hex_color(),
-    },
+  require('mini.indentscope').setup({
+    symbol = '│',
   })
+  vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'PickBorder' })
 end)
-
--- TODO: highlight group
-Config.later(function()
-  require('mini.indentscope').setup({ symbol = '│' })
-  -- vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'Comment' })
-end)
-
--- How to manage snippets:
--- How to expand a snippet in Insert mode:
--- - If you know snippet's prefix, type it as a word and press `<C-j>`. Snippet's
---   body should be inserted instead of the prefix.
--- - If you don't remember snippet's prefix, type only part of it (or none at all)
---   and press `<C-j>`. It should show picker with all snippets that have prefixes
---   matching typed characters (or all snippets if none was typed).
---   Choose one and its body should be inserted instead of previously typed text.
---
--- How to navigate during snippet session:
--- - Snippets can contain tabstops - places for user to interactively adjust text.
---   Each tabstop is highlighted depending on session progression - whether tabstop
---   is current, was or was not visited. If tabstop doesn't yet have text, it is
---   visualized with special "ghost" inline text: • and ∎ by default.
--- - Type necessary text at current tabstop and navigate to next/previous one
---   by pressing `<C-l>` / `<C-h>`.
--- - Repeat previous step until you reach special final tabstop, usually denoted
---   by ∎ symbol. If you spotted a mistake in an earlier tabstop, navigate to it
---   and return back to the final tabstop.
--- - To end a snippet session when at final tabstop, keep typing or go into
---   Normal mode. To force end snippet session, press `<C-c>`.
---
--- Config.later(function()
---   local snippets = require('mini.snippets')
---   local config_path = vim.fn.stdpath('config')
---   snippets.setup({
---     snippets = {
---       snippets.gen_loader.from_file(config_path .. '/snippets/global.json'),
---       snippets.gen_loader.from_lang(),
---     },
---   })
---
---   MiniSnippets.start_lsp_server()
--- end)

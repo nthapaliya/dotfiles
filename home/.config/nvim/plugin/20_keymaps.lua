@@ -145,12 +145,17 @@ usrcmd('BufOnly', function()
   print('BufOnly: deleted ' .. deleted .. ' buffers.')
 end)
 
-local map_hunk_operations = function(lhs, operator)
+local map_hunk_operations = function(mode, lhs, operator)
   local texobj = '<Cmd>lua MiniDiff.textobject()<CR>'
   local rhs = function() return require('mini.diff').operator(operator) .. texobj end
-  vim.keymap.set('n', lhs, rhs, { desc = 'Hunk ' .. operator, expr = true, remap = true })
+  vim.keymap.set(
+    mode,
+    lhs,
+    rhs,
+    { desc = 'Hunk ' .. operator, expr = true, remap = true }
+  )
 end
-map_hunk_operations('<leader>hs', 'apply')
-map_hunk_operations('<leader>hu', 'reset')
-map_hunk_operations('<leader>hy', 'yank')
+map_hunk_operations({ 'n', 'x' }, '<leader>hs', 'apply')
+map_hunk_operations({ 'n' }, '<leader>hu', 'reset')
+map_hunk_operations({ 'n', 'x' }, '<leader>hy', 'yank')
 usrcmd('Gwrite', 'Git add %')
