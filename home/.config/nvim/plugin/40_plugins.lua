@@ -3,18 +3,23 @@ Config.now(function()
     { src = 'https://codeberg.org/evergarden/nvim.git', name = 'evergarden' },
   })
 
-  require('evergarden').setup()
+  require('evergarden').setup({
+    style = { disable_styles = { 'italic' } },
+  })
   vim.cmd.colorscheme('evergarden')
 end)
 
 Config.now(function()
-  -- guess-indent, alternative to tpope/sleuth
-  vim.pack.add({ 'https://github.com/NMAC427/guess-indent.nvim' })
-  require('guess-indent').setup()
+  vim.pack.add({ 'https://github.com/tpope/vim-sleuth' })
 
   -- smart-splits.nvim
   -- keymaps in 20_keymaps.lua
   vim.pack.add({ 'https://github.com/mrjones2014/smart-splits.nvim' })
+end)
+
+Config.now_if_args(function()
+  vim.pack.add({ 'https://github.com/stevearc/oil.nvim' })
+  require('oil').setup()
 end)
 
 -- jupytext.nvim
@@ -28,6 +33,9 @@ Config.now_if_args(function()
 
   require('jupytext').setup({ format = 'markdown' })
 end)
+
+-- experimental: activate neovim builtin undotree plugin
+Config.now_if_args(function() vim.cmd('packadd nvim.undotree') end)
 
 -- nvim-treesitter
 Config.now_if_args(function()
