@@ -9,14 +9,13 @@ Config.now(function()
 
   -- icons
   require('mini.icons').setup()
-  Config.later(MiniIcons.mock_nvim_web_devicons)
   Config.later(MiniIcons.tweak_lsp_kind)
 
   -- tabline and statusline
   require('mini.statusline').setup()
   require('mini.tabline').setup({
     format = function(buf_id, label)
-      local suffix = vim.bo[buf_id].modified and '+ ' or ''
+      local suffix = vim.bo[buf_id].modified and ' ' or ''
       return MiniTabline.default_format(buf_id, label) .. suffix
     end,
   })
@@ -172,8 +171,6 @@ Config.later(
 )
 
 Config.later(function()
-  require('mini.indentscope').setup({
-    symbol = '│',
-  })
-  vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'PickBorder' })
+  require('mini.indentscope').setup({ symbol = '│' })
+  vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'LineNr' })
 end)

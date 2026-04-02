@@ -4,6 +4,7 @@ Config.now(function()
   })
 
   require('evergarden').setup({
+    theme = { variant = 'winter' },
     style = { disable_styles = { 'italic' } },
   })
   vim.cmd.colorscheme('evergarden')

@@ -33,7 +33,6 @@ end
 
 -- e is for 'Explore'
 nmap_leader('ed', "<Cmd>lua require('mini.files').open()<CR>", 'Directory')
-nmap_leader('ef', explore_at_file, 'File directory')
 nmap_leader('ei', '<Cmd>edit $MYVIMRC<CR>', 'init.lua')
 nmap_leader('ek', edit_plugin_file('20_keymaps.lua'), 'Keymaps config')
 nmap_leader('em', edit_plugin_file('30_mini.lua'), 'MINI config')
@@ -42,7 +41,7 @@ nmap_leader('eo', edit_plugin_file('10_options.lua'), 'Options config')
 nmap_leader('ep', edit_plugin_file('40_plugins.lua'), 'Plugins config')
 nmap_leader('eq', explore_quickfix, 'Quickfix list')
 nmap_leader('eQ', explore_locations, 'Location list')
-nmap('-', "<Cmd>lua require('mini.files').open()<CR>", 'Directory')
+nmap('-', explore_at_file, 'File Directory')
 
 -- f is for 'Fuzzy Find'. Common usage:
 -- - `<Leader>ff` - find files; for best performance requires `ripgrep`
