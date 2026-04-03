@@ -1,3 +1,5 @@
+" If nvim is not available, for short-term use in a pinch
+" Does not automatically symlink, copy to home to use
 " vim-plug config {{{
 let data_dir = '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -8,18 +10,13 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Vim enhancements
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'andymass/vim-matchup'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-vinegar'
 
 call plug#end()
 " }}}
@@ -67,16 +64,10 @@ colorscheme habamax
 let g:mapleader = "\<Space>"
 
 cmap w!! w !sudo tee % >/dev/null
-nnoremap <leader>W  :%s/\s\+$<cr>
+autocmd BufWritePre * :%s/\s\+$//e
 nnoremap <C-p>     :bprev<cr>
 nnoremap <C-n>     :bnext<cr>
 
 inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
-" }}}
-
-" junegunn/fzf {{{
-nnoremap <C-t> :Files<cr>
-nnoremap <leader>g :GFiles?<cr>
-nnoremap <leader>b :Buffers<cr>
 " }}}
