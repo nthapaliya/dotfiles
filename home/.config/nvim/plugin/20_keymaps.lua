@@ -147,3 +147,16 @@ map_hunk_operations('<leader>hu', 'reset')
 map_hunk_operations('<leader>hy', 'yank')
 usrcmd('Gwrite', 'Git add %')
 usrcmd('Gcommit', 'Git commit')
+
+-- MiniFiles Extras
+-- Yank in register full path of entry under cursor
+Config.new_autocmd('User', 'MiniFilesBufferCreate', function(args)
+  local b = args.data.buf_id
+  local yank_path = function()
+    local path = (MiniFiles.get_fs_entry() or {}).path
+    if path == nil then return vim.notify('Cursor is not on valid entry') end
+    vim.fn.setreg(vim.v.register, path)
+    MiniFiles.close()
+  end
+  vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
+end, '')
