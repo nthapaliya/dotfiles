@@ -160,3 +160,7 @@ Config.new_autocmd('User', 'MiniFilesBufferCreate', function(args)
   end
   vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
 end, '')
+
+-- Easily jump to next or previous buffer
+nmap('<C-p>', '<cmd>bprev<cr>', 'Previous Buffer')
+nmap('<C-n>', '<cmd>bnext<cr>', 'Next Buffer')
