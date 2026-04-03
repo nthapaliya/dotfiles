@@ -1,5 +1,4 @@
 local nmap = function(lhs, rhs, desc) vim.keymap.set('n', lhs, rhs, { desc = desc }) end
-local vmap = function(lhs, rhs, desc) vim.keymap.set('v', lhs, rhs, { desc = desc }) end
 local imap = function(lhs, rhs, desc) vim.keymap.set('i', lhs, rhs, { desc = desc }) end
 local xmap = function(lhs, rhs, desc) vim.keymap.set('x', lhs, rhs, { desc = desc }) end
 local usrcmd = function(command, fn) vim.api.nvim_create_user_command(command, fn, {}) end
@@ -43,14 +42,7 @@ nmap_leader('eq', explore_quickfix, 'Quickfix list')
 nmap_leader('eQ', explore_locations, 'Location list')
 nmap('-', explore_at_file, 'File Directory')
 
--- f is for 'Fuzzy Find'. Common usage:
--- - `<Leader>ff` - find files; for best performance requires `ripgrep`
--- - `<Leader>fg` - find inside files; requires `ripgrep`
--- - `<Leader>fh` - find help tag
--- - `<Leader>fr` - resume latest picker
--- - `<Leader>fv` - all visited paths; requires 'mini.visits'
---
--- All these use 'mini.pick'. See `:h MiniPick-overview` for an overview.
+-- f is for 'Fuzzy Find'
 local pick_added_hunks_buf = '<Cmd>Pick git_hunks path="%" scope="staged"<CR>'
 local pick_workspace_symbols_live = '<Cmd>Pick lsp scope="workspace_symbol_live"<CR>'
 
@@ -106,15 +98,15 @@ nmap('Q', '<nop>')
 nmap('q:', '<nop>')
 
 -- configure smart-splits.nvim
-local mmap = function(lhs, dir)
-  local cmd = "<Cmd>lua require('smart-splits').move_cursor_" .. dir .. '()<CR>'
+local move_map = function(lhs, dir)
+  local cmd = "<cmd>lua require('smart-splits').move_cursor_" .. dir .. '()<CR>'
   local desc = 'SmartSplits: move cursor ' .. dir
   nmap(lhs, cmd, desc)
 end
-mmap('<C-h>', 'left')
-mmap('<C-j>', 'down')
-mmap('<C-k>', 'up')
-mmap('<C-l>', 'right')
+move_map('<C-h>', 'left')
+move_map('<C-j>', 'down')
+move_map('<C-k>', 'up')
+move_map('<C-l>', 'right')
 
 usrcmd('PackUpdate', function() vim.pack.update() end)
 usrcmd('PackSync', function() vim.pack.update(nil, { target = 'lockfile' }) end)
@@ -144,17 +136,14 @@ usrcmd('BufOnly', function()
   print('BufOnly: deleted ' .. deleted .. ' buffers.')
 end)
 
-local map_hunk_operations = function(mode, lhs, operator)
-  local texobj = '<Cmd>lua MiniDiff.textobject()<CR>'
+local map_hunk_operations = function(lhs, operator)
+  local texobj = '<Cmd>lua MiniDiff.textobject()<CR><ESC>'
   local rhs = function() return require('mini.diff').operator(operator) .. texobj end
-  vim.keymap.set(
-    mode,
-    lhs,
-    rhs,
-    { desc = 'Hunk ' .. operator, expr = true, remap = true }
-  )
+  local desc = { desc = 'Hunk ' .. operator, expr = true, remap = true }
+  vim.keymap.set({ 'n', 'x' }, lhs, rhs, desc)
 end
-map_hunk_operations({ 'n', 'x' }, '<leader>hs', 'apply')
-map_hunk_operations({ 'n' }, '<leader>hu', 'reset')
-map_hunk_operations({ 'n', 'x' }, '<leader>hy', 'yank')
+map_hunk_operations('<leader>hs', 'apply')
+map_hunk_operations('<leader>hu', 'reset')
+map_hunk_operations('<leader>hy', 'yank')
 usrcmd('Gwrite', 'Git add %')
+usrcmd('Gcommit', 'Git commit')

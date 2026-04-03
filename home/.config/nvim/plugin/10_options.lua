@@ -4,33 +4,34 @@ vim.g.mapleader = ' '
 vim.o.shada = '' -- Limit ShaDa file (for startup)
 vim.o.clipboard = 'unnamedplus'
 
+-- stylua: ignore start
 -- UI =========================================================================
-vim.o.list = true
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.listchars = 'extends:#,nbsp:·,tab:▸·,trail:·'
-vim.o.pumborder = 'rounded' -- Use border in popup menu
-vim.o.winborder = 'rounded' -- Use border in floating windows
-vim.o.pummaxwidth = 100 -- Make popup menu not too wide
-vim.o.cursorline = true
+vim.o.list          = true
+vim.o.fillchars     = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.listchars     = 'extends:#,nbsp:·,tab:▸·,trail:·'
+vim.o.pumborder     = 'rounded' -- Use border in popup menu
+vim.o.winborder     = 'rounded' -- Use border in floating windows
+vim.o.pummaxwidth   = 100       -- Make popup menu not too wide
+vim.o.cursorline    = true
 vim.o.termguicolors = true
 
--- Folds (see `:h fold-commands`, `:h zM`, `:h zR`, `:h zA`, `:h zj`)
-vim.o.foldlevel = 99
+vim.o.foldlevel  = 99
 vim.o.foldmethod = 'indent' -- Fold based on indent level
-vim.o.foldtext = '' -- Show text under fold with its highlighting
+vim.o.foldtext   = ''       -- Show text under fold with its highlighting
 
 -- Editing ====================================================================
-vim.o.expandtab = true -- Convert tabs to spaces
-vim.o.tabstop = 2 -- Show tab as this number of spaces
-vim.o.shiftwidth = 0 -- If set to zero, uses value of tabstop
-vim.o.softtabstop = -1 -- If set to -1, uses value of shiftwidth
-vim.o.scrolloff = 12
+vim.o.expandtab   = true -- Convert tabs to spaces
+vim.o.tabstop     = 2    -- Show tab as this number of spaces
+vim.o.shiftwidth  = 0    -- If set to zero, uses value of tabstop
+vim.o.softtabstop = -1   -- If set to -1, uses value of shiftwidth
+vim.o.scrolloff   = 12
 vim.o.smartindent = true
-vim.o.synmaxcol = 300
+vim.o.synmaxcol   = 300
 
 -- Built-in completion
-vim.o.complete = '.,w,b,kspell' -- Use less sources
-vim.o.completetimeout = 100 -- Limit sources delay
+vim.o.complete        = '.,w,b,kspell' -- Use less sources
+vim.o.completetimeout = 100            -- Limit sources delay
+-- stylua: ignore end
 
 -- Autocommands ===============================================================
 -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.

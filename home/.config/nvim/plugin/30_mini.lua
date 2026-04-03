@@ -97,25 +97,6 @@ Config.later(
   end
 )
 
--- TODO: check if I need this...
--- Config.later(function() require('mini.bracketed').setup() end)
-
--- Show next key clues in a bottom right window. Requires explicit opt-in for
--- keys that act as clue trigger. Example usage:
--- - Press `<Leader>` and wait for 1 second. A window with information about
---   next available keys should appear.
--- - Press one of the listed keys. Window updates immediately to show information
---   about new next available keys. You can press `<BS>` to go back in key sequence.
--- - Press keys until they resolve into some mapping.
---
--- Note: it is designed to work in buffers for normal files. It doesn't work in
--- special buffers (like for 'mini.starter' or 'mini.files') to not conflict
--- with its local mappings.
---
--- See also:
--- - `:h MiniClue-examples` - examples of common setups
--- - `:h MiniClue.ensure_buf_triggers()` - use it to enable triggers in buffer
--- - `:h MiniClue.set_mapping_desc()` - change mapping description not from config
 Config.later(function()
   local miniclue = require('mini.clue')
   -- stylua: ignore
@@ -163,8 +144,10 @@ Config.later(
         apply = '',
         reset = '',
         textoperator = '',
-        goto_next = ']c',
+        goto_first = '[C',
         goto_prev = '[c',
+        goto_last = ']C',
+        goto_next = ']c',
       },
     })
   end
