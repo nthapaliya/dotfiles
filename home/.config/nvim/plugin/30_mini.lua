@@ -57,7 +57,21 @@ Config.now_if_args(function()
 end)
 
 -- use default of <leader>ef and <leader>ed
-Config.now_if_args(function() require('mini.files').setup() end)
+Config.now_if_args(function()
+  require('mini.files').setup()
+
+  -- Yank in register full path of entry under cursor
+  Config.new_autocmd('User', 'MiniFilesBufferCreate', function(args)
+    local b = args.data.buf_id
+    local yank_path = function()
+      local path = (MiniFiles.get_fs_entry() or {}).path
+      if path == nil then return vim.notify('Cursor is not on valid entry') end
+      vim.fn.setreg(vim.v.register, path)
+      MiniFiles.close()
+    end
+    vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
+  end, '')
+end)
 
 -- Miscellaneous small but useful functions
 Config.now_if_args(function()
@@ -71,9 +85,17 @@ end)
 Config.later(function() require('mini.extra').setup() end)
 Config.later(function() require('mini.ai').setup() end)
 Config.later(function() require('mini.comment').setup() end)
-Config.later(function() require('mini.git').setup() end)
 Config.later(function() require('mini.splitjoin').setup() end)
 Config.later(function() require('mini.surround').setup() end)
+
+Config.later(function()
+  require('mini.git').setup()
+
+  local usrcmd = function(command, fn) vim.api.nvim_create_user_command(command, fn, {}) end
+  usrcmd('Gwrite', 'Git add %')
+  usrcmd('Gcommit', 'Git commit')
+end)
+
 Config.later(function()
   local win_config = function()
     local height = math.floor(0.618 * vim.o.lines)
@@ -132,27 +154,53 @@ Config.later(function()
   })
 end)
 
-Config.later(
-  function()
-    require('mini.diff').setup({
-      view = {
-        style = 'sign',
-        signs = { add = '+', change = '~', delete = '-' },
-      },
-      options = { wrap_goto = true },
-      mappings = {
-        apply = '',
-        reset = '',
-        textoperator = '',
-        textobject = '',
-        goto_first = '',
-        goto_prev = '',
-        goto_last = '',
-        goto_next = '',
-      },
-    })
+Config.later(function()
+  require('mini.diff').setup({
+    view = {
+      style = 'sign',
+      signs = { add = '+', change = '~', delete = '-' },
+    },
+    options = { wrap_goto = true },
+    mappings = {
+      apply = '',
+      reset = '',
+      textoperator = '',
+      textobject = '',
+      goto_first = '',
+      goto_prev = '',
+      goto_last = '',
+      goto_next = '',
+    },
+  })
+
+  -- mini.diff hunk operations
+  local map_hunk_operations = function(lhs, operator)
+    local texobj = '<Cmd>lua MiniDiff.textobject()<CR><ESC>'
+    local rhs = function() return MiniDiff.operator(operator) .. texobj end
+    local desc = { desc = 'Hunk ' .. operator, expr = true, remap = true }
+    vim.keymap.set({ 'n', 'x' }, lhs, rhs, desc)
   end
-)
+  map_hunk_operations('<leader>hs', 'apply')
+  map_hunk_operations('<leader>hu', 'reset')
+  map_hunk_operations('<leader>hy', 'yank')
+
+  -- mini.diff movement wrapper
+  -- default behavior is to error when using the keymaps
+  -- in a non git file. This wraps to silently ignore
+  -- the keymap instead.
+  local goto_hunk = function(direction)
+    return function()
+      if MiniDiff.get_buf_data() == nil then return end
+      MiniDiff.goto_hunk(direction)
+    end
+  end
+
+  local nmap = function(lhs, rhs, desc) vim.keymap.set('n', lhs, rhs, { desc = desc }) end
+  nmap('[C', goto_hunk('first'), 'First hunk')
+  nmap('[c', goto_hunk('prev'), 'Previous hunk')
+  nmap(']c', goto_hunk('next'), 'Next hunk')
+  nmap(']C', goto_hunk('last'), 'Last hunk')
+end)
 
 Config.later(function()
   require('mini.indentscope').setup({ symbol = '│' })
