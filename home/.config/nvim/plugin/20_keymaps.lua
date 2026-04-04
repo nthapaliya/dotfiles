@@ -32,7 +32,7 @@ end
 
 -- e is for 'Explore'
 nmap_leader('ed', "<Cmd>lua require('mini.files').open()<CR>", 'Directory')
-nmap_leader('ei', '<Cmd>edit $MYVIMRC<CR>', 'init.lua')
+nmap_leader('ev', '<Cmd>edit $MYVIMRC<CR>', 'init.lua')
 nmap_leader('ek', edit_plugin_file('20_keymaps.lua'), 'Keymaps config')
 nmap_leader('em', edit_plugin_file('30_mini.lua'), 'MINI config')
 nmap_leader('en', '<Cmd>lua MiniNotify.show_history()<CR>', 'Notifications')
@@ -136,6 +136,7 @@ usrcmd('BufOnly', function()
   print('BufOnly: deleted ' .. deleted .. ' buffers.')
 end)
 
+-- mini.diff hunk operations
 local map_hunk_operations = function(lhs, operator)
   local texobj = '<Cmd>lua MiniDiff.textobject()<CR><ESC>'
   local rhs = function() return require('mini.diff').operator(operator) .. texobj end
@@ -147,6 +148,22 @@ map_hunk_operations('<leader>hu', 'reset')
 map_hunk_operations('<leader>hy', 'yank')
 usrcmd('Gwrite', 'Git add %')
 usrcmd('Gcommit', 'Git commit')
+
+-- mini.diff movement wrapper
+-- default behavior is to error when using the keymaps
+-- in a non git file. This wraps to silently ignore
+-- the keymap instead.
+local goto_hunk = function(direction)
+  return function()
+    if MiniDiff.get_buf_data() == nil then return end
+    MiniDiff.goto_hunk(direction)
+  end
+end
+
+nmap('[C', goto_hunk('first'), 'First hunk')
+nmap('[c', goto_hunk('prev'), 'Previous hunk')
+nmap(']c', goto_hunk('next'), 'Next hunk')
+nmap(']C', goto_hunk('last'), 'Last hunk')
 
 -- MiniFiles Extras
 -- Yank in register full path of entry under cursor
