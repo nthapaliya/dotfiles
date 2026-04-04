@@ -9,15 +9,12 @@ requirements=(
 )
 
 for i in ${requirements[@]}; do
-  echo command: $i
   hash $i 2>/dev/null || {
     echo "Missing command - \"$i\""
     echo "Install before continuing"
     exit 1
   }
 done
-
-exit
 
 case $1 in
   '')
