@@ -144,10 +144,11 @@ Config.later(
         apply = '',
         reset = '',
         textoperator = '',
-        goto_first = '[C',
-        goto_prev = '[c',
-        goto_last = ']C',
-        goto_next = ']c',
+        textobject = '',
+        goto_first = '',
+        goto_prev = '',
+        goto_last = '',
+        goto_next = '',
       },
     })
   end
