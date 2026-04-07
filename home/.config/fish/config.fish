@@ -23,7 +23,7 @@ abbr -a -- vdirty 'vi ( git status -s | cut -c4- )'
 
 ## dotfiles
 abbr -a -- d 'cd ~/Projects/dotfiles'
-abbr -a -- htree 'tree -a -I plugged\|\.git'
+abbr -a -- htree 'tree -a -I .git'
 abbr -a -- lsd 'ls -d .*'
 abbr -a -- p 'cd ~/Projects'
 abbr -a -- e 'cd ~/Projects/euler'
