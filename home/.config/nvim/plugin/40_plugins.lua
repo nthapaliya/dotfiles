@@ -108,3 +108,16 @@ Config.now_if_args(function()
   })
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 end)
+
+Config.later(function()
+  -- try this out for a minute
+  vim.pack.add({ 'https://github.com/yorickpeterse/nvim-jump' })
+  vim.keymap.set('n', 'f', require('jump').start, {})
+end)
+
+Config.now_if_args(function()
+  vim.pack.add({ 'https://github.com/MeanderingProgrammer/render-markdown.nvim' })
+  require('render-markdown').setup({
+    completions = { lsp = { enabled = true } },
+  })
+end)
