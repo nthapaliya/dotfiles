@@ -11,6 +11,7 @@ Config.now(function()
 end)
 
 Config.now(function() vim.pack.add({ 'https://github.com/tpope/vim-sleuth' }) end)
+Config.now(function() vim.pack.add({ 'https://github.com/numtostr/BufOnly.nvim' }) end)
 Config.now(function()
   vim.pack.add({ 'https://github.com/mrjones2014/smart-splits.nvim' })
   local ss = require('smart-splits')

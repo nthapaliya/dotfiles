@@ -31,21 +31,3 @@ usrcmd('PackClean', function()
 
   vim.pack.del(unused)
 end)
-
--- BufOnly
-usrcmd('BufOnly', function()
-  local cur_buf_id = vim.api.nvim_get_current_buf()
-  local modified = function(bid)
-    return vim.api.nvim_get_option_value('modified', { buf = bid })
-  end
-  local can_delete = function(bid) return (bid ~= cur_buf_id) and (not modified(bid)) end
-
-  local deleted = 0
-  for _, buf_id in ipairs(vim.api.nvim_list_bufs()) do
-    if can_delete(buf_id) then
-      deleted = deleted + 1
-      vim.api.nvim_buf_delete(buf_id, {})
-    end
-  end
-  print('BufOnly: deleted ' .. deleted .. ' buffers.')
-end)

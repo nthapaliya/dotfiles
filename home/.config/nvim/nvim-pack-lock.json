@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "BufOnly.nvim": {
+      "rev": "30579c2851743b00c4547c324a16f2c1cfa5a41c",
+      "src": "https://github.com/numtostr/BufOnly.nvim"
+    },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -14,7 +18,7 @@
       "version": "0.2.0 - 0.2.0"
     },
     "mini.nvim": {
-      "rev": "402ee6c6ec8ea44b22330446c8fb4e615fd3953e",
+      "rev": "2431902e78b76f435542d1e606f08475360068ca",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-lspconfig": {
@@ -26,7 +30,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "93d60a475f0b08a8eceb99255863977d3a25f310",
+      "rev": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "smart-splits.nvim": {
