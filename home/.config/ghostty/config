@@ -1,9 +1,40 @@
 theme = Catppuccin Mocha
 
-window-padding-x=5
-window-padding-y=0,2
+# command = /opt/homebrew/bin/tmux new-session -A -s 0
 
-command=/opt/homebrew/bin/tmux new-session -A -s 0
+font-size = 15
 
-confirm-close-surface = false
-shell-integration-features = ssh-terminfo,ssh-env,path
+macos-titlebar-style = tabs
+mouse-hide-while-typing = true
+
+split-inherit-working-directory
+tab-inherit-working-directory
+
+window-padding-x = 5
+window-padding-y = 0,2
+
+confirm-close-surface = true
+shell-integration-features = true
+
+# ---------------------------------------------
+# Emulating tmux keybinds
+# ---------------------------------------------
+keybind = ctrl+b>c=new_tab
+
+keybind = ctrl+b>p=previous_tab
+keybind = ctrl+b>ctrl+p=previous_tab
+keybind = ctrl+b>n=next_tab
+keybind = ctrl+b>ctrl+n=next_tab
+
+keybind = ctrl+b>shift+5=new_split:right
+keybind = ctrl+b>shift+'=new_split:down
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:down
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+l=goto_split:right
+
+keybind = ctrl+b>shift+1=toggle_split_zoom
+
+keybind = ctrl+b>shift+r=reload_config
+keybind = ctrl+b>==equalize_splits
