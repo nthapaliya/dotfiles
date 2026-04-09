@@ -32,11 +32,6 @@ abbr -a -- p 'cd ~/Projects'
 abbr -a -- e 'cd ~/Projects/euler'
 
 # Command specific:
-## atuin
-if command -sq atuin
-    # atuin init fish --disable-up-arrow --disable-ctrl-r | source
-    atuin init fish --disable-up-arrow | source
-end
 
 ## [fzf, rg, fd, bat, tmux]: assume available
 set -gx RIPGREP_CONFIG_PATH ~/.config/rg/config
