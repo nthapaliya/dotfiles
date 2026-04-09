@@ -21,7 +21,10 @@ map('n', '<C-n>', '<cmd>bnext<cr>', 'Next Buffer')
 
 -- vim.pack wrappers
 usrcmd('PackUpdate', function() vim.pack.update() end)
-usrcmd('PackSync', function() vim.pack.update(nil, { target = 'lockfile' }) end)
+usrcmd(
+  'PackSync',
+  function() vim.pack.update(nil, { target = 'lockfile', force = true }) end
+)
 usrcmd('PackClean', function()
   local unused = vim
     .iter(vim.pack.get())
@@ -31,3 +34,6 @@ usrcmd('PackClean', function()
 
   vim.pack.del(unused)
 end)
+
+map('n', 'f', function() require('jump').start() end, 'Start Jump Action')
+map('n', '\\m', '<CMD>RenderMarkdown toggle<CR>', 'Toggle RenderMarkdown')

@@ -112,7 +112,6 @@ end)
 Config.later(function()
   -- try this out for a minute
   vim.pack.add({ 'https://github.com/yorickpeterse/nvim-jump' })
-  vim.keymap.set('n', 'f', require('jump').start, {})
 end)
 
 Config.now_if_args(function()

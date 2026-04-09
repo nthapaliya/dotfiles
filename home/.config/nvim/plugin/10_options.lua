@@ -1,8 +1,9 @@
 -- General ====================================================================
 vim.g.mapleader = ' '
--- vim.o.undofile = false
 vim.o.shada = '' -- Limit ShaDa file (for startup)
+vim.o.switchbuf = 'usetab' -- Use already opened buffers when switching
 vim.o.clipboard = 'unnamedplus'
+-- vim.o.undofile = false
 
 -- stylua: ignore start
 -- UI =========================================================================

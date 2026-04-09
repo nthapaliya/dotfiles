@@ -5,13 +5,27 @@ local nmap_leader = function(suffix, rhs, desc) nmap('<Leader>' .. suffix, rhs, 
 local xmap_leader = function(suffix, rhs, desc) xmap('<Leader>' .. suffix, rhs, desc) end
 
 Config.leader_group_clues = {
+  { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
   { mode = 'n', keys = '<Leader>e', desc = '+Explore/Edit' },
   { mode = 'n', keys = '<Leader>f', desc = '+Find' },
   { mode = 'n', keys = '<Leader>h', desc = '+Hunk' },
   { mode = 'n', keys = '<Leader>l', desc = '+Language' },
+  { mode = 'n', keys = '<Leader>o', desc = '+Other' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },
 }
+-- b is for 'Buffer'
+local new_scratch_buffer = function()
+  vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
+end
 
+nmap_leader('ba', '<Cmd>b#<CR>', 'Alternate')
+nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>', 'Delete')
+nmap_leader('bD', '<Cmd>lua MiniBufremove.delete(0, true)<CR>', 'Delete!')
+nmap_leader('bs', new_scratch_buffer, 'Scratch')
+nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>', 'Wipeout')
+nmap_leader('bW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', 'Wipeout!')
+
+-- e is for 'Explore'
 local edit_plugin_file = function(filename)
   return string.format('<Cmd>edit %s/plugin/%s<CR>', vim.fn.stdpath('config'), filename)
 end
@@ -23,7 +37,6 @@ local explore_locations = function()
   vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and 'lclose' or 'lopen')
 end
 
--- e is for 'Explore'
 nmap_leader('ed', '<Cmd>lua MiniFiles.open()<CR>', 'Directory')
 nmap_leader('ev', '<Cmd>edit $MYVIMRC<CR>', 'init.lua')
 nmap_leader('ek', edit_plugin_file('20_keymaps.lua'), 'Keymaps config')
@@ -79,3 +92,8 @@ nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>', 'Source definition')
 nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition')
 
 xmap_leader('lf', '<Cmd>lua vim.lsp.buf.format()<CR>', 'Format')
+
+-- o is for 'Other'
+nmap_leader('or', '<Cmd>lua MiniMisc.resize_window()<CR>', 'Resize to default width')
+nmap_leader('ot', '<Cmd>lua MiniTrailspace.trim()<CR>', 'Trim trailspace')
+nmap_leader('oz', '<Cmd>lua MiniMisc.zoom()<CR>', 'Zoom toggle')
