@@ -34,6 +34,3 @@ usrcmd('PackClean', function()
 
   vim.pack.del(unused)
 end)
-
-map('n', 'f', function() require('jump').start() end, 'Start Jump Action')
-map('n', '\\m', '<CMD>RenderMarkdown toggle<CR>', 'Toggle RenderMarkdown')

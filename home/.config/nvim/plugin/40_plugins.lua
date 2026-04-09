@@ -84,6 +84,7 @@ Config.now_if_args(function()
   vim.lsp.enable({
     'lua_ls',
     'ruff',
+    'ty',
   })
 end)
 
@@ -112,6 +113,7 @@ end)
 Config.later(function()
   -- try this out for a minute
   vim.pack.add({ 'https://github.com/yorickpeterse/nvim-jump' })
+  vim.keymap.set('n', 'f', require('jump').start, { desc = 'Start Jump Action' })
 end)
 
 Config.now_if_args(function()
@@ -120,4 +122,7 @@ Config.now_if_args(function()
     completions = { lsp = { enabled = true } },
     sign = { enabled = false },
   })
+
+  local toggle = require('render-markdown').toggle
+  vim.keymap.set('n', '\\m', toggle, { desc = 'Toggle RenderMarkdown' })
 end)
