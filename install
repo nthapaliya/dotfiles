@@ -1,21 +1,5 @@
 #!/bin/bash
 
-requirements=(
-  stow            # required for script
-  fish nvim       # need latest!
-  tmux git        # relatively new version needed
-  fzf             # go: any version,    latest preferred
-  fd rg bat delta # cargo: any version, latest preferred
-)
-
-for i in ${requirements[@]}; do
-  hash $i 2>/dev/null || {
-    echo "Missing command - \"$i\""
-    echo "Install before continuing"
-    exit 1
-  }
-done
-
 case $1 in
   '')
     stow -R --target="$HOME" home

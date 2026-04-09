@@ -1,3 +1,62 @@
+# Installing basic dependencies
+
+Requirements:
+- stow       - to symlink dotfiles
+- neovim     - always latest release
+- fish shell - latest preferred
+- tmux       - latest preferred
+- git        - latest preferred
+
+- bat
+- git-delta (delta)
+- fd-find (fd)
+- fzf
+- jq
+- ripgrep (rg)
+- tree-sitter (needed for neovim)
+
+Try to rely on system package managers first (brew, apt, dnf)
+
+```bash
+sudo dnf install stow fish git tmux neovim
+sudo dnf install bat git-delta fd-find fzf jq ripgrep tree-sitter
+```
+
+If these aren't available or are too old, use mise
+
+# Installing mise
+
+Use your package manager or [install it manually](https://mise.jdx.dev/installing-mise.html):
+
+```bash
+curl https://mise.run > setup-mise.sh
+chmod +x setup-mise.sh
+./setup-mise.sh
+```
+
+Then install missing tools with:
+
+```bash
+mise use --global <tools>
+```
+
+See what's installed via mise with:
+
+```bash
+mise list
+```
+
+Useful settings
+```bash
+mise settings install_before="14d"
+mise settings python.uv_venv_auto="source"
+```
+
+Finally, uncomment mise related configs in fish shell config
+
+I'm not committing the mise configs because they will be different
+on each machine.
+
 # Install and uninstall
 
 ```bash
@@ -29,3 +88,8 @@
   sudo chsh -s $(which fish) $(whoami)
   # sudo reboot now # optional
   ```
+
+# For later
+- https://github.com/mhinz/vim-galore
+  - also ref: https://github.com/mhinz/vim-galore/blob/master/static/minimal-vimrc.vim
+- https://piechowski.io/post/git-commands-before-reading-code/
