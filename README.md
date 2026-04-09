@@ -1,19 +1,23 @@
 # Installing basic dependencies
 
-Requirements:
-- stow       - to symlink dotfiles
-- neovim     - always latest release
-- fish shell - latest preferred
-- tmux       - latest preferred
-- git        - latest preferred
-
-- bat
-- git-delta (delta)
-- fd-find (fd)
-- fzf
-- jq
-- ripgrep (rg)
-- tree-sitter (needed for neovim)
+| Package Name        | Version |
+| ---                 | ---     |
+| stow                | any     |
+| neovim              | latest  |
+| fish                | latest  |
+| tmux                | latest  |
+| git                 | latest  |
+| vim                 | any     |
+| bat                 | any     |
+| git-delta           | any     |
+| fd-find             | any     |
+| fzf                 | any     |
+| jq                  | any     |
+| ripgrep             | any     |
+| tree-sitter         | latest  |
+| lua-language-server | any     |
+| stylua              | any     |
+| uv                  | any     |
 
 Try to rely on system package managers first (brew, apt, dnf)
 
