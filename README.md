@@ -61,14 +61,49 @@ Finally, uncomment mise related configs in fish shell config
 I'm not committing the mise configs because they will be different
 on each machine.
 
-# Install and uninstall
+# Alternative to mise
+
+## Example: installing `nvim` directly from Github
+
+Assuming ~/.local/bin is already in `$PATH`
+
+- Go to their [Github releases
+  page](https://github.com/neovim/neovim/releases/tag/v0.12.1) and see if they
+have prebuilt binaries.
+- Copy link for your system.
 
 ```bash
-./install
+mkdir -p ~/.local/packages/
+cd ~/.local/packages/
+wget https://github.com/neovim/neovim/releases/download/v0.12.1/nvim-linux-x86_64.tar.gz
+tar xzvf nvim-linux-x86_64.tar.gz
+stow nvim-linux-x86_64
 ```
 
+Now `which nvim` should now point to `~/.local/bin/nvim`
+
+> [!NOTE]
+>
+> `stow packageName` will symlink its contents to `../` by default, so make
+> sure the directory structure is `~/.local/packages/packageName` where
+> `packageName/` contains `bin/` (and other things).
+>
+> Then from `.local/packages` run `stow packageName`
+
+To update:
 ```bash
-./install -u
+cd ~/.local/packages
+stow -D packageName
+rm -rf packageName
+```
+
+Then follow the steps to install, from the beginning.
+
+# Link and unlink dotfiles
+
+```bash
+./install    # To link
+./install -u # To unlink
 ```
 
 # Self-notes and references
