@@ -22,46 +22,17 @@
 Try to rely on system package managers first (brew, apt, dnf)
 
 ```bash
-sudo dnf install stow fish git tmux neovim
-sudo dnf install bat git-delta fd-find fzf jq ripgrep tree-sitter
+sudo dnf install --skip-unavailable stow neovim fish tmux git vim bat git-delta fd-find fzf jq ripgrep tree-sitter lua-language-server stylua uv
 ```
 
-If these aren't available or are too old, use mise
+> [!NOTE]
+>
+> - MacOS: Everything on this list can be found on homebrew.
+> - Fedora 43: neovim and tree-sitter not latest, lua-language-server and stylua unavailable.
+>   - stylua can be installed via `uv tool install stylua`
+>   - neovim and lua-language-server can be installed [directly from Github releases](#direct-download)
 
-# Installing mise
-
-Use your package manager or [install it manually](https://mise.jdx.dev/installing-mise.html):
-
-```bash
-curl https://mise.run > setup-mise.sh
-chmod +x setup-mise.sh
-./setup-mise.sh
-```
-
-Then install missing tools with:
-
-```bash
-mise use --global <tools>
-```
-
-See what's installed via mise with:
-
-```bash
-mise list
-```
-
-Useful settings
-```bash
-mise settings install_before="14d"
-mise settings python.uv_venv_auto="source"
-```
-
-Finally, uncomment mise related configs in fish shell config
-
-I'm not committing the mise configs because they will be different
-on each machine.
-
-# Alternative to mise
+# Direct Download
 
 ## Example: installing `nvim` directly from Github
 

@@ -4,9 +4,6 @@ fish_add_path ~/.local/bin
 set -U fish_greeting
 set -gx SHELL fish
 
-# ## mise
-# mise activate fish | source
-
 ## nvim
 set -gx EDITOR (which nvim)
 set -gx VISUAL $EDITOR
