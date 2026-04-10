@@ -116,13 +116,9 @@ Config.later(function()
   vim.keymap.set('n', 'f', require('jump').start, { desc = 'Start Jump Action' })
 end)
 
-Config.now_if_args(function()
-  vim.pack.add({ 'https://github.com/MeanderingProgrammer/render-markdown.nvim' })
-  require('render-markdown').setup({
-    completions = { lsp = { enabled = true } },
-    sign = { enabled = false },
-  })
-
-  local toggle = require('render-markdown').toggle
-  vim.keymap.set('n', '\\m', toggle, { desc = 'Toggle RenderMarkdown' })
-end)
+-- ftplugin
+-- prevents it from being deleted by "PackClean"
+vim.pack.add(
+  { { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' } },
+  { load = false }
+)
