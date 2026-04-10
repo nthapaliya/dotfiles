@@ -14,7 +14,10 @@ vim.o.pumborder     = 'rounded' -- Use border in popup menu
 vim.o.winborder     = 'rounded' -- Use border in floating windows
 vim.o.pummaxwidth   = 100       -- Make popup menu not too wide
 vim.o.cursorline    = true
+vim.o.cursorlineopt = 'number'
 vim.o.termguicolors = true
+vim.o.signcolumn    = 'yes:1'
+vim.o.statuscolumn  = '%l%s'
 
 vim.o.foldlevel  = 99
 vim.o.foldmethod = 'indent' -- Fold based on indent level
