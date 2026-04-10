@@ -50,7 +50,7 @@ syntax on
 filetype plugin indent on
 
 set autoindent
-" set autoread
+set autoread
 set background=dark
 set backspace=indent,eol,start
 set backupdir=~/.local/share/vim//,/tmp//

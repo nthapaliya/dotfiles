@@ -10,8 +10,6 @@ Config.now(function()
   vim.cmd.colorscheme('evergarden')
 end)
 
-Config.later(function() vim.pack.add({ 'https://github.com/tpope/vim-sleuth' }) end)
-Config.later(function() vim.pack.add({ 'https://github.com/numtostr/BufOnly.nvim' }) end)
 Config.now(function()
   vim.pack.add({ 'https://github.com/mrjones2014/smart-splits.nvim' })
   local ss = require('smart-splits')
@@ -24,15 +22,14 @@ end)
 
 -- jupytext.nvim
 Config.now_if_args(function()
-  vim.pack.add({
-    {
-      src = 'https://github.com/goerz/jupytext.nvim',
-      version = vim.version.range('0.2.0'),
-    },
-  })
+  vim.pack.add({ 'https://github.com/goerz/jupytext.nvim' })
 
   require('jupytext').setup({ format = 'markdown' })
 end)
+
+-- later plugins
+Config.later(function() vim.pack.add({ 'https://github.com/tpope/vim-sleuth' }) end)
+Config.later(function() vim.pack.add({ 'https://github.com/numtostr/BufOnly.nvim' }) end)
 
 -- experimental: activate neovim builtin undotree plugin
 Config.later(function() vim.cmd('packadd nvim.undotree') end)
