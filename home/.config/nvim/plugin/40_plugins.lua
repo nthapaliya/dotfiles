@@ -10,8 +10,8 @@ Config.now(function()
   vim.cmd.colorscheme('evergarden')
 end)
 
-Config.now(function() vim.pack.add({ 'https://github.com/tpope/vim-sleuth' }) end)
-Config.now(function() vim.pack.add({ 'https://github.com/numtostr/BufOnly.nvim' }) end)
+Config.later(function() vim.pack.add({ 'https://github.com/tpope/vim-sleuth' }) end)
+Config.later(function() vim.pack.add({ 'https://github.com/numtostr/BufOnly.nvim' }) end)
 Config.now(function()
   vim.pack.add({ 'https://github.com/mrjones2014/smart-splits.nvim' })
   local ss = require('smart-splits')
@@ -35,10 +35,10 @@ Config.now_if_args(function()
 end)
 
 -- experimental: activate neovim builtin undotree plugin
-Config.now_if_args(function() vim.cmd('packadd nvim.undotree') end)
+Config.later(function() vim.cmd('packadd nvim.undotree') end)
 
 -- nvim-treesitter
-Config.now_if_args(function()
+Config.later(function()
   local ts_update = function() vim.cmd('TSUpdate') end
   Config.on_packchanged('nvim-treesitter', { 'update' }, ts_update, ':TSUpdate')
 
@@ -78,7 +78,7 @@ Config.now_if_args(function()
 end)
 
 -- nvim-lspconfig
-Config.now_if_args(function()
+Config.later(function()
   vim.pack.add({ 'https://github.com/neovim/nvim-lspconfig' })
 
   vim.lsp.enable({
@@ -89,7 +89,7 @@ Config.now_if_args(function()
 end)
 
 -- conform.nvim
-Config.now_if_args(function()
+Config.later(function()
   vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
   require('conform').setup({
     formatters_by_ft = {

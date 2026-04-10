@@ -27,7 +27,7 @@ Config.now(function()
 end)
 
 -- completion
-Config.now_if_args(function()
+Config.later(function()
   -- Customize post-processing of LSP responses for a better user experience.
   -- Don't show 'Text' suggestions (usually noisy) and show snippets last.
   local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
@@ -74,7 +74,7 @@ Config.now_if_args(function()
 end)
 
 -- Miscellaneous small but useful functions
-Config.now_if_args(function()
+Config.later(function()
   -- Makes `:h MiniMisc.put()` and `:h MiniMisc.put_text()` public
   require('mini.misc').setup()
   MiniMisc.setup_auto_root()
