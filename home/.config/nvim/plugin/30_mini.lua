@@ -159,7 +159,8 @@ Config.later(function()
   require('mini.diff').setup({
     view = {
       style = 'sign',
-      signs = { add = '🭵', change = '🭵', delete = '🭵' },
+      -- signs = { add = '🭵', change = '🭵', delete = '🭵' },
+      signs = { add = '┃', change = '┃', delete = '┃' },
     },
     options = { wrap_goto = true },
     mappings = {
@@ -173,6 +174,10 @@ Config.later(function()
       goto_next = '',
     },
   })
+
+  vim.cmd([[hi MiniDiffSignAdd guifg=#3fc443]])
+  vim.cmd([[hi MiniDiffSignDelete guifg=#c74043]])
+  vim.cmd([[hi MiniDiffSignChange guifg=#f7c331]])
 
   -- mini.diff hunk operations
   local map_hunk_operations = function(lhs, operator)
