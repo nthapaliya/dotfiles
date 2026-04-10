@@ -86,6 +86,7 @@ Config.later(function() require('mini.extra').setup() end)
 Config.later(function() require('mini.ai').setup() end)
 Config.later(function() require('mini.bufremove').setup() end)
 Config.later(function() require('mini.comment').setup() end)
+Config.later(function() require('mini.sessions').setup() end)
 Config.later(function() require('mini.splitjoin').setup() end)
 Config.later(function() require('mini.surround').setup() end)
 
