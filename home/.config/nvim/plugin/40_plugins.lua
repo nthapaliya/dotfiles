@@ -116,6 +116,11 @@ Config.later(function()
   vim.keymap.set('n', 'f', require('jump').start, { desc = 'Start Jump Action' })
 end)
 
+Config.later(function()
+  vim.pack.add({ 'https://github.com/rachartier/tiny-inline-diagnostic.nvim' })
+  require('tiny-inline-diagnostic').setup()
+end)
+
 -- ftplugin
 -- prevents it from being deleted by "PackClean"
 vim.pack.add(
