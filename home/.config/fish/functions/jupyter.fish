@@ -3,5 +3,5 @@ function jupyter
         --with jupyter \
         --with python-localvenv-kernel \
         --with jupyterlab-vim \
-        --with jupyter-ruff jupyter $argv
+        jupyter $argv
 end

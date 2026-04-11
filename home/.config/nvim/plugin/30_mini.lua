@@ -176,10 +176,6 @@ Config.later(function()
     },
   })
 
-  vim.cmd([[hi MiniDiffSignAdd guifg=#3fc443]])
-  vim.cmd([[hi MiniDiffSignDelete guifg=#c74043]])
-  vim.cmd([[hi MiniDiffSignChange guifg=#f7c331]])
-
   -- mini.diff hunk operations
   local map_hunk_operations = function(lhs, operator)
     local texobj = '<Cmd>lua MiniDiff.textobject()<CR><ESC>'
