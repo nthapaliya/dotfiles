@@ -47,7 +47,7 @@
 	; line-numbers = true
 	; hyperlinks = true
 [merge]
-	conflictstyle = zdiff3
+	conflictStyle = zdiff3
 [init]
 	defaultBranch = main
 [advice]

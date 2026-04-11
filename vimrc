@@ -19,8 +19,6 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-colorscheme habamax
-
 call plug#begin('~/.vim/plugged')
 
 " Vim enhancements
@@ -40,9 +38,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/BufOnly.vim'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 " }}}
+"
+colorscheme gruvbox
 
 " basic settings {{{
 scriptencoding utf-8
@@ -80,10 +81,8 @@ set tabstop=2 sts=2 sw=2 expandtab
 set tags^=./.git/tags;
 set title
 set wildmenu
-
-" autocmds {{{
-autocmd BufWritePre * :%s/\s\+$//e
-" }}}
+set novisualbell
+set t_vb=
 
 " keymappings {{{
 let g:mapleader = "\<Space>"
@@ -95,6 +94,9 @@ nnoremap <C-n>     :bnext<cr>
 nnoremap <leader>ev :execute 'e ' . resolve(expand($MYVIMRC))<CR>
 inoremap jk <esc>
 nnoremap Q <nop> " don't enter ex mode accidentally
+nnoremap <esc> <cmd>nohlsearch<cr>
+nnoremap <leader>W <cmd>%s/\s\+$//e<cr>
+
 " }}}
 
 " vim-airline/vim-airline {{{
