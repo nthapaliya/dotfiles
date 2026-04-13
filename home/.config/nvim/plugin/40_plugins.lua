@@ -118,9 +118,14 @@ Config.later(function()
   require('tiny-inline-diagnostic').setup()
 end)
 
--- ftplugin
--- prevents it from being deleted by "PackClean"
-vim.pack.add(
-  { { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' } },
-  { load = false }
-)
+Config.now_if_args(function()
+  vim.pack.add({ 'https://github.com/MeanderingProgrammer/render-markdown.nvim' })
+
+  require('render-markdown').setup({
+    completions = { lsp = { enabled = true } },
+    sign = { enabled = false },
+  })
+
+  local toggle = require('render-markdown').toggle
+  vim.keymap.set('n', '\\m', toggle, { desc = 'Toggle RenderMarkdown' })
+end)
