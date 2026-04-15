@@ -13,6 +13,7 @@ Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>l', desc = '+Language' },
   { mode = 'n', keys = '<Leader>o', desc = '+Other' },
   { mode = 'n', keys = '<Leader>s', desc = '+Session' },
+  { mode = 'n', keys = '<Leader>v', desc = '+Visits' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },
 }
 -- b is for 'Buffer'

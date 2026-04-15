@@ -24,7 +24,7 @@ end)
 Config.now_if_args(function()
   vim.pack.add({ 'https://github.com/goerz/jupytext.nvim' })
 
-  require('jupytext').setup({ format = 'markdown' })
+  require('jupytext').setup({})
 end)
 
 -- later plugins
@@ -81,7 +81,6 @@ Config.later(function()
   vim.lsp.enable({
     'lua_ls',
     'ruff',
-    'ty',
   })
 end)
 
@@ -90,6 +89,7 @@ Config.later(function()
   vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
   require('conform').setup({
     formatters_by_ft = {
+      r = { 'air' },
       fish = { 'fish_indent' },
       json = { 'jq' },
       lua = { 'stylua' },
