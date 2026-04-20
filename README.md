@@ -29,7 +29,8 @@ sudo dnf install --skip-unavailable stow neovim fish tmux git vim bat git-delta 
 >
 > - MacOS: Everything on this list can be found on homebrew.
 > - Fedora 43: neovim and tree-sitter not latest, lua-language-server and stylua unavailable.
->   - stylua can be installed via `uv tool install stylua`
+>   - stylua can be installed via `uv tool install git+https://github.com/johnnymorganz/stylua`
+>   - air can be installed via `uv tool install air-formatter`
 >   - neovim and lua-language-server can be installed [directly from Github releases](#direct-download)
 
 # Direct Download

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir -p ~/.local/bin
+mkdir -p ~/.config/fish
+
 case $1 in
   '')
     stow -R --target="$HOME" home
