@@ -47,3 +47,5 @@ if test Darwin = (uname)
     set -gx XDG_CACHE_HOME ~/Library/Caches/xdg-cache
     set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 end
+
+zoxide init fish | source
