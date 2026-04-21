@@ -14,6 +14,18 @@ window-padding-x = 5
 window-padding-y = 0,2
 
 confirm-close-surface = true
+
+# ---------------------------------------------
+# Clipboard
+# ---------------------------------------------
+clipboard-read  = allow
+clipboard-write = allow
+clipboard-paste-protection
+
+# ---------------------------------------------
+# Shell integration features
+# ---------------------------------------------
+# shell-integration = none
 shell-integration-features = true
 
 # ---------------------------------------------
