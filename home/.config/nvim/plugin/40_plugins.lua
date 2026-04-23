@@ -50,7 +50,6 @@ Config.later(function()
     'markdown',
     'markdown_inline',
     'python',
-    'ruby',
   }
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
@@ -93,7 +92,6 @@ Config.later(function()
       fish = { 'fish_indent' },
       json = { 'jq' },
       lua = { 'stylua' },
-      ruby = { 'rubyfmt' },
       python = { 'ruff_format' },
       markdown = { 'injected' },
       ['*'] = { 'trim_newlines', 'trim_whitespace' },
