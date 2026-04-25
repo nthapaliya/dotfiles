@@ -31,22 +31,22 @@ shell-integration-features = true
 # ---------------------------------------------
 # Emulating tmux keybinds
 # ---------------------------------------------
-keybind = ctrl+b>c=new_tab
-
-keybind = ctrl+b>p=previous_tab
-keybind = ctrl+b>ctrl+p=previous_tab
-keybind = ctrl+b>n=next_tab
-keybind = ctrl+b>ctrl+n=next_tab
-
-keybind = ctrl+b>shift+5=new_split:right
-keybind = ctrl+b>shift+'=new_split:down
-
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:down
-keybind = ctrl+k=goto_split:up
-keybind = ctrl+l=goto_split:right
-
-keybind = ctrl+b>shift+1=toggle_split_zoom
-
-keybind = ctrl+b>shift+r=reload_config
-keybind = ctrl+b>==equalize_splits
+# keybind = ctrl+b>c=new_tab
+#
+# keybind = ctrl+b>p=previous_tab
+# keybind = ctrl+b>ctrl+p=previous_tab
+# keybind = ctrl+b>n=next_tab
+# keybind = ctrl+b>ctrl+n=next_tab
+#
+# keybind = ctrl+b>shift+5=new_split:right
+# keybind = ctrl+b>shift+'=new_split:down
+#
+# keybind = ctrl+h=goto_split:left
+# keybind = ctrl+j=goto_split:down
+# keybind = ctrl+k=goto_split:up
+# keybind = ctrl+l=goto_split:right
+#
+# keybind = ctrl+b>shift+1=toggle_split_zoom
+#
+# keybind = ctrl+b>shift+r=reload_config
+# keybind = ctrl+b>==equalize_splits
