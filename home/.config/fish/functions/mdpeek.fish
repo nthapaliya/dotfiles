@@ -7,7 +7,7 @@ function mdpeek
         echo "usage: mdpeek input_file.md"
         return 1
     end
-    set -l output /tmp/(basename --suffix=.md $input).html
+    set -l output /tmp/(basename -s .md $input).html
 
     pandoc --embed-resources=true \
         --standalone=true \

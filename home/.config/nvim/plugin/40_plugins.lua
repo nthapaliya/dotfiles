@@ -11,7 +11,7 @@ Config.now(function()
 end)
 
 Config.now(function()
-  vim.pack.add({ 'https://github.com/mrjones2014/smart-splits.nvim' })
+  vim.pack.add({ 'https://github.com/smart-splits-nvim/smart-splits.nvim' })
   local ss = require('smart-splits')
 
   vim.keymap.set('n', '<C-h>', ss.move_cursor_left)
