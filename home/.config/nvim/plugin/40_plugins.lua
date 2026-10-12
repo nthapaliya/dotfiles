@@ -12,6 +12,11 @@ end)
 
 Config.now(function()
   vim.pack.add({ 'https://github.com/smart-splits-nvim/smart-splits.nvim' })
+  vim.pack.add({ 'https://github.com/smart-splits-nvim/backend-tmux' })
+  require('smart-splits').setup({
+    mux = { backend = 'smart-splits-backend-tmux' },
+  })
+
   local ss = require('smart-splits')
 
   vim.keymap.set('n', '<C-h>', ss.move_cursor_left)

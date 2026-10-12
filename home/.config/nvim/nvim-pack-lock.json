@@ -4,6 +4,10 @@
       "rev": "30579c2851743b00c4547c324a16f2c1cfa5a41c",
       "src": "https://github.com/numtostr/BufOnly.nvim"
     },
+    "backend-tmux": {
+      "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
+      "src": "https://github.com/smart-splits-nvim/backend-tmux"
+    },
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
