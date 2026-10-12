@@ -51,6 +51,10 @@ shell-integration-features = true
 # keybind = ctrl+b>shift+r=reload_config
 # keybind = ctrl+b>==equalize_splits
 
+
+# ---------------------------------------------
+# Smart-Splits and Neovim
+# ---------------------------------------------
 # https://github.com/smart-splits-nvim/backend-ghostty#ghostty-configuration
 # Outside Neovim.
 # Move
