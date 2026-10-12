@@ -13,8 +13,10 @@ end)
 Config.now(function()
   vim.pack.add({ 'https://github.com/smart-splits-nvim/smart-splits.nvim' })
   vim.pack.add({ 'https://github.com/smart-splits-nvim/backend-tmux' })
+  vim.pack.add({ 'https://github.com/smart-splits-nvim/backend-ghostty' })
+
   require('smart-splits').setup({
-    mux = { backend = 'smart-splits-backend-tmux' },
+    mux = { backend = { 'smart-splits-backend-tmux', 'smart-splits-backend-ghostty' } },
   })
 
   local ss = require('smart-splits')

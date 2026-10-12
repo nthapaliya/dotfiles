@@ -4,6 +4,10 @@
       "rev": "30579c2851743b00c4547c324a16f2c1cfa5a41c",
       "src": "https://github.com/numtostr/BufOnly.nvim"
     },
+    "backend-ghostty": {
+      "rev": "f45d7ca1b12378818d5164d550ca4b908b0323da",
+      "src": "https://github.com/smart-splits-nvim/backend-ghostty"
+    },
     "backend-tmux": {
       "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
       "src": "https://github.com/smart-splits-nvim/backend-tmux"
@@ -29,7 +33,7 @@
       "src": "https://github.com/yorickpeterse/nvim-jump"
     },
     "nvim-lspconfig": {
-      "rev": "c59fc922f718fa055f69f5f3bc888f23211571eb",
+      "rev": "6d27c288ff951e1e94cb5f91c800adeddf0dc0c2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
