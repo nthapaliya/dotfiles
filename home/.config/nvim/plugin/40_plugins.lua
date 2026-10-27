@@ -39,10 +39,10 @@ Config.later(function() vim.pack.add({ 'https://github.com/tpope/vim-sleuth' }) 
 Config.later(function() vim.pack.add({ 'https://github.com/numtostr/BufOnly.nvim' }) end)
 
 -- experimental: activate neovim builtin undotree plugin
-Config.later(function() vim.cmd('packadd nvim.undotree') end)
+-- Config.later(function() vim.cmd('packadd nvim.undotree') end)
 
 -- nvim-treesitter
-Config.later(function()
+Config.now_if_args(function()
   local ts_update = function() vim.cmd('TSUpdate') end
   Config.on_packchanged('nvim-treesitter', { 'update' }, ts_update, ':TSUpdate')
 

@@ -13,6 +13,7 @@ Config.now(function()
 
   -- tabline and statusline
   require('mini.statusline').setup()
+  -- require('mini.statuscolumn').setup()
   require('mini.tabline').setup({
     format = function(buf_id, label)
       local suffix = vim.bo[buf_id].modified and ' ' or ''
@@ -27,7 +28,7 @@ Config.now(function()
 end)
 
 -- completion
-Config.later(function()
+Config.now_if_args(function()
   -- Customize post-processing of LSP responses for a better user experience.
   -- Don't show 'Text' suggestions (usually noisy) and show snippets last.
   local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
@@ -78,14 +79,18 @@ Config.later(function()
   -- Makes `:h MiniMisc.put()` and `:h MiniMisc.put_text()` public
   require('mini.misc').setup()
   MiniMisc.setup_auto_root()
+  MiniMisc.setup_restore_cursor()
   MiniMisc.setup_termbg_sync()
 end)
 
 -- Step two ===================================================================
 Config.later(function() require('mini.extra').setup() end)
+
 Config.later(function() require('mini.ai').setup() end)
 Config.later(function() require('mini.bufremove').setup() end)
+Config.later(function() require('mini.cmdline').setup() end)
 Config.later(function() require('mini.comment').setup() end)
+Config.later(function() require('mini.pairs').setup() end)
 Config.later(function() require('mini.sessions').setup() end)
 Config.later(function() require('mini.splitjoin').setup() end)
 Config.later(function() require('mini.surround').setup() end)
